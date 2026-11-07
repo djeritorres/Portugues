@@ -1,0 +1,1680 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pronunciación del portugués</title>
+<style>
+:root{
+  --bg:#f6f4ef; --card:#ffffff; --ink:#1d2433; --muted:#5d6678; --line:#e3dfd6;
+  --accent:#0b7a4b; --accent-soft:#d9f0e4; --warm:#b4471d; --warm-soft:#fbe4d8;
+  --blue:#1f5fbf; --blue-soft:#dde9fb;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#14181f; --card:#1d232d; --ink:#e8ebf1; --muted:#9aa4b5; --line:#2e3644;
+    --accent:#5fd49b; --accent-soft:#1c3a2d; --warm:#ff9a6b; --warm-soft:#3e2418;
+    --blue:#8ab4ff; --blue-soft:#1d2d4a;
+  }
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.wrap{max-width:860px;margin:0 auto;padding:24px 16px 80px}
+header h1{font-size:1.9rem;margin:.2em 0 .1em}
+header p{color:var(--muted);margin:0}
+nav.letters{display:flex;gap:8px;flex-wrap:wrap;margin:20px 0}
+nav.letters a,nav.letters span{padding:6px 16px;border-radius:999px;border:1px solid var(--line);background:var(--card);text-decoration:none;color:var(--ink);font-weight:600}
+nav.letters a.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+nav.letters span{color:var(--muted);font-weight:400;border-style:dashed}
+#voiceStatus{display:none;background:var(--warm-soft);color:var(--warm);border:1px solid var(--warm);padding:10px 14px;border-radius:10px;margin-bottom:16px;font-size:.95rem}
+h2{font-size:1.45rem;margin:2.2em 0 .3em;padding-top:.4em}
+h3{font-size:1.15rem;margin:0 0 .3em}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px;margin:14px 0}
+.legend{display:flex;gap:16px;flex-wrap:wrap;font-size:.92rem;color:var(--muted);margin:10px 0}
+mark{background:none;color:inherit;font-weight:700;border-radius:4px;padding:0 2px}
+mark.ch{background:var(--accent-soft);color:var(--accent)}
+table{width:100%;border-collapse:collapse;font-size:.97rem}
+th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{color:var(--muted);font-weight:600;font-size:.85rem;text-transform:uppercase;letter-spacing:.04em}
+.tablewrap{overflow-x:auto}
+.rule{border-left:5px solid var(--accent)}
+.rule .tag{display:inline-block;font-size:.8rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--accent);margin-bottom:2px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 4px}
+button{font:inherit;cursor:pointer}
+.chip{display:flex;flex-direction:column;align-items:flex-start;padding:7px 12px;border-radius:10px;border:1px solid var(--line);background:var(--bg);color:var(--ink);text-align:left;line-height:1.25}
+.chip b{font-size:1.02rem}
+.chip small{color:var(--muted);font-size:.85rem}
+.chip:hover,.btn:hover{border-color:var(--accent)}
+.chip::after{content:"🔊";font-size:.75rem;margin-top:2px;opacity:.7}
+.ex{border-top:1px dashed var(--line);padding:14px 0 6px}
+.ex:first-of-type{border-top:0}
+.ex .pt{font-size:1.25rem;margin:0}
+.ex .es{color:var(--muted);margin:2px 0 4px}
+.ex .say{font-size:.93rem;margin:0 0 8px}
+.btn{padding:6px 14px;border-radius:999px;border:1px solid var(--line);background:var(--bg);color:var(--ink);margin-right:6px;font-size:.92rem}
+.pairs{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.pair{border:1px solid var(--line);border-radius:12px;padding:12px;background:var(--bg)}
+.pair .row{display:flex;justify-content:space-between;align-items:center;gap:8px;margin:4px 0}
+.pair .arrow{text-align:center;color:var(--muted);font-size:.8rem}
+ul{padding-left:1.2em}
+li{margin:.3em 0}
+.note{font-size:.93rem;color:var(--muted)}
+footer{margin-top:50px;color:var(--muted);font-size:.88rem;border-top:1px solid var(--line);padding-top:14px}
+
+.rulenav{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:14px 0 0;flex-wrap:wrap}
+.rulenav .navbtn{padding:9px 18px;border-radius:999px;border:1px solid var(--accent);background:var(--accent);color:#fff;font-weight:600}
+.rulenav .navbtn[disabled]{opacity:.35;cursor:default}
+.rulenav .pills{display:flex;gap:6px;align-items:center;flex-wrap:wrap;justify-content:center}
+.rulenav .pill{min-width:38px;padding:6px 10px;border-radius:999px;border:1px solid var(--line);background:var(--card);color:var(--ink);font-weight:600}
+.rulenav .pill.on{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.slide{display:none}
+.slide.on{display:block}
+.slidehead{color:var(--muted);font-size:.9rem;margin:10px 0 -6px}
+@media (max-width:520px){.rulenav .navbtn{flex:1}.rulenav .pills{order:-1;width:100%}}
+
+nav.letters a:hover{border-color:var(--accent);color:var(--accent)}
+
+.js section[id^="letra-"]{display:none}
+.js section[id^="letra-"].on{display:block}
+nav.letters{margin:22px 0 6px;border-bottom:2px solid var(--line);padding-bottom:0;gap:6px}
+nav.letters a{padding:12px 28px;font-size:1.1rem;border-radius:12px 12px 0 0;border-bottom:0;margin-bottom:-2px}
+nav.letters a.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+.bigsec{font-size:2.1rem;line-height:1.2;margin:2.4em 0 .5em;padding-bottom:.25em;border-bottom:4px solid var(--accent);scroll-margin-top:12px}
+.subnav{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0 0}
+.subnav a{padding:6px 14px;border-radius:999px;border:1px solid var(--line);background:var(--card);color:var(--ink);text-decoration:none;font-size:.95rem}
+.subnav a:hover{border-color:var(--accent);color:var(--accent)}
+@media (max-width:520px){nav.letters a{padding:10px 18px}.bigsec{font-size:1.7rem}}
+
+/* ===== Colores por sonido ===== */
+:root{
+  --c-ch:#a8420a; --c-ch-bg:#ffe0c7;
+  --c-dy:#6a2cb8; --c-dy-bg:#ead9fc;
+  --c-nh:#066b3f; --c-nh-bg:#cfeedd;
+  --c-lh:#00637d; --c-lh-bg:#c9edf6;
+  --c-u:#b0185f;  --c-u-bg:#fad5e8;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --c-ch:#ffb27a; --c-ch-bg:#4d2b10;
+    --c-dy:#d2aaff; --c-dy-bg:#3b2562;
+    --c-nh:#63dca2; --c-nh-bg:#183d2c;
+    --c-lh:#72d9f0; --c-lh-bg:#0f3d4a;
+    --c-u:#ff93c6;  --c-u-bg:#4d1733;
+  }
+}
+mark.k-ch,mark.k-dy,mark.k-nh,mark.k-lh,mark.k-u{font-weight:700;background:none;padding:0}
+mark.k-ch{color:var(--c-ch)}
+mark.k-dy{color:var(--c-dy)}
+mark.k-nh{color:var(--c-nh)}
+mark.k-lh{color:var(--c-lh)}
+mark.k-u{color:var(--c-u)}
+/* sonido propio de la pestaña: con fondo */
+#letra-t mark.k-ch,.colorkey mark.k-ch{background:var(--c-ch-bg);padding:0 3px;border-radius:4px;box-shadow:inset 0 -2px 0 currentColor}
+#letra-d mark.k-dy,.colorkey mark.k-dy{background:var(--c-dy-bg);padding:0 3px;border-radius:4px;box-shadow:inset 0 -2px 0 currentColor}
+#letra-nh mark.k-nh,.colorkey mark.k-nh{background:var(--c-nh-bg);padding:0 3px;border-radius:4px;box-shadow:inset 0 -2px 0 currentColor}
+#letra-lh mark.k-lh,.colorkey mark.k-lh{background:var(--c-lh-bg);padding:0 3px;border-radius:4px;box-shadow:inset 0 -2px 0 currentColor}
+#letra-l mark.k-u,.colorkey mark.k-u{background:var(--c-u-bg);padding:0 3px;border-radius:4px;box-shadow:inset 0 -2px 0 currentColor}
+.colorkey{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center;font-size:.93rem;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 14px;margin:14px 0 4px}
+.colorkey b{margin-right:2px}
+.chip small mark,.say mark{font-weight:700}
+
+:root{--c-r:#7a5400;--c-r-bg:#ffeea0}
+@media (prefers-color-scheme: dark){:root{--c-r:#ffd666;--c-r-bg:#4a3a05}}
+mark.k-r{color:var(--c-r);font-weight:700;background:none;padding:0}
+#letra-r mark.k-r,.colorkey mark.k-r{background:var(--c-r-bg);padding:0 3px;border-radius:4px;box-shadow:inset 0 -2px 0 currentColor}
+</style>
+<script>document.documentElement.className="js";</script>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <h1>🇧🇷 Pronunciación del portugués</h1>
+  <p>Reglas, teoría y ejemplos con audio · Portugués de Brasil</p>
+</header>
+
+<nav class="letters" aria-label="Letras">
+  <a href="#letra-d">D</a>
+  <a href="#letra-l">L</a>
+  <a href="#letra-r">R</a>
+  <a href="#letra-t">T</a>
+  <a href="#letra-nh">NH</a>
+  <a href="#letra-lh">LH</a>
+</nav>
+
+<div class="colorkey" aria-label="Colores de los sonidos">
+  <b>Colores:</b>
+  <mark class="k-ch">ti / te → “ch”</mark>
+  <mark class="k-dy">di / de → “dy”</mark>
+  <mark class="k-nh">nh → “ñ”</mark>
+  <mark class="k-lh">lh → “ly”</mark>
+  <mark class="k-u">l final → “u”</mark>
+  <mark class="k-r">r inicial / rr → “h”</mark>
+</div>
+
+<div id="voiceStatus"></div>
+
+<div class="card" style="padding:12px 16px">
+  <label for="voiceSel"><b>🔊 Voz del audio:</b></label>
+  <select id="voiceSel" style="font:inherit;max-width:100%;padding:4px 6px"></select>
+  <button class="btn" data-say="Meu tio tem tempo hoje à noite.">Probar voz</button>
+  <p class="note" style="margin:8px 0 0">Para mejor pronunciación abre esta página en <b>Microsoft Edge</b> y elige una voz que diga <b>Online (Natural)</b>, como “Francisca” o “Antonio” (necesita internet). Las voces instaladas en Windows, como “Maria”, suenan más robóticas y pronuncian peor.</p>
+</div>
+
+<!-- ===================== LETRA D ===================== -->
+<section id="letra-d">
+
+<h2>D <small style="font-weight:400;color:var(--muted)">· “dê”</small></h2>
+<p>Igual que la T, la <b>d</b> portuguesa tiene <b>dos sonidos</b>, y depende de la letra que viene justo después.</p>
+
+<div class="legend">
+  <span><mark class="ch">di / de</mark> = suena <b>“dy”</b> (como la <i>j</i> del inglés <i>jam</i>)</span>
+</div>
+
+<div class="subnav"><a href="#r-d-resumen">Resumen</a><a href="#r-d-reglas">Reglas</a><a href="#r-d-compara">Compara</a><a href="#r-d-errores">Errores y variantes</a></div>
+
+<h3 class="bigsec" id="r-d-resumen">Resumen</h3>
+<div class="card">
+  <div class="tablewrap">
+  <table>
+    <tr><th>Situación</th><th>Sonido de la D</th><th>Ejemplo</th></tr>
+    <tr><td>D + <b>i</b></td><td><mark class="ch">dy</mark></td><td>dia → <i>dyía</i></td></tr>
+    <tr><td>D + <b>e</b> al final de palabra (<i>-de</i>, <i>-des</i>)</td><td><mark class="ch">dy</mark> (la e suena “i”)</td><td>cidade → <i>si-dá-dyi</i></td></tr>
+    <tr><td>D + <b>a, o, u</b></td><td>d firme</td><td>dado → <i>dá-du</i></td></tr>
+    <tr><td>D + <b>e</b> en medio de palabra</td><td>d firme</td><td>dedo → <i>dê-du</i></td></tr>
+    <tr><td>D + <b>r</b> (<i>dr-</i>)</td><td>d firme</td><td>quadro → <i>kuá-dru</i></td></tr>
+  </table>
+  </div>
+  <p class="note">💡 Truco: el sonido “dy” se parece a la <i>y</i> de “cónyuge” dicha con fuerza, o a la <i>j</i> de <i>jam</i> en inglés. Es la misma idea de la T, pero con voz: T→“ch”, D→“dy”.</p>
+</div>
+<h3 class="bigsec" id="r-d-reglas">Las reglas</h3>
+<div class="card rule">
+  <span class="tag">Regla 1</span>
+  <h3>D + <b>i</b> → suena “dy”</h3>
+  <p>Cuando la <b>d</b> va seguida directamente de <b>i</b>, se pronuncia <b>“dy”</b>. Por eso <i>dia</i> no suena “día”, sino <b>“dyía”</b>.</p>
+  <div class="chips">
+    <button class="chip" data-say="dia"><b><mark class="ch">di</mark>a</b><small>dyía · día</small></button>
+    <button class="chip" data-say="dizer"><b><mark class="ch">di</mark>zer</b><small>dyi-zér · decir</small></button>
+    <button class="chip" data-say="dinheiro"><b><mark class="ch">di</mark>nheiro</b><small>dyi-ñéi-ru · dinero</small></button>
+    <button class="chip" data-say="direito"><b><mark class="ch">di</mark>reito</b><small>dyi-réi-tu · derecho</small></button>
+    <button class="chip" data-say="médico"><b>mé<mark class="ch">di</mark>co</b><small>mé-dyi-ku · médico</small></button>
+    <button class="chip" data-say="medida"><b>me<mark class="ch">di</mark>da</b><small>me-dyí-da · medida</small></button>
+    <button class="chip" data-say="vendido"><b>ven<mark class="ch">di</mark>do</b><small>ven-dyí-du · vendido</small></button>
+    <button class="chip" data-say="decidir"><b>deci<mark class="ch">di</mark>r</b><small>de-si-dyír · decidir</small></button>
+    <button class="chip" data-say="pedir"><b>pe<mark class="ch">di</mark>r</b><small>pe-dyír · pedir</small></button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Hoje é um bom <mark class="ch">di</mark>a.</p>
+    <p class="es">Hoy es un buen día.</p>
+    <p class="say">Suena: <b>dyía</b></p>
+    <button class="btn" data-say="Hoje é um bom dia.">▶ Normal</button><button class="btn" data-say="Hoje é um bom dia." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Preciso <mark class="ch">di</mark>zer uma coisa.</p>
+    <p class="es">Necesito decir una cosa.</p>
+    <p class="say">Suena: <b>dyi-zér</b></p>
+    <button class="btn" data-say="Preciso dizer uma coisa.">▶ Normal</button><button class="btn" data-say="Preciso dizer uma coisa." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">O mé<mark class="ch">di</mark>co <mark class="ch">di</mark>sse que está tudo bem.</p>
+    <p class="es">El médico dijo que todo está bien.</p>
+    <p class="say">Suena: <b>mé-dyi-ku</b> · <b>dyí-si</b></p>
+    <button class="btn" data-say="O médico disse que está tudo bem.">▶ Normal</button><button class="btn" data-say="O médico disse que está tudo bem." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Eu não tenho <mark class="ch">di</mark>nheiro hoje.</p>
+    <p class="es">Hoy no tengo dinero.</p>
+    <p class="say">Suena: <b>dyi-ñéi-ru</b></p>
+    <button class="btn" data-say="Eu não tenho dinheiro hoje.">▶ Normal</button><button class="btn" data-say="Eu não tenho dinheiro hoje." data-slow="1">🐢 Lento</button>
+  </div>
+</div>
+<div class="card rule">
+  <span class="tag">Regla 2</span>
+  <h3>-de / -des al final → suena “dyi”</h3>
+  <p>La <b>e</b> final sin acento suena como <b>“i”</b>, así que <b>-de</b> se convierte en <b>“dyi”</b>. <i>Cidade</i> se dice <b>“si-dá-dyi”</b>, no “cidade”. Esto incluye la palabra <b>de</b> (“dyi”), que es muy frecuente.</p>
+  <div class="chips">
+    <button class="chip" data-say="cidade"><b>cida<mark class="ch">de</mark></b><small>si-dá-dyi · ciudad</small></button>
+    <button class="chip" data-say="cidades"><b>cida<mark class="ch">des</mark></b><small>si-dá-dyis · ciudades</small></button>
+    <button class="chip" data-say="grande"><b>gran<mark class="ch">de</mark></b><small>grán-dyi · grande</small></button>
+    <button class="chip" data-say="verdade"><b>verda<mark class="ch">de</mark></b><small>ver-dá-dyi · verdad</small></button>
+    <button class="chip" data-say="idade"><b>ida<mark class="ch">de</mark></b><small>i-dá-dyi · edad</small></button>
+    <button class="chip" data-say="saudade"><b>sauda<mark class="ch">de</mark></b><small>sau-dá-dyi · nostalgia</small></button>
+    <button class="chip" data-say="tarde"><b>tar<mark class="ch">de</mark></b><small>tár-dyi · tarde</small></button>
+    <button class="chip" data-say="onde"><b>on<mark class="ch">de</mark></b><small>ón-dyi · dónde</small></button>
+    <button class="chip" data-say="universidade"><b>universida<mark class="ch">de</mark></b><small>u-ni-ver-si-dá-dyi · universidad</small></button>
+    <button class="chip" data-say="de"><b><mark class="ch">de</mark></b><small>dyi · de</small></button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Eu moro em uma cida<mark class="ch">de</mark> gran<mark class="ch">de</mark>.</p>
+    <p class="es">Vivo en una ciudad grande.</p>
+    <p class="say">Suena: <b>si-dá-dyi</b> · <b>grán-dyi</b></p>
+    <button class="btn" data-say="Eu moro em uma cidade grande.">▶ Normal</button><button class="btn" data-say="Eu moro em uma cidade grande." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">On<mark class="ch">de</mark> fica a universida<mark class="ch">de</mark>?</p>
+    <p class="es">¿Dónde queda la universidad?</p>
+    <p class="say">Suena: <b>ón-dyi</b> · <b>u-ni-ver-si-dá-dyi</b></p>
+    <button class="btn" data-say="Onde fica a universidade?">▶ Normal</button><button class="btn" data-say="Onde fica a universidade?" data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Que sauda<mark class="ch">de</mark> <mark class="ch">de</mark> você!</p>
+    <p class="es">¡Cuánto te extraño!</p>
+    <p class="say">Suena: <b>sau-dá-dyi</b> · <b>dyi</b> (de)</p>
+    <button class="btn" data-say="Que saudade de você!">▶ Normal</button><button class="btn" data-say="Que saudade de você!" data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Estudo <mark class="ch">de</mark> manhã e trabalho à tar<mark class="ch">de</mark>.</p>
+    <p class="es">Estudo por la mañana y trabajo por la tarde.</p>
+    <p class="say">Suena: <b>es-tú-du</b> · <b>dyi</b> · <b>tár-dyi</b></p>
+    <button class="btn" data-say="Estudo de manhã e trabalho à tarde.">▶ Normal</button><button class="btn" data-say="Estudo de manhã e trabalho à tarde." data-slow="1">🐢 Lento</button>
+  </div>
+</div>
+<div class="card rule plain">
+  <span class="tag">Regla 3</span>
+  <h3>D + a, o, u (o e en medio de palabra) → “d” firme</h3>
+  <p>Si después de la <b>d</b> viene <b>a, o, u</b>, o una <b>e</b> que no está al final, la <b>d</b> suena fuerte y clara. Ojo: en español la <b>d</b> entre vocales se suaviza (<i>nada</i>, <i>cada</i>). En portugués <b>se mantiene firme</b>, como la <i>d</i> de “dónde”.</p>
+  <div class="chips">
+    <button class="chip" data-say="dado"><b>dado</b><small>dá-du · dado</small></button>
+    <button class="chip" data-say="dois"><b>dois</b><small>dois · dos</small></button>
+    <button class="chip" data-say="duas"><b>duas</b><small>dú-as · dos (f.)</small></button>
+    <button class="chip" data-say="dormir"><b>dormir</b><small>dor-mír · dormir</small></button>
+    <button class="chip" data-say="depois"><b>depois</b><small>de-pôis · después</small></button>
+    <button class="chip" data-say="dedo"><b>dedo</b><small>dê-du · dedo</small></button>
+    <button class="chip" data-say="domingo"><b>domingo</b><small>do-mín-gu · domingo</small></button>
+    <button class="chip" data-say="sábado"><b>sábado</b><small>sá-ba-du · sábado</small></button>
+    <button class="chip" data-say="devagar"><b>devagar</b><small>de-va-gár · despacio</small></button>
+    <button class="chip" data-say="obrigado"><b>obrigado</b><small>o-bri-gá-du · gracias (él)</small></button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Eu tenho duas aulas no sábado.</p>
+    <p class="es">Tengo dos clases el sábado.</p>
+    <p class="say">Suena: <b>dú-as</b> · <b>sá-ba-du</b></p>
+    <button class="btn" data-say="Eu tenho duas aulas no sábado.">▶ Normal</button><button class="btn" data-say="Eu tenho duas aulas no sábado." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Depois do almoço eu vou dormir.</p>
+    <p class="es">Después del almuerzo voy a dormir.</p>
+    <p class="say">Suena: <b>de-pôis</b> · <b>du</b> · <b>dor-mír</b></p>
+    <button class="btn" data-say="Depois do almoço eu vou dormir.">▶ Normal</button><button class="btn" data-say="Depois do almoço eu vou dormir." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Desculpa, hoje não dá.</p>
+    <p class="es">Perdona, hoy no se puede.</p>
+    <p class="say">Suena: <b>des-kúl-pa</b> · <b>dá</b></p>
+    <button class="btn" data-say="Desculpa, hoje não dá.">▶ Normal</button><button class="btn" data-say="Desculpa, hoje não dá." data-slow="1">🐢 Lento</button>
+  </div>
+</div>
+<div class="card rule plain">
+  <span class="tag">Regla 4</span>
+  <h3>D + r (dr-) → “d” firme</h3>
+  <p>Igual que en <i>triste</i> con la T: si entre la <b>d</b> y la vocal hay una <b>r</b>, la <b>d</b> no cambia. <i>Quadro</i> suena <b>“kuá-dru”</b>. Y si la palabra termina en <b>-dre</b>, la <b>e</b> final suena “i”: <i>padre</i> → <b>“pá-dri”</b>.</p>
+  <div class="chips">
+    <button class="chip" data-say="quadro"><b>quadro</b><small>kuá-dru · pizarra / cuadro</small></button>
+    <button class="chip" data-say="pedra"><b>pedra</b><small>pé-dra · piedra</small></button>
+    <button class="chip" data-say="drama"><b>drama</b><small>drá-ma · drama</small></button>
+    <button class="chip" data-say="padre"><b>padre</b><small>pá-dri · padre (cura)</small></button>
+    <button class="chip" data-say="madrugada"><b>madrugada</b><small>ma-dru-gá-da · madrugada</small></button>
+    <button class="chip" data-say="madrinha"><b>madrinha</b><small>ma-drí-ña · madrina</small></button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">O professor escreve no quadro.</p>
+    <p class="es">El profesor escribe en la pizarra.</p>
+    <p class="say">Suena: <b>kuá-dru</b></p>
+    <button class="btn" data-say="O professor escreve no quadro.">▶ Normal</button><button class="btn" data-say="O professor escreve no quadro." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Ela acordou <mark class="ch">de</mark> madrugada.</p>
+    <p class="es">Ella despertó de madrugada.</p>
+    <p class="say">Suena: <b>a-kor-dôu</b> · <b>dyi</b> · <b>ma-dru-gá-da</b></p>
+    <button class="btn" data-say="Ela acordou de madrugada.">▶ Normal</button><button class="btn" data-say="Ela acordou de madrugada." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Esse filme é um drama.</p>
+    <p class="es">Esta película es un drama.</p>
+    <p class="say">Suena: <b>drá-ma</b></p>
+    <button class="btn" data-say="Esse filme é um drama.">▶ Normal</button><button class="btn" data-say="Esse filme é um drama." data-slow="1">🐢 Lento</button>
+  </div>
+</div>
+<h3 class="bigsec" id="r-d-compara">🎧 Compara</h3>
+<div class="card">
+  <p>Escucha cada par seguido. Lo único que cambia es la letra que sigue a la <b>d</b>.</p>
+  <div class="pairs">
+    <div class="pair">
+      <div class="row"><span>dado</span><button class="btn" data-say="dado">🔊</button></div>
+      <div class="arrow">vs</div>
+      <div class="row"><span><mark class="ch">di</mark>a</span><button class="btn" data-say="dia">🔊</button></div>
+    </div>
+    <div class="pair">
+      <div class="row"><span>dois</span><button class="btn" data-say="dois">🔊</button></div>
+      <div class="arrow">vs</div>
+      <div class="row"><span><mark class="ch">di</mark>zer</span><button class="btn" data-say="dizer">🔊</button></div>
+    </div>
+    <div class="pair">
+      <div class="row"><span>duas</span><button class="btn" data-say="duas">🔊</button></div>
+      <div class="arrow">vs</div>
+      <div class="row"><span><mark class="ch">di</mark>nheiro</span><button class="btn" data-say="dinheiro">🔊</button></div>
+    </div>
+    <div class="pair">
+      <div class="row"><span>dormir</span><button class="btn" data-say="dormir">🔊</button></div>
+      <div class="arrow">vs</div>
+      <div class="row"><span><mark class="ch">di</mark>reito</span><button class="btn" data-say="direito">🔊</button></div>
+    </div>
+    <div class="pair">
+      <div class="row"><span>pedra</span><button class="btn" data-say="pedra">🔊</button></div>
+      <div class="arrow">vs</div>
+      <div class="row"><span>pe<mark class="ch">di</mark>r</span><button class="btn" data-say="pedir">🔊</button></div>
+    </div>
+    <div class="pair">
+      <div class="row"><span>domingo</span><button class="btn" data-say="domingo">🔊</button></div>
+      <div class="arrow">vs</div>
+      <div class="row"><span>mé<mark class="ch">di</mark>co</span><button class="btn" data-say="médico">🔊</button></div>
+    </div>
+  </div>
+</div>
+
+<h3 class="bigsec" id="r-d-errores">Errores y variantes</h3>
+<div class="card">
+  <h3>⚠️ Errores comunes de hispanohablantes</h3>
+  <ul>
+    <li>Decir <i>dia</i> con la <i>d</i> española (“día”) en vez de <b>“dyía”</b>.</li>
+    <li>Leer la <i>-de</i> final como “de”: <i>cidade</i> es <b>“si-dá-dyi”</b>, no “ci-dá-de”.</li>
+    <li>Suavizar la <i>d</i> entre vocales como en <i>nada</i>: en portugués (<i>sábado</i>, <i>dado</i>) se queda firme.</li>
+    <li>Olvidar que la palabra <i>de</i> también suena <b>“dyi”</b>: “livro de português”.</li>
+  </ul>
+  <h3 style="margin-top:14px">📍 Excepciones y variantes</h3>
+  <ul>
+    <li>Algunas regiones de Brasil (partes del Nordeste y del sur) no palatalizan y dicen <i>dia</i> con “d” normal.</li>
+    <li>En el portugués de <b>Portugal</b> tampoco se palataliza.</li>
+  </ul>
+</div>
+
+</section>
+
+<!-- ===================== LETRA T ===================== -->
+<section id="letra-t">
+
+<h2>T <small style="font-weight:400;color:var(--muted)">· “tê”</small></h2>
+<p>La <b>t</b> portuguesa tiene <b>dos sonidos</b>. Cuál usar depende de la letra que viene justo después.</p>
+
+<div class="legend">
+  <span><mark class="ch">ti / te</mark> = suena <b>“ch”</b> (como en <i>chico</i>)</span>
+</div>
+
+<div class="subnav"><a href="#r-t-resumen">Resumen</a><a href="#r-t-reglas">Reglas</a><a href="#r-t-compara">Compara</a><a href="#r-t-errores">Errores y variantes</a></div>
+
+<h3 class="bigsec" id="r-t-resumen">Resumen</h3>
+<div class="card">
+  <div class="tablewrap">
+  <table>
+    <tr><th>Situación</th><th>Sonido de la T</th><th>Ejemplo</th></tr>
+    <tr><td>T + <b>i</b></td><td><mark class="ch">ch</mark></td><td>tio → <i>chíu</i></td></tr>
+    <tr><td>T + <b>e</b> al final de palabra (<i>-te</i>, <i>-tes</i>)</td><td><mark class="ch">ch</mark> (la e suena “i”)</td><td>noite → <i>nói-chi</i></td></tr>
+    <tr><td>T + <b>a, o, u</b></td><td>t normal</td><td>tudo → <i>tú-du</i></td></tr>
+    <tr><td>T + <b>e</b> en medio de palabra</td><td>t normal</td><td>telefone → <i>te-le-fó-ni</i></td></tr>
+    <tr><td>T + <b>r</b> (<i>tr-</i>)</td><td>t normal</td><td>trabalho → <i>tra-bá-lyu</i></td></tr>
+  </table>
+  </div>
+  <p class="note">💡 Truco: el sonido “ch” de <b>ti</b> es el mismo de la <i>ch</i> española en “chico”. No hace falta aprender un sonido nuevo.</p>
+</div>
+
+<!-- ---------- Regla 1 ---------- -->
+<h3 class="bigsec" id="r-t-reglas">Las reglas</h3>
+<div class="card rule">
+  <span class="tag">Regla 1</span>
+  <h3>T + <b>i</b> → suena “ch”</h3>
+  <p>Cuando la <b>t</b> va seguida directamente de <b>i</b>, se pronuncia <b>“ch”</b>. Esto se llama <i>palatalización</i>. Por eso <i>tio</i> no suena “tío”, sino <b>“chíu”</b>.</p>
+  <div class="chips">
+    <button class="chip" data-say="tio"><b><mark class="ch">ti</mark>o</b><small>chíu · tío</small></button>
+    <button class="chip" data-say="tia"><b><mark class="ch">ti</mark>a</b><small>chía · tía</small></button>
+    <button class="chip" data-say="tipo"><b><mark class="ch">ti</mark>po</b><small>chípu · tipo</small></button>
+    <button class="chip" data-say="timi"><b><mark class="ch">ti</mark>me</b><small>chími · equipo</small></button>
+    <button class="chip" data-say="tinta"><b><mark class="ch">ti</mark>nta</b><small>chínta · tinta</small></button>
+    <button class="chip" data-say="tigre"><b><mark class="ch">ti</mark>gre</b><small>chí-gri · tigre</small></button>
+    <button class="chip" data-say="ótimo"><b>ó<mark class="ch">ti</mark>mo</b><small>ó-chi-mu · genial</small></button>
+    <button class="chip" data-say="partido"><b>par<mark class="ch">ti</mark>do</b><small>par-chí-du · partido</small></button>
+    <button class="chip" data-say="atitude"><b>a<mark class="ch">ti</mark>tude</b><small>a-chi-tú-dyi · actitud</small></button>
+  </div>
+
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Minha <mark class="ch">ti</mark>a mora perto daqui.</p>
+    <p class="es">Mi tía vive cerca de aquí.</p>
+    <p class="say">Suena: <b>chía</b> (con “ch”) · <b>pér-tu</b> (con “t” normal)</p>
+    <button class="btn" data-say="Minha tia mora perto daqui.">▶ Normal</button><button class="btn" data-say="Minha tia mora perto daqui." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Esse <mark class="ch">ti</mark>po de música é ó<mark class="ch">ti</mark>mo.</p>
+    <p class="es">Ese tipo de música es genial.</p>
+    <p class="say">Suena: <b>chípu</b> · <b>ó-chi-mu</b></p>
+    <button class="btn" data-say="Esse tipo de música é ótimo.">▶ Normal</button><button class="btn" data-say="Esse tipo de música é ótimo." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Ele tem uma a<mark class="ch">ti</mark>tude posi<mark class="ch">ti</mark>va.</p>
+    <p class="es">Él tiene una actitud positiva.</p>
+    <p class="say">Suena: <b>a-chi-tú-dyi</b> · <b>po-si-chí-va</b></p>
+    <button class="btn" data-say="Ele tem uma atitude positiva.">▶ Normal</button><button class="btn" data-say="Ele tem uma atitude positiva." data-slow="1">🐢 Lento</button>
+  </div>
+  <p class="note">Nota: en estas frases también oirás que <i>de</i> suena “dyi” y <i>di-</i> suena “dyi”. Es la misma regla aplicada a la letra D (la veremos después).</p>
+</div>
+
+<!-- ---------- Regla 2 ---------- -->
+<div class="card rule">
+  <span class="tag">Regla 2</span>
+  <h3>-te / -tes al final → suena “chi”</h3>
+  <p>En Brasil, la <b>e</b> final sin acento suena como <b>“i”</b>. Entonces <b>-te</b> se convierte en <b>“chi”</b> (por la regla 1). <i>Noite</i> se dice <b>“nói-chi”</b>, no “nóite”. Con plural pasa igual: <i>dentes</i> → <b>“dén-chis”</b>.</p>
+  <div class="chips">
+    <button class="chip" data-say="noite"><b>noi<mark class="ch">te</mark></b><small>nói-chi · noche</small></button>
+    <button class="chip" data-say="leite"><b>lei<mark class="ch">te</mark></b><small>léi-chi · leche</small></button>
+    <button class="chip" data-say="quente"><b>quen<mark class="ch">te</mark></b><small>kén-chi · caliente</small></button>
+    <button class="chip" data-say="parte"><b>par<mark class="ch">te</mark></b><small>pár-chi · parte</small></button>
+    <button class="chip" data-say="forte"><b>for<mark class="ch">te</mark></b><small>fór-chi · fuerte</small></button>
+    <button class="chip" data-say="norte"><b>nor<mark class="ch">te</mark></b><small>nór-chi · norte</small></button>
+    <button class="chip" data-say="sorte"><b>sor<mark class="ch">te</mark></b><small>sór-chi · suerte</small></button>
+    <button class="chip" data-say="gente"><b>gen<mark class="ch">te</mark></b><small>jén-chi · gente</small></button>
+    <button class="chip" data-say="dentes"><b>den<mark class="ch">tes</mark></b><small>dén-chis · dientes</small></button>
+    <button class="chip" data-say="tomate"><b>toma<mark class="ch">te</mark></b><small>to-má-chi · tomate</small></button>
+    <button class="chip" data-say="restaurante"><b>restauran<mark class="ch">te</mark></b><small>hes-tau-rán-chi · restaurante</small></button>
+  </div>
+
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Hoje à noi<mark class="ch">te</mark> faz muito frio.</p>
+    <p class="es">Esta noche hace mucho frío.</p>
+    <p class="say">Suena: <b>nói-chi</b> · <b>múi-tu</b> (aquí la t es normal)</p>
+    <button class="btn" data-say="Hoje à noite faz muito frio.">▶ Normal</button><button class="btn" data-say="Hoje à noite faz muito frio." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">O lei<mark class="ch">te</mark> está muito quen<mark class="ch">te</mark>.</p>
+    <p class="es">La leche está muy caliente.</p>
+    <p class="say">Suena: <b>léi-chi</b> · <b>es-tá</b> · <b>múi-tu</b> · <b>kén-chi</b></p>
+    <button class="btn" data-say="O leite está muito quente.">▶ Normal</button><button class="btn" data-say="O leite está muito quente." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">O restauran<mark class="ch">te</mark> fica perto da minha casa.</p>
+    <p class="es">El restaurante queda cerca de mi casa.</p>
+    <p class="say">Suena: <b>hes-tau-rán-chi</b> · <b>pér-tu</b></p>
+    <button class="btn" data-say="O restaurante fica perto da minha casa.">▶ Normal</button><button class="btn" data-say="O restaurante fica perto da minha casa." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Escovo os den<mark class="ch">tes</mark> todos os dias.</p>
+    <p class="es">Me cepillo los dientes todos los días.</p>
+    <p class="say">Suena: <b>dén-chis</b> · <b>tó-dus</b></p>
+    <button class="btn" data-say="Escovo os dentes todos os dias.">▶ Normal</button><button class="btn" data-say="Escovo os dentes todos os dias." data-slow="1">🐢 Lento</button>
+  </div>
+</div>
+
+<!-- ---------- Regla 3 ---------- -->
+<div class="card rule plain">
+  <span class="tag">Regla 3</span>
+  <h3>T + a, o, u (o e en medio de palabra) → “t” normal</h3>
+  <p>Si después de la <b>t</b> viene <b>a, o, u</b>, o una <b>e</b> que no está al final de la palabra, la <b>t</b> suena como en español. Es la misma <b>t</b> de <i>taza</i>, <i>todo</i>, <i>tuna</i>.</p>
+  <div class="chips">
+    <button class="chip" data-say="tudo"><b>tudo</b><small>tú-du · todo</small></button>
+    <button class="chip" data-say="toda"><b>toda</b><small>tó-da · toda</small></button>
+    <button class="chip" data-say="tenho"><b>tenho</b><small>té-ñu · tengo</small></button>
+    <button class="chip" data-say="tarefa"><b>tarefa</b><small>ta-ré-fa · tarea</small></button>
+    <button class="chip" data-say="terça"><b>terça</b><small>tér-sa · martes (terça-feira)</small></button>
+    <button class="chip" data-say="telefone"><b>telefone</b><small>te-le-fó-ni · teléfono</small></button>
+    <button class="chip" data-say="bateria"><b>bateria</b><small>ba-te-rí-a · batería</small></button>
+    <button class="chip" data-say="perto"><b>perto</b><small>pér-tu · cerca</small></button>
+    <button class="chip" data-say="muito"><b>muito</b><small>múi-tu · mucho</small></button>
+  </div>
+
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Tudo bem? Eu tenho trabalho hoje.</p>
+    <p class="es">¿Todo bien? Hoy tengo trabajo.</p>
+    <p class="say">Suena: <b>tú-du</b> · <b>té-ñu</b> · <b>tra-bá-lyu</b></p>
+    <button class="btn" data-say="Tudo bem? Eu tenho trabalho hoje.">▶ Normal</button><button class="btn" data-say="Tudo bem? Eu tenho trabalho hoje." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Toda terça eu tomo café.</p>
+    <p class="es">Todos los martes tomo café.</p>
+    <p class="say">Suena: <b>tó-da</b> · <b>tér-sa</b> · <b>tó-mu</b></p>
+    <button class="btn" data-say="Toda terça eu tomo café.">▶ Normal</button><button class="btn" data-say="Toda terça eu tomo café." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Meu telefone está sem bateria.</p>
+    <p class="es">Mi teléfono no tiene batería.</p>
+    <p class="say">Suena: <b>te-le-fó-ni</b> · <b>ba-te-rí-a</b> (la “te” del medio es “t” normal)</p>
+    <button class="btn" data-say="Meu telefone está sem bateria.">▶ Normal</button><button class="btn" data-say="Meu telefone está sem bateria." data-slow="1">🐢 Lento</button>
+  </div>
+</div>
+
+<!-- ---------- Regla 4 ---------- -->
+<div class="card rule plain">
+  <span class="tag">Regla 4</span>
+  <h3>T + r (tr-) → “t” normal, aunque venga una i después</h3>
+  <p>En <i>triste</i> la <b>t</b> <u>no</u> está pegada a la <b>i</b>: entre las dos hay una <b>r</b>. Por eso la primera <b>t</b> es normal y no se vuelve “ch”. La <i>-te</i> final sí sigue la regla 2: <b>“trís-chi”</b>.</p>
+  <div class="chips">
+    <button class="chip" data-say="triste"><b>tris<mark class="ch">te</mark></b><small>trís-chi · triste</small></button>
+    <button class="chip" data-say="trinta"><b>trinta</b><small>trín-ta · treinta</small></button>
+    <button class="chip" data-say="três"><b>três</b><small>treis · tres</small></button>
+    <button class="chip" data-say="trem"><b>trem</b><small>trein · tren</small></button>
+    <button class="chip" data-say="trabalho"><b>trabalho</b><small>tra-bá-lyu · trabajo</small></button>
+    <button class="chip" data-say="outro"><b>outro</b><small>ôu-tru · otro</small></button>
+  </div>
+
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Ela está tris<mark class="ch">te</mark> hoje.</p>
+    <p class="es">Ella está triste hoy.</p>
+    <p class="say">Suena: <b>trís-chi</b></p>
+    <button class="btn" data-say="Ela está triste hoje.">▶ Normal</button><button class="btn" data-say="Ela está triste hoje." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">O trem sai às três horas.</p>
+    <p class="es">El tren sale a las tres.</p>
+    <p class="say">Suena: <b>trein</b> · <b>treis</b></p>
+    <button class="btn" data-say="O trem sai às três horas.">▶ Normal</button><button class="btn" data-say="O trem sai às três horas." data-slow="1">🐢 Lento</button>
+  </div>
+</div>
+
+<!-- ---------- Contraste ---------- -->
+<h3 class="bigsec" id="r-t-compara">🎧 Compara</h3>
+<div class="card">
+  <p>Escucha cada par seguido. Fíjate que lo único que cambia es la letra que sigue a la <b>t</b>.</p>
+  <div class="pairs">
+    <div class="pair">
+      <div class="row"><span>tudo</span><button class="btn" data-say="tudo">🔊</button></div>
+      <div class="arrow">vs</div>
+      <div class="row"><span><mark class="ch">ti</mark>o</span><button class="btn" data-say="tio">🔊</button></div>
+    </div>
+    <div class="pair">
+      <div class="row"><span>tenho</span><button class="btn" data-say="tenho">🔊</button></div>
+      <div class="arrow">vs</div>
+      <div class="row"><span><mark class="ch">ti</mark>nta</span><button class="btn" data-say="tinta">🔊</button></div>
+    </div>
+    <div class="pair">
+      <div class="row"><span>tomo</span><button class="btn" data-say="tomo">🔊</button></div>
+      <div class="arrow">vs</div>
+      <div class="row"><span><mark class="ch">ti</mark>me</span><button class="btn" data-say="timi">🔊</button></div>
+    </div>
+    <div class="pair">
+      <div class="row"><span>toda</span><button class="btn" data-say="toda">🔊</button></div>
+      <div class="arrow">vs</div>
+      <div class="row"><span><mark class="ch">ti</mark>po</span><button class="btn" data-say="tipo">🔊</button></div>
+    </div>
+    <div class="pair">
+      <div class="row"><span>perto</span><button class="btn" data-say="perto">🔊</button></div>
+      <div class="arrow">vs</div>
+      <div class="row"><span>par<mark class="ch">te</mark></span><button class="btn" data-say="parte">🔊</button></div>
+    </div>
+    <div class="pair">
+      <div class="row"><span>muito</span><button class="btn" data-say="muito">🔊</button></div>
+      <div class="arrow">vs</div>
+      <div class="row"><span>noi<mark class="ch">te</mark></span><button class="btn" data-say="noite">🔊</button></div>
+    </div>
+  </div>
+</div>
+
+<!-- ---------- Errores y excepciones ---------- -->
+<h3 class="bigsec" id="r-t-errores">Errores y variantes</h3>
+<div class="card">
+  <h3>⚠️ Errores comunes de hispanohablantes</h3>
+  <ul>
+    <li>Leer <i>ti</i> como en español: decir “tío” en vez de <b>“chíu”</b>.</li>
+    <li>Pronunciar la <i>e</i> final como “e”: decir “nóite” en vez de <b>“nói-chi”</b>.</li>
+    <li>Aplicar “ch” donde no toca: en <i>triste</i> y <i>trinta</i>, la primera <b>t</b> es normal porque la <b>r</b> está en medio.</li>
+  </ul>
+  <h3 style="margin-top:14px">📍 Excepciones y variantes</h3>
+  <ul>
+    <li>Algunas regiones de Brasil (partes del Nordeste y del sur) no palatalizan y dicen <i>tio</i> con “t” normal.</li>
+    <li>En el portugués de <b>Portugal</b> tampoco se palataliza. Si tu curso es de portugués brasileño, usa las reglas de arriba.</li>
+  </ul>
+</div>
+
+</section>
+<!-- ===================== NH ===================== -->
+<section id="letra-nh">
+
+<h2>NH <small style="font-weight:400;color:var(--muted)">· suena “ñ”</small></h2>
+<div class="legend">
+  <span><mark class="ch">nh</mark> = suena <b>“ñ”</b>, una sola letra</span>
+</div>
+
+<div class="subnav"><a href="#r-nh-resumen">Resumen</a><a href="#r-nh-reglas">Reglas</a><a href="#r-nh-compara">Compara</a><a href="#r-nh-errores">Errores y variantes</a></div>
+
+<h3 class="bigsec" id="r-nh-resumen">Resumen</h3>
+<div class="card">
+  <div class="tablewrap">
+  <table>
+    <tr><th>Se escribe</th><th>Suena</th><th>Ejemplo</th></tr>
+    <tr><td><mark class="ch">nha</mark></td><td>ña</td><td>minha → <i>mí-ña</i></td></tr>
+    <tr><td><mark class="ch">nho</mark></td><td>ñu (la o final suena “u”)</td><td>vinho → <i>ví-ñu</i></td></tr>
+    <tr><td><mark class="ch">nhe</mark> / <mark class="ch">nhei</mark></td><td>ñe / ñei</td><td>dinheiro → <i>dyi-ñéi-ru</i></td></tr>
+    <tr><td><mark class="ch">nhia</mark></td><td>ñía</td><td>companhia → <i>kom-pa-ñí-a</i></td></tr>
+    <tr><td>-inho / -inha (diminutivos)</td><td>í-ñu / í-ña</td><td>casinha → <i>ka-zí-ña</i></td></tr>
+  </table>
+  </div>
+  <p class="note">💡 Es <b>exactamente la ñ del español</b>. <i>Minha</i> suena como “mi-ña”. No hay que aprender un sonido nuevo: solo recordar que <b>nh = ñ</b>.</p>
+</div>
+
+<h3 class="bigsec" id="r-nh-reglas">Las reglas</h3>
+<div class="card rule">
+  <span class="tag">Regla 1</span>
+  <h3>nh = “ñ” (siempre)</h3>
+  <p>Las letras <b>n + h</b> juntas forman un solo sonido: la <b>ñ</b>. La <b>h</b> no se pronuncia por separado. Nunca se lee “n-h” ni solo “n”.</p>
+  <div class="chips">
+    <button class="chip" data-say="minha"><b>mi<mark class="ch">nh</mark>a</b><small>mí-ña · mi</small></button>
+    <button class="chip" data-say="senhor"><b>se<mark class="ch">nh</mark>or</b><small>se-ñôr · señor</small></button>
+    <button class="chip" data-say="manhã"><b>ma<mark class="ch">nh</mark>ã</b><small>ma-ñã · mañana</small></button>
+    <button class="chip" data-say="vinho"><b>vi<mark class="ch">nh</mark>o</b><small>ví-ñu · vino</small></button>
+    <button class="chip" data-say="banho"><b>ba<mark class="ch">nh</mark>o</b><small>bá-ñu · baño</small></button>
+    <button class="chip" data-say="sonho"><b>so<mark class="ch">nh</mark>o</b><small>sô-ñu · sueño</small></button>
+    <button class="chip" data-say="montanha"><b>monta<mark class="ch">nh</mark>a</b><small>mon-tá-ña · montaña</small></button>
+    <button class="chip" data-say="Espanha"><b>Espa<mark class="ch">nh</mark>a</b><small>es-pá-ña · España</small></button>
+    <button class="chip" data-say="espanhol"><b>espa<mark class="ch">nh</mark>ol</b><small>es-pa-ñól · español</small></button>
+    <button class="chip" data-say="companhia"><b>compa<mark class="ch">nh</mark>ia</b><small>kom-pa-ñí-a · compañía</small></button>
+    <button class="chip" data-say="tenho"><b>te<mark class="ch">nh</mark>o</b><small>té-ñu · tengo</small></button>
+    <button class="chip" data-say="unha"><b>u<mark class="ch">nh</mark>a</b><small>ú-ña · uña</small></button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Mi<mark class="ch">nh</mark>a casa fica na monta<mark class="ch">nh</mark>a.</p>
+    <p class="es">Mi casa queda en la montaña.</p>
+    <p class="say">Suena: <b>mí-ña</b> · <b>mon-tá-ña</b></p>
+    <button class="btn" data-say="Minha casa fica na montanha.">▶ Normal</button><button class="btn" data-say="Minha casa fica na montanha." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Ama<mark class="ch">nh</mark>ã eu te<mark class="ch">nh</mark>o aula de ma<mark class="ch">nh</mark>ã.</p>
+    <p class="es">Mañana tengo clase en la mañana.</p>
+    <p class="say">Suena: <b>a-ma-ñã</b> · <b>té-ñu</b> · <b>ma-ñã</b></p>
+    <button class="btn" data-say="Amanhã eu tenho aula de manhã.">▶ Normal</button><button class="btn" data-say="Amanhã eu tenho aula de manhã." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">O se<mark class="ch">nh</mark>or quer vi<mark class="ch">nh</mark>o?</p>
+    <p class="es">¿El señor quiere vino?</p>
+    <p class="say">Suena: <b>se-ñôr</b> · <b>ví-ñu</b></p>
+    <button class="btn" data-say="O senhor quer vinho?">▶ Normal</button><button class="btn" data-say="O senhor quer vinho?" data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Ele tem um so<mark class="ch">nh</mark>o: viajar para a Espa<mark class="ch">nh</mark>a.</p>
+    <p class="es">Él tiene un sueño: viajar a España.</p>
+    <p class="say">Suena: <b>sô-ñu</b> · <b>es-pá-ña</b></p>
+    <button class="btn" data-say="Ele tem um sonho: viajar para a Espanha.">▶ Normal</button><button class="btn" data-say="Ele tem um sonho: viajar para a Espanha." data-slow="1">🐢 Lento</button>
+  </div>
+</div>
+<div class="card rule plain">
+  <span class="tag">Regla 2</span>
+  <h3>La vocal de antes suena un poco nasal</h3>
+  <p>En portugués brasileño, la vocal que va antes de <b>nh</b> se nasaliza un poco: <i>banho</i> suena casi como “bãñu”. No hace falta exagerarlo. Si dices bien la <b>ñ</b>, ya suena natural.</p>
+  <div class="chips">
+    <button class="chip" data-say="ganhar"><b>ga<mark class="ch">nh</mark>ar</b><small>ga-ñár · ganar</small></button>
+    <button class="chip" data-say="ganho"><b>ga<mark class="ch">nh</mark>o</b><small>gá-ñu · ganancia</small></button>
+    <button class="chip" data-say="tamanho"><b>tama<mark class="ch">nh</mark>o</b><small>ta-má-ñu · tamaño</small></button>
+    <button class="chip" data-say="vizinho"><b>vizi<mark class="ch">nh</mark>o</b><small>vi-zí-ñu · vecino</small></button>
+    <button class="chip" data-say="dinheiro"><b>di<mark class="ch">nh</mark>eiro</b><small>dyi-ñéi-ru · dinero</small></button>
+    <button class="chip" data-say="aranha"><b>ara<mark class="ch">nh</mark>a</b><small>a-rã-ña · araña</small></button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Eu quero ga<mark class="ch">nh</mark>ar di<mark class="ch">nh</mark>eiro.</p>
+    <p class="es">Quiero ganar dinero.</p>
+    <p class="say">Suena: <b>ga-ñár</b> · <b>dyi-ñéi-ru</b></p>
+    <button class="btn" data-say="Eu quero ganhar dinheiro.">▶ Normal</button><button class="btn" data-say="Eu quero ganhar dinheiro." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Vou tomar ba<mark class="ch">nh</mark>o agora.</p>
+    <p class="es">Voy a bañarme ahora.</p>
+    <p class="say">Suena: <b>bá-ñu</b></p>
+    <button class="btn" data-say="Vou tomar banho agora.">▶ Normal</button><button class="btn" data-say="Vou tomar banho agora." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Meu vizi<mark class="ch">nh</mark>o tem uma casa grande.</p>
+    <p class="es">Mi vecino tiene una casa grande.</p>
+    <p class="say">Suena: <b>vi-zí-ñu</b></p>
+    <button class="btn" data-say="Meu vizinho tem uma casa grande.">▶ Normal</button><button class="btn" data-say="Meu vizinho tem uma casa grande." data-slow="1">🐢 Lento</button>
+  </div>
+</div>
+<div class="card rule">
+  <span class="tag">Regla 3</span>
+  <h3>Diminutivos: -inho / -inha</h3>
+  <p>Para decir “pequeño” o dar cariño, el portugués usa <b>-inho</b> (masculino) e <b>-inha</b> (femenino). Siempre suenan <b>“í-ñu”</b> e <b>“í-ña”</b>, y la sílaba <b>-ni-</b> lleva el acento.</p>
+  <div class="chips">
+    <button class="chip" data-say="casinha"><b>casi<mark class="ch">nh</mark>a</b><small>ka-zí-ña · casita</small></button>
+    <button class="chip" data-say="cafezinho"><b>cafezi<mark class="ch">nh</mark>o</b><small>ka-fe-zí-ñu · cafecito</small></button>
+    <button class="chip" data-say="pouquinho"><b>pouqui<mark class="ch">nh</mark>o</b><small>pou-kí-ñu · poquito</small></button>
+    <button class="chip" data-say="carinho"><b>cari<mark class="ch">nh</mark>o</b><small>ka-rí-ñu · cariño</small></button>
+    <button class="chip" data-say="gatinho"><b>gati<mark class="ch">nh</mark>o</b><small>ga-chí-ñu · gatito</small></button>
+    <button class="chip" data-say="sozinho"><b>sozi<mark class="ch">nh</mark>o</b><small>so-zí-ñu · solito</small></button>
+    <button class="chip" data-say="bonitinha"><b>boniti<mark class="ch">nh</mark>a</b><small>bo-ni-chí-ña · lindita</small></button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Quero um cafezi<mark class="ch">nh</mark>o, só um pouqui<mark class="ch">nh</mark>o.</p>
+    <p class="es">Quiero un cafecito, solo un poquito.</p>
+    <p class="say">Suena: <b>ka-fe-zí-ñu</b> · <b>pou-kí-ñu</b></p>
+    <button class="btn" data-say="Quero um cafezinho, só um pouquinho.">▶ Normal</button><button class="btn" data-say="Quero um cafezinho, só um pouquinho." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Ela tem um gati<mark class="ch">nh</mark>o na casi<mark class="ch">nh</mark>a.</p>
+    <p class="es">Ella tiene un gatito en la casita.</p>
+    <p class="say">Suena: <b>ga-chí-ñu</b> · <b>ka-zí-ña</b></p>
+    <button class="btn" data-say="Ela tem um gatinho na casinha.">▶ Normal</button><button class="btn" data-say="Ela tem um gatinho na casinha." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Obrigado pelo cari<mark class="ch">nh</mark>o!</p>
+    <p class="es">¡Gracias por el cariño!</p>
+    <p class="say">Suena: <b>ka-rí-ñu</b></p>
+    <button class="btn" data-say="Obrigado pelo carinho!">▶ Normal</button><button class="btn" data-say="Obrigado pelo carinho!" data-slow="1">🐢 Lento</button>
+  </div>
+</div>
+
+<h3 class="bigsec" id="r-nh-compara">🎧 Compara</h3>
+<div class="card">
+  <p>Escucha cada par seguido. Lo único que cambia es la <b>h</b> detrás de la <b>n</b>.</p>
+  <div class="pairs">
+    <div class="pair">
+      <div class="row"><span>mina</span><button class="btn" data-say="mina">🔊</button></div>
+      <div class="arrow">vs</div>
+      <div class="row"><span>mi<mark class="ch">nh</mark>a</span><button class="btn" data-say="minha">🔊</button></div>
+    </div>
+    <div class="pair">
+      <div class="row"><span>sono</span><button class="btn" data-say="sono">🔊</button></div>
+      <div class="arrow">vs</div>
+      <div class="row"><span>so<mark class="ch">nh</mark>o</span><button class="btn" data-say="sonho">🔊</button></div>
+    </div>
+    <div class="pair">
+      <div class="row"><span>tina</span><button class="btn" data-say="tina">🔊</button></div>
+      <div class="arrow">vs</div>
+      <div class="row"><span>ti<mark class="ch">nh</mark>a</span><button class="btn" data-say="tinha">🔊</button></div>
+    </div>
+    <div class="pair">
+      <div class="row"><span>uma</span><button class="btn" data-say="uma">🔊</button></div>
+      <div class="arrow">vs</div>
+      <div class="row"><span>u<mark class="ch">nh</mark>a</span><button class="btn" data-say="unha">🔊</button></div>
+    </div>
+    <div class="pair">
+      <div class="row"><span>pino</span><button class="btn" data-say="pino">🔊</button></div>
+      <div class="arrow">vs</div>
+      <div class="row"><span>pi<mark class="ch">nh</mark>o</span><button class="btn" data-say="pinho">🔊</button></div>
+    </div>
+  </div>
+</div>
+
+<h3 class="bigsec" id="r-nh-errores">Errores y variantes</h3>
+<div class="card">
+  <h3>⚠️ Errores comunes de hispanohablantes</h3>
+  <ul>
+    <li>Leer <i>nh</i> como “n” + “h” (“min-ha”) o ignorar la <i>h</i> y decir “mina”. Es una sola <b>ñ</b>.</li>
+    <li>Decir “ny” (“min-ya”). No hay una <i>y</i> aparte: es una ñ directa.</li>
+    <li>Confiar en el español: <i>dinheiro</i> no es “dinero” (es <b>dyi-ñéi-ru</b>) y <i>senhor</i> es <b>se-ñôr</b>.</li>
+  </ul>
+  <h3 style="margin-top:14px">📍 Excepciones y variantes</h3>
+  <ul>
+    <li>Casi no hay variantes: <b>nh = ñ</b> en Brasil y en Portugal.</li>
+  </ul>
+</div>
+
+</section>
+
+<!-- ===================== LH ===================== -->
+<section id="letra-lh">
+
+<h2>LH <small style="font-weight:400;color:var(--muted)">· suena “ly”</small></h2>
+<div class="legend">
+  <span><mark class="ch">lh</mark> = suena <b>“ly”</b>, una sola letra</span>
+</div>
+
+<div class="subnav"><a href="#r-lh-resumen">Resumen</a><a href="#r-lh-reglas">Reglas</a><a href="#r-lh-compara">Compara</a><a href="#r-lh-errores">Errores y variantes</a></div>
+
+<h3 class="bigsec" id="r-lh-resumen">Resumen</h3>
+<div class="card">
+  <div class="tablewrap">
+  <table>
+    <tr><th>Se escribe</th><th>Suena</th><th>Ejemplo</th></tr>
+    <tr><td><mark class="ch">lha</mark></td><td>lya</td><td>filha → <i>fí-lya</i></td></tr>
+    <tr><td><mark class="ch">lho</mark></td><td>lyu (la o final suena “u”)</td><td>filho → <i>fí-lyu</i></td></tr>
+    <tr><td><mark class="ch">lhe</mark> / <mark class="ch">lher</mark></td><td>lye / lyér</td><td>mulher → <i>mu-lyér</i></td></tr>
+    <tr><td><mark class="ch">lhão</mark></td><td>lyãu</td><td>milhão → <i>mi-lyãu</i></td></tr>
+    <tr><td><i>lhe</i> (pronombre “le”)</td><td>lyi</td><td>Eu lhe disse → <i>lyi dyí-si</i></td></tr>
+  </table>
+  </div>
+  <p class="note">💡 Se parece a la <b>ll</b> del español de España o de los Andes (<i>calle</i>), o a una <b>l</b> seguida rápido de una <b>y</b>. <i>Filho</i> suena “fí-lyu”.</p>
+</div>
+
+<h3 class="bigsec" id="r-lh-reglas">Las reglas</h3>
+<div class="card rule">
+  <span class="tag">Regla 1</span>
+  <h3>lh = “ly”</h3>
+  <p>Las letras <b>l + h</b> juntas forman un solo sonido, parecido a “ly”: pon la lengua como para una <b>l</b> y deslízala rápido hacia una <b>y</b>. En el habla informal muchos brasileños lo reducen a una “y” (<i>filho</i> → “fí-yu”), pero la forma clara es <b>“ly”</b>.</p>
+  <div class="chips">
+    <button class="chip" data-say="filho"><b>fi<mark class="ch">lh</mark>o</b><small>fí-lyu · hijo</small></button>
+    <button class="chip" data-say="filha"><b>fi<mark class="ch">lh</mark>a</b><small>fí-lya · hija</small></button>
+    <button class="chip" data-say="olho"><b>o<mark class="ch">lh</mark>o</b><small>ô-lyu · ojo</small></button>
+    <button class="chip" data-say="alho"><b>a<mark class="ch">lh</mark>o</b><small>á-lyu · ajo</small></button>
+    <button class="chip" data-say="ilha"><b>i<mark class="ch">lh</mark>a</b><small>í-lya · isla</small></button>
+    <button class="chip" data-say="folha"><b>fo<mark class="ch">lh</mark>a</b><small>fô-lya · hoja</small></button>
+    <button class="chip" data-say="velho"><b>ve<mark class="ch">lh</mark>o</b><small>vé-lyu · viejo</small></button>
+    <button class="chip" data-say="julho"><b>ju<mark class="ch">lh</mark>o</b><small>jú-lyu · julio</small></button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Meu fi<mark class="ch">lh</mark>o trabalha hoje.</p>
+    <p class="es">Mi hijo trabaja hoy.</p>
+    <p class="say">Suena: <b>fí-lyu</b> · <b>tra-bá-lya</b></p>
+    <button class="btn" data-say="Meu filho trabalha hoje.">▶ Normal</button><button class="btn" data-say="Meu filho trabalha hoje." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Ela tem o o<mark class="ch">lh</mark>o vermelho.</p>
+    <p class="es">Ella tiene el ojo rojo.</p>
+    <p class="say">Suena: <b>ô-lyu</b> · <b>ver-mê-lyu</b></p>
+    <button class="btn" data-say="Ela tem o olho vermelho.">▶ Normal</button><button class="btn" data-say="Ela tem o olho vermelho." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Meu fi<mark class="ch">lh</mark>o gosta de a<mark class="ch">lh</mark>o.</p>
+    <p class="es">A mi hijo le gusta el ajo.</p>
+    <p class="say">Suena: <b>fí-lyu</b> · <b>á-lyu</b></p>
+    <button class="btn" data-say="Meu filho gosta de alho.">▶ Normal</button><button class="btn" data-say="Meu filho gosta de alho." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Em ju<mark class="ch">lh</mark>o eu viajo para a i<mark class="ch">lh</mark>a.</p>
+    <p class="es">En julio viajo a la isla.</p>
+    <p class="say">Suena: <b>jú-lyu</b> · <b>í-lya</b></p>
+    <button class="btn" data-say="Em julho eu viajo para a ilha.">▶ Normal</button><button class="btn" data-say="Em julho eu viajo para a ilha." data-slow="1">🐢 Lento</button>
+  </div>
+</div>
+<div class="card rule plain">
+  <span class="tag">Regla 2</span>
+  <h3>Terminaciones -lho / -lha</h3>
+  <p>Muchísimas palabras terminan en <b>-lho</b> (suena “lyu”) o <b>-lha</b> (suena “lya”). Ojo: <i>trabalho</i> <b>no</b> se dice como el español “trabajo”: suena <b>“tra-bá-lyu”</b>.</p>
+  <div class="chips">
+    <button class="chip" data-say="trabalho"><b>traba<mark class="ch">lh</mark>o</b><small>tra-bá-lyu · trabajo</small></button>
+    <button class="chip" data-say="vermelho"><b>verme<mark class="ch">lh</mark>o</b><small>ver-mê-lyu · rojo</small></button>
+    <button class="chip" data-say="coelho"><b>coe<mark class="ch">lh</mark>o</b><small>ko-ê-lyu · conejo</small></button>
+    <button class="chip" data-say="joelho"><b>joe<mark class="ch">lh</mark>o</b><small>ju-ê-lyu · rodilla</small></button>
+    <button class="chip" data-say="abelha"><b>abe<mark class="ch">lh</mark>a</b><small>a-bê-lya · abeja</small></button>
+    <button class="chip" data-say="orelha"><b>ore<mark class="ch">lh</mark>a</b><small>o-rê-lya · oreja</small></button>
+    <button class="chip" data-say="toalha"><b>toa<mark class="ch">lh</mark>a</b><small>tu-á-lya · toalla</small></button>
+    <button class="chip" data-say="palha"><b>pa<mark class="ch">lh</mark>a</b><small>pá-lya · paja</small></button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">O coe<mark class="ch">lh</mark>o tem a ore<mark class="ch">lh</mark>a grande.</p>
+    <p class="es">El conejo tiene la oreja grande.</p>
+    <p class="say">Suena: <b>ko-ê-lyu</b> · <b>o-rê-lya</b></p>
+    <button class="btn" data-say="O coelho tem a orelha grande.">▶ Normal</button><button class="btn" data-say="O coelho tem a orelha grande." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">A abe<mark class="ch">lh</mark>a está na fo<mark class="ch">lh</mark>a.</p>
+    <p class="es">La abeja está en la hoja.</p>
+    <p class="say">Suena: <b>a-bê-lya</b> · <b>fô-lya</b></p>
+    <button class="btn" data-say="A abelha está na folha.">▶ Normal</button><button class="btn" data-say="A abelha está na folha." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Preciso de uma toa<mark class="ch">lh</mark>a verme<mark class="ch">lh</mark>a.</p>
+    <p class="es">Necesito una toalla roja.</p>
+    <p class="say">Suena: <b>tu-á-lya</b> · <b>ver-mê-lya</b></p>
+    <button class="btn" data-say="Preciso de uma toalha vermelha.">▶ Normal</button><button class="btn" data-say="Preciso de uma toalha vermelha." data-slow="1">🐢 Lento</button>
+  </div>
+</div>
+<div class="card rule">
+  <span class="tag">Regla 3</span>
+  <h3>lh + e / ão: lhe, mulher, melhor</h3>
+  <p>Cuando <b>lh</b> va antes de <b>e</b> o <b>ão</b>, sigue siendo “ly”: <i>mulher</i> → <b>“mu-lyér”</b>, <i>melhor</i> → <b>“me-lyór”</b>, <i>milhão</i> → <b>“mi-lyãu”</b>. Además, el pronombre <b>lhe</b> (“le”) suena <b>“lyi”</b>.</p>
+  <div class="chips">
+    <button class="chip" data-say="mulher"><b>mu<mark class="ch">lh</mark>er</b><small>mu-lyér · mujer</small></button>
+    <button class="chip" data-say="melhor"><b>me<mark class="ch">lh</mark>or</b><small>me-lyór · mejor</small></button>
+    <button class="chip" data-say="colher"><b>co<mark class="ch">lh</mark>er</b><small>ko-lyér · cuchara</small></button>
+    <button class="chip" data-say="milhão"><b>mi<mark class="ch">lh</mark>ão</b><small>mi-lyãu · millón</small></button>
+    <button class="chip" data-say="olhar"><b>o<mark class="ch">lh</mark>ar</b><small>o-lyár · mirar</small></button>
+    <button class="chip" data-say="trabalhar"><b>traba<mark class="ch">lh</mark>ar</b><small>tra-ba-lyár · trabajar</small></button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Eu <mark class="ch">lhe</mark> disse a verdade.</p>
+    <p class="es">Le dije la verdad.</p>
+    <p class="say">Suena: <b>lyi</b> · <b>dyí-si</b> · <b>ver-dá-dyi</b></p>
+    <button class="btn" data-say="Eu lhe disse a verdade.">▶ Normal</button><button class="btn" data-say="Eu lhe disse a verdade." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Essa mu<mark class="ch">lh</mark>er é a me<mark class="ch">lh</mark>or médica.</p>
+    <p class="es">Esa mujer es la mejor médica.</p>
+    <p class="say">Suena: <b>mu-lyér</b> · <b>me-lyór</b></p>
+    <button class="btn" data-say="Essa mulher é a melhor médica.">▶ Normal</button><button class="btn" data-say="Essa mulher é a melhor médica." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Quero o<mark class="ch">lh</mark>ar o mar.</p>
+    <p class="es">Quiero mirar el mar.</p>
+    <p class="say">Suena: <b>o-lyár</b></p>
+    <button class="btn" data-say="Quero olhar o mar.">▶ Normal</button><button class="btn" data-say="Quero olhar o mar." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Preciso traba<mark class="ch">lh</mark>ar amanhã.</p>
+    <p class="es">Necesito trabajar mañana.</p>
+    <p class="say">Suena: <b>tra-ba-lyár</b></p>
+    <button class="btn" data-say="Preciso trabalhar amanhã.">▶ Normal</button><button class="btn" data-say="Preciso trabalhar amanhã." data-slow="1">🐢 Lento</button>
+  </div>
+</div>
+
+<h3 class="bigsec" id="r-lh-compara">🎧 Compara</h3>
+<div class="card">
+  <p>Escucha cada par seguido. Lo único que cambia es la <b>h</b> detrás de la <b>l</b>.</p>
+  <div class="pairs">
+    <div class="pair">
+      <div class="row"><span>mala</span><button class="btn" data-say="mala">🔊</button></div>
+      <div class="arrow">vs</div>
+      <div class="row"><span>ma<mark class="ch">lh</mark>a</span><button class="btn" data-say="malha">🔊</button></div>
+    </div>
+    <div class="pair">
+      <div class="row"><span>vela</span><button class="btn" data-say="vela">🔊</button></div>
+      <div class="arrow">vs</div>
+      <div class="row"><span>ve<mark class="ch">lh</mark>a</span><button class="btn" data-say="velha">🔊</button></div>
+    </div>
+    <div class="pair">
+      <div class="row"><span>bola</span><button class="btn" data-say="bola">🔊</button></div>
+      <div class="arrow">vs</div>
+      <div class="row"><span>bo<mark class="ch">lh</mark>a</span><button class="btn" data-say="bolha">🔊</button></div>
+    </div>
+    <div class="pair">
+      <div class="row"><span>pala</span><button class="btn" data-say="pala">🔊</button></div>
+      <div class="arrow">vs</div>
+      <div class="row"><span>pa<mark class="ch">lh</mark>a</span><button class="btn" data-say="palha">🔊</button></div>
+    </div>
+    <div class="pair">
+      <div class="row"><span>tela</span><button class="btn" data-say="tela">🔊</button></div>
+      <div class="arrow">vs</div>
+      <div class="row"><span>te<mark class="ch">lh</mark>a</span><button class="btn" data-say="telha">🔊</button></div>
+    </div>
+  </div>
+</div>
+
+<h3 class="bigsec" id="r-lh-errores">Errores y variantes</h3>
+<div class="card">
+  <h3>⚠️ Errores comunes de hispanohablantes</h3>
+  <ul>
+    <li>Leer <i>lh</i> como “l” + “h” (“fil-ho”) o dejarlo en “l” (“filo”). Es un solo sonido: <b>“ly”</b>.</li>
+    <li>Leer <i>lh</i> como la <i>j</i> del español: <i>filho</i> no es “fijo” ni <i>trabalho</i> es “trabajo”.</li>
+    <li>Confundir pares como <i>mala</i> (maleta) y <i>malha</i> (malla): la <i>h</i> cambia la palabra.</li>
+  </ul>
+  <h3 style="margin-top:14px">📍 Excepciones y variantes</h3>
+  <ul>
+    <li>En el habla informal, muchos brasileños reducen <i>lh</i> a una “y” (<i>filho</i> → “fí-yu”). Es común y se entiende bien, pero aprende primero el “ly”.</li>
+    <li>En Portugal el sonido “ly” se mantiene más claro.</li>
+  </ul>
+</div>
+
+</section>
+
+<!-- ===================== L FINAL ===================== -->
+<section id="letra-l">
+
+<h2>L <small style="font-weight:400;color:var(--muted)">· suena “u”</small></h2>
+<div class="legend">
+  <span><mark class="ch">l</mark> al final de sílaba = suena <b>“u”</b></span>
+</div>
+
+<div class="subnav"><a href="#r-l-resumen">Resumen</a><a href="#r-l-reglas">Reglas</a><a href="#r-l-compara">Compara</a><a href="#r-l-errores">Errores y variantes</a></div>
+
+<h3 class="bigsec" id="r-l-resumen">Resumen</h3>
+<div class="card">
+  <div class="tablewrap">
+  <table>
+    <tr><th>Dónde está la L</th><th>Suena</th><th>Ejemplo</th></tr>
+    <tr><td><b>Final de palabra</b> (-al, -el, -ol, -il, -ul)</td><td><mark class="ch">u</mark></td><td>Brasil → <i>bra-zíu</i></td></tr>
+    <tr><td><b>Antes de consonante</b> (-lt-, -lv-, -lm-, -lc-…)</td><td><mark class="ch">u</mark></td><td>falta → <i>fáu-ta</i></td></tr>
+    <tr><td><b>Antes de vocal</b> (inicio de sílaba)</td><td>l normal</td><td>sala → <i>sá-la</i></td></tr>
+  </table>
+  </div>
+  <p class="note">💡 Truco: en Brasil la <b>l</b> que cierra una sílaba se “vocaliza”: se convierte en una <b>u</b> rápida, como la de <i>auto</i> o <i>causa</i>. Por eso <i>Brasil</i> termina en “-zíu”, sin ninguna <i>l</i> clara, y <i>sol</i> suena “sôu”.</p>
+</div>
+
+<h3 class="bigsec" id="r-l-reglas">Las reglas</h3>
+<div class="card rule">
+  <span class="tag">Regla 1</span>
+  <h3>L al final de palabra → suena “u”</h3>
+  <p>Cuando una palabra <b>termina en -l</b>, esa <b>l</b> suena como una <b>u</b> corta. <i>Brasil</i> → <b>“bra-zíu”</b>, <i>papel</i> → <b>“pa-péu”</b>, <i>sol</i> → <b>“sôu”</b>. No se pronuncia la <i>l</i> española, con la lengua en el paladar.</p>
+  <div class="chips">
+    <button class="chip" data-say="Brasil"><b>Brasi<mark class="ch">l</mark></b><small>bra-zíu · Brasil</small></button>
+    <button class="chip" data-say="sol"><b>so<mark class="ch">l</mark></b><small>sôu · sol</small></button>
+    <button class="chip" data-say="mal"><b>ma<mark class="ch">l</mark></b><small>máu · mal</small></button>
+    <button class="chip" data-say="sal"><b>sa<mark class="ch">l</mark></b><small>sáu · sal</small></button>
+    <button class="chip" data-say="azul"><b>azu<mark class="ch">l</mark></b><small>a-zúu · azul</small></button>
+    <button class="chip" data-say="papel"><b>pape<mark class="ch">l</mark></b><small>pa-péu · papel</small></button>
+    <button class="chip" data-say="hotel"><b>hote<mark class="ch">l</mark></b><small>o-téu · hotel</small></button>
+    <button class="chip" data-say="animal"><b>anima<mark class="ch">l</mark></b><small>a-ni-máu · animal</small></button>
+    <button class="chip" data-say="jornal"><b>jorna<mark class="ch">l</mark></b><small>jor-náu · periódico</small></button>
+    <button class="chip" data-say="hospital"><b>hospita<mark class="ch">l</mark></b><small>os-pi-táu · hospital</small></button>
+    <button class="chip" data-say="Portugal"><b>Portuga<mark class="ch">l</mark></b><small>por-tu-gáu · Portugal</small></button>
+    <button class="chip" data-say="legal"><b>lega<mark class="ch">l</mark></b><small>le-gáu · genial</small></button>
+    <button class="chip" data-say="normal"><b>norma<mark class="ch">l</mark></b><small>nor-máu · normal</small></button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">O Brasi<mark class="ch">l</mark> é um país grande.</p>
+    <p class="es">Brasil es un país grande.</p>
+    <p class="say">Suena: <b>bra-zíu</b> · <b>grán-dyi</b></p>
+    <button class="btn" data-say="O Brasil é um país grande.">▶ Normal</button><button class="btn" data-say="O Brasil é um país grande." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Eu moro em um hote<mark class="ch">l</mark> perto do hospita<mark class="ch">l</mark>.</p>
+    <p class="es">Vivo en un hotel cerca del hospital.</p>
+    <p class="say">Suena: <b>o-téu</b> · <b>os-pi-táu</b></p>
+    <button class="btn" data-say="Eu moro em um hotel perto do hospital.">▶ Normal</button><button class="btn" data-say="Eu moro em um hotel perto do hospital." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">O so<mark class="ch">l</mark> está forte hoje.</p>
+    <p class="es">El sol está fuerte hoy.</p>
+    <p class="say">Suena: <b>sôu</b></p>
+    <button class="btn" data-say="O sol está forte hoje.">▶ Normal</button><button class="btn" data-say="O sol está forte hoje." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">O pape<mark class="ch">l</mark> é azu<mark class="ch">l</mark>.</p>
+    <p class="es">El papel es azul.</p>
+    <p class="say">Suena: <b>pa-péu</b> · <b>a-zúu</b></p>
+    <button class="btn" data-say="O papel é azul.">▶ Normal</button><button class="btn" data-say="O papel é azul." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Tudo lega<mark class="ch">l</mark>?</p>
+    <p class="es">¿Todo bien?</p>
+    <p class="say">Suena: <b>le-gáu</b></p>
+    <button class="btn" data-say="Tudo legal?">▶ Normal</button><button class="btn" data-say="Tudo legal?" data-slow="1">🐢 Lento</button>
+  </div>
+</div>
+<div class="card rule plain">
+  <span class="tag">Regla 2</span>
+  <h3>L antes de consonante → suena “u”</h3>
+  <p>Lo mismo pasa <b>en medio de la palabra</b>, cuando la <b>l</b> cierra una sílaba y la siguiente letra es una consonante: <i>falta</i> → <b>“fáu-ta”</b>, <i>almoço</i> → <b>“au-mô-su”</b>. Fíjate también en <i>balde</i> → “báu-dyi” (con la regla de la D).</p>
+  <div class="chips">
+    <button class="chip" data-say="alto"><b>a<mark class="ch">l</mark>to</b><small>áu-tu · alto</small></button>
+    <button class="chip" data-say="falta"><b>fa<mark class="ch">l</mark>ta</b><small>fáu-ta · falta</small></button>
+    <button class="chip" data-say="volta"><b>vo<mark class="ch">l</mark>ta</b><small>vôu-ta · vuelta</small></button>
+    <button class="chip" data-say="almoço"><b>a<mark class="ch">l</mark>moço</b><small>au-mô-su · almuerzo</small></button>
+    <button class="chip" data-say="calça"><b>ca<mark class="ch">l</mark>ça</b><small>káu-sa · pantalón</small></button>
+    <button class="chip" data-say="bolsa"><b>bo<mark class="ch">l</mark>sa</b><small>bôu-sa · bolso</small></button>
+    <button class="chip" data-say="culpa"><b>cu<mark class="ch">l</mark>pa</b><small>kúu-pa · culpa</small></button>
+    <button class="chip" data-say="soldado"><b>so<mark class="ch">l</mark>dado</b><small>sou-dá-du · soldado</small></button>
+    <button class="chip" data-say="palco"><b>pa<mark class="ch">l</mark>co</b><small>páu-ku · escenario</small></button>
+    <button class="chip" data-say="salto"><b>sa<mark class="ch">l</mark>to</b><small>sáu-tu · salto</small></button>
+    <button class="chip" data-say="Alberto"><b>A<mark class="ch">l</mark>berto</b><small>au-bér-tu · Alberto</small></button>
+    <button class="chip" data-say="balde"><b>ba<mark class="ch">l</mark>de</b><small>báu-dyi · balde</small></button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Eu a<mark class="ch">l</mark>moço às duas horas.</p>
+    <p class="es">Almuerzo a las dos.</p>
+    <p class="say">Suena: <b>au-mô-su</b> · <b>dú-as</b></p>
+    <button class="btn" data-say="Eu almoço às duas horas.">▶ Normal</button><button class="btn" data-say="Eu almoço às duas horas." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">A cu<mark class="ch">l</mark>pa é minha.</p>
+    <p class="es">La culpa es mía.</p>
+    <p class="say">Suena: <b>kúu-pa</b></p>
+    <button class="btn" data-say="A culpa é minha.">▶ Normal</button><button class="btn" data-say="A culpa é minha." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Minha bo<mark class="ch">l</mark>sa é nova.</p>
+    <p class="es">Mi bolso es nuevo.</p>
+    <p class="say">Suena: <b>bôu-sa</b></p>
+    <button class="btn" data-say="Minha bolsa é nova.">▶ Normal</button><button class="btn" data-say="Minha bolsa é nova." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Hoje fa<mark class="ch">l</mark>ta água.</p>
+    <p class="es">Hoy falta agua.</p>
+    <p class="say">Suena: <b>fáu-ta</b></p>
+    <button class="btn" data-say="Hoje falta água.">▶ Normal</button><button class="btn" data-say="Hoje falta água." data-slow="1">🐢 Lento</button>
+  </div>
+</div>
+<div class="card rule plain">
+  <span class="tag">Regla 3</span>
+  <h3>L antes de vocal → “l” normal</h3>
+  <p>Si la <b>l</b> está <b>al inicio de una sílaba</b> (antes de una vocal), suena como la <b>l</b> española de siempre. Compara: en <i>Brasil</i> la <b>l</b> final suena “u”, pero en <i>brasileiro</i> la <b>l</b> va antes de <b>e</b> y suena normal: <b>“bra-zi-léi-ru”</b>.</p>
+  <div class="chips">
+    <button class="chip" data-say="lado"><b>lado</b><small>lá-du · lado</small></button>
+    <button class="chip" data-say="lua"><b>lua</b><small>lú-a · luna</small></button>
+    <button class="chip" data-say="livro"><b>livro</b><small>lí-vru · libro</small></button>
+    <button class="chip" data-say="leite"><b>leite</b><small>léi-chi · leche</small></button>
+    <button class="chip" data-say="sala"><b>sala</b><small>sá-la · sala</small></button>
+    <button class="chip" data-say="bola"><b>bola</b><small>bô-la · pelota</small></button>
+    <button class="chip" data-say="solo"><b>solo</b><small>sô-lu · suelo</small></button>
+    <button class="chip" data-say="brasileiro"><b>brasileiro</b><small>bra-zi-léi-ru · brasileño</small></button>
+    <button class="chip" data-say="jornalista"><b>jornalista</b><small>jor-na-lís-ta · periodista</small></button>
+    <button class="chip" data-say="claro"><b>claro</b><small>klá-ru · claro</small></button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">O livro está na sala.</p>
+    <p class="es">El libro está en la sala.</p>
+    <p class="say">Suena: <b>lí-vru</b> · <b>sá-la</b></p>
+    <button class="btn" data-say="O livro está na sala.">▶ Normal</button><button class="btn" data-say="O livro está na sala." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">A lua está clara hoje.</p>
+    <p class="es">La luna está clara hoy.</p>
+    <p class="say">Suena: <b>lú-a</b> · <b>klá-ra</b></p>
+    <button class="btn" data-say="A lua está clara hoje.">▶ Normal</button><button class="btn" data-say="A lua está clara hoje." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Ele é brasileiro.</p>
+    <p class="es">Él es brasileño.</p>
+    <p class="say">Suena: <b>bra-zi-léi-ru</b></p>
+    <button class="btn" data-say="Ele é brasileiro.">▶ Normal</button><button class="btn" data-say="Ele é brasileiro." data-slow="1">🐢 Lento</button>
+  </div>
+</div>
+
+<h3 class="bigsec" id="r-l-compara">🎧 Compara</h3>
+<div class="card">
+  <p>Escucha cada par seguido. En el primero la <b>l</b> cierra la sílaba (suena “u”); en el segundo va antes de vocal (suena “l”).</p>
+  <div class="pairs">
+    <div class="pair">
+      <div class="row"><span>so<mark class="ch">l</mark></span><button class="btn" data-say="sol">🔊</button></div>
+      <div class="arrow">vs</div>
+      <div class="row"><span>solo</span><button class="btn" data-say="solo">🔊</button></div>
+    </div>
+    <div class="pair">
+      <div class="row"><span>ma<mark class="ch">l</mark></span><button class="btn" data-say="mal">🔊</button></div>
+      <div class="arrow">vs</div>
+      <div class="row"><span>mala</span><button class="btn" data-say="mala">🔊</button></div>
+    </div>
+    <div class="pair">
+      <div class="row"><span>sa<mark class="ch">l</mark></span><button class="btn" data-say="sal">🔊</button></div>
+      <div class="arrow">vs</div>
+      <div class="row"><span>sala</span><button class="btn" data-say="sala">🔊</button></div>
+    </div>
+    <div class="pair">
+      <div class="row"><span>Brasi<mark class="ch">l</mark></span><button class="btn" data-say="Brasil">🔊</button></div>
+      <div class="arrow">vs</div>
+      <div class="row"><span>brasileiro</span><button class="btn" data-say="brasileiro">🔊</button></div>
+    </div>
+    <div class="pair">
+      <div class="row"><span>jorna<mark class="ch">l</mark></span><button class="btn" data-say="jornal">🔊</button></div>
+      <div class="arrow">vs</div>
+      <div class="row"><span>jornalista</span><button class="btn" data-say="jornalista">🔊</button></div>
+    </div>
+  </div>
+</div>
+
+<h3 class="bigsec" id="r-l-errores">Errores y variantes</h3>
+<div class="card">
+  <h3>⚠️ Errores comunes de hispanohablantes</h3>
+  <ul>
+    <li>Pronunciar la <i>l</i> final como la <i>l</i> española: <i>Brasil</i> suena <b>“bra-zíu”</b>, no “bra-síl”.</li>
+    <li>Pronunciar la <i>l</i> en medio de palabra antes de consonante: <i>falta</i> es <b>“fáu-ta”</b>, no “fal-ta”; <i>almoço</i> es <b>“au-mô-su”</b>.</li>
+    <li>Alargar el sonido: no es una “u” larga, es un deslizamiento corto, como el final de <i>auto</i>.</li>
+    <li>Aplicar la regla donde no toca: si la <i>l</i> va antes de vocal (<i>sala</i>, <i>brasileiro</i>), es una <i>l</i> normal.</li>
+  </ul>
+  <h3 style="margin-top:14px">📍 Excepciones y variantes</h3>
+  <ul>
+    <li>En <b>Portugal</b> la <i>l</i> final se pronuncia como una “l” oscura, no como “u”.</li>
+    <li>En algunas zonas del sur de Brasil la <i>l</i> final también se acerca a una “l” oscura. En el resto del país, la “u” es lo normal.</li>
+  </ul>
+</div>
+
+</section>
+
+<!-- ===================== R ===================== -->
+<section id="letra-r">
+
+<h2>R <small style="font-weight:400;color:var(--muted)">· “h” fuerte o “r” suave</small></h2>
+<div class="legend">
+  <span><mark class="ch">r / rr</mark> fuerte = suena <b>“h”</b> (una “j” muy suave, de garganta)</span>
+</div>
+
+<div class="subnav"><a href="#r-r-resumen">Resumen</a><a href="#r-r-reglas">Reglas</a><a href="#r-r-compara">Compara</a><a href="#r-r-errores">Errores y variantes</a></div>
+
+<h3 class="bigsec" id="r-r-resumen">Resumen</h3>
+<div class="card">
+  <div class="tablewrap">
+  <table>
+    <tr><th>Dónde está la R</th><th>Suena</th><th>Ejemplo</th></tr>
+    <tr><td><b>Al inicio de palabra</b></td><td><mark class="ch">h</mark> fuerte</td><td>rua → <i>hú-a</i></td></tr>
+    <tr><td><b>RR</b> (doble)</td><td><mark class="ch">h</mark> fuerte</td><td>carro → <i>ká-hu</i></td></tr>
+    <tr><td><b>Después de n, l, s</b></td><td><mark class="ch">h</mark> fuerte</td><td>honra → <i>ôn-ha</i></td></tr>
+    <tr><td><b>Entre vocales</b></td><td>r suave (como la r de <i>caro</i> en español)</td><td>caro → <i>ká-ru</i></td></tr>
+    <tr><td><b>Después de consonante</b> (br, tr, pr, gr…)</td><td>r suave</td><td>prato → <i>prá-tu</i></td></tr>
+    <tr><td><b>Al final de sílaba o palabra</b></td><td>varía: r suave, “h” o casi no se oye</td><td>porta → <i>pôr-ta</i></td></tr>
+  </table>
+  </div>
+  <p class="note">💡 Truco: <b>en portugués no existe la “rr” vibrante del español</b> (la de <i>perro</i>). La R fuerte es un sonido de garganta, como una <b>j suave</b> o la <b>h</b> del inglés <i>hat</i>. Solo se colorea la R que cambia; la r suave es igual que en español y no lleva color.</p>
+</div>
+
+<h3 class="bigsec" id="r-r-reglas">Las reglas</h3>
+<div class="card rule">
+  <span class="tag">Regla 1</span>
+  <h3>R al inicio de palabra (o tras n, l, s) → “h” fuerte</h3>
+  <p>Cuando una palabra <b>empieza con r</b>, suena <b>“h”</b>: <i>rua</i> → <b>“hú-a”</b>. Pasa lo mismo si la <b>r</b> viene después de <b>n, l o s</b>: <i>honra</i> → <b>“ôn-ha”</b>. No se enrolla la lengua.</p>
+  <div class="chips">
+    <button class="chip" data-say="rua"><b>rua</b><small>hú-a · calle</small></button>
+    <button class="chip" data-say="rio"><b>rio</b><small>hí-u · río</small></button>
+    <button class="chip" data-say="rato"><b>rato</b><small>há-tu · rata</small></button>
+    <button class="chip" data-say="rosa"><b>rosa</b><small>hó-za · rosa</small></button>
+    <button class="chip" data-say="roupa"><b>roupa</b><small>hôu-pa · ropa</small></button>
+    <button class="chip" data-say="rápido"><b>rápido</b><small>há-pi-du · rápido</small></button>
+    <button class="chip" data-say="reunião"><b>reunião</b><small>heu-ni-ãu · reunión</small></button>
+    <button class="chip" data-say="Recife"><b>Recife</b><small>he-sí-fi · Recife</small></button>
+    <button class="chip" data-say="honra"><b>honra</b><small>ôn-ha · honra</small></button>
+    <button class="chip" data-say="Israel"><b>Israel</b><small>is-ha-éu · Israel</small></button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">O rio é grande.</p>
+    <p class="es">El río es grande.</p>
+    <p class="say">Suena: <b>hí-u</b> · <b>grán-dyi</b></p>
+    <button class="btn" data-say="O rio é grande.">▶ Normal</button><button class="btn" data-say="O rio é grande." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Eu gosto de roupa rosa.</p>
+    <p class="es">Me gusta la ropa rosada.</p>
+    <p class="say">Suena: <b>hôu-pa</b> · <b>hó-za</b></p>
+    <button class="btn" data-say="Eu gosto de roupa rosa.">▶ Normal</button><button class="btn" data-say="Eu gosto de roupa rosa." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">A reunião é rápida.</p>
+    <p class="es">La reunión es rápida.</p>
+    <p class="say">Suena: <b>heu-ni-ãu</b> · <b>há-pi-da</b></p>
+    <button class="btn" data-say="A reunião é rápida.">▶ Normal</button><button class="btn" data-say="A reunião é rápida." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">O restaurante fica na rua.</p>
+    <p class="es">El restaurante queda en la calle.</p>
+    <p class="say">Suena: <b>hes-tau-rán-chi</b> · <b>hú-a</b></p>
+    <button class="btn" data-say="O restaurante fica na rua.">▶ Normal</button><button class="btn" data-say="O restaurante fica na rua." data-slow="1">🐢 Lento</button>
+  </div>
+</div>
+<div class="card rule">
+  <span class="tag">Regla 2</span>
+  <h3>RR (doble r) → “h” fuerte</h3>
+  <p>Las dos <b>r</b> juntas suenan igual que la <b>r</b> inicial: <b>“h”</b>. <i>Carro</i> → <b>“ká-hu”</b>, <i>terra</i> → <b>“té-ha”</b>. Ojo: no se dice “ká-rru” con la rr española.</p>
+  <div class="chips">
+    <button class="chip" data-say="carro"><b>carro</b><small>ká-hu · carro / auto</small></button>
+    <button class="chip" data-say="terra"><b>terra</b><small>té-ha · tierra</small></button>
+    <button class="chip" data-say="erro"><b>erro</b><small>ê-hu · error</small></button>
+    <button class="chip" data-say="errar"><b>errar</b><small>e-hár · equivocarse</small></button>
+    <button class="chip" data-say="arroz"><b>arroz</b><small>a-hôs · arroz</small></button>
+    <button class="chip" data-say="correr"><b>correr</b><small>ko-hér · correr</small></button>
+    <button class="chip" data-say="guerra"><b>guerra</b><small>gé-ha · guerra</small></button>
+    <button class="chip" data-say="barriga"><b>barriga</b><small>ba-hí-ga · barriga</small></button>
+    <button class="chip" data-say="ferro"><b>ferro</b><small>fé-hu · hierro</small></button>
+    <button class="chip" data-say="morrer"><b>morrer</b><small>mo-hér · morir</small></button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Eu tenho um carro novo.</p>
+    <p class="es">Tengo un carro nuevo.</p>
+    <p class="say">Suena: <b>ká-hu</b></p>
+    <button class="btn" data-say="Eu tenho um carro novo.">▶ Normal</button><button class="btn" data-say="Eu tenho um carro novo." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Eu como arroz todo dia.</p>
+    <p class="es">Como arroz todos los días.</p>
+    <p class="say">Suena: <b>a-hôs</b></p>
+    <button class="btn" data-say="Eu como arroz todo dia.">▶ Normal</button><button class="btn" data-say="Eu como arroz todo dia." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">A guerra é um erro.</p>
+    <p class="es">La guerra es un error.</p>
+    <p class="say">Suena: <b>gé-ha</b> · <b>ê-hu</b></p>
+    <button class="btn" data-say="A guerra é um erro.">▶ Normal</button><button class="btn" data-say="A guerra é um erro." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Eu quero correr na rua.</p>
+    <p class="es">Quiero correr en la calle.</p>
+    <p class="say">Suena: <b>ko-hér</b> · <b>hú-a</b></p>
+    <button class="btn" data-say="Eu quero correr na rua.">▶ Normal</button><button class="btn" data-say="Eu quero correr na rua." data-slow="1">🐢 Lento</button>
+  </div>
+</div>
+<div class="card rule">
+  <span class="tag">Regla 3</span>
+  <h3>R entre vocales o tras consonante → “r” suave</h3>
+  <p>Una <b>r simple</b> entre vocales, o después de otra consonante (<i>br, pr, tr, gr, vr…</i>), es la <b>r suave del español</b>, la de <i>caro</i> o <i>pero</i>. <b>No cambia</b>, por eso no lleva color. Ojo: <i>caro</i> y <i>carro</i> son palabras distintas.</p>
+  <div class="chips">
+    <button class="chip" data-say="caro"><b>caro</b><small>ká-ru · caro</small></button>
+    <button class="chip" data-say="pera"><b>pera</b><small>pé-ra · pera</small></button>
+    <button class="chip" data-say="hora"><b>hora</b><small>ó-ra · hora</small></button>
+    <button class="chip" data-say="para"><b>para</b><small>pá-ra · para</small></button>
+    <button class="chip" data-say="prato"><b>prato</b><small>prá-tu · plato</small></button>
+    <button class="chip" data-say="livro"><b>livro</b><small>lí-vru · libro</small></button>
+    <button class="chip" data-say="três"><b>três</b><small>trêis · tres</small></button>
+    <button class="chip" data-say="obrigado"><b>obrigado</b><small>o-bri-gá-du · gracias (él)</small></button>
+    <button class="chip" data-say="trabalho"><b>trabalho</b><small>tra-bá-lyu · trabajo</small></button>
+    <button class="chip" data-say="outro"><b>outro</b><small>ôu-tru · otro</small></button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">O prato é caro.</p>
+    <p class="es">El plato es caro.</p>
+    <p class="say">Suena: <b>prá-tu</b> · <b>ká-ru</b></p>
+    <button class="btn" data-say="O prato é caro.">▶ Normal</button><button class="btn" data-say="O prato é caro." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Eu trabalho três horas.</p>
+    <p class="es">Trabajo tres horas.</p>
+    <p class="say">Suena: <b>tra-bá-lyu</b> · <b>trêis</b> · <b>ó-ras</b></p>
+    <button class="btn" data-say="Eu trabalho três horas.">▶ Normal</button><button class="btn" data-say="Eu trabalho três horas." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Obrigado pelo livro!</p>
+    <p class="es">¡Gracias por el libro!</p>
+    <p class="say">Suena: <b>o-bri-gá-du</b> · <b>lí-vru</b></p>
+    <button class="btn" data-say="Obrigado pelo livro!">▶ Normal</button><button class="btn" data-say="Obrigado pelo livro!" data-slow="1">🐢 Lento</button>
+  </div>
+</div>
+<div class="card rule">
+  <span class="tag">Regla 4</span>
+  <h3>R al final de sílaba o palabra → varía</h3>
+  <p>Cuando la <b>r</b> cierra una sílaba (<i>porta</i>, <i>mar</i>, <i>falar</i>), la pronunciación <b>depende de la región</b>: en Río suena como una “h” suave, en São Paulo y el interior como una “r” con la lengua curvada (parecida a la inglesa), y en los verbos terminados en <b>-ar, -er, -ir</b> muchas veces casi no se oye (<i>falar</i> → “fa-lá”). Una <b>r suave española</b> se entiende en todas partes.</p>
+  <div class="chips">
+    <button class="chip" data-say="porta"><b>porta</b><small>pôr-ta · puerta</small></button>
+    <button class="chip" data-say="carta"><b>carta</b><small>kár-ta · carta</small></button>
+    <button class="chip" data-say="mar"><b>mar</b><small>már · mar</small></button>
+    <button class="chip" data-say="falar"><b>falar</b><small>fa-lár · hablar</small></button>
+    <button class="chip" data-say="comer"><b>comer</b><small>ko-mér · comer</small></button>
+    <button class="chip" data-say="amor"><b>amor</b><small>a-mór · amor</small></button>
+    <button class="chip" data-say="professor"><b>professor</b><small>pro-fe-sôr · profesor</small></button>
+    <button class="chip" data-say="melhor"><b>melhor</b><small>me-lyór · mejor</small></button>
+    <button class="chip" data-say="senhor"><b>senhor</b><small>se-ñôr · señor</small></button>
+    <button class="chip" data-say="verde"><b>verde</b><small>vér-dyi · verde</small></button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Eu gosto de falar português.</p>
+    <p class="es">Me gusta hablar portugués.</p>
+    <p class="say">Suena: <b>fa-lár</b> · <b>por-tu-gês</b></p>
+    <button class="btn" data-say="Eu gosto de falar português.">▶ Normal</button><button class="btn" data-say="Eu gosto de falar português." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">O professor está na porta.</p>
+    <p class="es">El profesor está en la puerta.</p>
+    <p class="say">Suena: <b>pro-fe-sôr</b> · <b>pôr-ta</b></p>
+    <button class="btn" data-say="O professor está na porta.">▶ Normal</button><button class="btn" data-say="O professor está na porta." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Quero comer arroz com carne.</p>
+    <p class="es">Quiero comer arroz con carne.</p>
+    <p class="say">Suena: <b>ko-mér</b> · <b>a-hôs</b> · <b>kár-ni</b></p>
+    <button class="btn" data-say="Quero comer arroz com carne.">▶ Normal</button><button class="btn" data-say="Quero comer arroz com carne." data-slow="1">🐢 Lento</button>
+  </div>
+</div>
+
+<h3 class="bigsec" id="r-r-compara">🎧 Compara</h3>
+<div class="card">
+  <p>Escucha cada par seguido. En el primero la r es suave; en el segundo es doble y suena “h”. <b>Cambia el significado de la palabra.</b></p>
+  <div class="pairs">
+    <div class="pair">
+      <div class="row"><span>caro</span><button class="btn" data-say="caro">🔊</button></div>
+      <div class="arrow">vs</div>
+      <div class="row"><span>carro</span><button class="btn" data-say="carro">🔊</button></div>
+    </div>
+    <div class="pair">
+      <div class="row"><span>coro</span><button class="btn" data-say="coro">🔊</button></div>
+      <div class="arrow">vs</div>
+      <div class="row"><span>corro</span><button class="btn" data-say="corro">🔊</button></div>
+    </div>
+    <div class="pair">
+      <div class="row"><span>era</span><button class="btn" data-say="era">🔊</button></div>
+      <div class="arrow">vs</div>
+      <div class="row"><span>erra</span><button class="btn" data-say="erra">🔊</button></div>
+    </div>
+    <div class="pair">
+      <div class="row"><span>moro</span><button class="btn" data-say="moro">🔊</button></div>
+      <div class="arrow">vs</div>
+      <div class="row"><span>morro</span><button class="btn" data-say="morro">🔊</button></div>
+    </div>
+    <div class="pair">
+      <div class="row"><span>careta</span><button class="btn" data-say="careta">🔊</button></div>
+      <div class="arrow">vs</div>
+      <div class="row"><span>carreta</span><button class="btn" data-say="carreta">🔊</button></div>
+    </div>
+  </div>
+  <p class="note">caro (caro) / carro (carro, auto) · coro (coro) / corro (yo corro) · era (era) / erra (se equivoca) · moro (vivo) / morro (cerro) · careta (careta) / carreta (carreta).</p>
+</div>
+
+<h3 class="bigsec" id="r-r-errores">Errores y variantes</h3>
+<div class="card">
+  <h3>⚠️ Errores comunes de hispanohablantes</h3>
+  <ul>
+    <li>Enrollar la <i>rr</i> como en español: <i>carro</i> es <b>“ká-hu”</b>, no “ká-rru”.</li>
+    <li>Pronunciar la <i>r</i> inicial con la r suave: <i>rua</i> es <b>“hú-a”</b>, no “rú-a”.</li>
+    <li>Pronunciar fuerte una <i>r</i> simple entre vocales: <i>caro</i> es <b>“ká-ru”</b>. Confundirlas cambia la palabra (<i>moro</i> / <i>morro</i>).</li>
+    <li>Marcar demasiado la <i>r</i> final de los verbos: <i>falar</i> suena mucho más suave en el habla normal.</li>
+  </ul>
+  <h3 style="margin-top:14px">📍 Excepciones y variantes</h3>
+  <ul>
+    <li>La “h” de la R fuerte cambia según la región: en Río suena suave, en otras zonas se acerca más a la <b>j</b> española, y a veces es una garganta tipo “r” francesa.</li>
+    <li>En el sur de Brasil y en <b>Portugal</b>, la R fuerte a veces es vibrante (como la <i>rr</i> española) o de garganta.</li>
+    <li>La <i>r</i> al final de sílaba es la que más cambia: puede ser “h”, “r” inglesa o casi no oírse.</li>
+  </ul>
+</div>
+
+</section>
+
+<!-- Para añadir otra letra: copia el bloque <section id="letra-t"> completo,
+     cámbiale el id (p. ej. letra-d), agrega su enlace en <nav class="letters">
+     y reemplaza las reglas y ejemplos. El audio funciona solo con data-say="texto". -->
+
+<footer>
+  El audio usa una voz sintética en portugués de Brasil (pt-BR) de tu navegador o sistema; puedes cambiarla arriba. Úsalo como guía. Las transcripciones tipo “chí-u” son aproximaciones para hispanohablantes.
+</footer>
+
+</div>
+
+<script>
+(function(){
+  var synth = window.speechSynthesis;
+  var voices = [];
+  var statusEl = document.getElementById('voiceStatus');
+  var sel = document.getElementById('voiceSel');
+
+  function lang(v){ return v.lang.replace('_','-').toLowerCase(); }
+  function ptList(){
+    var l = voices.filter(function(v){ return lang(v).indexOf('pt') === 0; });
+    l.sort(function(a,b){
+      var sa = (lang(a)==='pt-br'?0:2) + (/natural|online/i.test(a.name)?0:1);
+      var sb = (lang(b)==='pt-br'?0:2) + (/natural|online/i.test(b.name)?0:1);
+      return sa - sb;
+    });
+    return l;
+  }
+  function saved(){ try{ return localStorage.getItem('vozPT'); }catch(e){ return null; } }
+  function save(n){ try{ localStorage.setItem('vozPT', n); }catch(e){} }
+
+  function loadVoices(){
+    voices = synth ? synth.getVoices() : [];
+    var list = ptList();
+    sel.innerHTML = '';
+    list.forEach(function(v){
+      var o = document.createElement('option');
+      o.value = v.name; o.textContent = v.name + ' (' + v.lang + ')';
+      sel.appendChild(o);
+    });
+    var s = saved();
+    if(s && list.some(function(v){ return v.name === s; })) sel.value = s;
+    if(!synth){
+      showStatus('Tu navegador no admite audio de voz. Prueba con Edge o Chrome.');
+    } else if(voices.length && !list.length){
+      showStatus('No encontré ninguna voz en portugués en este navegador. Prueba abrir la página en Microsoft Edge.');
+    } else if(voices.length && !list.some(function(v){ return lang(v)==='pt-br'; })){
+      showStatus('Solo hay voces de portugués de Portugal (pt-PT). No sirven para estas reglas, que son de Brasil. Prueba en Microsoft Edge.');
+    } else {
+      statusEl.style.display = 'none';
+    }
+  }
+  function showStatus(msg){ statusEl.textContent = msg; statusEl.style.display = 'block'; }
+  sel.addEventListener('change', function(){ save(sel.value); });
+
+  function currentVoice(){
+    var list = ptList();
+    return list.find(function(v){ return v.name === sel.value; }) || list[0] || null;
+  }
+
+  function speak(text, slow){
+    if(!synth) return;
+    synth.cancel();
+    var u = new SpeechSynthesisUtterance(text);
+    var v = currentVoice();
+    u.lang = v ? v.lang : 'pt-BR';
+    if(v) u.voice = v;
+    u.rate = slow ? 0.55 : 0.9;
+    synth.speak(u);
+  }
+
+  loadVoices();
+  if(synth && typeof synth.onvoiceschanged !== 'undefined') synth.onvoiceschanged = loadVoices;
+
+  document.addEventListener('click', function(e){
+    var b = e.target.closest('[data-say]');
+    if(b) speak(b.getAttribute('data-say'), b.getAttribute('data-slow') === '1');
+  });
+})();
+</script>
+<script>
+(function(){
+  var all = [];
+  function init(section){
+    var slides = Array.prototype.slice.call(section.querySelectorAll('.card.rule'));
+    if(!slides.length) return;
+    var holder = document.createElement('div'); holder.className = 'reglas';
+    slides[0].parentNode.insertBefore(holder, slides[0]);
+    var head = document.createElement('p'); head.className = 'slidehead';
+    var top = document.createElement('div'); top.className = 'rulenav';
+    var bottom = document.createElement('div'); bottom.className = 'rulenav';
+    holder.appendChild(top); holder.appendChild(head);
+    slides.forEach(function(sl){ sl.classList.add('slide'); holder.appendChild(sl); });
+    holder.appendChild(bottom);
+    var i = 0;
+    function build(bar){
+      bar.innerHTML = '';
+      var prev = document.createElement('button'); prev.className='navbtn'; prev.textContent='← Anterior';
+      var next = document.createElement('button'); next.className='navbtn'; next.textContent='Siguiente →';
+      var pills = document.createElement('div'); pills.className='pills';
+      slides.forEach(function(_, k){
+        var b = document.createElement('button'); b.className='pill'+(k===i?' on':''); b.textContent=(k+1);
+        b.setAttribute('aria-label','Regla '+(k+1));
+        b.addEventListener('click', function(){ go(k, bar===bottom); });
+        pills.appendChild(b);
+      });
+      prev.disabled = (i===0); next.disabled = (i===slides.length-1);
+      prev.addEventListener('click', function(){ go(i-1, bar===bottom); });
+      next.addEventListener('click', function(){ go(i+1, bar===bottom); });
+      bar.appendChild(prev); bar.appendChild(pills); bar.appendChild(next);
+    }
+    function render(){
+      slides.forEach(function(sl,k){ sl.classList.toggle('on', k===i); });
+      var t = slides[i].querySelector('h3');
+      head.textContent = 'Regla ' + (i+1) + ' de ' + slides.length + (t ? ' · ' + t.textContent : '');
+      build(top); build(bottom);
+    }
+    function go(n, scroll){
+      if(n<0 || n>=slides.length) return;
+      i = n;
+      if(window.speechSynthesis) window.speechSynthesis.cancel();
+      render();
+      if(scroll) top.scrollIntoView({behavior:'smooth', block:'start'});
+    }
+    render();
+    all.push({holder: holder, go: go, cur: function(){ return i; }});
+  }
+  document.querySelectorAll('section[id^="letra-"]').forEach(init);
+
+  document.addEventListener('keydown', function(e){
+    var tag = (e.target && e.target.tagName) || '';
+    if(tag==='SELECT' || tag==='INPUT' || tag==='TEXTAREA') return;
+    if(e.key!=='ArrowRight' && e.key!=='ArrowLeft') return;
+    var mid = window.innerHeight/2, best = null, bd = 1e9;
+    all.forEach(function(c){
+      if(!c.holder.offsetParent) return;
+      var r = c.holder.getBoundingClientRect();
+      var d = (r.top<=mid && r.bottom>=mid) ? 0 : Math.min(Math.abs(r.top-mid), Math.abs(r.bottom-mid));
+      if(d<bd){ bd=d; best=c; }
+    });
+    if(best) best.go(best.cur() + (e.key==='ArrowRight'?1:-1), false);
+  });
+})();
+</script>
+<script>
+(function(){
+  var secs = Array.prototype.slice.call(document.querySelectorAll('section[id^="letra-"]'));
+  var links = Array.prototype.slice.call(document.querySelectorAll('nav.letters a'));
+  function activate(id){
+    secs.forEach(function(sc){ sc.classList.toggle('on', sc.id===id); });
+    links.forEach(function(a){ a.classList.toggle('active', a.getAttribute('href')==='#'+id); });
+  }
+  function route(first){
+    var h = decodeURIComponent((location.hash||'').slice(1));
+    var el = h ? document.getElementById(h) : null;
+    var sec = el ? (el.matches('section[id^="letra-"]') ? el : el.closest('section[id^="letra-"]')) : null;
+    activate(sec ? sec.id : secs[0].id);
+    if(el && el !== sec){ el.scrollIntoView({behavior:'smooth', block:'start'}); }
+    else if(!first){ window.scrollTo({top:0, behavior:'smooth'}); }
+    if(window.speechSynthesis) window.speechSynthesis.cancel();
+  }
+  window.addEventListener('hashchange', function(){ route(false); });
+  route(true);
+})();
+</script>
+<script>
+(function(){
+  var V='aeiouáàâãäéêíóôõöúü';
+  function isV(c){ return !!c && V.indexOf(c)>-1; }
+  function esc(t){ return t.replace(/&/g,'&amp;').replace(/</g,'&lt;'); }
+
+  // Detecta los sonidos que cambian en un texto (todas las reglas a la vez)
+  function analyze(text){
+    var out=[], re=/[A-Za-zÀ-ÖØ-öø-ÿ]+/g, m;
+    while((m=re.exec(text))){
+      var w=m[0].toLowerCase(), b=m.index, n=w.length;
+      for(var i=0;i<n;i++){
+        var c=w.charAt(i), nx=w.charAt(i+1);
+        if(c==='n' && nx==='h'){ out.push([b+i,b+i+2,'k-nh']); i++; continue; }
+        if(c==='l' && nx==='h'){ out.push([b+i,b+i+2,'k-lh']); i++; continue; }
+        if(c==='l'){ if(!isV(nx)) out.push([b+i,b+i+1,'k-u']); continue; }
+        if(c==='r'){
+          var pv=i>0?w.charAt(i-1):'';
+          if(nx==='r'){ out.push([b+i,b+i+2,'k-r']); i++; continue; }
+          if(i===0 || 'nls'.indexOf(pv)>-1){ if(i===0 || isV(nx)) out.push([b+i,b+i+1,'k-r']); }
+          continue;
+        }
+        if(c==='t' || c==='d'){
+          var cls = (c==='t') ? 'k-ch' : 'k-dy';
+          if(nx==='i' || nx==='í'){ out.push([b+i,b+i+2,cls]); i++; continue; }
+          if(nx==='e'){
+            var rest=w.slice(i+2);
+            if(rest==='' || rest==='s'){ out.push([b+i,b+i+2+rest.length,cls]); break; }
+          }
+        }
+      }
+    }
+    return out;
+  }
+
+  // Reconstruye una palabra/frase conservando las marcas azules (sonido normal)
+  function rebuild(el){
+    var text=el.textContent, n=text.length, cls=new Array(n);
+    var hasU=false;
+    analyze(text).forEach(function(r){
+      for(var k=r[0];k<r[1];k++) cls[k]=r[2];
+      if(r[2]==='k-u') hasU=true;
+    });
+    var html='', cur=null, buf='';
+    function flush(){ if(buf) html += cur ? '<mark class="'+cur+'">'+esc(buf)+'</mark>' : esc(buf); buf=''; }
+    for(var i=0;i<n;i++){
+      var c=cls[i]||'';
+      if(c!==cur){ flush(); cur=c; }
+      buf+=text.charAt(i);
+    }
+    flush();
+    el.innerHTML=html;
+    return hasU;
+  }
+
+  // Resalta en la pronunciación escrita los sonidos que cambian
+  function respell(str,useU){
+    return esc(str).replace(/ch|dy|ly|ñ|h|([aeiouáéíóúâêôãõ])u(?![a-zñáéíóúâêôãõ])/gi,function(m,v){
+      if(v){ return useU ? v+'<mark class="k-u">u</mark>' : m; }
+      var c={ch:'k-ch',dy:'k-dy',ly:'k-lh','ñ':'k-nh',h:'k-r'}[m.toLowerCase()];
+      return '<mark class="'+c+'">'+m+'</mark>';
+    });
+  }
+
+  document.querySelectorAll('.chip b, .ex .pt, .pair .row span').forEach(function(el){
+    var hasU=rebuild(el);
+    if(el.matches('.chip b')){
+      var sm=el.closest('.chip').querySelector('small');
+      if(sm){
+        var t=sm.textContent, i=t.indexOf(' · ');
+        var a=(i<0)?t:t.slice(0,i), r=(i<0)?'':t.slice(i);
+        sm.innerHTML=respell(a,hasU)+esc(r);
+      }
+    } else if(el.matches('.ex .pt')){
+      el.closest('.ex').querySelectorAll('.say b').forEach(function(b){
+        b.innerHTML=respell(b.textContent,hasU);
+      });
+    }
+  });
+
+  // Tablas y leyendas: cada pestaña usa el color de su propio sonido
+  var map={'letra-t':'k-ch','letra-d':'k-dy','letra-nh':'k-nh','letra-lh':'k-lh','letra-l':'k-u','letra-r':'k-r'};
+  document.querySelectorAll('section[id^="letra-"]').forEach(function(sec){
+    sec.querySelectorAll('mark.ch').forEach(function(m){ m.className=map[sec.id]||'k-ch'; });
+    sec.querySelectorAll('table td i').forEach(function(i){
+      i.innerHTML=respell(i.textContent, sec.id==='letra-l');
+    });
+  });
+})();
+</script>
+</body>
+</html>
