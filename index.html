@@ -122,6 +122,13 @@ mark.k-u{color:var(--c-u)}
 @media (prefers-color-scheme: dark){:root{--c-r:#ffd666;--c-r-bg:#4a3a05}}
 mark.k-r{color:var(--c-r);font-weight:700;background:none;padding:0}
 #letra-r mark.k-r,.colorkey mark.k-r{background:var(--c-r-bg);padding:0 3px;border-radius:4px;box-shadow:inset 0 -2px 0 currentColor}
+
+:root{--c-g:#1f4fc4;--c-g-bg:#d9e4ff}
+@media (prefers-color-scheme: dark){:root{--c-g:#9db8ff;--c-g-bg:#1b2f5c}}
+mark.k-g{color:var(--c-g);font-weight:700;background:none;padding:0}
+#letra-g mark.k-g,.colorkey mark.k-g{background:var(--c-g-bg);padding:0 3px;border-radius:4px;box-shadow:inset 0 -2px 0 currentColor}
+.callout{background:var(--bg);border:1px dashed var(--accent);border-radius:10px;padding:10px 14px;margin-top:14px;font-size:.95rem}
+.callout p{margin:.4em 0 0}
 </style>
 <script>document.documentElement.className="js";</script>
 </head>
@@ -135,6 +142,7 @@ mark.k-r{color:var(--c-r);font-weight:700;background:none;padding:0}
 
 <nav class="letters" aria-label="Letras">
   <a href="#letra-d">D</a>
+  <a href="#letra-g">G</a>
   <a href="#letra-l">L</a>
   <a href="#letra-r">R</a>
   <a href="#letra-t">T</a>
@@ -150,6 +158,7 @@ mark.k-r{color:var(--c-r);font-weight:700;background:none;padding:0}
   <mark class="k-lh">lh → “ly”</mark>
   <mark class="k-u">l final → “u”</mark>
   <mark class="k-r">r inicial / rr → “h”</mark>
+  <mark class="k-g">g(e, i) / j → “zh”</mark>
 </div>
 
 <div id="voiceStatus"></div>
@@ -469,10 +478,13 @@ mark.k-r{color:var(--c-r);font-weight:700;background:none;padding:0}
     <button class="chip" data-say="forte"><b>for<mark class="ch">te</mark></b><small>fór-chi · fuerte</small></button>
     <button class="chip" data-say="norte"><b>nor<mark class="ch">te</mark></b><small>nór-chi · norte</small></button>
     <button class="chip" data-say="sorte"><b>sor<mark class="ch">te</mark></b><small>sór-chi · suerte</small></button>
-    <button class="chip" data-say="gente"><b>gen<mark class="ch">te</mark></b><small>jén-chi · gente</small></button>
+    <button class="chip" data-say="gente"><b>gen<mark class="ch">te</mark></b><small>zhén-chi · gente</small></button>
     <button class="chip" data-say="dentes"><b>den<mark class="ch">tes</mark></b><small>dén-chis · dientes</small></button>
     <button class="chip" data-say="tomate"><b>toma<mark class="ch">te</mark></b><small>to-má-chi · tomate</small></button>
     <button class="chip" data-say="restaurante"><b>restauran<mark class="ch">te</mark></b><small>hes-tau-rán-chi · restaurante</small></button>
+    <button class="chip" data-say="sete"><b>sete</b><small>sé-chi · siete</small></button>
+    <button class="chip" data-say="setecentos"><b>setecentos</b><small>se-chi-sên-tus · setecientos</small></button>
+    <button class="chip" data-say="dezessete"><b>dezessete</b><small>de-ze-sé-chi · diecisiete</small></button>
   </div>
 
   <div class="ex">
@@ -499,6 +511,12 @@ mark.k-r{color:var(--c-r);font-weight:700;background:none;padding:0}
     <p class="say">Suena: <b>dén-chis</b> · <b>tó-dus</b></p>
     <button class="btn" data-say="Escovo os dentes todos os dias.">▶ Normal</button><button class="btn" data-say="Escovo os dentes todos os dias." data-slow="1">🐢 Lento</button>
   </div>
+
+  <div class="callout">
+    <b>📝 Caso especial: palabras con <i>sete</i></b>
+    <p>En <i>setecentos</i> (700) la “te” queda en medio de la palabra, pero sigue sonando <b>“chi”</b> porque viene de <i>sete</i> (que termina en <i>-te</i>): <b>“se-chi-sên-tus”</b>. También <i>dezessete</i> → “de-ze-sé-chi”.</p>
+    <p>Ojo: <b>no</b> pasa en <i>setenta</i> (“se-tên-ta”) ni en <i>setembro</i> (“se-têm-bru”). No son “sete” + otra palabra, así que su <i>t</i> es normal (Regla 3). En el habla real a veces también se oye “se-te-sên-tus”; las dos se entienden.</p>
+  </div>
 </div>
 
 <!-- ---------- Regla 3 ---------- -->
@@ -516,6 +534,8 @@ mark.k-r{color:var(--c-r);font-weight:700;background:none;padding:0}
     <button class="chip" data-say="bateria"><b>bateria</b><small>ba-te-rí-a · batería</small></button>
     <button class="chip" data-say="perto"><b>perto</b><small>pér-tu · cerca</small></button>
     <button class="chip" data-say="muito"><b>muito</b><small>múi-tu · mucho</small></button>
+    <button class="chip" data-say="setenta"><b>setenta</b><small>se-tên-ta · setenta</small></button>
+    <button class="chip" data-say="setembro"><b>setembro</b><small>se-têm-bru · septiembre</small></button>
   </div>
 
   <div class="ex">
@@ -840,7 +860,7 @@ mark.k-r{color:var(--c-r);font-weight:700;background:none;padding:0}
     <button class="chip" data-say="ilha"><b>i<mark class="ch">lh</mark>a</b><small>í-lya · isla</small></button>
     <button class="chip" data-say="folha"><b>fo<mark class="ch">lh</mark>a</b><small>fô-lya · hoja</small></button>
     <button class="chip" data-say="velho"><b>ve<mark class="ch">lh</mark>o</b><small>vé-lyu · viejo</small></button>
-    <button class="chip" data-say="julho"><b>ju<mark class="ch">lh</mark>o</b><small>jú-lyu · julio</small></button>
+    <button class="chip" data-say="julho"><b>ju<mark class="ch">lh</mark>o</b><small>zhú-lyu · julio</small></button>
   </div>
   <div class="ex">
     <p class="pt" lang="pt-BR">Meu fi<mark class="ch">lh</mark>o trabalha hoje.</p>
@@ -863,7 +883,7 @@ mark.k-r{color:var(--c-r);font-weight:700;background:none;padding:0}
   <div class="ex">
     <p class="pt" lang="pt-BR">Em ju<mark class="ch">lh</mark>o eu viajo para a i<mark class="ch">lh</mark>a.</p>
     <p class="es">En julio viajo a la isla.</p>
-    <p class="say">Suena: <b>jú-lyu</b> · <b>í-lya</b></p>
+    <p class="say">Suena: <b>zhú-lyu</b> · <b>í-lya</b></p>
     <button class="btn" data-say="Em julho eu viajo para a ilha.">▶ Normal</button><button class="btn" data-say="Em julho eu viajo para a ilha." data-slow="1">🐢 Lento</button>
   </div>
 </div>
@@ -875,7 +895,7 @@ mark.k-r{color:var(--c-r);font-weight:700;background:none;padding:0}
     <button class="chip" data-say="trabalho"><b>traba<mark class="ch">lh</mark>o</b><small>tra-bá-lyu · trabajo</small></button>
     <button class="chip" data-say="vermelho"><b>verme<mark class="ch">lh</mark>o</b><small>ver-mê-lyu · rojo</small></button>
     <button class="chip" data-say="coelho"><b>coe<mark class="ch">lh</mark>o</b><small>ko-ê-lyu · conejo</small></button>
-    <button class="chip" data-say="joelho"><b>joe<mark class="ch">lh</mark>o</b><small>ju-ê-lyu · rodilla</small></button>
+    <button class="chip" data-say="joelho"><b>joe<mark class="ch">lh</mark>o</b><small>zhu-ê-lyu · rodilla</small></button>
     <button class="chip" data-say="abelha"><b>abe<mark class="ch">lh</mark>a</b><small>a-bê-lya · abeja</small></button>
     <button class="chip" data-say="orelha"><b>ore<mark class="ch">lh</mark>a</b><small>o-rê-lya · oreja</small></button>
     <button class="chip" data-say="toalha"><b>toa<mark class="ch">lh</mark>a</b><small>tu-á-lya · toalla</small></button>
@@ -1024,7 +1044,7 @@ mark.k-r{color:var(--c-r);font-weight:700;background:none;padding:0}
     <button class="chip" data-say="papel"><b>pape<mark class="ch">l</mark></b><small>pa-péu · papel</small></button>
     <button class="chip" data-say="hotel"><b>hote<mark class="ch">l</mark></b><small>o-téu · hotel</small></button>
     <button class="chip" data-say="animal"><b>anima<mark class="ch">l</mark></b><small>a-ni-máu · animal</small></button>
-    <button class="chip" data-say="jornal"><b>jorna<mark class="ch">l</mark></b><small>jor-náu · periódico</small></button>
+    <button class="chip" data-say="jornal"><b>jorna<mark class="ch">l</mark></b><small>zhor-náu · periódico</small></button>
     <button class="chip" data-say="hospital"><b>hospita<mark class="ch">l</mark></b><small>os-pi-táu · hospital</small></button>
     <button class="chip" data-say="Portugal"><b>Portuga<mark class="ch">l</mark></b><small>por-tu-gáu · Portugal</small></button>
     <button class="chip" data-say="legal"><b>lega<mark class="ch">l</mark></b><small>le-gáu · genial</small></button>
@@ -1117,7 +1137,7 @@ mark.k-r{color:var(--c-r);font-weight:700;background:none;padding:0}
     <button class="chip" data-say="bola"><b>bola</b><small>bô-la · pelota</small></button>
     <button class="chip" data-say="solo"><b>solo</b><small>sô-lu · suelo</small></button>
     <button class="chip" data-say="brasileiro"><b>brasileiro</b><small>bra-zi-léi-ru · brasileño</small></button>
-    <button class="chip" data-say="jornalista"><b>jornalista</b><small>jor-na-lís-ta · periodista</small></button>
+    <button class="chip" data-say="jornalista"><b>jornalista</b><small>zhor-na-lís-ta · periodista</small></button>
     <button class="chip" data-say="claro"><b>claro</b><small>klá-ru · claro</small></button>
   </div>
   <div class="ex">
@@ -1422,6 +1442,258 @@ mark.k-r{color:var(--c-r);font-weight:700;background:none;padding:0}
 
 </section>
 
+<!-- ===================== G ===================== -->
+<section id="letra-g">
+
+<h2>G <small style="font-weight:400;color:var(--muted)">· “g” firme o “zh”</small></h2>
+<div class="legend">
+  <span><mark class="ch">g + e / i</mark> (y la <b>j</b>) = suena <b>“zh”</b>, como la <i>s</i> de <i>vision</i> en inglés</span>
+</div>
+
+<div class="subnav"><a href="#r-g-resumen">Resumen</a><a href="#r-g-reglas">Reglas</a><a href="#r-g-compara">Compara</a><a href="#r-g-errores">Errores y variantes</a></div>
+
+<h3 class="bigsec" id="r-g-resumen">Resumen</h3>
+<div class="card">
+  <div class="tablewrap">
+  <table>
+    <tr><th>Se escribe</th><th>Suena</th><th>Ejemplo</th></tr>
+    <tr><td>g + <b>a, o, u</b></td><td>g firme (como en español)</td><td>gato → <i>gá-tu</i></td></tr>
+    <tr><td>g + <b>e, i</b></td><td><mark class="ch">zh</mark></td><td>gente → <i>zhén-chi</i></td></tr>
+    <tr><td><b>gu</b> + e, i</td><td>g firme (la u no suena)</td><td>guerra → <i>gé-ha</i></td></tr>
+    <tr><td><b>gu</b> + a, o</td><td>g + u (la u sí suena)</td><td>água → <i>á-gua</i></td></tr>
+    <tr><td><b>gr, gl, ng</b></td><td>g firme</td><td>grande → <i>grán-dyi</i></td></tr>
+    <tr><td><b>j</b> (siempre)</td><td><mark class="ch">zh</mark></td><td>jogo → <i>zhô-gu</i></td></tr>
+    <tr><td><b>-gem</b> al final</td><td><mark class="ch">zh</mark> + e nasal</td><td>viagem → <i>vi-á-zhêi</i></td></tr>
+  </table>
+  </div>
+  <p class="note">💡 Truco: el sonido “zh” <b>no es la jota española</b> (la que raspa en <i>jamón</i>). Es un sonido suave en el que la garganta vibra: como la <i>s</i> de <i>vision</i> en inglés, la <i>j</i> del francés (<i>jour</i>) o la <i>y/ll</i> de un argentino diciendo <i>calle</i> (“cá-zhe”). Si no te sale, una <b>y</b> fuerte se entiende. Solo se colorea la g que cambia; la g firme es igual que en español.</p>
+</div>
+
+<h3 class="bigsec" id="r-g-reglas">Las reglas</h3>
+<div class="card rule">
+  <span class="tag">Regla 1</span>
+  <h3>g + a, o, u (y gr, gl, ng) → “g” firme</h3>
+  <p>Antes de <b>a, o, u</b>, y en los grupos <b>gr</b>, <b>gl</b> y <b>ng</b>, la <b>g</b> suena <b>firme</b>, igual que en español: <i>gato</i>, <i>gordo</i>, <i>grande</i>. <b>No cambia</b>, por eso no lleva color.</p>
+  <div class="chips">
+    <button class="chip" data-say="gato"><b>gato</b><small>gá-tu · gato</small></button>
+    <button class="chip" data-say="gosto"><b>gosto</b><small>gôs-tu · gusto / me gusta</small></button>
+    <button class="chip" data-say="gordo"><b>gordo</b><small>gôr-du · gordo</small></button>
+    <button class="chip" data-say="agora"><b>agora</b><small>a-gô-ra · ahora</small></button>
+    <button class="chip" data-say="amigo"><b>amigo</b><small>a-mí-gu · amigo</small></button>
+    <button class="chip" data-say="amiga"><b>amiga</b><small>a-mí-ga · amiga</small></button>
+    <button class="chip" data-say="lugar"><b>lugar</b><small>lu-gár · lugar</small></button>
+    <button class="chip" data-say="domingo"><b>domingo</b><small>do-mín-gu · domingo</small></button>
+    <button class="chip" data-say="grande"><b>grande</b><small>grán-dyi · grande</small></button>
+    <button class="chip" data-say="grupo"><b>grupo</b><small>grú-pu · grupo</small></button>
+    <button class="chip" data-say="pergunta"><b>pergunta</b><small>per-gún-ta · pregunta</small></button>
+    <button class="chip" data-say="obrigado"><b>obrigado</b><small>o-bri-gá-du · gracias (él)</small></button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Meu amigo tem um gato gordo.</p>
+    <p class="es">Mi amigo tiene un gato gordo.</p>
+    <p class="say">Suena: <b>a-mí-gu</b> · <b>gá-tu</b> · <b>gôr-du</b></p>
+    <button class="btn" data-say="Meu amigo tem um gato gordo.">▶ Normal</button><button class="btn" data-say="Meu amigo tem um gato gordo." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Eu gosto de domingo.</p>
+    <p class="es">Me gusta el domingo.</p>
+    <p class="say">Suena: <b>gôs-tu</b> · <b>do-mín-gu</b></p>
+    <button class="btn" data-say="Eu gosto de domingo.">▶ Normal</button><button class="btn" data-say="Eu gosto de domingo." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Agora o grupo é grande.</p>
+    <p class="es">Ahora el grupo es grande.</p>
+    <p class="say">Suena: <b>a-gô-ra</b> · <b>grú-pu</b> · <b>grán-dyi</b></p>
+    <button class="btn" data-say="Agora o grupo é grande.">▶ Normal</button><button class="btn" data-say="Agora o grupo é grande." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Obrigado pela pergunta!</p>
+    <p class="es">¡Gracias por la pregunta!</p>
+    <p class="say">Suena: <b>o-bri-gá-du</b> · <b>per-gún-ta</b></p>
+    <button class="btn" data-say="Obrigado pela pergunta!">▶ Normal</button><button class="btn" data-say="Obrigado pela pergunta!" data-slow="1">🐢 Lento</button>
+  </div>
+</div>
+<div class="card rule">
+  <span class="tag">Regla 2</span>
+  <h3>g + e, i → “zh”</h3>
+  <p>Antes de <b>e</b> o <b>i</b>, la <b>g</b> suena <b>“zh”</b> (como la <i>s</i> de <i>vision</i> en inglés), <b>no</b> como la jota española: <i>gente</i> → <b>“zhén-chi”</b>. Al final de palabra, <b>-gem</b> suena <b>“zhêi”</b> con la <i>e</i> nasal (no se pronuncia la <i>m</i>).</p>
+  <div class="chips">
+    <button class="chip" data-say="gente"><b>gente</b><small>zhén-chi · gente</small></button>
+    <button class="chip" data-say="gelo"><b>gelo</b><small>zhê-lu · hielo</small></button>
+    <button class="chip" data-say="girafa"><b>girafa</b><small>zhi-rá-fa · jirafa</small></button>
+    <button class="chip" data-say="página"><b>página</b><small>pá-zhi-na · página</small></button>
+    <button class="chip" data-say="região"><b>região</b><small>he-zhi-ãu · región</small></button>
+    <button class="chip" data-say="longe"><b>longe</b><small>lôn-zhi · lejos</small></button>
+    <button class="chip" data-say="geral"><b>geral</b><small>zhe-ráu · general</small></button>
+    <button class="chip" data-say="agenda"><b>agenda</b><small>a-zhên-da · agenda</small></button>
+    <button class="chip" data-say="gerente"><b>gerente</b><small>zhe-rén-chi · gerente</small></button>
+    <button class="chip" data-say="inteligente"><b>inteligente</b><small>in-te-li-zhén-chi · inteligente</small></button>
+    <button class="chip" data-say="magia"><b>magia</b><small>ma-zhí-a · magia</small></button>
+    <button class="chip" data-say="energia"><b>energia</b><small>e-ner-zhí-a · energía</small></button>
+    <button class="chip" data-say="fugir"><b>fugir</b><small>fu-zhír · huir</small></button>
+    <button class="chip" data-say="dirigir"><b>dirigir</b><small>dyi-ri-zhír · conducir</small></button>
+    <button class="chip" data-say="viagem"><b>viagem</b><small>vi-á-zhêi · viaje</small></button>
+    <button class="chip" data-say="mensagem"><b>mensagem</b><small>mên-sá-zhêi · mensaje</small></button>
+    <button class="chip" data-say="imagem"><b>imagem</b><small>i-má-zhêi · imagen</small></button>
+    <button class="chip" data-say="garagem"><b>garagem</b><small>ga-rá-zhêi · garaje</small></button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">A gente vai viajar amanhã.</p>
+    <p class="es">Vamos a viajar mañana. (“a gente” = nosotros)</p>
+    <p class="say">Suena: <b>a zhén-chi</b> · <b>vi-a-zhár</b></p>
+    <button class="btn" data-say="A gente vai viajar amanhã.">▶ Normal</button><button class="btn" data-say="A gente vai viajar amanhã." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">A girafa mora longe daqui.</p>
+    <p class="es">La jirafa vive lejos de aquí.</p>
+    <p class="say">Suena: <b>zhi-rá-fa</b> · <b>lôn-zhi</b></p>
+    <button class="btn" data-say="A girafa mora longe daqui.">▶ Normal</button><button class="btn" data-say="A girafa mora longe daqui." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Esse gerente é muito inteligente.</p>
+    <p class="es">Ese gerente es muy inteligente.</p>
+    <p class="say">Suena: <b>zhe-rén-chi</b> · <b>in-te-li-zhén-chi</b></p>
+    <button class="btn" data-say="Esse gerente é muito inteligente.">▶ Normal</button><button class="btn" data-say="Esse gerente é muito inteligente." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Preciso dirigir até a região.</p>
+    <p class="es">Necesito conducir hasta la región.</p>
+    <p class="say">Suena: <b>dyi-ri-zhír</b> · <b>he-zhi-ãu</b></p>
+    <button class="btn" data-say="Preciso dirigir até a região.">▶ Normal</button><button class="btn" data-say="Preciso dirigir até a região." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">A viagem foi boa.</p>
+    <p class="es">El viaje fue bueno.</p>
+    <p class="say">Suena: <b>vi-á-zhêi</b></p>
+    <button class="btn" data-say="A viagem foi boa.">▶ Normal</button><button class="btn" data-say="A viagem foi boa." data-slow="1">🐢 Lento</button>
+  </div>
+</div>
+<div class="card rule">
+  <span class="tag">Regla 3</span>
+  <h3>La j siempre suena “zh”</h3>
+  <p>La letra <b>j</b> tiene <b>siempre</b> el mismo sonido <b>“zh”</b>, con cualquier vocal: <i>já</i>, <i>jogo</i>, <i>julho</i>. Es el mismo sonido de la <b>g</b> antes de e / i. Cuidado: <b>ga</b> y <b>ja</b> suenan distinto (<i>gato</i> / <i>jato</i>).</p>
+  <div class="chips">
+    <button class="chip" data-say="já"><b>já</b><small>zhá · ya</small></button>
+    <button class="chip" data-say="jogo"><b>jogo</b><small>zhô-gu · juego</small></button>
+    <button class="chip" data-say="hoje"><b>hoje</b><small>ô-zhi · hoy</small></button>
+    <button class="chip" data-say="janeiro"><b>janeiro</b><small>zha-néi-ru · enero</small></button>
+    <button class="chip" data-say="julho"><b>julho</b><small>zhú-lyu · julio</small></button>
+    <button class="chip" data-say="joelho"><b>joelho</b><small>zhu-ê-lyu · rodilla</small></button>
+    <button class="chip" data-say="jornal"><b>jornal</b><small>zhor-náu · periódico</small></button>
+    <button class="chip" data-say="jovem"><b>jovem</b><small>zhô-vêi · joven</small></button>
+    <button class="chip" data-say="jantar"><b>jantar</b><small>zhan-tár · cenar</small></button>
+    <button class="chip" data-say="viajar"><b>viajar</b><small>vi-a-zhár · viajar</small></button>
+    <button class="chip" data-say="laranja"><b>laranja</b><small>la-rãn-zha · naranja</small></button>
+    <button class="chip" data-say="loja"><b>loja</b><small>lô-zha · tienda</small></button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Hoje eu jogo futebol.</p>
+    <p class="es">Hoy juego fútbol.</p>
+    <p class="say">Suena: <b>ô-zhi</b> · <b>zhô-gu</b></p>
+    <button class="btn" data-say="Hoje eu jogo futebol.">▶ Normal</button><button class="btn" data-say="Hoje eu jogo futebol." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Em janeiro eu viajo.</p>
+    <p class="es">En enero viajo.</p>
+    <p class="say">Suena: <b>zha-néi-ru</b> · <b>vi-á-zhu</b></p>
+    <button class="btn" data-say="Em janeiro eu viajo.">▶ Normal</button><button class="btn" data-say="Em janeiro eu viajo." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">O jornal está na loja.</p>
+    <p class="es">El periódico está en la tienda.</p>
+    <p class="say">Suena: <b>zhor-náu</b> · <b>lô-zha</b></p>
+    <button class="btn" data-say="O jornal está na loja.">▶ Normal</button><button class="btn" data-say="O jornal está na loja." data-slow="1">🐢 Lento</button>
+  </div>
+</div>
+<div class="card rule">
+  <span class="tag">Regla 4</span>
+  <h3>gu: ¿la u suena o no?</h3>
+  <p>Con <b>gue / gui</b>, la <b>u no suena</b> y la <b>g</b> es firme (igual que en español): <i>guerra</i> → <b>“gé-ha”</b>. Con <b>gua / guo</b>, la <b>u sí suena</b>: <i>água</i> → <b>“á-gua”</b>. Hay pocas excepciones donde suena la <i>u</i> en <i>gue/gui</i>: <i>linguiça</i>, <i>aguentar</i>, <i>pinguim</i>.</p>
+  <div class="chips">
+    <button class="chip" data-say="guerra"><b>guerra</b><small>gé-ha · guerra</small></button>
+    <button class="chip" data-say="guitarra"><b>guitarra</b><small>gi-tá-ha · guitarra</small></button>
+    <button class="chip" data-say="guia"><b>guia</b><small>gí-a · guía</small></button>
+    <button class="chip" data-say="seguir"><b>seguir</b><small>se-gír · seguir</small></button>
+    <button class="chip" data-say="seguinte"><b>seguinte</b><small>se-guín-chi · siguiente</small></button>
+    <button class="chip" data-say="Miguel"><b>Miguel</b><small>mi-géu · Miguel</small></button>
+    <button class="chip" data-say="água"><b>água</b><small>á-gua · agua</small></button>
+    <button class="chip" data-say="língua"><b>língua</b><small>lín-gua · lengua</small></button>
+    <button class="chip" data-say="guarda"><b>guarda</b><small>guár-da · guarda</small></button>
+    <button class="chip" data-say="igual"><b>igual</b><small>i-guáu · igual</small></button>
+    <button class="chip" data-say="pinguim"><b>pinguim</b><small>pin-guím · pingüino</small></button>
+    <button class="chip" data-say="linguiça"><b>linguiça</b><small>lin-guí-sa · longaniza</small></button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">A guerra não é a solução.</p>
+    <p class="es">La guerra no es la solución.</p>
+    <p class="say">Suena: <b>gé-ha</b> · <b>so-lu-sãu</b></p>
+    <button class="btn" data-say="A guerra não é a solução.">▶ Normal</button><button class="btn" data-say="A guerra não é a solução." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Eu bebo água e falo uma língua nova.</p>
+    <p class="es">Bebo agua y hablo una lengua nueva.</p>
+    <p class="say">Suena: <b>á-gua</b> · <b>lín-gua</b></p>
+    <button class="btn" data-say="Eu bebo água e falo uma língua nova.">▶ Normal</button><button class="btn" data-say="Eu bebo água e falo uma língua nova." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Vou seguir a guia.</p>
+    <p class="es">Voy a seguir a la guía.</p>
+    <p class="say">Suena: <b>se-gír</b> · <b>gí-a</b></p>
+    <button class="btn" data-say="Vou seguir a guia.">▶ Normal</button><button class="btn" data-say="Vou seguir a guia." data-slow="1">🐢 Lento</button>
+  </div>
+</div>
+
+<h3 class="bigsec" id="r-g-compara">🎧 Compara</h3>
+<div class="card">
+  <p>Escucha cada par seguido. En el primero la g es firme; en el segundo suena “zh”. <b>Cambia el significado de la palabra.</b></p>
+  <div class="pairs">
+    <div class="pair">
+      <div class="row"><span>gato</span><button class="btn" data-say="gato">🔊</button></div>
+      <div class="arrow">vs</div>
+      <div class="row"><span>jato</span><button class="btn" data-say="jato">🔊</button></div>
+    </div>
+    <div class="pair">
+      <div class="row"><span>gosto</span><button class="btn" data-say="gosto">🔊</button></div>
+      <div class="arrow">vs</div>
+      <div class="row"><span>gesto</span><button class="btn" data-say="gesto">🔊</button></div>
+    </div>
+    <div class="pair">
+      <div class="row"><span>mago</span><button class="btn" data-say="mago">🔊</button></div>
+      <div class="arrow">vs</div>
+      <div class="row"><span>mágico</span><button class="btn" data-say="mágico">🔊</button></div>
+    </div>
+    <div class="pair">
+      <div class="row"><span>fuga</span><button class="btn" data-say="fuga">🔊</button></div>
+      <div class="arrow">vs</div>
+      <div class="row"><span>fugir</span><button class="btn" data-say="fugir">🔊</button></div>
+    </div>
+    <div class="pair">
+      <div class="row"><span>logo</span><button class="btn" data-say="logo">🔊</button></div>
+      <div class="arrow">vs</div>
+      <div class="row"><span>loja</span><button class="btn" data-say="loja">🔊</button></div>
+    </div>
+  </div>
+  <p class="note">gato (gato) / jato (jet) · gosto (gusto) / gesto (gesto) · mago (mago) / mágico (mágico) · fuga (fuga) / fugir (huir) · logo (pronto) / loja (tienda).</p>
+</div>
+
+<h3 class="bigsec" id="r-g-errores">Errores y variantes</h3>
+<div class="card">
+  <h3>⚠️ Errores comunes de hispanohablantes</h3>
+  <ul>
+    <li>Decir <i>ge / gi / j</i> con la <b>jota española</b> (“jente”, “jogo” raspando). El sonido portugués es <b>“zh”</b>, suave, con la garganta vibrando.</li>
+    <li>Decir <i>ge / gi</i> con g firme (“guente”). Antes de e / i la g cambia siempre.</li>
+    <li>Pronunciar la <i>u</i> en <i>guerra</i> o <i>seguir</i> (“gu-erra”). Esa u no suena.</li>
+    <li>Pronunciar la <i>m</i> final de <i>-gem</i>: <i>viagem</i> es <b>“vi-á-zhêi”</b>, con la e nasal.</li>
+  </ul>
+  <h3 style="margin-top:14px">📍 Excepciones y variantes</h3>
+  <ul>
+    <li>En <i>gue / gui</i> la u casi nunca suena, pero hay excepciones: <i>linguiça</i>, <i>aguentar</i>, <i>pinguim</i>.</li>
+    <li>No hay variantes importantes: el sonido “zh” es el mismo en Brasil y en Portugal.</li>
+  </ul>
+</div>
+
+</section>
+
 <!-- Para añadir otra letra: copia el bloque <section id="letra-t"> completo,
      cámbiale el id (p. ej. letra-d), agrega su enlace en <nav class="letters">
      y reemplaza las reglas y ejemplos. El audio funciona solo con data-say="texto". -->
@@ -1597,6 +1869,7 @@ mark.k-r{color:var(--c-r);font-weight:700;background:none;padding:0}
     var out=[], re=/[A-Za-zÀ-ÖØ-öø-ÿ]+/g, m;
     while((m=re.exec(text))){
       var w=m[0].toLowerCase(), b=m.index, n=w.length;
+      if(w.indexOf('setecentos')===0){ out.push([b+2,b+4,'k-ch']); }
       for(var i=0;i<n;i++){
         var c=w.charAt(i), nx=w.charAt(i+1);
         if(c==='n' && nx==='h'){ out.push([b+i,b+i+2,'k-nh']); i++; continue; }
@@ -1606,6 +1879,11 @@ mark.k-r{color:var(--c-r);font-weight:700;background:none;padding:0}
           var pv=i>0?w.charAt(i-1):'';
           if(nx==='r'){ out.push([b+i,b+i+2,'k-r']); i++; continue; }
           if(i===0 || 'nls'.indexOf(pv)>-1){ if(i===0 || isV(nx)) out.push([b+i,b+i+1,'k-r']); }
+          continue;
+        }
+        if(c==='j'){ out.push([b+i,b+i+1,'k-g']); continue; }
+        if(c==='g'){
+          if(nx==='e'||nx==='i'||nx==='é'||nx==='ê'||nx==='í') out.push([b+i,b+i+1,'k-g']);
           continue;
         }
         if(c==='t' || c==='d'){
@@ -1643,9 +1921,9 @@ mark.k-r{color:var(--c-r);font-weight:700;background:none;padding:0}
 
   // Resalta en la pronunciación escrita los sonidos que cambian
   function respell(str,useU){
-    return esc(str).replace(/ch|dy|ly|ñ|h|([aeiouáéíóúâêôãõ])u(?![a-zñáéíóúâêôãõ])/gi,function(m,v){
+    return esc(str).replace(/ch|dy|ly|zh|ñ|h|([aeiouáéíóúâêôãõ])u(?![a-zñáéíóúâêôãõ])/gi,function(m,v){
       if(v){ return useU ? v+'<mark class="k-u">u</mark>' : m; }
-      var c={ch:'k-ch',dy:'k-dy',ly:'k-lh','ñ':'k-nh',h:'k-r'}[m.toLowerCase()];
+      var c={ch:'k-ch',dy:'k-dy',ly:'k-lh','ñ':'k-nh',h:'k-r',zh:'k-g'}[m.toLowerCase()];
       return '<mark class="'+c+'">'+m+'</mark>';
     });
   }
@@ -1667,7 +1945,7 @@ mark.k-r{color:var(--c-r);font-weight:700;background:none;padding:0}
   });
 
   // Tablas y leyendas: cada pestaña usa el color de su propio sonido
-  var map={'letra-t':'k-ch','letra-d':'k-dy','letra-nh':'k-nh','letra-lh':'k-lh','letra-l':'k-u','letra-r':'k-r'};
+  var map={'letra-t':'k-ch','letra-d':'k-dy','letra-nh':'k-nh','letra-lh':'k-lh','letra-l':'k-u','letra-r':'k-r','letra-g':'k-g'};
   document.querySelectorAll('section[id^="letra-"]').forEach(function(sec){
     sec.querySelectorAll('mark.ch').forEach(function(m){ m.className=map[sec.id]||'k-ch'; });
     sec.querySelectorAll('table td i').forEach(function(i){
