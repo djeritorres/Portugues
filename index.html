@@ -129,12 +129,23 @@ mark.k-g{color:var(--c-g);font-weight:700;background:none;padding:0}
 #letra-g mark.k-g,#letra-j mark.k-g,.colorkey mark.k-g{background:var(--c-g-bg);padding:0 3px;border-radius:4px;box-shadow:inset 0 -2px 0 currentColor}
 .callout{background:var(--bg);border:1px dashed var(--accent);border-radius:10px;padding:10px 14px;margin-top:14px;font-size:.95rem}
 .callout p{margin:.4em 0 0}
+
+/* ===== Encabezado fijo ===== */
+.topbar{position:sticky;top:0;z-index:50;background:var(--bg);margin:0 -16px;padding:0 16px;transition:box-shadow .2s}
+.topbar.stuck{box-shadow:0 8px 14px -10px rgba(0,0,0,.55)}
+.topbar header h1{transition:font-size .15s}
+.topbar.stuck header h1{font-size:1.25rem;margin:.25em 0 0}
+.topbar.stuck header p{display:none}
+.topbar.stuck nav.letters{margin:10px 0 0}
+.topbar nav.letters{margin-bottom:0}
+.bigsec,.rulenav{scroll-margin-top:calc(var(--topbar-h,120px) + 12px)}
 </style>
 <script>document.documentElement.className="js";</script>
 </head>
 <body>
 <div class="wrap">
 
+<div class="topbar">
 <header>
   <h1>🇧🇷 Pronunciación del portugués</h1>
   <p>Reglas, teoría y ejemplos con audio · Portugués de Brasil</p>
@@ -150,6 +161,7 @@ mark.k-g{color:var(--c-g);font-weight:700;background:none;padding:0}
   <a href="#letra-nh">NH</a>
   <a href="#letra-lh">LH</a>
 </nav>
+</div>
 
 <div class="colorkey" aria-label="Colores de los sonidos">
   <b>Colores:</b>
@@ -2087,6 +2099,20 @@ mark.k-g{color:var(--c-g);font-weight:700;background:none;padding:0}
       i.innerHTML=respell(i.textContent, sec.id==='letra-l');
     });
   });
+})();
+</script>
+<script>
+(function(){
+  var bar=document.querySelector('.topbar'); if(!bar) return;
+  function setH(){ document.documentElement.style.setProperty('--topbar-h', bar.offsetHeight+'px'); }
+  function onScroll(){
+    var y=window.scrollY||document.documentElement.scrollTop||0;
+    if(y>40) bar.classList.add('stuck'); else if(y<10) bar.classList.remove('stuck');
+    setH();
+  }
+  window.addEventListener('scroll',onScroll,{passive:true});
+  window.addEventListener('resize',setH);
+  setH(); onScroll();
 })();
 </script>
 </body>
