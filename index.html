@@ -126,7 +126,7 @@ mark.k-r{color:var(--c-r);font-weight:700;background:none;padding:0}
 :root{--c-g:#1f4fc4;--c-g-bg:#d9e4ff}
 @media (prefers-color-scheme: dark){:root{--c-g:#9db8ff;--c-g-bg:#1b2f5c}}
 mark.k-g{color:var(--c-g);font-weight:700;background:none;padding:0}
-#letra-g mark.k-g,.colorkey mark.k-g{background:var(--c-g-bg);padding:0 3px;border-radius:4px;box-shadow:inset 0 -2px 0 currentColor}
+#letra-g mark.k-g,#letra-j mark.k-g,.colorkey mark.k-g{background:var(--c-g-bg);padding:0 3px;border-radius:4px;box-shadow:inset 0 -2px 0 currentColor}
 .callout{background:var(--bg);border:1px dashed var(--accent);border-radius:10px;padding:10px 14px;margin-top:14px;font-size:.95rem}
 .callout p{margin:.4em 0 0}
 </style>
@@ -143,6 +143,7 @@ mark.k-g{color:var(--c-g);font-weight:700;background:none;padding:0}
 <nav class="letters" aria-label="Letras">
   <a href="#letra-d">D</a>
   <a href="#letra-g">G</a>
+  <a href="#letra-j">J</a>
   <a href="#letra-l">L</a>
   <a href="#letra-r">R</a>
   <a href="#letra-t">T</a>
@@ -1447,7 +1448,7 @@ mark.k-g{color:var(--c-g);font-weight:700;background:none;padding:0}
 
 <h2>G <small style="font-weight:400;color:var(--muted)">· “g” firme o “zh”</small></h2>
 <div class="legend">
-  <span><mark class="ch">g + e / i</mark> (y la <b>j</b>) = suena <b>“zh”</b>, como la <i>s</i> de <i>vision</i> en inglés</span>
+  <span><mark class="ch">g + e / i</mark> = suena <b>“zh”</b>, como la <i>s</i> de <i>vision</i> en inglés</span>
 </div>
 
 <div class="subnav"><a href="#r-g-resumen">Resumen</a><a href="#r-g-reglas">Reglas</a><a href="#r-g-compara">Compara</a><a href="#r-g-errores">Errores y variantes</a></div>
@@ -1462,11 +1463,11 @@ mark.k-g{color:var(--c-g);font-weight:700;background:none;padding:0}
     <tr><td><b>gu</b> + e, i</td><td>g firme (la u no suena)</td><td>guerra → <i>gé-ha</i></td></tr>
     <tr><td><b>gu</b> + a, o</td><td>g + u (la u sí suena)</td><td>água → <i>á-gua</i></td></tr>
     <tr><td><b>gr, gl, ng</b></td><td>g firme</td><td>grande → <i>grán-dyi</i></td></tr>
-    <tr><td><b>j</b> (siempre)</td><td><mark class="ch">zh</mark></td><td>jogo → <i>zhô-gu</i></td></tr>
     <tr><td><b>-gem</b> al final</td><td><mark class="ch">zh</mark> + e nasal</td><td>viagem → <i>vi-á-zhêi</i></td></tr>
   </table>
   </div>
   <p class="note">💡 Truco: el sonido “zh” <b>no es la jota española</b> (la que raspa en <i>jamón</i>). Es un sonido suave en el que la garganta vibra: como la <i>s</i> de <i>vision</i> en inglés, la <i>j</i> del francés (<i>jour</i>) o la <i>y/ll</i> de un argentino diciendo <i>calle</i> (“cá-zhe”). Si no te sale, una <b>y</b> fuerte se entiende. Solo se colorea la g que cambia; la g firme es igual que en español.</p>
+  <p class="note">➡️ La letra <b>j</b> suena igual (“zh”). Tiene su propia pestaña: <b>J</b>.</p>
 </div>
 
 <h3 class="bigsec" id="r-g-reglas">Las reglas</h3>
@@ -1538,10 +1539,10 @@ mark.k-g{color:var(--c-g);font-weight:700;background:none;padding:0}
     <button class="chip" data-say="garagem"><b>garagem</b><small>ga-rá-zhêi · garaje</small></button>
   </div>
   <div class="ex">
-    <p class="pt" lang="pt-BR">A gente vai viajar amanhã.</p>
-    <p class="es">Vamos a viajar mañana. (“a gente” = nosotros)</p>
-    <p class="say">Suena: <b>a zhén-chi</b> · <b>vi-a-zhár</b></p>
-    <button class="btn" data-say="A gente vai viajar amanhã.">▶ Normal</button><button class="btn" data-say="A gente vai viajar amanhã." data-slow="1">🐢 Lento</button>
+    <p class="pt" lang="pt-BR">A gente vai ao restaurante amanhã.</p>
+    <p class="es">Vamos al restaurante mañana. (“a gente” = nosotros)</p>
+    <p class="say">Suena: <b>a zhén-chi</b> · <b>hes-tau-rán-chi</b></p>
+    <button class="btn" data-say="A gente vai ao restaurante amanhã.">▶ Normal</button><button class="btn" data-say="A gente vai ao restaurante amanhã." data-slow="1">🐢 Lento</button>
   </div>
   <div class="ex">
     <p class="pt" lang="pt-BR">A girafa mora longe daqui.</p>
@@ -1570,43 +1571,6 @@ mark.k-g{color:var(--c-g);font-weight:700;background:none;padding:0}
 </div>
 <div class="card rule">
   <span class="tag">Regla 3</span>
-  <h3>La j siempre suena “zh”</h3>
-  <p>La letra <b>j</b> tiene <b>siempre</b> el mismo sonido <b>“zh”</b>, con cualquier vocal: <i>já</i>, <i>jogo</i>, <i>julho</i>. Es el mismo sonido de la <b>g</b> antes de e / i. Cuidado: <b>ga</b> y <b>ja</b> suenan distinto (<i>gato</i> / <i>jato</i>).</p>
-  <div class="chips">
-    <button class="chip" data-say="já"><b>já</b><small>zhá · ya</small></button>
-    <button class="chip" data-say="jogo"><b>jogo</b><small>zhô-gu · juego</small></button>
-    <button class="chip" data-say="hoje"><b>hoje</b><small>ô-zhi · hoy</small></button>
-    <button class="chip" data-say="janeiro"><b>janeiro</b><small>zha-néi-ru · enero</small></button>
-    <button class="chip" data-say="julho"><b>julho</b><small>zhú-lyu · julio</small></button>
-    <button class="chip" data-say="joelho"><b>joelho</b><small>zhu-ê-lyu · rodilla</small></button>
-    <button class="chip" data-say="jornal"><b>jornal</b><small>zhor-náu · periódico</small></button>
-    <button class="chip" data-say="jovem"><b>jovem</b><small>zhô-vêi · joven</small></button>
-    <button class="chip" data-say="jantar"><b>jantar</b><small>zhan-tár · cenar</small></button>
-    <button class="chip" data-say="viajar"><b>viajar</b><small>vi-a-zhár · viajar</small></button>
-    <button class="chip" data-say="laranja"><b>laranja</b><small>la-rãn-zha · naranja</small></button>
-    <button class="chip" data-say="loja"><b>loja</b><small>lô-zha · tienda</small></button>
-  </div>
-  <div class="ex">
-    <p class="pt" lang="pt-BR">Hoje eu jogo futebol.</p>
-    <p class="es">Hoy juego fútbol.</p>
-    <p class="say">Suena: <b>ô-zhi</b> · <b>zhô-gu</b></p>
-    <button class="btn" data-say="Hoje eu jogo futebol.">▶ Normal</button><button class="btn" data-say="Hoje eu jogo futebol." data-slow="1">🐢 Lento</button>
-  </div>
-  <div class="ex">
-    <p class="pt" lang="pt-BR">Em janeiro eu viajo.</p>
-    <p class="es">En enero viajo.</p>
-    <p class="say">Suena: <b>zha-néi-ru</b> · <b>vi-á-zhu</b></p>
-    <button class="btn" data-say="Em janeiro eu viajo.">▶ Normal</button><button class="btn" data-say="Em janeiro eu viajo." data-slow="1">🐢 Lento</button>
-  </div>
-  <div class="ex">
-    <p class="pt" lang="pt-BR">O jornal está na loja.</p>
-    <p class="es">El periódico está en la tienda.</p>
-    <p class="say">Suena: <b>zhor-náu</b> · <b>lô-zha</b></p>
-    <button class="btn" data-say="O jornal está na loja.">▶ Normal</button><button class="btn" data-say="O jornal está na loja." data-slow="1">🐢 Lento</button>
-  </div>
-</div>
-<div class="card rule">
-  <span class="tag">Regla 4</span>
   <h3>gu: ¿la u suena o no?</h3>
   <p>Con <b>gue / gui</b>, la <b>u no suena</b> y la <b>g</b> es firme (igual que en español): <i>guerra</i> → <b>“gé-ha”</b>. Con <b>gua / guo</b>, la <b>u sí suena</b>: <i>água</i> → <b>“á-gua”</b>. Hay pocas excepciones donde suena la <i>u</i> en <i>gue/gui</i>: <i>linguiça</i>, <i>aguentar</i>, <i>pinguim</i>.</p>
   <div class="chips">
@@ -1648,11 +1612,6 @@ mark.k-g{color:var(--c-g);font-weight:700;background:none;padding:0}
   <p>Escucha cada par seguido. En el primero la g es firme; en el segundo suena “zh”. <b>Cambia el significado de la palabra.</b></p>
   <div class="pairs">
     <div class="pair">
-      <div class="row"><span>gato</span><button class="btn" data-say="gato">🔊</button></div>
-      <div class="arrow">vs</div>
-      <div class="row"><span>jato</span><button class="btn" data-say="jato">🔊</button></div>
-    </div>
-    <div class="pair">
       <div class="row"><span>gosto</span><button class="btn" data-say="gosto">🔊</button></div>
       <div class="arrow">vs</div>
       <div class="row"><span>gesto</span><button class="btn" data-say="gesto">🔊</button></div>
@@ -1668,19 +1627,19 @@ mark.k-g{color:var(--c-g);font-weight:700;background:none;padding:0}
       <div class="row"><span>fugir</span><button class="btn" data-say="fugir">🔊</button></div>
     </div>
     <div class="pair">
-      <div class="row"><span>logo</span><button class="btn" data-say="logo">🔊</button></div>
+      <div class="row"><span>pagar</span><button class="btn" data-say="pagar">🔊</button></div>
       <div class="arrow">vs</div>
-      <div class="row"><span>loja</span><button class="btn" data-say="loja">🔊</button></div>
+      <div class="row"><span>página</span><button class="btn" data-say="página">🔊</button></div>
     </div>
   </div>
-  <p class="note">gato (gato) / jato (jet) · gosto (gusto) / gesto (gesto) · mago (mago) / mágico (mágico) · fuga (fuga) / fugir (huir) · logo (pronto) / loja (tienda).</p>
+  <p class="note">gosto (gusto) / gesto (gesto) · mago (mago) / mágico (mágico) · fuga (fuga) / fugir (huir) · pagar (pagar) / página (página).</p>
 </div>
 
 <h3 class="bigsec" id="r-g-errores">Errores y variantes</h3>
 <div class="card">
   <h3>⚠️ Errores comunes de hispanohablantes</h3>
   <ul>
-    <li>Decir <i>ge / gi / j</i> con la <b>jota española</b> (“jente”, “jogo” raspando). El sonido portugués es <b>“zh”</b>, suave, con la garganta vibrando.</li>
+    <li>Decir <i>ge / gi</i> con la <b>jota española</b> (“jente” raspando). El sonido portugués es <b>“zh”</b>, suave, con la garganta vibrando.</li>
     <li>Decir <i>ge / gi</i> con g firme (“guente”). Antes de e / i la g cambia siempre.</li>
     <li>Pronunciar la <i>u</i> en <i>guerra</i> o <i>seguir</i> (“gu-erra”). Esa u no suena.</li>
     <li>Pronunciar la <i>m</i> final de <i>-gem</i>: <i>viagem</i> es <b>“vi-á-zhêi”</b>, con la e nasal.</li>
@@ -1689,6 +1648,182 @@ mark.k-g{color:var(--c-g);font-weight:700;background:none;padding:0}
   <ul>
     <li>En <i>gue / gui</i> la u casi nunca suena, pero hay excepciones: <i>linguiça</i>, <i>aguentar</i>, <i>pinguim</i>.</li>
     <li>No hay variantes importantes: el sonido “zh” es el mismo en Brasil y en Portugal.</li>
+  </ul>
+</div>
+
+</section>
+
+<!-- ===================== J ===================== -->
+<section id="letra-j">
+
+<h2>J <small style="font-weight:400;color:var(--muted)">· siempre “zh”</small></h2>
+<div class="legend">
+  <span><mark class="ch">j</mark> = suena <b>“zh”</b>, como la <i>s</i> de <i>vision</i> en inglés</span>
+</div>
+
+<div class="subnav"><a href="#r-j-resumen">Resumen</a><a href="#r-j-reglas">Reglas</a><a href="#r-j-compara">Compara</a><a href="#r-j-errores">Errores y variantes</a></div>
+
+<h3 class="bigsec" id="r-j-resumen">Resumen</h3>
+<div class="card">
+  <div class="tablewrap">
+  <table>
+    <tr><th>Se escribe</th><th>Suena</th><th>Ejemplo</th></tr>
+    <tr><td><b>ja</b></td><td><mark class="ch">zha</mark></td><td>já → <i>zhá</i></td></tr>
+    <tr><td><b>je</b></td><td><mark class="ch">zhe</mark></td><td>jeito → <i>zhêi-tu</i></td></tr>
+    <tr><td><b>ji</b></td><td><mark class="ch">zhi</mark></td><td>jipe → <i>zhí-pi</i></td></tr>
+    <tr><td><b>jo</b></td><td><mark class="ch">zho</mark></td><td>jogo → <i>zhô-gu</i></td></tr>
+    <tr><td><b>ju</b></td><td><mark class="ch">zhu</mark></td><td>julho → <i>zhú-lyu</i></td></tr>
+  </table>
+  </div>
+  <p class="note">💡 Truco: la <b>j</b> portuguesa <b>no es la jota española</b> (la que raspa en <i>jamón</i>). Es un sonido suave en el que la garganta vibra: como la <i>s</i> de <i>vision</i> en inglés, la <i>j</i> del francés (<i>jour</i>) o la <i>y/ll</i> de un argentino diciendo <i>calle</i>. Si no te sale, una <b>y</b> fuerte se entiende. Es el mismo sonido de la <b>g</b> antes de <b>e / i</b> (pestaña G).</p>
+</div>
+
+<h3 class="bigsec" id="r-j-reglas">Las reglas</h3>
+<div class="card rule">
+  <span class="tag">Regla 1</span>
+  <h3>La j siempre suena “zh”</h3>
+  <p>La letra <b>j</b> tiene <b>un solo sonido</b>, con cualquier vocal: <b>“zh”</b>. <i>Já</i> → <b>“zhá”</b>, <i>jogo</i> → <b>“zhô-gu”</b>. No cambia nunca.</p>
+  <div class="chips">
+    <button class="chip" data-say="já"><b>já</b><small>zhá · ya</small></button>
+    <button class="chip" data-say="jogo"><b>jogo</b><small>zhô-gu · juego</small></button>
+    <button class="chip" data-say="hoje"><b>hoje</b><small>ô-zhi · hoy</small></button>
+    <button class="chip" data-say="janeiro"><b>janeiro</b><small>zha-néi-ru · enero</small></button>
+    <button class="chip" data-say="junho"><b>junho</b><small>zhú-ñu · junio</small></button>
+    <button class="chip" data-say="julho"><b>julho</b><small>zhú-lyu · julio</small></button>
+    <button class="chip" data-say="jantar"><b>jantar</b><small>zhan-tár · cenar</small></button>
+    <button class="chip" data-say="jovem"><b>jovem</b><small>zhô-vêi · joven</small></button>
+    <button class="chip" data-say="jornal"><b>jornal</b><small>zhor-náu · periódico</small></button>
+    <button class="chip" data-say="joelho"><b>joelho</b><small>zhu-ê-lyu · rodilla</small></button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Hoje eu jogo futebol.</p>
+    <p class="es">Hoy juego fútbol.</p>
+    <p class="say">Suena: <b>ô-zhi</b> · <b>zhô-gu</b></p>
+    <button class="btn" data-say="Hoje eu jogo futebol.">▶ Normal</button><button class="btn" data-say="Hoje eu jogo futebol." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Em janeiro eu viajo.</p>
+    <p class="es">En enero viajo.</p>
+    <p class="say">Suena: <b>zha-néi-ru</b> · <b>vi-á-zhu</b></p>
+    <button class="btn" data-say="Em janeiro eu viajo.">▶ Normal</button><button class="btn" data-say="Em janeiro eu viajo." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">O jornal está aqui.</p>
+    <p class="es">El periódico está aquí.</p>
+    <p class="say">Suena: <b>zhor-náu</b></p>
+    <button class="btn" data-say="O jornal está aqui.">▶ Normal</button><button class="btn" data-say="O jornal está aqui." data-slow="1">🐢 Lento</button>
+  </div>
+</div>
+<div class="card rule">
+  <span class="tag">Regla 2</span>
+  <h3>j en medio de la palabra: el mismo sonido</h3>
+  <p>Aunque la <b>j</b> esté entre vocales o al final de la palabra, suena igual: <b>“zh”</b>. <i>Laranja</i> → <b>“la-rãn-zha”</b>, <i>queijo</i> → <b>“kêi-zhu”</b>.</p>
+  <div class="chips">
+    <button class="chip" data-say="viajar"><b>viajar</b><small>vi-a-zhár · viajar</small></button>
+    <button class="chip" data-say="laranja"><b>laranja</b><small>la-rãn-zha · naranja</small></button>
+    <button class="chip" data-say="loja"><b>loja</b><small>lô-zha · tienda</small></button>
+    <button class="chip" data-say="beijo"><b>beijo</b><small>bêi-zhu · beso</small></button>
+    <button class="chip" data-say="queijo"><b>queijo</b><small>kêi-zhu · queso</small></button>
+    <button class="chip" data-say="feijão"><b>feijão</b><small>fei-zhãu · frijol</small></button>
+    <button class="chip" data-say="caju"><b>caju</b><small>ka-zhú · marañón</small></button>
+    <button class="chip" data-say="gorjeta"><b>gorjeta</b><small>gor-zhê-ta · propina</small></button>
+    <button class="chip" data-say="trabalhei"><b>trabalhei</b><small>tra-ba-lyêi · trabajé</small></button>
+    <button class="chip" data-say="hoje"><b>hoje</b><small>ô-zhi · hoy</small></button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Eu como queijo e feijão.</p>
+    <p class="es">Como queso y frijoles.</p>
+    <p class="say">Suena: <b>kêi-zhu</b> · <b>fei-zhãu</b></p>
+    <button class="btn" data-say="Eu como queijo e feijão.">▶ Normal</button><button class="btn" data-say="Eu como queijo e feijão." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Quero uma laranja.</p>
+    <p class="es">Quiero una naranja.</p>
+    <p class="say">Suena: <b>la-rãn-zha</b></p>
+    <button class="btn" data-say="Quero uma laranja.">▶ Normal</button><button class="btn" data-say="Quero uma laranja." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Ele viaja em julho.</p>
+    <p class="es">Él viaja en julio.</p>
+    <p class="say">Suena: <b>vi-á-zha</b> · <b>zhú-lyu</b></p>
+    <button class="btn" data-say="Ele viaja em julho.">▶ Normal</button><button class="btn" data-say="Ele viaja em julho." data-slow="1">🐢 Lento</button>
+  </div>
+</div>
+<div class="card rule">
+  <span class="tag">Regla 3</span>
+  <h3>j y g: mismo sonido, distinta escritura</h3>
+  <p>Antes de <b>e / i</b>, la <b>g</b> y la <b>j</b> suenan <b>igual</b> (“zh”): <i>gente</i> y <i>jeito</i>. Pero antes de <b>a, o, u</b> solo la <b>j</b> da este sonido: <i>jogo</i> (“zhô-gu”) frente a <i>gosto</i> (“gôs-tu”, g firme). La escritura de cada palabra hay que memorizarla.</p>
+  <div class="chips">
+    <button class="chip" data-say="gente"><b>gente</b><small>zhén-chi · gente</small></button>
+    <button class="chip" data-say="jeito"><b>jeito</b><small>zhêi-tu · manera</small></button>
+    <button class="chip" data-say="gelo"><b>gelo</b><small>zhê-lu · hielo</small></button>
+    <button class="chip" data-say="jejum"><b>jejum</b><small>zhe-zhúm · ayuno</small></button>
+    <button class="chip" data-say="girafa"><b>girafa</b><small>zhi-rá-fa · jirafa</small></button>
+    <button class="chip" data-say="jipe"><b>jipe</b><small>zhí-pi · jeep</small></button>
+    <button class="chip" data-say="página"><b>página</b><small>pá-zhi-na · página</small></button>
+    <button class="chip" data-say="jiboia"><b>jiboia</b><small>zhi-bôi-a · boa</small></button>
+    <button class="chip" data-say="gíria"><b>gíria</b><small>zhí-ria · jerga</small></button>
+    <button class="chip" data-say="jiló"><b>jiló</b><small>zhi-ló · jiló (verdura)</small></button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Ele tem um jeito simpático.</p>
+    <p class="es">Él tiene una manera simpática.</p>
+    <p class="say">Suena: <b>zhêi-tu</b> · <b>sin-pá-chi-ku</b></p>
+    <button class="btn" data-say="Ele tem um jeito simpático.">▶ Normal</button><button class="btn" data-say="Ele tem um jeito simpático." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">O jipe está na garagem.</p>
+    <p class="es">El jeep está en el garaje.</p>
+    <p class="say">Suena: <b>zhí-pi</b> · <b>ga-rá-zhêi</b></p>
+    <button class="btn" data-say="O jipe está na garagem.">▶ Normal</button><button class="btn" data-say="O jipe está na garagem." data-slow="1">🐢 Lento</button>
+  </div>
+</div>
+
+<h3 class="bigsec" id="r-j-compara">🎧 Compara</h3>
+<div class="card">
+  <p>Escucha cada par seguido. En el primero la g es firme; en el segundo la j suena “zh”. <b>Cambia el significado de la palabra.</b></p>
+  <div class="pairs">
+    <div class="pair">
+      <div class="row"><span>gato</span><button class="btn" data-say="gato">🔊</button></div>
+      <div class="arrow">vs</div>
+      <div class="row"><span>jato</span><button class="btn" data-say="jato">🔊</button></div>
+    </div>
+    <div class="pair">
+      <div class="row"><span>logo</span><button class="btn" data-say="logo">🔊</button></div>
+      <div class="arrow">vs</div>
+      <div class="row"><span>loja</span><button class="btn" data-say="loja">🔊</button></div>
+    </div>
+    <div class="pair">
+      <div class="row"><span>lago</span><button class="btn" data-say="lago">🔊</button></div>
+      <div class="arrow">vs</div>
+      <div class="row"><span>laje</span><button class="btn" data-say="laje">🔊</button></div>
+    </div>
+    <div class="pair">
+      <div class="row"><span>gorro</span><button class="btn" data-say="gorro">🔊</button></div>
+      <div class="arrow">vs</div>
+      <div class="row"><span>jorro</span><button class="btn" data-say="jorro">🔊</button></div>
+    </div>
+    <div class="pair">
+      <div class="row"><span>gota</span><button class="btn" data-say="gota">🔊</button></div>
+      <div class="arrow">vs</div>
+      <div class="row"><span>jota</span><button class="btn" data-say="jota">🔊</button></div>
+    </div>
+  </div>
+  <p class="note">gato (gato) / jato (jet) · logo (pronto) / loja (tienda) · lago (lago) / laje (losa) · gorro (gorro) / jorro (chorro) · gota (gota) / jota (la letra j).</p>
+</div>
+
+<h3 class="bigsec" id="r-j-errores">Errores y variantes</h3>
+<div class="card">
+  <h3>⚠️ Errores comunes de hispanohablantes</h3>
+  <ul>
+    <li>Decir la <i>j</i> con la <b>jota española</b> (“jogo” raspando). El sonido portugués es <b>“zh”</b>, suave, con la garganta vibrando.</li>
+    <li>Agregar una <b>d</b> delante (“djogo”, como la <i>j</i> inglesa de <i>jam</i>). Eso es el sonido de <i>di / de</i> (pestaña D), no el de la <i>j</i>.</li>
+    <li>Confundir <i>g</i> y <i>j</i> al leer: <i>gato</i> es “gá-tu” (g firme), <i>jato</i> es “zhá-tu”.</li>
+  </ul>
+  <h3 style="margin-top:14px">📍 Excepciones y variantes</h3>
+  <ul>
+    <li>No hay variantes importantes: el sonido “zh” es el mismo en Brasil y en Portugal.</li>
+    <li>Algunos nombres propios y palabras extranjeras mantienen su pronunciación original (por ejemplo, <i>jeans</i>).</li>
   </ul>
 </div>
 
@@ -1945,7 +2080,7 @@ mark.k-g{color:var(--c-g);font-weight:700;background:none;padding:0}
   });
 
   // Tablas y leyendas: cada pestaña usa el color de su propio sonido
-  var map={'letra-t':'k-ch','letra-d':'k-dy','letra-nh':'k-nh','letra-lh':'k-lh','letra-l':'k-u','letra-r':'k-r','letra-g':'k-g'};
+  var map={'letra-t':'k-ch','letra-d':'k-dy','letra-nh':'k-nh','letra-lh':'k-lh','letra-l':'k-u','letra-r':'k-r','letra-g':'k-g','letra-j':'k-g'};
   document.querySelectorAll('section[id^="letra-"]').forEach(function(sec){
     sec.querySelectorAll('mark.ch').forEach(function(m){ m.className=map[sec.id]||'k-ch'; });
     sec.querySelectorAll('table td i').forEach(function(i){
