@@ -139,6 +139,16 @@ mark.k-g{color:var(--c-g);font-weight:700;background:none;padding:0}
 .topbar.stuck nav.letters{margin:10px 0 0}
 .topbar nav.letters{margin-bottom:0}
 .bigsec,.rulenav{scroll-margin-top:calc(var(--topbar-h,120px) + 12px)}
+
+:root{--c-s:#b3261e;--c-s-bg:#fddad6}
+@media (prefers-color-scheme: dark){:root{--c-s:#ff8f85;--c-s-bg:#4d1c19}}
+mark.k-s{color:var(--c-s);font-weight:700;background:none;padding:0}
+#letra-c mark.k-s,.colorkey mark.k-s{background:var(--c-s-bg);padding:0 3px;border-radius:4px;box-shadow:inset 0 -2px 0 currentColor}
+
+:root{--c-x:#3f6212;--c-x-bg:#e4f5b8}
+@media (prefers-color-scheme: dark){:root{--c-x:#c4ee6b;--c-x-bg:#3a4a0e}}
+mark.k-x{color:var(--c-x);font-weight:700;background:none;padding:0}
+#letra-x mark.k-x,.colorkey mark.k-x{background:var(--c-x-bg);padding:0 3px;border-radius:4px;box-shadow:inset 0 -2px 0 currentColor}
 </style>
 <script>document.documentElement.className="js";</script>
 </head>
@@ -152,12 +162,14 @@ mark.k-g{color:var(--c-g);font-weight:700;background:none;padding:0}
 </header>
 
 <nav class="letters" aria-label="Letras">
+  <a href="#letra-c">Ç</a>
   <a href="#letra-d">D</a>
   <a href="#letra-g">G</a>
   <a href="#letra-j">J</a>
   <a href="#letra-l">L</a>
   <a href="#letra-r">R</a>
   <a href="#letra-t">T</a>
+  <a href="#letra-x">X</a>
   <a href="#letra-nh">NH</a>
   <a href="#letra-lh">LH</a>
 </nav>
@@ -172,6 +184,8 @@ mark.k-g{color:var(--c-g);font-weight:700;background:none;padding:0}
   <mark class="k-u">l final → “u”</mark>
   <mark class="k-r">r inicial / rr → “h”</mark>
   <mark class="k-g">g(e, i) / j → “zh”</mark>
+  <mark class="k-s">ç → “s”</mark>
+  <mark class="k-x">x → “sh / ks / z / s”</mark>
 </div>
 
 <div id="voiceStatus"></div>
@@ -1841,6 +1855,455 @@ mark.k-g{color:var(--c-g);font-weight:700;background:none;padding:0}
 
 </section>
 
+<!-- ===================== Ç ===================== -->
+<section id="letra-c">
+
+<h2>Ç <small style="font-weight:400;color:var(--muted)">· “cê cedilha”, suena “s”</small></h2>
+<div class="legend">
+  <span><mark class="ch">ç</mark> = suena <b>“s”</b> fuerte, como la <i>s</i> de <i>sol</i></span>
+</div>
+
+<div class="subnav"><a href="#r-c-resumen">Resumen</a><a href="#r-c-reglas">Reglas</a><a href="#r-c-compara">Compara</a><a href="#r-c-errores">Errores y variantes</a></div>
+
+<h3 class="bigsec" id="r-c-resumen">Resumen</h3>
+<div class="card">
+  <div class="tablewrap">
+  <table>
+    <tr><th>Se escribe</th><th>Suena</th><th>Ejemplo</th></tr>
+    <tr><td><b>ça</b></td><td><mark class="ch">s</mark> (“sa”)</td><td>caça → <i>ká-§a</i></td></tr>
+    <tr><td><b>ço</b></td><td><mark class="ch">s</mark> (“su”)</td><td>almoço → <i>au-mô-§u</i></td></tr>
+    <tr><td><b>çu</b></td><td><mark class="ch">s</mark> (“su”)</td><td>açúcar → <i>a-§ú-kar</i></td></tr>
+    <tr><td><b>-ção</b> al final</td><td><mark class="ch">s</mark> + <i>ão</i> nasal</td><td>ação → <i>a-§ãu</i></td></tr>
+    <tr><td><b>-ções</b> (plural)</td><td><mark class="ch">s</mark> + <i>ões</i> nasal</td><td>ações → <i>a-§õis</i></td></tr>
+    <tr><td>c + <b>a, o, u</b> (sin cedilla)</td><td>k (no cambia)</td><td>cada → <i>ká-da</i></td></tr>
+    <tr><td>c + <b>e, i</b></td><td>s (no cambia)</td><td>cinco → <i>sín-ku</i></td></tr>
+  </table>
+  </div>
+  <p class="note">💡 Truco: la <b>ç</b> (c con cedilla) <b>suena “s”</b>, como la <i>z</i> de <i>zapato</i> en el español de Latinoamérica. Se usa solo antes de <b>a, o, u</b>, para que la <i>c</i> suene “s” en lugar de “k”.</p>
+</div>
+
+<h3 class="bigsec" id="r-c-reglas">Las reglas</h3>
+<div class="card rule">
+  <span class="tag">Regla 1</span>
+  <h3>ç = “s”</h3>
+  <p>La <b>ç</b> siempre suena <b>“s”</b> fuerte. <i>Almoço</i> → <b>“au-mô-su”</b>, <i>cabeça</i> → <b>“ka-bê-sa”</b>. No suena “k” ni “ch”: es una “s” normal.</p>
+  <div class="chips">
+    <button class="chip" data-say="ação"><b>ação</b><small>a-§ãu · acción</small></button>
+    <button class="chip" data-say="coração"><b>coração</b><small>ko-ra-§ãu · corazón</small></button>
+    <button class="chip" data-say="cabeça"><b>cabeça</b><small>ka-bê-§a · cabeza</small></button>
+    <button class="chip" data-say="moça"><b>moça</b><small>mô-§a · joven (f.)</small></button>
+    <button class="chip" data-say="almoço"><b>almoço</b><small>au-mô-§u · almuerzo</small></button>
+    <button class="chip" data-say="praça"><b>praça</b><small>prá-§a · plaza</small></button>
+    <button class="chip" data-say="abraço"><b>abraço</b><small>a-brá-§u · abrazo</small></button>
+    <button class="chip" data-say="preço"><b>preço</b><small>prê-§u · precio</small></button>
+    <button class="chip" data-say="começar"><b>começar</b><small>ko-me-§ár · empezar</small></button>
+    <button class="chip" data-say="força"><b>força</b><small>fôr-§a · fuerza</small></button>
+    <button class="chip" data-say="açúcar"><b>açúcar</b><small>a-§ú-kar · azúcar</small></button>
+    <button class="chip" data-say="criança"><b>criança</b><small>kri-ãn-§a · niño</small></button>
+    <button class="chip" data-say="esperança"><b>esperança</b><small>es-pe-rãn-§a · esperanza</small></button>
+    <button class="chip" data-say="dança"><b>dança</b><small>dãn-§a · baile</small></button>
+    <button class="chip" data-say="calça"><b>calça</b><small>káu-§a · pantalón</small></button>
+    <button class="chip" data-say="terça"><b>terça</b><small>tér-§a · martes</small></button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Eu almoço às duas horas.</p>
+    <p class="es">Almuerzo a las dos.</p>
+    <p class="say">Suena: <b>au-mô-§u</b> · <b>dú-as</b></p>
+    <button class="btn" data-say="Eu almoço às duas horas.">▶ Normal</button><button class="btn" data-say="Eu almoço às duas horas." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Essa moça dança muito bem.</p>
+    <p class="es">Esa joven baila muy bien.</p>
+    <p class="say">Suena: <b>mô-§a</b> · <b>dãn-§a</b></p>
+    <button class="btn" data-say="Essa moça dança muito bem.">▶ Normal</button><button class="btn" data-say="Essa moça dança muito bem." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">O preço da calça é alto.</p>
+    <p class="es">El precio del pantalón es alto.</p>
+    <p class="say">Suena: <b>prê-§u</b> · <b>káu-§a</b> · <b>áu-tu</b></p>
+    <button class="btn" data-say="O preço da calça é alto.">▶ Normal</button><button class="btn" data-say="O preço da calça é alto." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Preciso de um abraço.</p>
+    <p class="es">Necesito un abrazo.</p>
+    <p class="say">Suena: <b>a-brá-§u</b></p>
+    <button class="btn" data-say="Preciso de um abraço.">▶ Normal</button><button class="btn" data-say="Preciso de um abraço." data-slow="1">🐢 Lento</button>
+  </div>
+</div>
+<div class="card rule">
+  <span class="tag">Regla 2</span>
+  <h3>ç solo antes de a, o, u</h3>
+  <p>La <b>ç</b> solo se escribe antes de <b>a, o, u</b>, nunca al inicio de palabra ni antes de <b>e / i</b>. Antes de e / i la <b>c</b> ya suena “s” sin ayuda (<i>cedo</i>, <i>cidade</i>). Entonces: <b>ce, ci → s</b> · <b>ça, ço, çu → s</b> · <b>ca, co, cu → k</b>.</p>
+  <div class="chips">
+    <button class="chip" data-say="cedo"><b>cedo</b><small>sê-du · temprano</small></button>
+    <button class="chip" data-say="cinco"><b>cinco</b><small>sín-ku · cinco</small></button>
+    <button class="chip" data-say="centro"><b>centro</b><small>sên-tru · centro</small></button>
+    <button class="chip" data-say="cidade"><b>cidade</b><small>si-dá-dyi · ciudad</small></button>
+    <button class="chip" data-say="aço"><b>aço</b><small>á-§u · acero</small></button>
+    <button class="chip" data-say="açúcar"><b>açúcar</b><small>a-§ú-kar · azúcar</small></button>
+    <button class="chip" data-say="cada"><b>cada</b><small>ká-da · cada</small></button>
+    <button class="chip" data-say="como"><b>como</b><small>kô-mu · como</small></button>
+    <button class="chip" data-say="cama"><b>cama</b><small>ká-ma · cama</small></button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Cinco moças dançam na praça.</p>
+    <p class="es">Cinco jóvenes bailan en la plaza.</p>
+    <p class="say">Suena: <b>sín-ku</b> · <b>mô-§as</b> · <b>dãn-§ãu</b> · <b>prá-§a</b></p>
+    <button class="btn" data-say="Cinco moças dançam na praça.">▶ Normal</button><button class="btn" data-say="Cinco moças dançam na praça." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Eu quero açúcar no café.</p>
+    <p class="es">Quiero azúcar en el café.</p>
+    <p class="say">Suena: <b>a-§ú-kar</b> · <b>ka-fé</b></p>
+    <button class="btn" data-say="Eu quero açúcar no café.">▶ Normal</button><button class="btn" data-say="Eu quero açúcar no café." data-slow="1">🐢 Lento</button>
+  </div>
+</div>
+<div class="card rule">
+  <span class="tag">Regla 3</span>
+  <h3>-ção / -ções al final → “sãu” / “sõis”</h3>
+  <p>Las palabras terminadas en <b>-ção</b> son muy frecuentes y suenan <b>“sãu”</b> (la <i>ão</i> nasal, que ya viste). Equivalen a <b>-ción</b> en español: <i>nação</i> = nación, <i>canção</i> = canción. El plural es <b>-ções</b>, que suena <b>“sõis”</b>. El acento va en la última sílaba.</p>
+  <div class="chips">
+    <button class="chip" data-say="nação"><b>nação</b><small>na-§ãu · nación</small></button>
+    <button class="chip" data-say="canção"><b>canção</b><small>kan-§ãu · canción</small></button>
+    <button class="chip" data-say="lição"><b>lição</b><small>li-§ãu · lección</small></button>
+    <button class="chip" data-say="educação"><b>educação</b><small>e-du-ka-§ãu · educación</small></button>
+    <button class="chip" data-say="informação"><b>informação</b><small>in-for-ma-§ãu · información</small></button>
+    <button class="chip" data-say="situação"><b>situação</b><small>si-tua-§ãu · situación</small></button>
+    <button class="chip" data-say="solução"><b>solução</b><small>so-lu-§ãu · solución</small></button>
+    <button class="chip" data-say="ações"><b>ações</b><small>a-§õis · acciones</small></button>
+    <button class="chip" data-say="lições"><b>lições</b><small>li-§õis · lecciones</small></button>
+    <button class="chip" data-say="canções"><b>canções</b><small>kan-§õis · canciones</small></button>
+    <button class="chip" data-say="soluções"><b>soluções</b><small>so-lu-§õis · soluciones</small></button>
+    <button class="chip" data-say="informações"><b>informações</b><small>in-for-ma-§õis · informaciones</small></button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">A educação é importante.</p>
+    <p class="es">La educación es importante.</p>
+    <p class="say">Suena: <b>e-du-ka-§ãu</b> · <b>im-por-tán-chi</b></p>
+    <button class="btn" data-say="A educação é importante.">▶ Normal</button><button class="btn" data-say="A educação é importante." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Eu gosto dessa canção.</p>
+    <p class="es">Me gusta esa canción.</p>
+    <p class="say">Suena: <b>kan-§ãu</b></p>
+    <button class="btn" data-say="Eu gosto dessa canção.">▶ Normal</button><button class="btn" data-say="Eu gosto dessa canção." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Temos muitas soluções.</p>
+    <p class="es">Tenemos muchas soluciones.</p>
+    <p class="say">Suena: <b>so-lu-§õis</b></p>
+    <button class="btn" data-say="Temos muitas soluções.">▶ Normal</button><button class="btn" data-say="Temos muitas soluções." data-slow="1">🐢 Lento</button>
+  </div>
+</div>
+<div class="card rule">
+  <span class="tag">Regla 4</span>
+  <h3>ç, ss y s: ¿cuándo suena “s” y cuándo “z”?</h3>
+  <p>La <b>ç</b> y la <b>ss</b> suenan igual: <b>“s”</b> fuerte. Pero una <b>s</b> sola entre vocales suena <b>“z”</b>: <i>casa</i> → <b>“ká-za”</b>, mientras que <i>caça</i> → <b>“ká-sa”</b>. Por eso existe la ç (o la ss): para mantener el sonido “s” entre vocales.</p>
+  <div class="chips">
+    <button class="chip" data-say="caça"><b>caça</b><small>ká-§a · caza</small></button>
+    <button class="chip" data-say="casa"><b>casa</b><small>ká-za · casa</small></button>
+    <button class="chip" data-say="braço"><b>braço</b><small>brá-§u · brazo</small></button>
+    <button class="chip" data-say="brasa"><b>brasa</b><small>brá-za · brasa</small></button>
+    <button class="chip" data-say="rosa"><b>rosa</b><small>hó-za · rosa</small></button>
+    <button class="chip" data-say="passo"><b>passo</b><small>pá-su · paso</small></button>
+    <button class="chip" data-say="posso"><b>posso</b><small>pô-su · puedo</small></button>
+    <button class="chip" data-say="esse"><b>esse</b><small>ê-si · ese</small></button>
+    <button class="chip" data-say="assim"><b>assim</b><small>a-sín · así</small></button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">A caça e a casa são diferentes.</p>
+    <p class="es">La caza y la casa son diferentes.</p>
+    <p class="say">Suena: <b>ká-§a</b> · <b>ká-za</b> · <b>dyi-fe-rén-chis</b></p>
+    <button class="btn" data-say="A caça e a casa são diferentes.">▶ Normal</button><button class="btn" data-say="A caça e a casa são diferentes." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Eu passo na praça.</p>
+    <p class="es">Paso por la plaza.</p>
+    <p class="say">Suena: <b>pá-su</b> · <b>prá-§a</b></p>
+    <button class="btn" data-say="Eu passo na praça.">▶ Normal</button><button class="btn" data-say="Eu passo na praça." data-slow="1">🐢 Lento</button>
+  </div>
+</div>
+
+<h3 class="bigsec" id="r-c-compara">🎧 Compara</h3>
+<div class="card">
+  <p>Escucha cada par seguido. En el primero la <b>s</b> suena “z” (o la <b>c</b> suena “k”); en el segundo la <b>ç</b> suena “s”. <b>Cambia el significado de la palabra.</b></p>
+  <div class="pairs">
+    <div class="pair">
+      <div class="row"><span>casa</span><button class="btn" data-say="casa">🔊</button></div>
+      <div class="arrow">vs</div>
+      <div class="row"><span>caça</span><button class="btn" data-say="caça">🔊</button></div>
+    </div>
+    <div class="pair">
+      <div class="row"><span>brasa</span><button class="btn" data-say="brasa">🔊</button></div>
+      <div class="arrow">vs</div>
+      <div class="row"><span>braço</span><button class="btn" data-say="braço">🔊</button></div>
+    </div>
+    <div class="pair">
+      <div class="row"><span>caso</span><button class="btn" data-say="caso">🔊</button></div>
+      <div class="arrow">vs</div>
+      <div class="row"><span>caço</span><button class="btn" data-say="caço">🔊</button></div>
+    </div>
+    <div class="pair">
+      <div class="row"><span>coca</span><button class="btn" data-say="coca">🔊</button></div>
+      <div class="arrow">vs</div>
+      <div class="row"><span>coça</span><button class="btn" data-say="coça">🔊</button></div>
+    </div>
+  </div>
+  <p class="note">casa (casa) / caça (caza) · brasa (brasa) / braço (brazo) · caso (caso) / caço (yo cazo) · coca (coca) / coça (se rasca).</p>
+</div>
+
+<h3 class="bigsec" id="r-c-errores">Errores y variantes</h3>
+<div class="card">
+  <h3>⚠️ Errores comunes de hispanohablantes</h3>
+  <ul>
+    <li>Leer la <i>ç</i> como “k” (“ka-ção”). La cedilla existe justamente para que suene <b>“s”</b>.</li>
+    <li>Pronunciarla como la <i>z</i> de España (“th”) o como “ch”. Es una “s” normal.</li>
+    <li>Confundir <i>caça</i> (“ká-sa”) con <i>casa</i> (“ká-za”): la <i>s</i> sola entre vocales suena “z”.</li>
+    <li>Decir <i>-ção</i> como el español “-ción”. Suena <b>“sãu”</b>, con la <i>ão</i> nasal y sin “i”.</li>
+  </ul>
+  <h3 style="margin-top:14px">📍 Excepciones y variantes</h3>
+  <ul>
+    <li>No hay variantes importantes: la <i>ç</i> es “s” en Brasil y en Portugal.</li>
+    <li>La <i>ç</i> nunca va al inicio de una palabra ni antes de <i>e / i</i>.</li>
+  </ul>
+</div>
+
+</section>
+
+<!-- ===================== X ===================== -->
+<section id="letra-x">
+
+<h2>X <small style="font-weight:400;color:var(--muted)">· cuatro sonidos: “sh”, “ks”, “z”, “s”</small></h2>
+<div class="legend">
+  <span><mark class="ch">x</mark> = <b>“sh”</b>, <b>“ks”</b>, <b>“z”</b> o <b>“s”</b>, según la palabra</span>
+</div>
+
+<div class="subnav"><a href="#r-x-resumen">Resumen</a><a href="#r-x-reglas">Reglas</a><a href="#r-x-compara">Compara</a><a href="#r-x-errores">Errores y variantes</a></div>
+
+<h3 class="bigsec" id="r-x-resumen">Resumen</h3>
+<div class="card">
+  <div class="tablewrap">
+  <table>
+    <tr><th>Dónde está la X</th><th>Suena</th><th>Ejemplo</th></tr>
+    <tr><td><b>Al inicio</b> de palabra</td><td><mark class="ch">sh</mark></td><td>xícara → <i>{sh}í-ka-ra</i></td></tr>
+    <tr><td>Después de <b>ei, ai, ou, en</b></td><td><mark class="ch">sh</mark></td><td>peixe → <i>pêi-{sh}i</i></td></tr>
+    <tr><td><b>Entre vocales</b> (palabras cultas)</td><td><mark class="ch">ks</mark></td><td>táxi → <i>tá-{ks}i</i></td></tr>
+    <tr><td><b>ex + vocal</b></td><td><mark class="ch">z</mark></td><td>exame → <i>e-{z}á-mi</i></td></tr>
+    <tr><td><b>ex + consonante</b></td><td><mark class="ch">s</mark></td><td>texto → <i>tê{s}-tu</i></td></tr>
+    <tr><td>Otras palabras (<i>próximo, máximo</i>)</td><td><mark class="ch">s</mark></td><td>máximo → <i>má-{s}i-mu</i></td></tr>
+  </table>
+  </div>
+  <p class="note">💡 Truco: la <b>x</b> no tiene un sonido fijo, depende de la palabra. Para empezar, usa estas pistas en orden: <b>x al inicio → “sh”</b> (como el “shhh” para pedir silencio) · <b>ex + vocal → “z”</b> · <b>ex + consonante → “s”</b>. Las demás hay que memorizarlas.</p>
+</div>
+
+<h3 class="bigsec" id="r-x-reglas">Las reglas</h3>
+<div class="card rule">
+  <span class="tag">Regla 1</span>
+  <h3>x = “sh”: al inicio y tras ei, ai, ou, en</h3>
+  <p>La <b>x</b> suena <b>“sh”</b> (como el “shhh” para pedir silencio) cuando está <b>al inicio de la palabra</b> (<i>xícara</i>), <b>después de ei, ai, ou</b> (<i>peixe</i>, <i>caixa</i>) o <b>después de en</b> (<i>enxada</i>). También en otras palabras que se aprenden de memoria, como <i>abacaxi</i> y <i>México</i>.</p>
+  <div class="chips">
+    <button class="chip" data-say="xícara"><b>xícara</b><small>{sh}í-ka-ra · taza</small></button>
+    <button class="chip" data-say="xadrez"><b>xadrez</b><small>{sh}a-drês · ajedrez</small></button>
+    <button class="chip" data-say="xampu"><b>xampu</b><small>{sh}ãm-pu · champú</small></button>
+    <button class="chip" data-say="xarope"><b>xarope</b><small>{sh}a-rô-pi · jarabe</small></button>
+    <button class="chip" data-say="peixe"><b>peixe</b><small>pêi-{sh}i · pescado</small></button>
+    <button class="chip" data-say="caixa"><b>caixa</b><small>kái-{sh}a · caja</small></button>
+    <button class="chip" data-say="baixo"><b>baixo</b><small>bái-{sh}u · bajo</small></button>
+    <button class="chip" data-say="deixar"><b>deixar</b><small>dêi-{sh}ár · dejar</small></button>
+    <button class="chip" data-say="abacaxi"><b>abacaxi</b><small>a-ba-ka-{sh}í · piña</small></button>
+    <button class="chip" data-say="lixo"><b>lixo</b><small>lí-{sh}u · basura</small></button>
+    <button class="chip" data-say="roxo"><b>roxo</b><small>hô-{sh}u · morado</small></button>
+    <button class="chip" data-say="faixa"><b>faixa</b><small>fái-{sh}a · franja</small></button>
+    <button class="chip" data-say="bruxa"><b>bruxa</b><small>brú-{sh}a · bruja</small></button>
+    <button class="chip" data-say="México"><b>México</b><small>mé-{sh}i-ku · México</small></button>
+    <button class="chip" data-say="mexer"><b>mexer</b><small>me-{sh}ér · mover</small></button>
+    <button class="chip" data-say="enxugar"><b>enxugar</b><small>ên-{sh}u-gár · secar</small></button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Eu quero uma xícara de café.</p>
+    <p class="es">Quiero una taza de café.</p>
+    <p class="say">Suena: <b>{sh}í-ka-ra</b> · <b>ka-fé</b></p>
+    <button class="btn" data-say="Eu quero uma xícara de café.">▶ Normal</button><button class="btn" data-say="Eu quero uma xícara de café." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">O peixe está na caixa.</p>
+    <p class="es">El pescado está en la caja.</p>
+    <p class="say">Suena: <b>pêi-{sh}i</b> · <b>kái-{sh}a</b></p>
+    <button class="btn" data-say="O peixe está na caixa.">▶ Normal</button><button class="btn" data-say="O peixe está na caixa." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Ela joga xadrez muito bem.</p>
+    <p class="es">Ella juega ajedrez muy bien.</p>
+    <p class="say">Suena: <b>{sh}a-drês</b></p>
+    <button class="btn" data-say="Ela joga xadrez muito bem.">▶ Normal</button><button class="btn" data-say="Ela joga xadrez muito bem." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Eu moro no México.</p>
+    <p class="es">Vivo en México.</p>
+    <p class="say">Suena: <b>mé-{sh}i-ku</b></p>
+    <button class="btn" data-say="Eu moro no México.">▶ Normal</button><button class="btn" data-say="Eu moro no México." data-slow="1">🐢 Lento</button>
+  </div>
+</div>
+<div class="card rule">
+  <span class="tag">Regla 2</span>
+  <h3>x entre vocales → “ks”</h3>
+  <p>En muchas palabras de origen culto, la <b>x</b> entre vocales suena <b>“ks”</b>, como en español: <i>táxi</i> → <b>“tá-ksi”</b>, <i>sexo</i> → <b>“sé-ksu”</b>. No hay una regla para saber cuáles son, hay que aprenderlas.</p>
+  <div class="chips">
+    <button class="chip" data-say="táxi"><b>táxi</b><small>tá-{ks}i · taxi</small></button>
+    <button class="chip" data-say="sexo"><b>sexo</b><small>sé-{ks}u · sexo</small></button>
+    <button class="chip" data-say="fixo"><b>fixo</b><small>fí-{ks}u · fijo</small></button>
+    <button class="chip" data-say="boxe"><b>boxe</b><small>bó-{ks}i · boxeo</small></button>
+    <button class="chip" data-say="reflexo"><b>reflexo</b><small>he-flé-{ks}u · reflejo</small></button>
+    <button class="chip" data-say="complexo"><b>complexo</b><small>kõm-plé-{ks}u · complejo</small></button>
+    <button class="chip" data-say="tórax"><b>tórax</b><small>tô-ra{ks} · tórax</small></button>
+    <button class="chip" data-say="tóxico"><b>tóxico</b><small>tó-{ks}i-ku · tóxico</small></button>
+    <button class="chip" data-say="oxigênio"><b>oxigênio</b><small>o-{ks}i-zhê-nyu · oxígeno</small></button>
+    <button class="chip" data-say="anexo"><b>anexo</b><small>a-né-{ks}u · anexo</small></button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Eu pego um táxi.</p>
+    <p class="es">Tomo un taxi.</p>
+    <p class="say">Suena: <b>tá-{ks}i</b></p>
+    <button class="btn" data-say="Eu pego um táxi.">▶ Normal</button><button class="btn" data-say="Eu pego um táxi." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">O problema é complexo.</p>
+    <p class="es">El problema es complejo.</p>
+    <p class="say">Suena: <b>kõm-plé-{ks}u</b></p>
+    <button class="btn" data-say="O problema é complexo.">▶ Normal</button><button class="btn" data-say="O problema é complexo." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">O corpo precisa de oxigênio.</p>
+    <p class="es">El cuerpo necesita oxígeno.</p>
+    <p class="say">Suena: <b>o-{ks}i-zhê-nyu</b></p>
+    <button class="btn" data-say="O corpo precisa de oxigênio.">▶ Normal</button><button class="btn" data-say="O corpo precisa de oxigênio." data-slow="1">🐢 Lento</button>
+  </div>
+</div>
+<div class="card rule">
+  <span class="tag">Regla 3</span>
+  <h3>ex + vocal → “z”</h3>
+  <p>Cuando una palabra empieza con <b>ex-</b> y después viene una <b>vocal</b>, la <b>x</b> suena <b>“z”</b>: <i>exame</i> → <b>“e-zá-mi”</b>, <i>exemplo</i> → <b>“e-zên-plu”</b>. No se dice “ek-sa-men”.</p>
+  <div class="chips">
+    <button class="chip" data-say="exame"><b>exame</b><small>e-{z}á-mi · examen</small></button>
+    <button class="chip" data-say="exato"><b>exato</b><small>e-{z}á-tu · exacto</small></button>
+    <button class="chip" data-say="exemplo"><b>exemplo</b><small>e-{z}ên-plu · ejemplo</small></button>
+    <button class="chip" data-say="existir"><b>existir</b><small>e-{z}is-chír · existir</small></button>
+    <button class="chip" data-say="exagerar"><b>exagerar</b><small>e-{z}a-zhe-rár · exagerar</small></button>
+    <button class="chip" data-say="executivo"><b>executivo</b><small>e-{z}e-ku-chí-vu · ejecutivo</small></button>
+    <button class="chip" data-say="êxito"><b>êxito</b><small>ê-{z}i-tu · éxito</small></button>
+    <button class="chip" data-say="exército"><b>exército</b><small>e-{z}ér-si-tu · ejército</small></button>
+    <button class="chip" data-say="exausto"><b>exausto</b><small>e-{z}aus-tu · exhausto</small></button>
+    <button class="chip" data-say="exibir"><b>exibir</b><small>e-{z}i-bír · exhibir</small></button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Eu tenho um exame amanhã.</p>
+    <p class="es">Tengo un examen mañana.</p>
+    <p class="say">Suena: <b>e-{z}á-mi</b></p>
+    <button class="btn" data-say="Eu tenho um exame amanhã.">▶ Normal</button><button class="btn" data-say="Eu tenho um exame amanhã." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Qual é um bom exemplo?</p>
+    <p class="es">¿Cuál es un buen ejemplo?</p>
+    <p class="say">Suena: <b>e-{z}ên-plu</b></p>
+    <button class="btn" data-say="Qual é um bom exemplo?">▶ Normal</button><button class="btn" data-say="Qual é um bom exemplo?" data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Esse restaurante existe há anos.</p>
+    <p class="es">Ese restaurante existe desde hace años.</p>
+    <p class="say">Suena: <b>hes-tau-rán-chi</b> · <b>e-{z}ís-chi</b></p>
+    <button class="btn" data-say="Esse restaurante existe há anos.">▶ Normal</button><button class="btn" data-say="Esse restaurante existe há anos." data-slow="1">🐢 Lento</button>
+  </div>
+</div>
+<div class="card rule">
+  <span class="tag">Regla 4</span>
+  <h3>ex + consonante (y otras) → “s”</h3>
+  <p>Cuando <b>ex-</b> va seguido de una <b>consonante</b>, la <b>x</b> suena <b>“s”</b>: <i>texto</i> → <b>“têstu”</b>, <i>experiência</i> → <b>“es-pe-ri-ên-sia”</b>. También en <i>xc</i> (<i>excelente</i>) y en algunas palabras sueltas: <i>próximo</i>, <i>máximo</i>, <i>auxílio</i>.</p>
+  <div class="chips">
+    <button class="chip" data-say="texto"><b>texto</b><small>tê{s}-tu · texto</small></button>
+    <button class="chip" data-say="extra"><b>extra</b><small>ê{s}-tra · extra</small></button>
+    <button class="chip" data-say="experiência"><b>experiência</b><small>e{s}-pe-ri-ên-sia · experiencia</small></button>
+    <button class="chip" data-say="expressão"><b>expressão</b><small>e{s}-pre-§ãu · expresión</small></button>
+    <button class="chip" data-say="explicar"><b>explicar</b><small>e{s}-pli-kár · explicar</small></button>
+    <button class="chip" data-say="exterior"><b>exterior</b><small>e{s}-te-ri-ór · exterior</small></button>
+    <button class="chip" data-say="exportar"><b>exportar</b><small>e{s}-por-tár · exportar</small></button>
+    <button class="chip" data-say="excelente"><b>excelente</b><small>e-{s}e-lên-chi · excelente</small></button>
+    <button class="chip" data-say="exceção"><b>exceção</b><small>e-{s}e-§ãu · excepción</small></button>
+    <button class="chip" data-say="próximo"><b>próximo</b><small>prô-{s}i-mu · próximo</small></button>
+    <button class="chip" data-say="máximo"><b>máximo</b><small>má-{s}i-mu · máximo</small></button>
+    <button class="chip" data-say="auxílio"><b>auxílio</b><small>au-{s}í-lyu · auxilio</small></button>
+    <button class="chip" data-say="trouxe"><b>trouxe</b><small>trô-{s}i · traje (de traer)</small></button>
+    <button class="chip" data-say="sintaxe"><b>sintaxe</b><small>sin-tá-{s}i · sintaxis</small></button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Leia o texto com atenção.</p>
+    <p class="es">Lee el texto con atención.</p>
+    <p class="say">Suena: <b>tê{s}-tu</b> · <b>a-tên-§ãu</b></p>
+    <button class="btn" data-say="Leia o texto com atenção.">▶ Normal</button><button class="btn" data-say="Leia o texto com atenção." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Tenho muita experiência.</p>
+    <p class="es">Tengo mucha experiencia.</p>
+    <p class="say">Suena: <b>e{s}-pe-ri-ên-sia</b></p>
+    <button class="btn" data-say="Tenho muita experiência.">▶ Normal</button><button class="btn" data-say="Tenho muita experiência." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">O próximo ônibus chega às três.</p>
+    <p class="es">El próximo bus llega a las tres.</p>
+    <p class="say">Suena: <b>prô-{s}i-mu</b> · <b>ô-ni-bus</b> · <b>trêis</b></p>
+    <button class="btn" data-say="O próximo ônibus chega às três.">▶ Normal</button><button class="btn" data-say="O próximo ônibus chega às três." data-slow="1">🐢 Lento</button>
+  </div>
+</div>
+
+<h3 class="bigsec" id="r-x-compara">🎧 Compara</h3>
+<div class="card">
+  <p>Escucha cada par seguido. La misma letra <b>x</b> suena distinto según la palabra.</p>
+  <div class="pairs">
+    <div class="pair">
+      <div class="row"><span>taxa</span><button class="btn" data-say="taxa">🔊</button></div>
+      <div class="arrow">vs</div>
+      <div class="row"><span>táxi</span><button class="btn" data-say="táxi">🔊</button></div>
+    </div>
+    <div class="pair">
+      <div class="row"><span>faixa</span><button class="btn" data-say="faixa">🔊</button></div>
+      <div class="arrow">vs</div>
+      <div class="row"><span>fixo</span><button class="btn" data-say="fixo">🔊</button></div>
+    </div>
+    <div class="pair">
+      <div class="row"><span>exame</span><button class="btn" data-say="exame">🔊</button></div>
+      <div class="arrow">vs</div>
+      <div class="row"><span>texto</span><button class="btn" data-say="texto">🔊</button></div>
+    </div>
+    <div class="pair">
+      <div class="row"><span>exato</span><button class="btn" data-say="exato">🔊</button></div>
+      <div class="arrow">vs</div>
+      <div class="row"><span>extra</span><button class="btn" data-say="extra">🔊</button></div>
+    </div>
+    <div class="pair">
+      <div class="row"><span>máximo</span><button class="btn" data-say="máximo">🔊</button></div>
+      <div class="arrow">vs</div>
+      <div class="row"><span>xampu</span><button class="btn" data-say="xampu">🔊</button></div>
+    </div>
+  </div>
+  <p class="note">taxa (“tá-sha”, tasa) / táxi (“tá-ksi”, taxi) · faixa (“fái-sha”, franja) / fixo (“fí-ksu”, fijo) · exame (“e-zá-mi”) / texto (“têstu”) · exato (“e-zá-tu”) / extra (“êstra”) · máximo (“má-simu”) / xampu (“shãm-pu”).</p>
+</div>
+
+<h3 class="bigsec" id="r-x-errores">Errores y variantes</h3>
+<div class="card">
+  <h3>⚠️ Errores comunes de hispanohablantes</h3>
+  <ul>
+    <li>Leer la <i>x</i> siempre como “ks” (“ek-sá-men”, “peik-si”). Cada palabra tiene su sonido: <i>exame</i> es <b>“e-zá-mi”</b> y <i>peixe</i> es <b>“pêi-shi”</b>.</li>
+    <li>Leer la <i>x</i> como “j” (como en <i>México</i> en español). En portugués es <b>“mé-shi-ku”</b>.</li>
+    <li>Decir <i>ex + consonante</i> con “eks”: <i>texto</i> es <b>“têstu”</b>, <i>experiência</i> es <b>“es-pe-ri-ên-sia”</b>.</li>
+  </ul>
+  <h3 style="margin-top:14px">📍 Excepciones y variantes</h3>
+  <ul>
+    <li>La <i>x</i> no sigue una regla totalmente fija: fuera de las pistas de arriba, hay que aprender cada palabra.</li>
+    <li>En <b>Portugal</b>, la <i>x</i> antes de consonante o al final suele sonar “sh” (<i>texto</i> → “têsh-tu”). En Brasil suena “s”.</li>
+  </ul>
+</div>
+
+</section>
+
 <!-- Para añadir otra letra: copia el bloque <section id="letra-t"> completo,
      cámbiale el id (p. ej. letra-d), agrega su enlace en <nav class="letters">
      y reemplaza las reglas y ejemplos. El audio funciona solo con data-say="texto". -->
@@ -1996,7 +2459,7 @@ mark.k-g{color:var(--c-g);font-weight:700;background:none;padding:0}
     var h = decodeURIComponent((location.hash||'').slice(1));
     var el = h ? document.getElementById(h) : null;
     var sec = el ? (el.matches('section[id^="letra-"]') ? el : el.closest('section[id^="letra-"]')) : null;
-    activate(sec ? sec.id : secs[0].id);
+    activate(sec ? sec.id : (links[0] ? links[0].getAttribute('href').slice(1) : secs[0].id));
     if(el && el !== sec){ el.scrollIntoView({behavior:'smooth', block:'start'}); }
     else if(!first){ window.scrollTo({top:0, behavior:'smooth'}); }
     if(window.speechSynthesis) window.speechSynthesis.cancel();
@@ -2028,6 +2491,8 @@ mark.k-g{color:var(--c-g);font-weight:700;background:none;padding:0}
           if(i===0 || 'nls'.indexOf(pv)>-1){ if(i===0 || isV(nx)) out.push([b+i,b+i+1,'k-r']); }
           continue;
         }
+        if(c==='ç'){ out.push([b+i,b+i+1,'k-s']); continue; }
+        if(c==='x'){ out.push([b+i,b+i+1,'k-x']); continue; }
         if(c==='j'){ out.push([b+i,b+i+1,'k-g']); continue; }
         if(c==='g'){
           if(nx==='e'||nx==='i'||nx==='é'||nx==='ê'||nx==='í') out.push([b+i,b+i+1,'k-g']);
@@ -2068,8 +2533,10 @@ mark.k-g{color:var(--c-g);font-weight:700;background:none;padding:0}
 
   // Resalta en la pronunciación escrita los sonidos que cambian
   function respell(str,useU){
-    return esc(str).replace(/ch|dy|ly|zh|ñ|h|([aeiouáéíóúâêôãõ])u(?![a-zñáéíóúâêôãõ])/gi,function(m,v){
+    return esc(str).replace(/\{[^}]*\}|ch|dy|ly|zh|ñ|h|§|([aeiouáéíóúâêôãõ])u(?![a-zñáéíóúâêôãõ])/gi,function(m,v){
       if(v){ return useU ? v+'<mark class="k-u">u</mark>' : m; }
+      if(m==='§') return '<mark class="k-s">s</mark>';
+      if(m.charAt(0)==='{') return '<mark class="k-x">'+m.slice(1,-1)+'</mark>';
       var c={ch:'k-ch',dy:'k-dy',ly:'k-lh','ñ':'k-nh',h:'k-r',zh:'k-g'}[m.toLowerCase()];
       return '<mark class="'+c+'">'+m+'</mark>';
     });
@@ -2092,7 +2559,7 @@ mark.k-g{color:var(--c-g);font-weight:700;background:none;padding:0}
   });
 
   // Tablas y leyendas: cada pestaña usa el color de su propio sonido
-  var map={'letra-t':'k-ch','letra-d':'k-dy','letra-nh':'k-nh','letra-lh':'k-lh','letra-l':'k-u','letra-r':'k-r','letra-g':'k-g','letra-j':'k-g'};
+  var map={'letra-t':'k-ch','letra-d':'k-dy','letra-nh':'k-nh','letra-lh':'k-lh','letra-l':'k-u','letra-r':'k-r','letra-g':'k-g','letra-j':'k-g','letra-c':'k-s','letra-x':'k-x'};
   document.querySelectorAll('section[id^="letra-"]').forEach(function(sec){
     sec.querySelectorAll('mark.ch').forEach(function(m){ m.className=map[sec.id]||'k-ch'; });
     sec.querySelectorAll('table td i').forEach(function(i){
