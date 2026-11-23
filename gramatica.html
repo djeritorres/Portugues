@@ -1,0 +1,2353 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gramática del portugués</title>
+<style>
+:root{
+  --bg:#f6f4ef; --card:#ffffff; --ink:#1d2433; --muted:#5d6678; --line:#e3dfd6;
+  --accent:#0b7a4b; --accent-soft:#d9f0e4; --warm:#b4471d; --warm-soft:#fbe4d8;
+  --blue:#1f5fbf; --blue-soft:#dde9fb;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#14181f; --card:#1d232d; --ink:#e8ebf1; --muted:#9aa4b5; --line:#2e3644;
+    --accent:#5fd49b; --accent-soft:#1c3a2d; --warm:#ff9a6b; --warm-soft:#3e2418;
+    --blue:#8ab4ff; --blue-soft:#1d2d4a;
+  }
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.wrap{max-width:860px;margin:0 auto;padding:24px 16px 80px}
+header h1{font-size:1.9rem;margin:.2em 0 .1em}
+header p{color:var(--muted);margin:0}
+nav.letters{display:flex;gap:8px;flex-wrap:wrap;margin:20px 0}
+nav.letters a,nav.letters span{padding:6px 16px;border-radius:999px;border:1px solid var(--line);background:var(--card);text-decoration:none;color:var(--ink);font-weight:600}
+nav.letters a.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+nav.letters span{color:var(--muted);font-weight:400;border-style:dashed}
+#voiceStatus{display:none;background:var(--warm-soft);color:var(--warm);border:1px solid var(--warm);padding:10px 14px;border-radius:10px;margin-bottom:16px;font-size:.95rem}
+h2{font-size:1.45rem;margin:2.2em 0 .3em;padding-top:.4em}
+h3{font-size:1.15rem;margin:0 0 .3em}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px;margin:14px 0}
+.legend{display:flex;gap:16px;flex-wrap:wrap;font-size:.92rem;color:var(--muted);margin:10px 0}
+mark{background:none;color:inherit;font-weight:700;border-radius:4px;padding:0 2px}
+mark.ch{background:var(--accent-soft);color:var(--accent)}
+table{width:100%;border-collapse:collapse;font-size:.97rem}
+th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{color:var(--muted);font-weight:600;font-size:.85rem;text-transform:uppercase;letter-spacing:.04em}
+.tablewrap{overflow-x:auto}
+.rule{border-left:5px solid var(--accent)}
+.rule .tag{display:inline-block;font-size:.8rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--accent);margin-bottom:2px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 4px}
+button{font:inherit;cursor:pointer}
+.chip{display:flex;flex-direction:column;align-items:flex-start;padding:7px 12px;border-radius:10px;border:1px solid var(--line);background:var(--bg);color:var(--ink);text-align:left;line-height:1.25}
+.chip b{font-size:1.02rem}
+.chip small{color:var(--muted);font-size:.85rem}
+.chip:hover,.btn:hover{border-color:var(--accent)}
+.chip::after{content:"🔊";font-size:.75rem;margin-top:2px;opacity:.7}
+.ex{border-top:1px dashed var(--line);padding:14px 0 6px}
+.ex:first-of-type{border-top:0}
+.ex .pt{font-size:1.25rem;margin:0}
+.ex .es{color:var(--muted);margin:2px 0 4px}
+.ex .say{font-size:.93rem;margin:0 0 8px}
+.btn{padding:6px 14px;border-radius:999px;border:1px solid var(--line);background:var(--bg);color:var(--ink);margin-right:6px;font-size:.92rem}
+.pairs{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.pair{border:1px solid var(--line);border-radius:12px;padding:12px;background:var(--bg)}
+.pair .row{display:flex;justify-content:space-between;align-items:center;gap:8px;margin:4px 0}
+.pair .arrow{text-align:center;color:var(--muted);font-size:.8rem}
+ul{padding-left:1.2em}
+li{margin:.3em 0}
+.note{font-size:.93rem;color:var(--muted)}
+footer{margin-top:50px;color:var(--muted);font-size:.88rem;border-top:1px solid var(--line);padding-top:14px}
+
+.rulenav{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:14px 0 0;flex-wrap:wrap}
+.rulenav .navbtn{padding:9px 18px;border-radius:999px;border:1px solid var(--accent);background:var(--accent);color:#fff;font-weight:600}
+.rulenav .navbtn[disabled]{opacity:.35;cursor:default}
+.rulenav .pills{display:flex;gap:6px;align-items:center;flex-wrap:wrap;justify-content:center}
+.rulenav .pill{min-width:38px;padding:6px 10px;border-radius:999px;border:1px solid var(--line);background:var(--card);color:var(--ink);font-weight:600}
+.rulenav .pill.on{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.slide{display:none}
+.slide.on{display:block}
+.slidehead{color:var(--muted);font-size:.9rem;margin:10px 0 -6px}
+@media (max-width:520px){.rulenav .navbtn{flex:1}.rulenav .pills{order:-1;width:100%}}
+
+nav.letters a:hover{border-color:var(--accent);color:var(--accent)}
+
+.js section[id^="gram-"]{display:none}
+.js section[id^="gram-"].on{display:block}
+nav.letters{margin:22px 0 6px;border-bottom:2px solid var(--line);padding-bottom:0;gap:6px}
+nav.letters a{padding:12px 28px;font-size:1.1rem;border-radius:12px 12px 0 0;border-bottom:0;margin-bottom:-2px}
+nav.letters a.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+.bigsec{font-size:2.1rem;line-height:1.2;margin:2.4em 0 .5em;padding-bottom:.25em;border-bottom:4px solid var(--accent);scroll-margin-top:12px}
+.subnav{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0 0}
+.subnav a{padding:6px 14px;border-radius:999px;border:1px solid var(--line);background:var(--card);color:var(--ink);text-decoration:none;font-size:.95rem}
+.subnav a:hover{border-color:var(--accent);color:var(--accent)}
+@media (max-width:520px){nav.letters a{padding:10px 18px}.bigsec{font-size:1.7rem}}
+
+/* ===== Colores por sonido ===== */
+:root{
+  --c-ch:#a8420a; --c-ch-bg:#ffe0c7;
+  --c-dy:#6a2cb8; --c-dy-bg:#ead9fc;
+  --c-nh:#066b3f; --c-nh-bg:#cfeedd;
+  --c-lh:#00637d; --c-lh-bg:#c9edf6;
+  --c-u:#b0185f;  --c-u-bg:#fad5e8;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --c-ch:#ffb27a; --c-ch-bg:#4d2b10;
+    --c-dy:#d2aaff; --c-dy-bg:#3b2562;
+    --c-nh:#63dca2; --c-nh-bg:#183d2c;
+    --c-lh:#72d9f0; --c-lh-bg:#0f3d4a;
+    --c-u:#ff93c6;  --c-u-bg:#4d1733;
+  }
+}
+mark.k-ch,mark.k-dy,mark.k-nh,mark.k-lh,mark.k-u{font-weight:700;background:none;padding:0}
+mark.k-ch{color:var(--c-ch)}
+mark.k-dy{color:var(--c-dy)}
+mark.k-nh{color:var(--c-nh)}
+mark.k-lh{color:var(--c-lh)}
+mark.k-u{color:var(--c-u)}
+/* sonido propio de la pestaña: con fondo */
+#letra-t mark.k-ch,.colorkey mark.k-ch{background:var(--c-ch-bg);padding:0 3px;border-radius:4px;box-shadow:inset 0 -2px 0 currentColor}
+#letra-d mark.k-dy,.colorkey mark.k-dy{background:var(--c-dy-bg);padding:0 3px;border-radius:4px;box-shadow:inset 0 -2px 0 currentColor}
+#letra-nh mark.k-nh,.colorkey mark.k-nh{background:var(--c-nh-bg);padding:0 3px;border-radius:4px;box-shadow:inset 0 -2px 0 currentColor}
+#letra-lh mark.k-lh,.colorkey mark.k-lh{background:var(--c-lh-bg);padding:0 3px;border-radius:4px;box-shadow:inset 0 -2px 0 currentColor}
+#letra-l mark.k-u,.colorkey mark.k-u{background:var(--c-u-bg);padding:0 3px;border-radius:4px;box-shadow:inset 0 -2px 0 currentColor}
+.colorkey{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center;font-size:.93rem;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 14px;margin:14px 0 4px}
+.colorkey b{margin-right:2px}
+.chip small mark,.say mark{font-weight:700}
+
+:root{--c-r:#7a5400;--c-r-bg:#ffeea0}
+@media (prefers-color-scheme: dark){:root{--c-r:#ffd666;--c-r-bg:#4a3a05}}
+mark.k-r{color:var(--c-r);font-weight:700;background:none;padding:0}
+#letra-r mark.k-r,.colorkey mark.k-r{background:var(--c-r-bg);padding:0 3px;border-radius:4px;box-shadow:inset 0 -2px 0 currentColor}
+
+:root{--c-g:#1f4fc4;--c-g-bg:#d9e4ff}
+@media (prefers-color-scheme: dark){:root{--c-g:#9db8ff;--c-g-bg:#1b2f5c}}
+mark.k-g{color:var(--c-g);font-weight:700;background:none;padding:0}
+#letra-g mark.k-g,#letra-j mark.k-g,.colorkey mark.k-g{background:var(--c-g-bg);padding:0 3px;border-radius:4px;box-shadow:inset 0 -2px 0 currentColor}
+.callout{background:var(--bg);border:1px dashed var(--accent);border-radius:10px;padding:10px 14px;margin-top:14px;font-size:.95rem}
+.callout p{margin:.4em 0 0}
+
+/* ===== Encabezado fijo ===== */
+.topbar{position:sticky;top:0;z-index:50;background:var(--bg);margin:0 -16px;padding:0 16px;transition:box-shadow .2s}
+.topbar.stuck{box-shadow:0 8px 14px -10px rgba(0,0,0,.55)}
+.topbar header h1{transition:font-size .15s}
+.topbar.stuck header h1{font-size:1.25rem;margin:.25em 0 0}
+.topbar.stuck header p{display:none}
+.topbar.stuck nav.letters{margin:10px 0 0}
+.topbar nav.letters{margin-bottom:0}
+.bigsec,.rulenav{scroll-margin-top:calc(var(--topbar-h,120px) + 12px)}
+
+:root{--c-s:#b3261e;--c-s-bg:#fddad6}
+@media (prefers-color-scheme: dark){:root{--c-s:#ff8f85;--c-s-bg:#4d1c19}}
+mark.k-s{color:var(--c-s);font-weight:700;background:none;padding:0}
+#letra-c mark.k-s,.colorkey mark.k-s{background:var(--c-s-bg);padding:0 3px;border-radius:4px;box-shadow:inset 0 -2px 0 currentColor}
+
+:root{--c-x:#3f6212;--c-x-bg:#e4f5b8}
+@media (prefers-color-scheme: dark){:root{--c-x:#c4ee6b;--c-x-bg:#3a4a0e}}
+mark.k-x{color:var(--c-x);font-weight:700;background:none;padding:0}
+#letra-x mark.k-x,.colorkey mark.k-x{background:var(--c-x-bg);padding:0 3px;border-radius:4px;box-shadow:inset 0 -2px 0 currentColor}
+.homelink{display:inline-block;font-size:.9rem;color:var(--muted);text-decoration:none;margin-top:10px}
+.homelink:hover{color:var(--accent)}
+.topbar.stuck .homelink{display:none}
+
+/* ===== Gramática ===== */
+mark.v{color:var(--accent);font-weight:700;background:none;padding:0}
+.homelink{display:inline-block;font-size:.9rem;color:var(--muted);text-decoration:none;margin-top:10px}
+.homelink:hover{color:var(--accent)}
+.topbar.stuck .homelink{display:none}
+.pair .tr{color:var(--muted);font-size:.85rem;margin:-2px 0 6px}
+.bad{color:var(--warm);text-decoration:line-through;text-decoration-thickness:1px}
+.good{color:var(--accent);font-weight:600}
+.errlist li{margin:.7em 0}
+.tbtn{margin:0}
+.steps{counter-reset:s;list-style:none;padding:0;margin:8px 0}
+.steps li{counter-increment:s;position:relative;padding-left:44px;margin:12px 0}
+.steps li::before{content:counter(s);position:absolute;left:0;top:0;width:30px;height:30px;border-radius:50%;background:var(--accent);color:#fff;font-weight:700;text-align:center;line-height:30px}
+.formtable td:nth-child(2) i{color:var(--muted)}
+h4{font-size:1.05rem;margin:18px 0 4px}
+.quiz{margin-top:18px;border-top:2px solid var(--line);padding-top:6px}
+.quiz .q{border-top:1px dashed var(--line);padding:12px 0}
+.quiz .q:first-of-type{border-top:0}
+.qs{font-size:1.2rem;margin:0 0 8px}
+.blank{display:inline-block;min-width:3.4em;border-bottom:2px solid var(--muted);text-align:center;line-height:1.2}
+.opts{display:flex;gap:8px;flex-wrap:wrap}
+.opt{padding:6px 18px;border-radius:999px;border:1px solid var(--line);background:var(--bg);color:var(--ink);font-weight:600}
+.opt:hover{border-color:var(--accent)}
+.opt.right{background:var(--accent);color:#fff;border-color:var(--accent)}
+.opt.wrong{border-color:var(--warm);color:var(--warm);background:var(--warm-soft);text-decoration:line-through}
+.q.solved .opt:not(.right){opacity:.45}
+.fb{margin:8px 0 0;font-size:.95rem;min-height:1.2em}
+.fb.good{color:var(--accent);font-weight:400}
+.fb.bad{color:var(--warm);text-decoration:none}
+.qsay{display:none;margin-top:6px}
+.q.solved .qsay{display:inline-block}
+.quizbar{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:10px}
+.score{font-weight:600}
+</style>
+<script>document.documentElement.className="js";</script>
+</head>
+<body>
+<div class="wrap">
+
+<div class="topbar">
+<header>
+  <a class="homelink" href="index.html">← Inicio</a>
+  <h1>🇧🇷 Gramática del portugués</h1>
+  <p>Teoría, práctica y ejemplos con audio · Portugués de Brasil</p>
+</header>
+
+<nav class="letters" aria-label="Temas de gramática">
+  <a href="#gram-posesivos">Pronombres posesivos</a>
+  <a href="#gram-contracciones">Contracciones</a>
+  <span>más temas pronto…</span>
+</nav>
+</div>
+
+<div class="colorkey" aria-label="Colores de los sonidos">
+  <b>Colores:</b>
+  <mark class="k-ch">ti / te → “ch”</mark>
+  <mark class="k-dy">di / de → “dy”</mark>
+  <mark class="k-nh">nh → “ñ”</mark>
+  <mark class="k-lh">lh → “ly”</mark>
+  <mark class="k-u">l final → “u”</mark>
+  <mark class="k-r">r inicial / rr → “h”</mark>
+  <mark class="k-g">g(e, i) / j → “zh”</mark>
+  <mark class="k-s">ç → “s”</mark>
+  <mark class="k-x">x → “sh / ks / z / s”</mark>
+</div>
+
+<div id="voiceStatus"></div>
+
+<div class="card" style="padding:12px 16px">
+  <label for="voiceSel"><b>🔊 Voz del audio:</b></label>
+  <select id="voiceSel" style="font:inherit;max-width:100%;padding:4px 6px"></select>
+  <button class="btn" data-say="Meu pai e minha mãe moram aqui.">Probar voz</button>
+  <p class="note" style="margin:8px 0 0">Para mejor pronunciación abre esta página en <b>Microsoft Edge</b> y elige una voz que diga <b>Online (Natural)</b>, como “Francisca” o “Antonio” (necesita internet).</p>
+</div>
+
+<section id="gram-posesivos" data-unit="Pronombre">
+
+<h2>Pronombres posesivos <small style="font-weight:400;color:var(--muted)">· mi, tu, su, nuestro…</small></h2>
+<p>Los <b>pronombres posesivos</b> dicen <b>de quién es</b> algo: <i>mi</i> casa, <i>tu</i> casaco, <i>su</i> amiga. En portugués cambian de forma según lo que se posee.</p>
+
+<div class="subnav"><a href="#r-pos-resumen">Resumen</a><a href="#r-pos-reglas">Los pronombres</a><a href="#r-pos-ayuda">Para entenderlo mejor</a><a href="#r-pos-compara">Compara</a><a href="#r-pos-practica">Práctica final</a><a href="#r-pos-errores">Errores</a></div>
+
+<h3 class="bigsec" id="r-pos-resumen">Resumen</h3>
+<div class="card">
+  <p class="note" style="margin-top:0">Toca cada forma para oírla.</p>
+  <div class="tablewrap">
+  <table>
+    <tr><th>Dueño</th><th>Masc. sing.</th><th>Fem. sing.</th><th>Masc. pl.</th><th>Fem. pl.</th><th>Significa</th></tr>
+    <tr><td><b>eu (yo)</b></td><td><button class="btn tbtn" data-say="meu">meu</button></td><td><button class="btn tbtn" data-say="minha">minha</button></td><td><button class="btn tbtn" data-say="meus">meus</button></td><td><button class="btn tbtn" data-say="minhas">minhas</button></td><td>mi, mío</td></tr>
+    <tr><td><b>tu (tú)</b></td><td><button class="btn tbtn" data-say="teu">teu</button></td><td><button class="btn tbtn" data-say="tua">tua</button></td><td><button class="btn tbtn" data-say="teus">teus</button></td><td><button class="btn tbtn" data-say="tuas">tuas</button></td><td>tu, tuyo</td></tr>
+    <tr><td><b>você / ele / ela</b></td><td><button class="btn tbtn" data-say="seu">seu</button></td><td><button class="btn tbtn" data-say="sua">sua</button></td><td><button class="btn tbtn" data-say="seus">seus</button></td><td><button class="btn tbtn" data-say="suas">suas</button></td><td>tu (de você), su</td></tr>
+    <tr><td><b>nós / a gente</b></td><td><button class="btn tbtn" data-say="nosso">nosso</button></td><td><button class="btn tbtn" data-say="nossa">nossa</button></td><td><button class="btn tbtn" data-say="nossos">nossos</button></td><td><button class="btn tbtn" data-say="nossas">nossas</button></td><td>nuestro</td></tr>
+    <tr><td><b>vós (formal)</b></td><td><button class="btn tbtn" data-say="vosso">vosso</button></td><td><button class="btn tbtn" data-say="vossa">vossa</button></td><td><button class="btn tbtn" data-say="vossos">vossos</button></td><td><button class="btn tbtn" data-say="vossas">vossas</button></td><td>vuestro</td></tr>
+    <tr><td><b>ele / ela / eles / elas</b></td><td><button class="btn tbtn" data-say="dele">dele</button></td><td><button class="btn tbtn" data-say="dela">dela</button></td><td><button class="btn tbtn" data-say="deles">deles</button></td><td><button class="btn tbtn" data-say="delas">delas</button></td><td>de él / de ella / de ellos / de ellas</td></tr>
+  </table>
+  </div>
+  <h4>¿Cómo elijo el correcto? Tres pasos</h4>
+  <ol class="steps">
+    <li><b>¿Quién es el dueño?</b> Eso decide la familia: <i>eu → meu</i>, <i>tu → teu</i>, <i>você → seu</i>, <i>nós → nosso</i>, <i>ele → dele</i>.</li>
+    <li><b>¿Qué se posee?</b> Mira su género y número: <i>casa</i> es femenino singular → <i>minha casa</i>; <i>livros</i> es masculino plural → <i>meus livros</i>.</li>
+    <li><b>Excepción: dele / dela / deles / delas.</b> Aquí no miras la cosa, sino al dueño: <i>a casa <b>dela</b></i> (la dueña es mujer).</li>
+  </ol>
+  <div class="callout"><b>💡 Idea clave</b><p>Con <i>meu, teu, seu, nosso</i> el posesivo concuerda con <b>lo poseído</b>. Con <i>dele, dela</i> concuerda con <b>el dueño</b>.</p></div>
+</div>
+
+<h3 class="bigsec" id="r-pos-reglas">Los pronombres</h3>
+<div class="card rule">
+  <span class="tag">Pronombre 1 · para <i>eu</i></span>
+  <h3>meu · minha · meus · minhas</h3>
+  <p>Es el posesivo de <b>eu</b> (yo): <b>mi / mío</b>. Cambia según <b>la cosa poseída</b>, no según quién habla: <i>meu</i> (masc.), <i>minha</i> (fem.), <i>meus</i> y <i>minhas</i> (plurales).</p>
+  <div class="tablewrap">
+  <table class="formtable">
+    <tr><th>Forma</th><th>Suena</th><th>Se usa con…</th><th>Ejemplo</th></tr>
+    <tr><td><button class="btn tbtn" data-say="meu"><b>meu</b></button></td><td><i>mêu</i></td><td>masculino singular</td><td><button class="btn tbtn" data-say="meu pai">meu pai</button></td></tr>
+    <tr><td><button class="btn tbtn" data-say="minha"><b>minha</b></button></td><td><i>mí-ña</i></td><td>femenino singular</td><td><button class="btn tbtn" data-say="minha mãe">minha mãe</button></td></tr>
+    <tr><td><button class="btn tbtn" data-say="meus"><b>meus</b></button></td><td><i>mêus</i></td><td>masculino plural</td><td><button class="btn tbtn" data-say="meus irmãos">meus irmãos</button></td></tr>
+    <tr><td><button class="btn tbtn" data-say="minhas"><b>minhas</b></button></td><td><i>mí-ñas</i></td><td>femenino plural</td><td><button class="btn tbtn" data-say="minhas amigas">minhas amigas</button></td></tr>
+  </table>
+  </div>
+  <div class="chips">
+    <button class="chip" data-say="meu pai"><b>meu pai</b><small>mêu pái · mi papá</small></button>
+    <button class="chip" data-say="minha mãe"><b>minha mãe</b><small>mí-ña mãi · mi mamá</small></button>
+    <button class="chip" data-say="meus irmãos"><b>meus irmãos</b><small>mêus ir-mãus · mis hermanos</small></button>
+    <button class="chip" data-say="minhas amigas"><b>minhas amigas</b><small>mí-ñas a-mí-gas · mis amigas</small></button>
+    <button class="chip" data-say="meu casaco"><b>meu casaco</b><small>mêu ka-zá-ku · mi abrigo</small></button>
+    <button class="chip" data-say="minha jaqueta"><b>minha jaqueta</b><small>mí-ña zha-kê-ta · mi chaqueta</small></button>
+  </div>
+
+  <div class="ex">
+    <p class="pt" lang="pt-BR"><mark class="v">Meu</mark> pai é médico.</p>
+    <p class="es">Mi papá es médico.</p>
+    <p class="say">Suena: <b>mêu</b></p>
+    <button class="btn" data-say="Meu pai é médico.">▶ Normal</button><button class="btn" data-say="Meu pai é médico." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR"><mark class="v">Minha</mark> mãe é professora.</p>
+    <p class="es">Mi mamá es profesora.</p>
+    <p class="say">Suena: <b>mí-ña</b></p>
+    <button class="btn" data-say="Minha mãe é professora.">▶ Normal</button><button class="btn" data-say="Minha mãe é professora." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR"><mark class="v">Meus</mark> amigos moram em Lima.</p>
+    <p class="es">Mis amigos viven en Lima.</p>
+    <p class="say">Suena: <b>mêus</b></p>
+    <button class="btn" data-say="Meus amigos moram em Lima.">▶ Normal</button><button class="btn" data-say="Meus amigos moram em Lima." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR"><mark class="v">Minhas</mark> irmãs gostam de música.</p>
+    <p class="es">Mis hermanas disfrutan la música.</p>
+    <p class="say">Suena: <b>mí-ñas</b></p>
+    <button class="btn" data-say="Minhas irmãs gostam de música.">▶ Normal</button><button class="btn" data-say="Minhas irmãs gostam de música." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="callout">
+    <b>📝 Ojo</b>
+    <p>Una mujer también dice <i>meu irmão</i> (mi hermano) y un hombre también dice <i>minha irmã</i> (mi hermana): el pronombre concuerda con <b>irmão / irmã</b>, no con quien habla. Y <b>nh</b> suena “ñ”, por eso <i>minha</i> es “mí-ña”.</p>
+  </div>
+  <div class="quiz">
+  <h4>✍️ Práctica</h4>
+  <div class="q" data-ans="Minha" data-why="casa es femenino → &lt;b&gt;minha&lt;/b&gt;.">
+    <p class="qs"><span class="blank">____</span> casa é grande.</p>
+    <div class="opts"><button class="opt" data-v="Meu">Meu</button><button class="opt" data-v="Minha">Minha</button></div>
+    <p class="fb"></p>
+    <button class="btn qsay" data-say="Minha casa é grande.">🔊 Escuchar la frase</button>
+  </div>
+  <div class="q" data-ans="minha" data-why="jaqueta es femenino → &lt;b&gt;minha&lt;/b&gt;.">
+    <p class="qs">Eu comprei <span class="blank">____</span> jaqueta.</p>
+    <div class="opts"><button class="opt" data-v="meu">meu</button><button class="opt" data-v="minha">minha</button></div>
+    <p class="fb"></p>
+    <button class="btn qsay" data-say="Eu comprei minha jaqueta.">🔊 Escuchar la frase</button>
+  </div>
+  <div class="q" data-ans="meus" data-why="livros es masculino plural → &lt;b&gt;meus&lt;/b&gt;.">
+    <p class="qs">Onde estão <span class="blank">____</span> livros?</p>
+    <div class="opts"><button class="opt" data-v="minhas">minhas</button><button class="opt" data-v="meus">meus</button></div>
+    <p class="fb"></p>
+    <button class="btn qsay" data-say="Onde estão meus livros?">🔊 Escuchar la frase</button>
+  </div>
+  <div class="q" data-ans="Minhas" data-why="irmãs es femenino plural → &lt;b&gt;minhas&lt;/b&gt;.">
+    <p class="qs"><span class="blank">____</span> irmãs moram no Peru.</p>
+    <div class="opts"><button class="opt" data-v="Meus">Meus</button><button class="opt" data-v="Minhas">Minhas</button></div>
+    <p class="fb"></p>
+    <button class="btn qsay" data-say="Minhas irmãs moram no Peru.">🔊 Escuchar la frase</button>
+  </div>
+  <div class="q" data-ans="meu" data-why="casaco es masculino → &lt;b&gt;meu&lt;/b&gt;.">
+    <p class="qs">Eu perdi <span class="blank">____</span> casaco.</p>
+    <div class="opts"><button class="opt" data-v="meu">meu</button><button class="opt" data-v="minha">minha</button></div>
+    <p class="fb"></p>
+    <button class="btn qsay" data-say="Eu perdi meu casaco.">🔊 Escuchar la frase</button>
+  </div>
+  <div class="quizbar"><button class="btn reset">↺ Reiniciar</button></div>
+</div>
+</div>
+
+<div class="card rule">
+  <span class="tag">Pronombre 2 · para <i>tu</i></span>
+  <h3>teu · tua · teus · tuas</h3>
+  <p>Es el posesivo de <b>tu</b>: <b>tu / tuyo</b>. Funciona igual que <i>meu/minha</i>. Se usa solo cuando hablas de <b>tu</b> (más común en Portugal y en algunas regiones de Brasil). Con <b>você</b>, que es lo más común en Brasil, se usa <i>seu/sua</i>.</p>
+  <div class="tablewrap">
+  <table class="formtable">
+    <tr><th>Forma</th><th>Suena</th><th>Se usa con…</th><th>Ejemplo</th></tr>
+    <tr><td><button class="btn tbtn" data-say="teu"><b>teu</b></button></td><td><i>têu</i></td><td>masculino singular</td><td><button class="btn tbtn" data-say="teu livro">teu livro</button></td></tr>
+    <tr><td><button class="btn tbtn" data-say="tua"><b>tua</b></button></td><td><i>tú-a</i></td><td>femenino singular</td><td><button class="btn tbtn" data-say="tua casa">tua casa</button></td></tr>
+    <tr><td><button class="btn tbtn" data-say="teus"><b>teus</b></button></td><td><i>têus</i></td><td>masculino plural</td><td><button class="btn tbtn" data-say="teus amigos">teus amigos</button></td></tr>
+    <tr><td><button class="btn tbtn" data-say="tuas"><b>tuas</b></button></td><td><i>tú-as</i></td><td>femenino plural</td><td><button class="btn tbtn" data-say="tuas amigas">tuas amigas</button></td></tr>
+  </table>
+  </div>
+  <div class="chips">
+    <button class="chip" data-say="teu livro"><b>teu livro</b><small>têu lí-vru · tu libro</small></button>
+    <button class="chip" data-say="tua casa"><b>tua casa</b><small>tú-a ká-za · tu casa</small></button>
+    <button class="chip" data-say="teus amigos"><b>teus amigos</b><small>têus a-mí-gus · tus amigos</small></button>
+    <button class="chip" data-say="tuas amigas"><b>tuas amigas</b><small>tú-as a-mí-gas · tus amigas</small></button>
+  </div>
+
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Onde está o <mark class="v">teu</mark> casaco?</p>
+    <p class="es">¿Dónde está tu abrigo?</p>
+    <p class="say">Suena: <b>têu</b></p>
+    <button class="btn" data-say="Onde está o teu casaco?">▶ Normal</button><button class="btn" data-say="Onde está o teu casaco?" data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">A <mark class="v">tua</mark> casa é linda.</p>
+    <p class="es">Tu casa es linda.</p>
+    <p class="say">Suena: <b>tú-a</b></p>
+    <button class="btn" data-say="A tua casa é linda.">▶ Normal</button><button class="btn" data-say="A tua casa é linda." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Os <mark class="v">teus</mark> amigos chegaram.</p>
+    <p class="es">Tus amigos llegaron.</p>
+    <p class="say">Suena: <b>têus</b></p>
+    <button class="btn" data-say="Os teus amigos chegaram.">▶ Normal</button><button class="btn" data-say="Os teus amigos chegaram." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Eu adoro as <mark class="v">tuas</mark> ideias.</p>
+    <p class="es">Me encantan tus ideas.</p>
+    <p class="say">Suena: <b>tú-as</b></p>
+    <button class="btn" data-say="Eu adoro as tuas ideias.">▶ Normal</button><button class="btn" data-say="Eu adoro as tuas ideias." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="callout">
+    <b>📝 Ojo</b>
+    <p>Nunca mezcles: con <b>tu</b> va <i>teu/tua</i>; con <b>você</b> va <i>seu/sua</i>. Es raro oír <i>teu</i> con <i>você</i> en el mismo discurso.</p>
+  </div>
+  <div class="quiz">
+  <h4>✍️ Práctica</h4>
+  <div class="q" data-ans="teu" data-why="casaco es masculino → &lt;b&gt;teu&lt;/b&gt;.">
+    <p class="qs">Tu perdeste <span class="blank">____</span> casaco.</p>
+    <div class="opts"><button class="opt" data-v="tua">tua</button><button class="opt" data-v="teu">teu</button></div>
+    <p class="fb"></p>
+    <button class="btn qsay" data-say="Tu perdeste teu casaco.">🔊 Escuchar la frase</button>
+  </div>
+  <div class="q" data-ans="Tua" data-why="mãe es femenino → &lt;b&gt;tua&lt;/b&gt;.">
+    <p class="qs"><span class="blank">____</span> mãe é simpática.</p>
+    <div class="opts"><button class="opt" data-v="Teu">Teu</button><button class="opt" data-v="Tua">Tua</button></div>
+    <p class="fb"></p>
+    <button class="btn qsay" data-say="Tua mãe é simpática.">🔊 Escuchar la frase</button>
+  </div>
+  <div class="q" data-ans="tuas" data-why="chaves es femenino plural → &lt;b&gt;tuas&lt;/b&gt;.">
+    <p class="qs">Onde estão <span class="blank">____</span> chaves?</p>
+    <div class="opts"><button class="opt" data-v="teus">teus</button><button class="opt" data-v="tuas">tuas</button></div>
+    <p class="fb"></p>
+    <button class="btn qsay" data-say="Onde estão tuas chaves?">🔊 Escuchar la frase</button>
+  </div>
+  <div class="q" data-ans="teus" data-why="amigos es masculino plural → &lt;b&gt;teus&lt;/b&gt;.">
+    <p class="qs">Eu gosto dos <span class="blank">____</span> amigos.</p>
+    <div class="opts"><button class="opt" data-v="teus">teus</button><button class="opt" data-v="tuas">tuas</button></div>
+    <p class="fb"></p>
+    <button class="btn qsay" data-say="Eu gosto dos teus amigos.">🔊 Escuchar la frase</button>
+  </div>
+  <div class="quizbar"><button class="btn reset">↺ Reiniciar</button></div>
+</div>
+</div>
+
+<div class="card rule">
+  <span class="tag">Pronombre 3 · para <i>você / ele / ela</i></span>
+  <h3>seu · sua · seus · suas</h3>
+  <p>Es el posesivo de <b>você</b> (tu, de usted) y también puede significar <b>su</b> (de él, de ella, de ellos). En Brasil es el que más usarás para “tu”. Concuerda con la cosa poseída: <i>seu</i>, <i>sua</i>, <i>seus</i>, <i>suas</i>.</p>
+  <div class="tablewrap">
+  <table class="formtable">
+    <tr><th>Forma</th><th>Suena</th><th>Se usa con…</th><th>Ejemplo</th></tr>
+    <tr><td><button class="btn tbtn" data-say="seu"><b>seu</b></button></td><td><i>sêu</i></td><td>masculino singular</td><td><button class="btn tbtn" data-say="seu nome">seu nome</button></td></tr>
+    <tr><td><button class="btn tbtn" data-say="sua"><b>sua</b></button></td><td><i>sú-a</i></td><td>femenino singular</td><td><button class="btn tbtn" data-say="sua casa">sua casa</button></td></tr>
+    <tr><td><button class="btn tbtn" data-say="seus"><b>seus</b></button></td><td><i>sêus</i></td><td>masculino plural</td><td><button class="btn tbtn" data-say="seus pais">seus pais</button></td></tr>
+    <tr><td><button class="btn tbtn" data-say="suas"><b>suas</b></button></td><td><i>sú-as</i></td><td>femenino plural</td><td><button class="btn tbtn" data-say="suas amigas">suas amigas</button></td></tr>
+  </table>
+  </div>
+  <div class="chips">
+    <button class="chip" data-say="seu nome"><b>seu nome</b><small>sêu nô-mi · tu nombre</small></button>
+    <button class="chip" data-say="sua casa"><b>sua casa</b><small>sú-a ká-za · tu casa</small></button>
+    <button class="chip" data-say="seus pais"><b>seus pais</b><small>sêus páis · tus padres</small></button>
+    <button class="chip" data-say="suas amigas"><b>suas amigas</b><small>sú-as a-mí-gas · tus amigas</small></button>
+    <button class="chip" data-say="sua blusa"><b>sua blusa</b><small>sú-a blú-za · tu blusa</small></button>
+  </div>
+
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Qual é o <mark class="v">seu</mark> nome?</p>
+    <p class="es">¿Cuál es tu nombre?</p>
+    <p class="say">Suena: <b>sêu</b></p>
+    <button class="btn" data-say="Qual é o seu nome?">▶ Normal</button><button class="btn" data-say="Qual é o seu nome?" data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">A <mark class="v">sua</mark> blusa é linda!</p>
+    <p class="es">¡Tu blusa es linda!</p>
+    <p class="say">Suena: <b>sú-a</b></p>
+    <button class="btn" data-say="A sua blusa é linda!">▶ Normal</button><button class="btn" data-say="A sua blusa é linda!" data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Onde estão os <mark class="v">seus</mark> amigos?</p>
+    <p class="es">¿Dónde están tus amigos?</p>
+    <p class="say">Suena: <b>sêus</b></p>
+    <button class="btn" data-say="Onde estão os seus amigos?">▶ Normal</button><button class="btn" data-say="Onde estão os seus amigos?" data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Você poderia me emprestar <mark class="v">sua</mark> jaqueta?</p>
+    <p class="es">¿Podrías prestarme tu chaqueta?</p>
+    <p class="say">Suena: <b>sú-a</b> · <b>zha-kê-ta</b></p>
+    <button class="btn" data-say="Você poderia me emprestar sua jaqueta?">▶ Normal</button><button class="btn" data-say="Você poderia me emprestar sua jaqueta?" data-slow="1">🐢 Lento</button>
+  </div>
+  <p class="note">En el habla informal <i>Seu</i> también es un título: <i>Seu João</i> = “Don João”.</p>
+  <div class="callout">
+    <b>📝 Ojo</b>
+    <p><b>Ojo:</b> <i>seu/sua</i> a veces es ambiguo (¿tuyo o de él?). Para aclarar se usa <b>dele / dela</b> (mira el pronombre 6).</p>
+  </div>
+  <div class="quiz">
+  <h4>✍️ Práctica</h4>
+  <div class="q" data-ans="sua" data-why="jaqueta es femenino → &lt;b&gt;sua&lt;/b&gt;.">
+    <p class="qs">Você pode me emprestar <span class="blank">____</span> jaqueta?</p>
+    <div class="opts"><button class="opt" data-v="seu">seu</button><button class="opt" data-v="sua">sua</button></div>
+    <p class="fb"></p>
+    <button class="btn qsay" data-say="Você pode me emprestar sua jaqueta?">🔊 Escuchar la frase</button>
+  </div>
+  <div class="q" data-ans="seu" data-why="casaco es masculino → &lt;b&gt;seu&lt;/b&gt;.">
+    <p class="qs">Onde está <span class="blank">____</span> casaco, Marcos?</p>
+    <div class="opts"><button class="opt" data-v="sua">sua</button><button class="opt" data-v="seu">seu</button></div>
+    <p class="fb"></p>
+    <button class="btn qsay" data-say="Onde está seu casaco, Marcos?">🔊 Escuchar la frase</button>
+  </div>
+  <div class="q" data-ans="seus" data-why="pais es masculino plural → &lt;b&gt;seus&lt;/b&gt;.">
+    <p class="qs">Como estão <span class="blank">____</span> pais?</p>
+    <div class="opts"><button class="opt" data-v="seus">seus</button><button class="opt" data-v="suas">suas</button></div>
+    <p class="fb"></p>
+    <button class="btn qsay" data-say="Como estão seus pais?">🔊 Escuchar la frase</button>
+  </div>
+  <div class="q" data-ans="suas" data-why="amigas es femenino plural → &lt;b&gt;suas&lt;/b&gt;.">
+    <p class="qs">Ana, <span class="blank">____</span> amigas chegaram.</p>
+    <div class="opts"><button class="opt" data-v="seus">seus</button><button class="opt" data-v="suas">suas</button></div>
+    <p class="fb"></p>
+    <button class="btn qsay" data-say="Ana, suas amigas chegaram.">🔊 Escuchar la frase</button>
+  </div>
+  <div class="q" data-ans="seu" data-why="trabalho es masculino → &lt;b&gt;seu&lt;/b&gt;.">
+    <p class="qs">Você gosta de <span class="blank">____</span> trabalho?</p>
+    <div class="opts"><button class="opt" data-v="sua">sua</button><button class="opt" data-v="seu">seu</button></div>
+    <p class="fb"></p>
+    <button class="btn qsay" data-say="Você gosta de seu trabalho?">🔊 Escuchar la frase</button>
+  </div>
+  <div class="quizbar"><button class="btn reset">↺ Reiniciar</button></div>
+</div>
+</div>
+
+<div class="card rule">
+  <span class="tag">Pronombre 4 · para <i>nós / a gente</i></span>
+  <h3>nosso · nossa · nossos · nossas</h3>
+  <p>Es el posesivo de <b>nós</b> y de <b>a gente</b>: <b>nuestro</b>. Concuerda con la cosa poseída: <i>nosso</i>, <i>nossa</i>, <i>nossos</i>, <i>nossas</i>. La <b>ss</b> suena “s” (“nó-su”, no “nó-zu”).</p>
+  <div class="tablewrap">
+  <table class="formtable">
+    <tr><th>Forma</th><th>Suena</th><th>Se usa con…</th><th>Ejemplo</th></tr>
+    <tr><td><button class="btn tbtn" data-say="nosso"><b>nosso</b></button></td><td><i>nó-su</i></td><td>masculino singular</td><td><button class="btn tbtn" data-say="nosso pedido">nosso pedido</button></td></tr>
+    <tr><td><button class="btn tbtn" data-say="nossa"><b>nossa</b></button></td><td><i>nó-sa</i></td><td>femenino singular</td><td><button class="btn tbtn" data-say="nossa casa">nossa casa</button></td></tr>
+    <tr><td><button class="btn tbtn" data-say="nossos"><b>nossos</b></button></td><td><i>nó-sus</i></td><td>masculino plural</td><td><button class="btn tbtn" data-say="nossos amigos">nossos amigos</button></td></tr>
+    <tr><td><button class="btn tbtn" data-say="nossas"><b>nossas</b></button></td><td><i>nó-sas</i></td><td>femenino plural</td><td><button class="btn tbtn" data-say="nossas aulas">nossas aulas</button></td></tr>
+  </table>
+  </div>
+  <div class="chips">
+    <button class="chip" data-say="nosso pedido"><b>nosso pedido</b><small>nó-su pe-dyí-du · nuestro pedido</small></button>
+    <button class="chip" data-say="nossa casa"><b>nossa casa</b><small>nó-sa ká-za · nuestra casa</small></button>
+    <button class="chip" data-say="nossos amigos"><b>nossos amigos</b><small>nó-sus a-mí-gus · nuestros amigos</small></button>
+    <button class="chip" data-say="nossas aulas"><b>nossas aulas</b><small>nó-sas áu-las · nuestras clases</small></button>
+  </div>
+
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Nós podemos fazer <mark class="v">nosso</mark> pedido, por favor?</p>
+    <p class="es">¿Podemos hacer nuestro pedido, por favor?</p>
+    <p class="say">Suena: <b>nó-su</b> · <b>pe-dyí-du</b></p>
+    <button class="btn" data-say="Nós podemos fazer nosso pedido, por favor?">▶ Normal</button><button class="btn" data-say="Nós podemos fazer nosso pedido, por favor?" data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR"><mark class="v">Nossa</mark> casa é perto do parque.</p>
+    <p class="es">Nuestra casa queda cerca del parque.</p>
+    <p class="say">Suena: <b>nó-sa</b></p>
+    <button class="btn" data-say="Nossa casa é perto do parque.">▶ Normal</button><button class="btn" data-say="Nossa casa é perto do parque." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR"><mark class="v">Nossos</mark> pais moram em Lima.</p>
+    <p class="es">Nuestros padres viven en Lima.</p>
+    <p class="say">Suena: <b>nó-sus</b></p>
+    <button class="btn" data-say="Nossos pais moram em Lima.">▶ Normal</button><button class="btn" data-say="Nossos pais moram em Lima." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR"><mark class="v">Nossas</mark> aulas são às sete.</p>
+    <p class="es">Nuestras clases son a las siete.</p>
+    <p class="say">Suena: <b>nó-sas</b></p>
+    <button class="btn" data-say="Nossas aulas são às sete.">▶ Normal</button><button class="btn" data-say="Nossas aulas são às sete." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="callout">
+    <b>📝 Ojo</b>
+    <p><b>Nossa!</b> sola es una interjección muy común en Brasil: “¡caramba!”, “¡guau!”. <i>Nossa, que delícia!</i> = ¡Caramba, qué delicia! También <i>a gente</i> usa <i>nosso</i>: <i>A gente adora nossa escola.</i></p>
+  </div>
+  <div class="quiz">
+  <h4>✍️ Práctica</h4>
+  <div class="q" data-ans="nosso" data-why="pedido es masculino → &lt;b&gt;nosso&lt;/b&gt;.">
+    <p class="qs">Nós fizemos <span class="blank">____</span> pedido.</p>
+    <div class="opts"><button class="opt" data-v="nossa">nossa</button><button class="opt" data-v="nosso">nosso</button></div>
+    <p class="fb"></p>
+    <button class="btn qsay" data-say="Nós fizemos nosso pedido.">🔊 Escuchar la frase</button>
+  </div>
+  <div class="q" data-ans="Nossa" data-why="aula es femenino → &lt;b&gt;nossa&lt;/b&gt;.">
+    <p class="qs"><span class="blank">____</span> aula começa às oito.</p>
+    <div class="opts"><button class="opt" data-v="Nosso">Nosso</button><button class="opt" data-v="Nossa">Nossa</button></div>
+    <p class="fb"></p>
+    <button class="btn qsay" data-say="Nossa aula começa às oito.">🔊 Escuchar la frase</button>
+  </div>
+  <div class="q" data-ans="nossos" data-why="amigos es masculino plural → &lt;b&gt;nossos&lt;/b&gt;.">
+    <p class="qs">Esses são <span class="blank">____</span> amigos.</p>
+    <div class="opts"><button class="opt" data-v="nossos">nossos</button><button class="opt" data-v="nossas">nossas</button></div>
+    <p class="fb"></p>
+    <button class="btn qsay" data-say="Esses são nossos amigos.">🔊 Escuchar la frase</button>
+  </div>
+  <div class="q" data-ans="Nossas" data-why="férias es femenino plural → &lt;b&gt;nossas&lt;/b&gt;.">
+    <p class="qs"><span class="blank">____</span> férias foram ótimas.</p>
+    <div class="opts"><button class="opt" data-v="Nossos">Nossos</button><button class="opt" data-v="Nossas">Nossas</button></div>
+    <p class="fb"></p>
+    <button class="btn qsay" data-say="Nossas férias foram ótimas.">🔊 Escuchar la frase</button>
+  </div>
+  <div class="q" data-ans="nossa" data-why="casa es femenino → &lt;b&gt;nossa&lt;/b&gt;.">
+    <p class="qs">A gente adora <span class="blank">____</span> casa.</p>
+    <div class="opts"><button class="opt" data-v="nosso">nosso</button><button class="opt" data-v="nossa">nossa</button></div>
+    <p class="fb"></p>
+    <button class="btn qsay" data-say="A gente adora nossa casa.">🔊 Escuchar la frase</button>
+  </div>
+  <div class="quizbar"><button class="btn reset">↺ Reiniciar</button></div>
+</div>
+</div>
+
+<div class="card rule">
+  <span class="tag">Pronombre 5 · para <i>vós</i></span>
+  <h3>vosso · vossa · vossos · vossas</h3>
+  <p>Es el posesivo de <b>vós</b>: <b>vuestro</b>. En Brasil casi <b>no se usa</b> en la conversación: se dice <i>seu/sua</i> o <i>de vocês</i>. Lo verás sobre todo en títulos formales (<i>Vossa Excelência</i>), en textos religiosos y en literatura.</p>
+  <div class="tablewrap">
+  <table class="formtable">
+    <tr><th>Forma</th><th>Suena</th><th>Se usa con…</th><th>Ejemplo</th></tr>
+    <tr><td><button class="btn tbtn" data-say="vosso"><b>vosso</b></button></td><td><i>vó-su</i></td><td>masculino singular</td><td><button class="btn tbtn" data-say="vosso filho">vosso filho</button></td></tr>
+    <tr><td><button class="btn tbtn" data-say="vossa"><b>vossa</b></button></td><td><i>vó-sa</i></td><td>femenino singular</td><td><button class="btn tbtn" data-say="vossa casa">vossa casa</button></td></tr>
+    <tr><td><button class="btn tbtn" data-say="vossos"><b>vossos</b></button></td><td><i>vó-sus</i></td><td>masculino plural</td><td><button class="btn tbtn" data-say="vossos filhos">vossos filhos</button></td></tr>
+    <tr><td><button class="btn tbtn" data-say="vossas"><b>vossas</b></button></td><td><i>vó-sas</i></td><td>femenino plural</td><td><button class="btn tbtn" data-say="vossas casas">vossas casas</button></td></tr>
+  </table>
+  </div>
+  <div class="chips">
+    <button class="chip" data-say="Vossa Excelência"><b>Vossa Excelência</b><small>vó-sa e-se-lên-si-a · Su Excelencia</small></button>
+    <button class="chip" data-say="Vossa Majestade"><b>Vossa Majestade</b><small>vó-sa ma-zhes-tá-dyi · Su Majestad</small></button>
+    <button class="chip" data-say="vosso"><b>vosso</b><small>vó-su · vuestro</small></button>
+  </div>
+
+  <div class="ex">
+    <p class="pt" lang="pt-BR"><mark class="v">Vossa</mark> Excelência chegou.</p>
+    <p class="es">Su Excelencia llegó.</p>
+    <p class="say">Suena: <b>vó-sa</b></p>
+    <button class="btn" data-say="Vossa Excelência chegou.">▶ Normal</button><button class="btn" data-say="Vossa Excelência chegou." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Senhores, <mark class="v">vossa</mark> ajuda é muito importante.</p>
+    <p class="es">Señores, su ayuda es muy importante.</p>
+    <p class="say">Suena: <b>vó-sa</b></p>
+    <button class="btn" data-say="Senhores, vossa ajuda é muito importante.">▶ Normal</button><button class="btn" data-say="Senhores, vossa ajuda é muito importante." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Vocês gostam da <mark class="v">sua</mark> escola?</p>
+    <p class="es">¿Les gusta su escuela? (lo normal en Brasil)</p>
+    <p class="say">Suena: <b>sú-a</b></p>
+    <button class="btn" data-say="Vocês gostam da sua escola?">▶ Normal</button><button class="btn" data-say="Vocês gostam da sua escola?" data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="callout">
+    <b>📝 Ojo</b>
+    <p>En la vida diaria, “vuestro” se dice <b>seu/sua</b> (con <i>vocês</i>) o <b>de vocês</b>: <i>a casa de vocês</i> = la casa de ustedes.</p>
+  </div>
+  <div class="quiz">
+  <h4>✍️ Práctica</h4>
+  <div class="q" data-ans="sua" data-why="En Brasil se usa &lt;b&gt;sua&lt;/b&gt; con &lt;i&gt;vocês&lt;/i&gt;.">
+    <p class="qs">Vocês gostam da <span class="blank">____</span> escola? (conversación diaria)</p>
+    <div class="opts"><button class="opt" data-v="vossa">vossa</button><button class="opt" data-v="sua">sua</button></div>
+    <p class="fb"></p>
+    <button class="btn qsay" data-say="Vocês gostam da sua escola?">🔊 Escuchar la frase</button>
+  </div>
+  <div class="q" data-ans="Vossa" data-why="En títulos formales se usa &lt;b&gt;Vossa&lt;/b&gt; Excelência.">
+    <p class="qs"><span class="blank">____</span> Excelência (a un juez)</p>
+    <div class="opts"><button class="opt" data-v="Sua">Sua</button><button class="opt" data-v="Vossa">Vossa</button></div>
+    <p class="fb"></p>
+    <button class="btn qsay" data-say="Vossa Excelência">🔊 Escuchar la frase</button>
+  </div>
+  <div class="quizbar"><button class="btn reset">↺ Reiniciar</button></div>
+</div>
+</div>
+
+<div class="card rule">
+  <span class="tag">Pronombre 6 · para <i>ele / ela / eles / elas</i></span>
+  <h3>dele · dela · deles · delas</h3>
+  <p>Significan <b>de él, de ella, de ellos, de ellas</b>. Se forman con <i>de + ele/ela/eles/elas</i>. <b>Ojo:</b> aquí la forma depende del <b>dueño</b> (él, ella, ellos, ellas) y no de la cosa poseída. Es lo contrario de <i>meu/minha</i>.</p>
+  <div class="tablewrap">
+  <table class="formtable">
+    <tr><th>Forma</th><th>Suena</th><th>Se usa con…</th><th>Ejemplo</th></tr>
+    <tr><td><button class="btn tbtn" data-say="dele"><b>dele</b></button></td><td><i>dê-li</i></td><td>el dueño es un hombre</td><td><button class="btn tbtn" data-say="o carro dele">o carro dele</button></td></tr>
+    <tr><td><button class="btn tbtn" data-say="dela"><b>dela</b></button></td><td><i>dé-la</i></td><td>la dueña es una mujer</td><td><button class="btn tbtn" data-say="a casa dela">a casa dela</button></td></tr>
+    <tr><td><button class="btn tbtn" data-say="deles"><b>deles</b></button></td><td><i>dê-lis</i></td><td>los dueños son hombres (o mixto)</td><td><button class="btn tbtn" data-say="os filhos deles">os filhos deles</button></td></tr>
+    <tr><td><button class="btn tbtn" data-say="delas"><b>delas</b></button></td><td><i>dé-las</i></td><td>las dueñas son mujeres</td><td><button class="btn tbtn" data-say="as amigas delas">as amigas delas</button></td></tr>
+  </table>
+  </div>
+  <div class="chips">
+    <button class="chip" data-say="o carro dele"><b>o carro dele</b><small>u ká-hu dê-li · el carro de él</small></button>
+    <button class="chip" data-say="a casa dela"><b>a casa dela</b><small>a ká-za dé-la · la casa de ella</small></button>
+    <button class="chip" data-say="os filhos deles"><b>os filhos deles</b><small>us fí-lyus dê-lis · los hijos de ellos</small></button>
+    <button class="chip" data-say="as amigas delas"><b>as amigas delas</b><small>as a-mí-gas dé-las · las amigas de ellas</small></button>
+  </div>
+
+  <div class="ex">
+    <p class="pt" lang="pt-BR">O carro <mark class="v">dele</mark> é novo.</p>
+    <p class="es">El carro de él es nuevo.</p>
+    <p class="say">Suena: <b>dê-li</b></p>
+    <button class="btn" data-say="O carro dele é novo.">▶ Normal</button><button class="btn" data-say="O carro dele é novo." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">A casa <mark class="v">dela</mark> é grande.</p>
+    <p class="es">La casa de ella es grande.</p>
+    <p class="say">Suena: <b>dé-la</b></p>
+    <button class="btn" data-say="A casa dela é grande.">▶ Normal</button><button class="btn" data-say="A casa dela é grande." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Os filhos <mark class="v">deles</mark> estudam aqui.</p>
+    <p class="es">Los hijos de ellos estudian aquí.</p>
+    <p class="say">Suena: <b>dê-lis</b></p>
+    <button class="btn" data-say="Os filhos deles estudam aqui.">▶ Normal</button><button class="btn" data-say="Os filhos deles estudam aqui." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">As amigas <mark class="v">delas</mark> chegaram.</p>
+    <p class="es">Las amigas de ellas llegaron.</p>
+    <p class="say">Suena: <b>dé-las</b></p>
+    <button class="btn" data-say="As amigas delas chegaram.">▶ Normal</button><button class="btn" data-say="As amigas delas chegaram." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="callout">
+    <b>📝 Ojo</b>
+    <p><b>Truco:</b> para <i>dele/dela</i> pregúntate “¿el dueño es hombre o mujer?”. En <i>o carro dela</i> el carro es masculino, pero la dueña es mujer, así que va <b>dela</b>. Se usan mucho para aclarar cuando <i>seu/sua</i> sería ambiguo.</p>
+  </div>
+  <div class="quiz">
+  <h4>✍️ Práctica</h4>
+  <div class="q" data-ans="dela" data-why="La dueña es Ana (mujer) → &lt;b&gt;dela&lt;/b&gt;.">
+    <p class="qs">A casa <span class="blank">____</span> (de Ana) é bonita.</p>
+    <div class="opts"><button class="opt" data-v="dele">dele</button><button class="opt" data-v="dela">dela</button></div>
+    <p class="fb"></p>
+    <button class="btn qsay" data-say="A casa dela é bonita.">🔊 Escuchar la frase</button>
+  </div>
+  <div class="q" data-ans="dele" data-why="El dueño es Paulo (hombre) → &lt;b&gt;dele&lt;/b&gt;.">
+    <p class="qs">O carro <span class="blank">____</span> (de Paulo) é novo.</p>
+    <div class="opts"><button class="opt" data-v="dele">dele</button><button class="opt" data-v="dela">dela</button></div>
+    <p class="fb"></p>
+    <button class="btn qsay" data-say="O carro dele é novo.">🔊 Escuchar la frase</button>
+  </div>
+  <div class="q" data-ans="deles" data-why="Los dueños son un hombre y una mujer → &lt;b&gt;deles&lt;/b&gt;.">
+    <p class="qs">Os filhos <span class="blank">____</span> (de Paulo e Ana) moram aqui.</p>
+    <div class="opts"><button class="opt" data-v="delas">delas</button><button class="opt" data-v="deles">deles</button></div>
+    <p class="fb"></p>
+    <button class="btn qsay" data-say="Os filhos deles moram aqui.">🔊 Escuchar la frase</button>
+  </div>
+  <div class="q" data-ans="delas" data-why="Las dueñas son mujeres → &lt;b&gt;delas&lt;/b&gt;.">
+    <p class="qs">As blusas <span class="blank">____</span> (de Ana e Rita) são lindas.</p>
+    <div class="opts"><button class="opt" data-v="deles">deles</button><button class="opt" data-v="delas">delas</button></div>
+    <p class="fb"></p>
+    <button class="btn qsay" data-say="As blusas delas são lindas.">🔊 Escuchar la frase</button>
+  </div>
+  <div class="q" data-ans="dela" data-why="La dueña es Rita (mujer) → &lt;b&gt;dela&lt;/b&gt;.">
+    <p class="qs">Eu gosto do pai <span class="blank">____</span> (de Rita).</p>
+    <div class="opts"><button class="opt" data-v="dela">dela</button><button class="opt" data-v="dele">dele</button></div>
+    <p class="fb"></p>
+    <button class="btn qsay" data-say="Eu gosto do pai dela.">🔊 Escuchar la frase</button>
+  </div>
+  <div class="quizbar"><button class="btn reset">↺ Reiniciar</button></div>
+</div>
+</div>
+
+<h3 class="bigsec" id="r-pos-ayuda">Para entenderlo mejor</h3>
+<div class="card">
+  <h3>La regla de oro: concuerda con lo poseído</h3>
+  <p>Con <i>meu, teu, seu, nosso</i> el pronombre <b>no cambia por quién habla</b>, sino por <b>la cosa que se posee</b> (su género y número).</p><div class="tablewrap"><table><tr><th>Quién habla</th><th>Cosa poseída</th><th>Se dice</th></tr><tr><td>Ana (mujer)</td><td>irmão (masculino)</td><td><button class="btn" data-say="meu irmão"><mark class="v">meu</mark> irmão</button></td></tr><tr><td>Paulo (hombre)</td><td>irmã (femenino)</td><td><button class="btn" data-say="minha irmã"><mark class="v">minha</mark> irmã</button></td></tr><tr><td>nós</td><td>casas (femenino plural)</td><td><button class="btn" data-say="nossas casas"><mark class="v">nossas</mark> casas</button></td></tr><tr><td>você</td><td>livros (masculino plural)</td><td><button class="btn" data-say="seus livros"><mark class="v">seus</mark> livros</button></td></tr></table></div><p class="note">Con <b>dele / dela / deles / delas</b> es al revés: la forma depende del dueño.</p>
+</div>
+
+<div class="card">
+  <h3>seu / sua o dele / dela: evita la confusión</h3>
+  <p><i>Seu/sua</i> puede referirse a varias personas. Fíjate:</p><div class="ex"><p class="pt" lang="pt-BR">O Paulo encontrou a Ana com a <mark class="v">sua</mark> mãe.</p><p class="es">Paulo encontró a Ana con su mamá. (¿la mamá de Paulo o la de Ana?)</p><button class="btn" data-say="O Paulo encontrou a Ana com a sua mãe.">▶ Normal</button></div><div class="ex"><p class="pt" lang="pt-BR">O Paulo encontrou a Ana com a mãe <mark class="v">dela</mark>.</p><p class="es">Paulo encontró a Ana con la mamá de ella. (claro: la mamá de Ana)</p><button class="btn" data-say="O Paulo encontrou a Ana com a mãe dela.">▶ Normal</button></div><p class="note">Cuando haya duda, usa <b>dele / dela</b>.</p>
+</div>
+
+<div class="card">
+  <h3>Con artículo y contracciones</h3>
+  <p>En Brasil el artículo antes del posesivo es <b>opcional</b>: <i>meu pai</i> = <i>o meu pai</i>. Pero si lo usas junto a una preposición, se <b>contrae</b>:</p><div class="tablewrap"><table><tr><th>Preposición + artículo</th><th>Resultado</th><th>Ejemplo</th></tr><tr><td>de + o</td><td><b>do</b> meu</td><td><button class="btn" data-say="Eu gosto do meu trabalho.">Eu gosto <mark class="v">do meu</mark> trabalho.</button></td></tr><tr><td>de + a</td><td><b>da</b> minha</td><td><button class="btn" data-say="Eu falo da minha família.">Eu falo <mark class="v">da minha</mark> família.</button></td></tr><tr><td>em + o</td><td><b>no</b> meu</td><td><button class="btn" data-say="O livro está no meu quarto.">O livro está <mark class="v">no meu</mark> quarto.</button></td></tr><tr><td>em + a</td><td><b>na</b> minha</td><td><button class="btn" data-say="Eu moro na minha cidade.">Eu moro <mark class="v">na minha</mark> cidade.</button></td></tr><tr><td>a + a</td><td><b>à</b> minha</td><td><button class="btn" data-say="Eu vou à minha escola.">Eu vou <mark class="v">à minha</mark> escola.</button></td></tr><tr><td>por + a</td><td><b>pela</b> minha</td><td><button class="btn" data-say="Eu passo pela minha escola.">Eu passo <mark class="v">pela minha</mark> escola.</button></td></tr></table></div>
+</div>
+
+<div class="card">
+  <h3>El posesivo solo: “el mío”</h3>
+  <p>Cuando no hay sustantivo, el posesivo sustituye a la cosa. Puede ir con o sin artículo:</p><div class="ex"><p class="pt" lang="pt-BR">Esse casaco é <mark class="v">meu</mark>. / Esse casaco é o <mark class="v">meu</mark>.</p><p class="es">Este abrigo es mío. / Este abrigo es el mío.</p><button class="btn" data-say="Esse casaco é meu. Esse casaco é o meu.">▶ Normal</button></div><div class="ex"><p class="pt" lang="pt-BR">De quem é a jaqueta? É <mark class="v">dela</mark>.</p><p class="es">¿De quién es la chaqueta? Es de ella.</p><button class="btn" data-say="De quem é a jaqueta? É dela.">▶ Normal</button></div>
+</div>
+
+<div class="card">
+  <h3>Partes del cuerpo y hábitos: a veces solo artículo</h3>
+  <p>Con partes del cuerpo y acciones muy personales, el portugués suele usar <b>solo el artículo</b>, no el posesivo:</p><div class="ex"><p class="pt" lang="pt-BR">Eu lavo as mãos antes de comer.</p><p class="es">Me lavo las manos antes de comer. (no “minhas mãos”)</p><button class="btn" data-say="Eu lavo as mãos antes de comer.">▶ Normal</button></div><div class="ex"><p class="pt" lang="pt-BR">Ele escova os dentes.</p><p class="es">Él se cepilla los dientes.</p><button class="btn" data-say="Ele escova os dentes.">▶ Normal</button></div>
+</div>
+
+<h3 class="bigsec" id="r-pos-compara">🎧 Compara</h3>
+<div class="card">
+  <p>Escucha cada par seguido y fíjate qué parte cambia.</p>
+  <div class="pairs">
+    <div class="pair">
+      <div class="row"><span><mark class="v">Meu</mark> irmão</span><button class="btn" data-say="Meu irmão">🔊</button></div>
+      <div class="tr">Mi hermano</div>
+      <div class="arrow">vs</div>
+      <div class="row"><span><mark class="v">Minha</mark> irmã</span><button class="btn" data-say="Minha irmã">🔊</button></div>
+      <div class="tr">Mi hermana</div>
+    </div>
+    <div class="pair">
+      <div class="row"><span><mark class="v">Nosso</mark> pedido</span><button class="btn" data-say="Nosso pedido">🔊</button></div>
+      <div class="tr">Nuestro pedido</div>
+      <div class="arrow">vs</div>
+      <div class="row"><span><mark class="v">Nossa</mark> aula</span><button class="btn" data-say="Nossa aula">🔊</button></div>
+      <div class="tr">Nuestra clase</div>
+    </div>
+    <div class="pair">
+      <div class="row"><span>O carro <mark class="v">dele</mark></span><button class="btn" data-say="O carro dele">🔊</button></div>
+      <div class="tr">El carro de él</div>
+      <div class="arrow">vs</div>
+      <div class="row"><span>O carro <mark class="v">dela</mark></span><button class="btn" data-say="O carro dela">🔊</button></div>
+      <div class="tr">El carro de ella</div>
+    </div>
+    <div class="pair">
+      <div class="row"><span><mark class="v">Seu</mark> carro</span><button class="btn" data-say="Seu carro">🔊</button></div>
+      <div class="tr">Tu carro</div>
+      <div class="arrow">vs</div>
+      <div class="row"><span>O carro <mark class="v">dele</mark></span><button class="btn" data-say="O carro dele">🔊</button></div>
+      <div class="tr">El carro de él</div>
+    </div>
+  </div>
+</div>
+
+<h3 class="bigsec" id="r-pos-practica">✍️ Práctica final</h3>
+<div class="card">
+  <p>Elige la opción correcta en cada frase. Al acertar, oirás la frase completa.</p>
+  <div class="quiz scored">
+  <h4>Diez frases mezcladas</h4>
+  <div class="q" data-ans="Meus" data-why="amigos es masculino plural → &lt;b&gt;meus&lt;/b&gt;.">
+    <p class="qs"><span class="blank">____</span> amigos chegaram. (yo)</p>
+    <div class="opts"><button class="opt" data-v="Minhas">Minhas</button><button class="opt" data-v="Meus">Meus</button></div>
+    <p class="fb"></p>
+    <button class="btn qsay" data-say="Meus amigos chegaram.">🔊 Escuchar la frase</button>
+  </div>
+  <div class="q" data-ans="seu" data-why="casaco es masculino → &lt;b&gt;seu&lt;/b&gt;.">
+    <p class="qs">Maria, onde está <span class="blank">____</span> casaco?</p>
+    <div class="opts"><button class="opt" data-v="sua">sua</button><button class="opt" data-v="seu">seu</button></div>
+    <p class="fb"></p>
+    <button class="btn qsay" data-say="Maria, onde está seu casaco?">🔊 Escuchar la frase</button>
+  </div>
+  <div class="q" data-ans="dele" data-why="El dueño es Pedro → &lt;b&gt;dele&lt;/b&gt;.">
+    <p class="qs">A casa <span class="blank">____</span> (de Pedro) é nova.</p>
+    <div class="opts"><button class="opt" data-v="dela">dela</button><button class="opt" data-v="dele">dele</button></div>
+    <p class="fb"></p>
+    <button class="btn qsay" data-say="A casa dele é nova.">🔊 Escuchar la frase</button>
+  </div>
+  <div class="q" data-ans="nossa" data-why="professora es femenino → &lt;b&gt;nossa&lt;/b&gt;.">
+    <p class="qs">Nós adoramos <span class="blank">____</span> professora.</p>
+    <div class="opts"><button class="opt" data-v="nosso">nosso</button><button class="opt" data-v="nossa">nossa</button></div>
+    <p class="fb"></p>
+    <button class="btn qsay" data-say="Nós adoramos nossa professora.">🔊 Escuchar la frase</button>
+  </div>
+  <div class="q" data-ans="da" data-why="de + a = &lt;b&gt;da&lt;/b&gt;: &lt;i&gt;da minha casa&lt;/i&gt;.">
+    <p class="qs">Eu gosto <span class="blank">____</span> minha casa.</p>
+    <div class="opts"><button class="opt" data-v="do">do</button><button class="opt" data-v="da">da</button><button class="opt" data-v="de a">de a</button></div>
+    <p class="fb"></p>
+    <button class="btn qsay" data-say="Eu gosto da minha casa.">🔊 Escuchar la frase</button>
+  </div>
+  <div class="q" data-ans="delas" data-why="Las dueñas son mujeres → &lt;b&gt;delas&lt;/b&gt;.">
+    <p class="qs">As blusas <span class="blank">____</span> (de Ana e Rita) são lindas.</p>
+    <div class="opts"><button class="opt" data-v="deles">deles</button><button class="opt" data-v="delas">delas</button></div>
+    <p class="fb"></p>
+    <button class="btn qsay" data-say="As blusas delas são lindas.">🔊 Escuchar la frase</button>
+  </div>
+  <div class="q" data-ans="tuas" data-why="chaves es femenino plural → &lt;b&gt;tuas&lt;/b&gt;.">
+    <p class="qs">Tu esqueceste <span class="blank">____</span> chaves.</p>
+    <div class="opts"><button class="opt" data-v="teus">teus</button><button class="opt" data-v="tuas">tuas</button></div>
+    <p class="fb"></p>
+    <button class="btn qsay" data-say="Tu esqueceste tuas chaves.">🔊 Escuchar la frase</button>
+  </div>
+  <div class="q" data-ans="sua" data-why="jaqueta es femenino → &lt;b&gt;sua&lt;/b&gt;.">
+    <p class="qs">Você pode me emprestar <span class="blank">____</span> jaqueta?</p>
+    <div class="opts"><button class="opt" data-v="sua">sua</button><button class="opt" data-v="seu">seu</button></div>
+    <p class="fb"></p>
+    <button class="btn qsay" data-say="Você pode me emprestar sua jaqueta?">🔊 Escuchar la frase</button>
+  </div>
+  <div class="q" data-ans="meu" data-why="casaco es masculino → &lt;b&gt;meu&lt;/b&gt;.">
+    <p class="qs">Esse casaco é <span class="blank">____</span>.</p>
+    <div class="opts"><button class="opt" data-v="minha">minha</button><button class="opt" data-v="meu">meu</button></div>
+    <p class="fb"></p>
+    <button class="btn qsay" data-say="Esse casaco é meu.">🔊 Escuchar la frase</button>
+  </div>
+  <div class="q" data-ans="sua" data-why="En la conversación se usa &lt;b&gt;sua&lt;/b&gt;.">
+    <p class="qs">Vocês gostam da <span class="blank">____</span> escola? (conversación diaria)</p>
+    <div class="opts"><button class="opt" data-v="vossa">vossa</button><button class="opt" data-v="sua">sua</button></div>
+    <p class="fb"></p>
+    <button class="btn qsay" data-say="Vocês gostam da sua escola?">🔊 Escuchar la frase</button>
+  </div>
+  <div class="quizbar"><button class="btn reset">↺ Reiniciar</button><span class="score"></span></div>
+</div>
+</div>
+
+<h3 class="bigsec" id="r-pos-errores">Errores y detalles</h3>
+<div class="card">
+  <h3>⚠️ Errores comunes</h3>
+  <ul class="errlist">
+    <li><span class="bad">Minha irmão é alto.</span> → <span class="good">Meu irmão é alto.</span> <button class="btn" data-say="Meu irmão é alto.">🔊</button><br><span class="note">Concuerda con la cosa poseída: <i>irmão</i> es masculino → <b>meu</b>.</span></li>
+    <li><span class="bad">As minha amigas chegaram.</span> → <span class="good">As minhas amigas chegaram.</span> <button class="btn" data-say="As minhas amigas chegaram.">🔊</button><br><span class="note">El plural también cambia el posesivo.</span></li>
+    <li><span class="bad">A casa dele (de Ana) é linda.</span> → <span class="good">A casa dela é linda.</span> <button class="btn" data-say="A casa dela é linda.">🔊</button><br><span class="note">Con <b>dele/dela</b> manda el dueño: Ana → <b>dela</b>.</span></li>
+    <li><span class="bad">Eu gosto de o meu trabalho.</span> → <span class="good">Eu gosto do meu trabalho.</span> <button class="btn" data-say="Eu gosto do meu trabalho.">🔊</button><br><span class="note"><i>de + o</i> se une: <b>do</b>.</span></li>
+    <li><span class="bad">Eu vou a a minha escola.</span> → <span class="good">Eu vou à minha escola.</span> <button class="btn" data-say="Eu vou à minha escola.">🔊</button><br><span class="note"><i>a + a</i> = <b>à</b>.</span></li>
+    <li><span class="bad">Nosso casa é grande.</span> → <span class="good">Nossa casa é grande.</span> <button class="btn" data-say="Nossa casa é grande.">🔊</button><br><span class="note"><i>casa</i> es femenino → <b>nossa</b>.</span></li>
+  </ul>
+  <h3 style="margin-top:14px">📍 Para tener en cuenta</h3>
+  <ul>
+    <li><b>Seu</b> también es un título informal: <i>Seu João</i> = “don João”.</li>
+    <li><b>Nossa!</b> sola es una exclamación: “¡caramba!”.</li>
+    <li><b>seu/sua</b> pueden significar “tu” o “su”: si hay duda, usa <b>dele/dela</b>.</li>
+    <li><b>vosso/vossa</b> casi no se usan en conversación: se dice <b>de vocês</b> o <b>seu/sua</b>.</li>
+  </ul>
+</div>
+
+</section>
+<section id="gram-contracciones" data-unit="Grupo">
+
+<h2>Contracciones <small style="font-weight:400;color:var(--muted)">· ao, do, no, pelo…</small></h2>
+<p>Una <b>contracción</b> es la unión de una <b>preposición</b> (a, de, em, por…) con un <b>artículo, pronombre o demostrativo</b>. Se escribe como una sola palabra: <i>de + o = <b>do</b></i>. Aquí van ordenadas en 12 grupos, de las más usadas a las menos usadas.</p>
+
+<div class="subnav"><a href="#r-con-resumen">Resumen</a><a href="#r-con-reglas">Los 12 grupos</a><a href="#r-con-ayuda">Para entenderlo mejor</a><a href="#r-con-compara">Compara</a><a href="#r-con-practica">Práctica final</a><a href="#r-con-errores">Errores</a></div>
+
+<h3 class="bigsec" id="r-con-resumen">Resumen</h3>
+<div class="card">
+  <p class="note" style="margin-top:0">Toca cada forma para oírla dentro de una frase.</p>
+  <div class="tablewrap">
+  <table>
+    <tr><th>Preposición</th><th>Masc. sing.</th><th>Fem. sing.</th><th>Masc. pl.</th><th>Fem. pl.</th></tr>
+    <tr><td><b>a</b></td><td><button class="btn tbtn" data-say="ao mercado">ao</button></td><td><button class="btn tbtn" data-say="à escola">à</button></td><td><button class="btn tbtn" data-say="aos sábados">aos</button></td><td><button class="btn tbtn" data-say="às sete horas">às</button></td></tr>
+    <tr><td><b>de</b></td><td><button class="btn tbtn" data-say="do Peru">do</button></td><td><button class="btn tbtn" data-say="da escola">da</button></td><td><button class="btn tbtn" data-say="dos amigos">dos</button></td><td><button class="btn tbtn" data-say="das aulas">das</button></td></tr>
+    <tr><td><b>em</b></td><td><button class="btn tbtn" data-say="no parque">no</button></td><td><button class="btn tbtn" data-say="na cidade">na</button></td><td><button class="btn tbtn" data-say="nos Estados Unidos">nos</button></td><td><button class="btn tbtn" data-say="nas bolsas">nas</button></td></tr>
+    <tr><td><b>por</b></td><td><button class="btn tbtn" data-say="pelo parque">pelo</button></td><td><button class="btn tbtn" data-say="pela escola">pela</button></td><td><button class="btn tbtn" data-say="pelos amigos">pelos</button></td><td><button class="btn tbtn" data-say="pelas flores">pelas</button></td></tr>
+    <tr><td><b>em + indefinido</b></td><td><button class="btn tbtn" data-say="num banco">num</button></td><td><button class="btn tbtn" data-say="numa casa">numa</button></td><td><button class="btn tbtn" data-say="nuns apartamentos">nuns</button></td><td><button class="btn tbtn" data-say="numas festas">numas</button></td></tr>
+    <tr><td><b>para (informal)</b></td><td><button class="btn tbtn" data-say="pro mercado">pro</button></td><td><button class="btn tbtn" data-say="pra escola">pra</button></td><td><button class="btn tbtn" data-say="pros alunos">pros</button></td><td><button class="btn tbtn" data-say="pras crianças">pras</button></td></tr>
+  </table>
+  </div>
+  <h4>Con pronombres, demostrativos y lugar</h4>
+  <div class="tablewrap">
+  <table>
+    <tr><th>Se forma con…</th><th>Contracciones</th></tr>
+    <tr><td><b>de + esse / este / aquele</b></td><td><button class="btn tbtn" data-say="desse casaco">desse</button> <button class="btn tbtn" data-say="dessa gravata">dessa</button> <button class="btn tbtn" data-say="deste livro">deste</button> <button class="btn tbtn" data-say="desta cidade">desta</button> <button class="btn tbtn" data-say="daquele bolo">daquele</button> <button class="btn tbtn" data-say="daquela jaqueta">daquela</button></td></tr>
+    <tr><td><b>em + esse / este / aquele</b></td><td><button class="btn tbtn" data-say="nesse prédio">nesse</button> <button class="btn tbtn" data-say="nessa loja">nessa</button> <button class="btn tbtn" data-say="neste momento">neste</button> <button class="btn tbtn" data-say="nesta semana">nesta</button> <button class="btn tbtn" data-say="naquele dia">naquele</button> <button class="btn tbtn" data-say="naquela loja">naquela</button></td></tr>
+    <tr><td><b>de / em + ele, ela</b></td><td><button class="btn tbtn" data-say="Eu gosto dele.">dele</button> <button class="btn tbtn" data-say="Eu gosto dela.">dela</button> <button class="btn tbtn" data-say="Eu penso nele.">nele</button> <button class="btn tbtn" data-say="Eu penso nela.">nela</button> <button class="btn tbtn" data-say="A casa deles">deles</button> <button class="btn tbtn" data-say="A casa delas">delas</button></td></tr>
+    <tr><td><b>de + lugar</b></td><td><button class="btn tbtn" data-say="perto daqui">daqui</button> <button class="btn tbtn" data-say="longe dali">dali</button> <button class="btn tbtn" data-say="sai daí">daí</button></td></tr>
+    <tr><td><b>com + pronombre</b></td><td><button class="btn tbtn" data-say="Vem comigo!">comigo</button> <button class="btn tbtn" data-say="Eu vou contigo.">contigo</button> <button class="btn tbtn" data-say="Ela vem conosco.">conosco</button></td></tr>
+  </table>
+  </div>
+  <h4>Orden de los 12 grupos</h4>
+  <ol>
+    <li><b>ao · à · aos · às</b> <span class="note">· a + artículo (o, a, os, as)</span></li>
+    <li><b>do · da · dos · das</b> <span class="note">· de + artículo (o, a, os, as)</span></li>
+    <li><b>no · na · nos · nas</b> <span class="note">· em + artículo (o, a, os, as)</span></li>
+    <li><b>pelo · pela · pelos · pelas</b> <span class="note">· por + artículo (o, a, os, as)</span></li>
+    <li><b>num · numa · nuns · numas</b> <span class="note">· em + artículo indefinido (um, uma, uns, umas)</span></li>
+    <li><b>dele · dela · nele · nela</b> <span class="note">· de / em + pronombre (ele, ela, eles, elas)</span></li>
+    <li><b>desse · dessa · nesse · nessa</b> <span class="note">· de / em + esse, essa</span></li>
+    <li><b>deste · desta · neste · nesta</b> <span class="note">· de / em + este, esta</span></li>
+    <li><b>daquele · daquela · naquele · naquela</b> <span class="note">· de / em / a + aquele, aquela</span></li>
+    <li><b>daqui · dali · daí</b> <span class="note">· de + adverbios de lugar (aqui, ali, aí)</span></li>
+    <li><b>comigo · contigo · conosco</b> <span class="note">· com + pronombre (mim, ti, nós)</span></li>
+    <li><b>pro · pra · pros · pras</b> <span class="note">· para + artículo (informal, hablado)</span></li>
+  </ol>
+  <div class="callout"><b>💡 Idea clave</b><p>Cuando una preposición va <b>pegada a un artículo, pronombre o demostrativo</b>, se une en una sola palabra. Si no hay artículo (<i>de Lima</i>), no hay contracción.</p></div>
+</div>
+
+<h3 class="bigsec" id="r-con-reglas">Los 12 grupos</h3>
+<div class="card rule">
+  <span class="tag">Grupo 1 · <b>a</b> + artículo (o, a, os, as)</span>
+  <h3>ao · à · aos · às</h3>
+  <p>La preposición <b>a</b> (“a, hacia”) se une al artículo definido. Se usa con <i>ir a, chegar a, dar a, falar a</i>, con <b>horas</b> (<i>às sete</i>) y con <b>días repetidos</b> (<i>aos domingos</i>).</p>
+  <div class="tablewrap">
+  <table class="formtable">
+    <tr><th>Forma</th><th>Suena</th><th>Se forma con…</th><th>Ejemplo</th></tr>
+    <tr><td><button class="btn tbtn" data-say="ao mercado"><b>ao</b></button></td><td><i>áu</i></td><td>a + o (masculino singular)</td><td><button class="btn tbtn" data-say="ao mercado">ao mercado</button></td></tr>
+    <tr><td><button class="btn tbtn" data-say="à escola"><b>à</b></button></td><td><i>a</i></td><td>a + a (femenino singular)</td><td><button class="btn tbtn" data-say="à escola">à escola</button></td></tr>
+    <tr><td><button class="btn tbtn" data-say="aos sábados"><b>aos</b></button></td><td><i>áus</i></td><td>a + os (masculino plural)</td><td><button class="btn tbtn" data-say="aos sábados">aos sábados</button></td></tr>
+    <tr><td><button class="btn tbtn" data-say="às sete horas"><b>às</b></button></td><td><i>as</i></td><td>a + as (femenino plural)</td><td><button class="btn tbtn" data-say="às sete horas">às sete horas</button></td></tr>
+  </table>
+  </div>
+  <div class="chips">
+    <button class="chip" data-say="ao mercado"><b>ao mercado</b><small>áu mer-ká-du · al mercado</small></button>
+    <button class="chip" data-say="à escola"><b>à escola</b><small>a es-kó-la · a la escuela</small></button>
+    <button class="chip" data-say="aos sábados"><b>aos sábados</b><small>áus sá-ba-dus · los sábados</small></button>
+    <button class="chip" data-say="às sete horas"><b>às sete horas</b><small>as sé-chi ó-ras · a las siete</small></button>
+  </div>
+
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Eu vou <mark class="v">ao</mark> mercado.</p>
+    <p class="es">Voy al mercado.</p>
+    <p class="say">Suena: <b>áu</b></p>
+    <button class="btn" data-say="Eu vou ao mercado.">▶ Normal</button><button class="btn" data-say="Eu vou ao mercado." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Eu vou <mark class="v">à</mark> escola.</p>
+    <p class="es">Voy a la escuela.</p>
+    <p class="say">Suena: <b>a</b></p>
+    <button class="btn" data-say="Eu vou à escola.">▶ Normal</button><button class="btn" data-say="Eu vou à escola." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Eu acordo <mark class="v">às</mark> sete horas.</p>
+    <p class="es">Me despierto a las siete.</p>
+    <p class="say">Suena: <b>as</b></p>
+    <button class="btn" data-say="Eu acordo às sete horas.">▶ Normal</button><button class="btn" data-say="Eu acordo às sete horas." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Eu jogo futebol <mark class="v">aos</mark> sábados.</p>
+    <p class="es">Juego fútbol los sábados.</p>
+    <p class="say">Suena: <b>áus</b></p>
+    <button class="btn" data-say="Eu jogo futebol aos sábados.">▶ Normal</button><button class="btn" data-say="Eu jogo futebol aos sábados." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="callout">
+    <b>📝 Ojo</b>
+    <p>El <b>acento grave</b> (<i>à, às</i>) marca la fusión de dos “a”, y solo existe en femenino. Truco: cambia la palabra por una masculina; si queda <i>ao</i>, la femenina lleva <i>à</i>.</p>
+  </div>
+  <div class="quiz">
+  <h4>✍️ Práctica</h4>
+  <div class="q" data-ans="ao" data-why="mercado es masculino → &lt;b&gt;ao&lt;/b&gt;.">
+    <p class="qs">Eu vou <span class="blank">____</span> mercado.</p>
+    <div class="opts"><button class="opt" data-v="ao">ao</button><button class="opt" data-v="à">à</button></div>
+    <p class="fb"></p>
+    <button class="btn qsay" data-say="Eu vou ao mercado.">🔊 Escuchar la frase</button>
+  </div>
+  <div class="q" data-ans="à" data-why="escola es femenino → &lt;b&gt;à&lt;/b&gt;.">
+    <p class="qs">Eu vou <span class="blank">____</span> escola.</p>
+    <div class="opts"><button class="opt" data-v="ao">ao</button><button class="opt" data-v="à">à</button></div>
+    <p class="fb"></p>
+    <button class="btn qsay" data-say="Eu vou à escola.">🔊 Escuchar la frase</button>
+  </div>
+  <div class="q" data-ans="às" data-why="horas es femenino plural → &lt;b&gt;às&lt;/b&gt;.">
+    <p class="qs">Eu acordo <span class="blank">____</span> sete horas.</p>
+    <div class="opts"><button class="opt" data-v="aos">aos</button><button class="opt" data-v="às">às</button></div>
+    <p class="fb"></p>
+    <button class="btn qsay" data-say="Eu acordo às sete horas.">🔊 Escuchar la frase</button>
+  </div>
+  <div class="q" data-ans="aos" data-why="sábados es masculino plural → &lt;b&gt;aos&lt;/b&gt;.">
+    <p class="qs">Eu jogo futebol <span class="blank">____</span> sábados.</p>
+    <div class="opts"><button class="opt" data-v="aos">aos</button><button class="opt" data-v="às">às</button></div>
+    <p class="fb"></p>
+    <button class="btn qsay" data-say="Eu jogo futebol aos sábados.">🔊 Escuchar la frase</button>
+  </div>
+  <div class="quizbar"><button class="btn reset">↺ Reiniciar</button></div>
+</div>
+</div>
+
+<div class="card rule">
+  <span class="tag">Grupo 2 · <b>de</b> + artículo (o, a, os, as)</span>
+  <h3>do · da · dos · das</h3>
+  <p>La preposición <b>de</b> (“de”) se une al artículo definido. Se usa con <i>gostar de</i>, para decir el <b>origen</b> (<i>sou do Peru</i>), la <b>posesión</b> (<i>a casa do meu tio</i>) y el <b>tema</b>.</p>
+  <div class="tablewrap">
+  <table class="formtable">
+    <tr><th>Forma</th><th>Suena</th><th>Se forma con…</th><th>Ejemplo</th></tr>
+    <tr><td><button class="btn tbtn" data-say="do Peru"><b>do</b></button></td><td><i>du</i></td><td>de + o</td><td><button class="btn tbtn" data-say="do Peru">do Peru</button></td></tr>
+    <tr><td><button class="btn tbtn" data-say="da escola"><b>da</b></button></td><td><i>da</i></td><td>de + a</td><td><button class="btn tbtn" data-say="da escola">da escola</button></td></tr>
+    <tr><td><button class="btn tbtn" data-say="dos amigos"><b>dos</b></button></td><td><i>dus</i></td><td>de + os</td><td><button class="btn tbtn" data-say="dos amigos">dos amigos</button></td></tr>
+    <tr><td><button class="btn tbtn" data-say="das aulas"><b>das</b></button></td><td><i>das</i></td><td>de + as</td><td><button class="btn tbtn" data-say="das aulas">das aulas</button></td></tr>
+  </table>
+  </div>
+  <div class="chips">
+    <button class="chip" data-say="do Peru"><b>do Peru</b><small>du pe-rú · de Perú</small></button>
+    <button class="chip" data-say="da Colômbia"><b>da Colômbia</b><small>da ko-lôm-bi-a · de Colombia</small></button>
+    <button class="chip" data-say="dos amigos"><b>dos amigos</b><small>dus a-mí-gus · de los amigos</small></button>
+    <button class="chip" data-say="das aulas"><b>das aulas</b><small>das áu-las · de las clases</small></button>
+  </div>
+
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Eu sou <mark class="v">do</mark> Peru.</p>
+    <p class="es">Soy de Perú.</p>
+    <p class="say">Suena: <b>du</b></p>
+    <button class="btn" data-say="Eu sou do Peru.">▶ Normal</button><button class="btn" data-say="Eu sou do Peru." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Ela é <mark class="v">da</mark> Colômbia.</p>
+    <p class="es">Ella es de Colombia.</p>
+    <p class="say">Suena: <b>da</b></p>
+    <button class="btn" data-say="Ela é da Colômbia.">▶ Normal</button><button class="btn" data-say="Ela é da Colômbia." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Eu gosto <mark class="v">dos</mark> meus amigos.</p>
+    <p class="es">Me gustan mis amigos.</p>
+    <p class="say">Suena: <b>dus</b></p>
+    <button class="btn" data-say="Eu gosto dos meus amigos.">▶ Normal</button><button class="btn" data-say="Eu gosto dos meus amigos." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">O preço <mark class="v">das</mark> blusas é alto.</p>
+    <p class="es">El precio de las blusas es alto.</p>
+    <p class="say">Suena: <b>das</b></p>
+    <button class="btn" data-say="O preço das blusas é alto.">▶ Normal</button><button class="btn" data-say="O preço das blusas é alto." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="callout">
+    <b>📝 Ojo</b>
+    <p>Con <b>nombres de ciudad</b> (sin artículo) no hay contracción: <i>sou <b>de</b> Lima</i>, no <i>sou do Lima</i>.</p>
+  </div>
+  <div class="quiz">
+  <h4>✍️ Práctica</h4>
+  <div class="q" data-ans="do" data-why="Peru lleva artículo masculino → &lt;b&gt;do&lt;/b&gt;.">
+    <p class="qs">Eu sou <span class="blank">____</span> Peru.</p>
+    <div class="opts"><button class="opt" data-v="da">da</button><button class="opt" data-v="do">do</button></div>
+    <p class="fb"></p>
+    <button class="btn qsay" data-say="Eu sou do Peru.">🔊 Escuchar la frase</button>
+  </div>
+  <div class="q" data-ans="da" data-why="Colômbia lleva artículo femenino → &lt;b&gt;da&lt;/b&gt;.">
+    <p class="qs">Ela é <span class="blank">____</span> Colômbia.</p>
+    <div class="opts"><button class="opt" data-v="da">da</button><button class="opt" data-v="do">do</button></div>
+    <p class="fb"></p>
+    <button class="btn qsay" data-say="Ela é da Colômbia.">🔊 Escuchar la frase</button>
+  </div>
+  <div class="q" data-ans="das" data-why="aulas es femenino plural → &lt;b&gt;das&lt;/b&gt;.">
+    <p class="qs">Eu gosto <span class="blank">____</span> aulas.</p>
+    <div class="opts"><button class="opt" data-v="dos">dos</button><button class="opt" data-v="das">das</button></div>
+    <p class="fb"></p>
+    <button class="btn qsay" data-say="Eu gosto das aulas.">🔊 Escuchar la frase</button>
+  </div>
+  <div class="q" data-ans="de" data-why="Lima no lleva artículo → &lt;b&gt;de&lt;/b&gt; sin contraer.">
+    <p class="qs">Eu sou <span class="blank">____</span> Lima.</p>
+    <div class="opts"><button class="opt" data-v="de">de</button><button class="opt" data-v="do">do</button></div>
+    <p class="fb"></p>
+    <button class="btn qsay" data-say="Eu sou de Lima.">🔊 Escuchar la frase</button>
+  </div>
+  <div class="quizbar"><button class="btn reset">↺ Reiniciar</button></div>
+</div>
+</div>
+
+<div class="card rule">
+  <span class="tag">Grupo 3 · <b>em</b> + artículo (o, a, os, as)</span>
+  <h3>no · na · nos · nas</h3>
+  <p>La preposición <b>em</b> (“en”) se une al artículo definido. Se usa para <b>ubicación</b> (<i>no parque</i>), <b>tiempo</b> (<i>no verão</i>) y con verbos como <i>pensar em, confiar em</i>.</p>
+  <div class="tablewrap">
+  <table class="formtable">
+    <tr><th>Forma</th><th>Suena</th><th>Se forma con…</th><th>Ejemplo</th></tr>
+    <tr><td><button class="btn tbtn" data-say="no parque"><b>no</b></button></td><td><i>nu</i></td><td>em + o</td><td><button class="btn tbtn" data-say="no parque">no parque</button></td></tr>
+    <tr><td><button class="btn tbtn" data-say="na escola"><b>na</b></button></td><td><i>na</i></td><td>em + a</td><td><button class="btn tbtn" data-say="na escola">na escola</button></td></tr>
+    <tr><td><button class="btn tbtn" data-say="nos Estados Unidos"><b>nos</b></button></td><td><i>nus</i></td><td>em + os</td><td><button class="btn tbtn" data-say="nos Estados Unidos">nos Estados Unidos</button></td></tr>
+    <tr><td><button class="btn tbtn" data-say="nas bolsas"><b>nas</b></button></td><td><i>nas</i></td><td>em + as</td><td><button class="btn tbtn" data-say="nas bolsas">nas bolsas</button></td></tr>
+  </table>
+  </div>
+  <div class="chips">
+    <button class="chip" data-say="no parque"><b>no parque</b><small>nu pár-ki · en el parque</small></button>
+    <button class="chip" data-say="na escola"><b>na escola</b><small>na es-kó-la · en la escuela</small></button>
+    <button class="chip" data-say="nos Estados Unidos"><b>nos Estados Unidos</b><small>nus es-tá-dus u-ní-dus · en Estados Unidos</small></button>
+    <button class="chip" data-say="nas bolsas"><b>nas bolsas</b><small>nas bôl-sas · en los bolsos</small></button>
+  </div>
+
+  <div class="ex">
+    <p class="pt" lang="pt-BR">O livro está <mark class="v">no</mark> quarto.</p>
+    <p class="es">El libro está en el cuarto.</p>
+    <p class="say">Suena: <b>nu</b></p>
+    <button class="btn" data-say="O livro está no quarto.">▶ Normal</button><button class="btn" data-say="O livro está no quarto." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Eu moro <mark class="v">na</mark> cidade.</p>
+    <p class="es">Vivo en la ciudad.</p>
+    <p class="say">Suena: <b>na</b></p>
+    <button class="btn" data-say="Eu moro na cidade.">▶ Normal</button><button class="btn" data-say="Eu moro na cidade." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Eles moram <mark class="v">nos</mark> Estados Unidos.</p>
+    <p class="es">Ellos viven en Estados Unidos.</p>
+    <p class="say">Suena: <b>nus</b></p>
+    <button class="btn" data-say="Eles moram nos Estados Unidos.">▶ Normal</button><button class="btn" data-say="Eles moram nos Estados Unidos." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">As chaves estão <mark class="v">nas</mark> bolsas.</p>
+    <p class="es">Las llaves están en los bolsos.</p>
+    <p class="say">Suena: <b>nas</b></p>
+    <button class="btn" data-say="As chaves estão nas bolsas.">▶ Normal</button><button class="btn" data-say="As chaves estão nas bolsas." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="callout">
+    <b>📝 Ojo</b>
+    <p>Con ciudades sin artículo se usa <b>em</b> solo: <i>moro <b>em</b> Lima</i>, <i>moro <b>em</b> Portugal</i>.</p>
+  </div>
+  <div class="quiz">
+  <h4>✍️ Práctica</h4>
+  <div class="q" data-ans="no" data-why="quarto es masculino → &lt;b&gt;no&lt;/b&gt;.">
+    <p class="qs">O livro está <span class="blank">____</span> quarto.</p>
+    <div class="opts"><button class="opt" data-v="na">na</button><button class="opt" data-v="no">no</button></div>
+    <p class="fb"></p>
+    <button class="btn qsay" data-say="O livro está no quarto.">🔊 Escuchar la frase</button>
+  </div>
+  <div class="q" data-ans="na" data-why="cidade es femenino → &lt;b&gt;na&lt;/b&gt;.">
+    <p class="qs">Eu moro <span class="blank">____</span> cidade.</p>
+    <div class="opts"><button class="opt" data-v="no">no</button><button class="opt" data-v="na">na</button></div>
+    <p class="fb"></p>
+    <button class="btn qsay" data-say="Eu moro na cidade.">🔊 Escuchar la frase</button>
+  </div>
+  <div class="q" data-ans="nas" data-why="bolsas es femenino plural → &lt;b&gt;nas&lt;/b&gt;.">
+    <p class="qs">As chaves estão <span class="blank">____</span> bolsas.</p>
+    <div class="opts"><button class="opt" data-v="nos">nos</button><button class="opt" data-v="nas">nas</button></div>
+    <p class="fb"></p>
+    <button class="btn qsay" data-say="As chaves estão nas bolsas.">🔊 Escuchar la frase</button>
+  </div>
+  <div class="q" data-ans="em" data-why="Lima no lleva artículo → &lt;b&gt;em&lt;/b&gt;.">
+    <p class="qs">Eu moro <span class="blank">____</span> Lima.</p>
+    <div class="opts"><button class="opt" data-v="em">em</button><button class="opt" data-v="no">no</button></div>
+    <p class="fb"></p>
+    <button class="btn qsay" data-say="Eu moro em Lima.">🔊 Escuchar la frase</button>
+  </div>
+  <div class="quizbar"><button class="btn reset">↺ Reiniciar</button></div>
+</div>
+</div>
+
+<div class="card rule">
+  <span class="tag">Grupo 4 · <b>por</b> + artículo (o, a, os, as)</span>
+  <h3>pelo · pela · pelos · pelas</h3>
+  <p>La preposición <b>por</b> (“por, a través de”) se une al artículo definido. Se usa para <b>pasar por un lugar</b> (<i>passo pela escola</i>), <b>medios</b> (<i>pelo telefone</i>) y para agradecer (<i>obrigado pelo presente</i>).</p>
+  <div class="tablewrap">
+  <table class="formtable">
+    <tr><th>Forma</th><th>Suena</th><th>Se forma con…</th><th>Ejemplo</th></tr>
+    <tr><td><button class="btn tbtn" data-say="pelo parque"><b>pelo</b></button></td><td><i>pê-lu</i></td><td>por + o</td><td><button class="btn tbtn" data-say="pelo parque">pelo parque</button></td></tr>
+    <tr><td><button class="btn tbtn" data-say="pela escola"><b>pela</b></button></td><td><i>pê-la</i></td><td>por + a</td><td><button class="btn tbtn" data-say="pela escola">pela escola</button></td></tr>
+    <tr><td><button class="btn tbtn" data-say="pelos amigos"><b>pelos</b></button></td><td><i>pê-lus</i></td><td>por + os</td><td><button class="btn tbtn" data-say="pelos amigos">pelos amigos</button></td></tr>
+    <tr><td><button class="btn tbtn" data-say="pelas flores"><b>pelas</b></button></td><td><i>pê-las</i></td><td>por + as</td><td><button class="btn tbtn" data-say="pelas flores">pelas flores</button></td></tr>
+  </table>
+  </div>
+  <div class="chips">
+    <button class="chip" data-say="pelo parque"><b>pelo parque</b><small>pê-lu pár-ki · por el parque</small></button>
+    <button class="chip" data-say="pela escola"><b>pela escola</b><small>pê-la es-kó-la · por la escuela</small></button>
+    <button class="chip" data-say="pelo telefone"><b>pelo telefone</b><small>pê-lu te-le-fô-ni · por teléfono</small></button>
+    <button class="chip" data-say="pelas flores"><b>pelas flores</b><small>pê-las flô-ris · por las flores</small></button>
+  </div>
+
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Eu passo <mark class="v">pela</mark> escola todos os dias.</p>
+    <p class="es">Paso por la escuela todos los días.</p>
+    <p class="say">Suena: <b>pê-la</b></p>
+    <button class="btn" data-say="Eu passo pela escola todos os dias.">▶ Normal</button><button class="btn" data-say="Eu passo pela escola todos os dias." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Obrigado <mark class="v">pelo</mark> presente!</p>
+    <p class="es">¡Gracias por el regalo!</p>
+    <p class="say">Suena: <b>pê-lu</b></p>
+    <button class="btn" data-say="Obrigado pelo presente!">▶ Normal</button><button class="btn" data-say="Obrigado pelo presente!" data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Ela fala <mark class="v">pelo</mark> telefone.</p>
+    <p class="es">Ella habla por teléfono.</p>
+    <p class="say">Suena: <b>pê-lu</b></p>
+    <button class="btn" data-say="Ela fala pelo telefone.">▶ Normal</button><button class="btn" data-say="Ela fala pelo telefone." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Muito obrigada <mark class="v">pelas</mark> flores.</p>
+    <p class="es">Muchas gracias por las flores.</p>
+    <p class="say">Suena: <b>pê-las</b></p>
+    <button class="btn" data-say="Muito obrigada pelas flores.">▶ Normal</button><button class="btn" data-say="Muito obrigada pelas flores." data-slow="1">🐢 Lento</button>
+  </div>
+  <p class="note">En el habla oirás también <i>pro</i> y <i>pra</i> (de <i>para</i>), pero son otra contracción (grupo 12).</p>
+  <div class="quiz">
+  <h4>✍️ Práctica</h4>
+  <div class="q" data-ans="pelo" data-why="parque es masculino → &lt;b&gt;pelo&lt;/b&gt;.">
+    <p class="qs">Eu passo <span class="blank">____</span> parque.</p>
+    <div class="opts"><button class="opt" data-v="pela">pela</button><button class="opt" data-v="pelo">pelo</button></div>
+    <p class="fb"></p>
+    <button class="btn qsay" data-say="Eu passo pelo parque.">🔊 Escuchar la frase</button>
+  </div>
+  <div class="q" data-ans="pelo" data-why="presente es masculino → &lt;b&gt;pelo&lt;/b&gt;.">
+    <p class="qs">Obrigado <span class="blank">____</span> presente.</p>
+    <div class="opts"><button class="opt" data-v="pelo">pelo</button><button class="opt" data-v="pela">pela</button></div>
+    <p class="fb"></p>
+    <button class="btn qsay" data-say="Obrigado pelo presente.">🔊 Escuchar la frase</button>
+  </div>
+  <div class="q" data-ans="pelas" data-why="flores es femenino plural → &lt;b&gt;pelas&lt;/b&gt;.">
+    <p class="qs">Obrigada <span class="blank">____</span> flores.</p>
+    <div class="opts"><button class="opt" data-v="pelos">pelos</button><button class="opt" data-v="pelas">pelas</button></div>
+    <p class="fb"></p>
+    <button class="btn qsay" data-say="Obrigada pelas flores.">🔊 Escuchar la frase</button>
+  </div>
+  <div class="q" data-ans="pela" data-why="escola es femenino → &lt;b&gt;pela&lt;/b&gt;.">
+    <p class="qs">Eu passo <span class="blank">____</span> escola.</p>
+    <div class="opts"><button class="opt" data-v="pelo">pelo</button><button class="opt" data-v="pela">pela</button></div>
+    <p class="fb"></p>
+    <button class="btn qsay" data-say="Eu passo pela escola.">🔊 Escuchar la frase</button>
+  </div>
+  <div class="quizbar"><button class="btn reset">↺ Reiniciar</button></div>
+</div>
+</div>
+
+<div class="card rule">
+  <span class="tag">Grupo 5 · <b>em</b> + artículo indefinido (um, uma, uns, umas)</span>
+  <h3>num · numa · nuns · numas</h3>
+  <p>La preposición <b>em</b> también se une al artículo <b>indefinido</b> (<i>um, uma</i>). Es muy común en Brasil: <i>moro numa casa</i>. La unión de <b>de + um</b> (<i>dum, duma</i>) casi no se usa en Brasil: allí se dice <i>de um, de uma</i>.</p>
+  <div class="tablewrap">
+  <table class="formtable">
+    <tr><th>Forma</th><th>Suena</th><th>Se forma con…</th><th>Ejemplo</th></tr>
+    <tr><td><button class="btn tbtn" data-say="num banco"><b>num</b></button></td><td><i>nún</i></td><td>em + um</td><td><button class="btn tbtn" data-say="num banco">num banco</button></td></tr>
+    <tr><td><button class="btn tbtn" data-say="numa casa"><b>numa</b></button></td><td><i>nú-ma</i></td><td>em + uma</td><td><button class="btn tbtn" data-say="numa casa">numa casa</button></td></tr>
+    <tr><td><button class="btn tbtn" data-say="nuns apartamentos"><b>nuns</b></button></td><td><i>núns</i></td><td>em + uns</td><td><button class="btn tbtn" data-say="nuns apartamentos">nuns apartamentos</button></td></tr>
+    <tr><td><button class="btn tbtn" data-say="numas festas"><b>numas</b></button></td><td><i>nú-mas</i></td><td>em + umas</td><td><button class="btn tbtn" data-say="numas festas">numas festas</button></td></tr>
+  </table>
+  </div>
+  <div class="chips">
+    <button class="chip" data-say="num banco"><b>num banco</b><small>nún bán-ku · en un banco</small></button>
+    <button class="chip" data-say="numa casa"><b>numa casa</b><small>nú-ma ká-za · en una casa</small></button>
+    <button class="chip" data-say="num apartamento"><b>num apartamento</b><small>nún a-par-ta-mên-tu · en un apartamento</small></button>
+    <button class="chip" data-say="numa festa"><b>numa festa</b><small>nú-ma fés-ta · en una fiesta</small></button>
+  </div>
+
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Ele trabalha <mark class="v">num</mark> banco.</p>
+    <p class="es">Él trabaja en un banco.</p>
+    <p class="say">Suena: <b>nún</b></p>
+    <button class="btn" data-say="Ele trabalha num banco.">▶ Normal</button><button class="btn" data-say="Ele trabalha num banco." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Eu moro <mark class="v">numa</mark> casa grande.</p>
+    <p class="es">Vivo en una casa grande.</p>
+    <p class="say">Suena: <b>nú-ma</b></p>
+    <button class="btn" data-say="Eu moro numa casa grande.">▶ Normal</button><button class="btn" data-say="Eu moro numa casa grande." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Ela mora <mark class="v">num</mark> apartamento pequeno.</p>
+    <p class="es">Ella vive en un apartamento pequeño.</p>
+    <p class="say">Suena: <b>nún</b></p>
+    <button class="btn" data-say="Ela mora num apartamento pequeno.">▶ Normal</button><button class="btn" data-say="Ela mora num apartamento pequeno." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Eles estão <mark class="v">numa</mark> festa.</p>
+    <p class="es">Ellos están en una fiesta.</p>
+    <p class="say">Suena: <b>nú-ma</b></p>
+    <button class="btn" data-say="Eles estão numa festa.">▶ Normal</button><button class="btn" data-say="Eles estão numa festa." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="callout">
+    <b>📝 Ojo</b>
+    <p><b>em + um / uma</b> se une: <i>num, numa</i>. <b>de + um / uma</b> en Brasil normalmente <b>no</b> se une: <i>Eu gosto <b>de uma</b> blusa azul.</i></p>
+  </div>
+  <div class="quiz">
+  <h4>✍️ Práctica</h4>
+  <div class="q" data-ans="numa" data-why="casa es femenino → &lt;b&gt;numa&lt;/b&gt;.">
+    <p class="qs">Eu moro <span class="blank">____</span> casa grande.</p>
+    <div class="opts"><button class="opt" data-v="num">num</button><button class="opt" data-v="numa">numa</button></div>
+    <p class="fb"></p>
+    <button class="btn qsay" data-say="Eu moro numa casa grande.">🔊 Escuchar la frase</button>
+  </div>
+  <div class="q" data-ans="num" data-why="banco es masculino → &lt;b&gt;num&lt;/b&gt;.">
+    <p class="qs">Ele trabalha <span class="blank">____</span> banco.</p>
+    <div class="opts"><button class="opt" data-v="num">num</button><button class="opt" data-v="numa">numa</button></div>
+    <p class="fb"></p>
+    <button class="btn qsay" data-say="Ele trabalha num banco.">🔊 Escuchar la frase</button>
+  </div>
+  <div class="q" data-ans="numa" data-why="festa es femenino → &lt;b&gt;numa&lt;/b&gt;.">
+    <p class="qs">Eles estão <span class="blank">____</span> festa.</p>
+    <div class="opts"><button class="opt" data-v="num">num</button><button class="opt" data-v="numa">numa</button></div>
+    <p class="fb"></p>
+    <button class="btn qsay" data-say="Eles estão numa festa.">🔊 Escuchar la frase</button>
+  </div>
+  <div class="q" data-ans="num" data-why="apartamento es masculino → &lt;b&gt;num&lt;/b&gt;.">
+    <p class="qs">Ela mora <span class="blank">____</span> apartamento.</p>
+    <div class="opts"><button class="opt" data-v="numa">numa</button><button class="opt" data-v="num">num</button></div>
+    <p class="fb"></p>
+    <button class="btn qsay" data-say="Ela mora num apartamento.">🔊 Escuchar la frase</button>
+  </div>
+  <div class="quizbar"><button class="btn reset">↺ Reiniciar</button></div>
+</div>
+</div>
+
+<div class="card rule">
+  <span class="tag">Grupo 6 · <b>de / em</b> + pronombre (ele, ela, eles, elas)</span>
+  <h3>dele · dela · nele · nela</h3>
+  <p><b>de</b> y <b>em</b> también se unen a los pronombres <i>ele, ela, eles, elas</i>. Se usan con verbos como <i>gostar <b>de</b></i> (<i>gosto <b>dele</b></i>) y <i>pensar <b>em</b></i> (<i>penso <b>nela</b></i>). También forman los posesivos <i>dele / dela</i>.</p>
+  <div class="tablewrap">
+  <table class="formtable">
+    <tr><th>Forma</th><th>Suena</th><th>Se forma con…</th><th>Ejemplo</th></tr>
+    <tr><td><button class="btn tbtn" data-say="Eu gosto dele."><b>dele / dela</b></button></td><td><i>dê-li / dé-la</i></td><td>de + ele / ela</td><td><button class="btn tbtn" data-say="Eu gosto dele.">Eu gosto dele.</button></td></tr>
+    <tr><td><button class="btn tbtn" data-say="A casa deles é grande."><b>deles / delas</b></button></td><td><i>dê-lis / dé-las</i></td><td>de + eles / elas</td><td><button class="btn tbtn" data-say="A casa deles é grande.">A casa deles é grande.</button></td></tr>
+    <tr><td><button class="btn tbtn" data-say="Eu penso nela."><b>nele / nela</b></button></td><td><i>nê-li / né-la</i></td><td>em + ele / ela</td><td><button class="btn tbtn" data-say="Eu penso nela.">Eu penso nela.</button></td></tr>
+    <tr><td><button class="btn tbtn" data-say="Eu confio neles."><b>neles / nelas</b></button></td><td><i>nê-lis / né-las</i></td><td>em + eles / elas</td><td><button class="btn tbtn" data-say="Eu confio neles.">Eu confio neles.</button></td></tr>
+  </table>
+  </div>
+  <div class="chips">
+    <button class="chip" data-say="dele"><b>dele</b><small>dê-li · de él</small></button>
+    <button class="chip" data-say="dela"><b>dela</b><small>dé-la · de ella</small></button>
+    <button class="chip" data-say="nele"><b>nele</b><small>nê-li · en él</small></button>
+    <button class="chip" data-say="nela"><b>nela</b><small>né-la · en ella</small></button>
+    <button class="chip" data-say="deles"><b>deles</b><small>dê-lis · de ellos</small></button>
+    <button class="chip" data-say="nelas"><b>nelas</b><small>né-las · en ellas</small></button>
+  </div>
+
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Eu gosto <mark class="v">dele</mark>.</p>
+    <p class="es">Me gusta él.</p>
+    <p class="say">Suena: <b>dê-li</b></p>
+    <button class="btn" data-say="Eu gosto dele.">▶ Normal</button><button class="btn" data-say="Eu gosto dele." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Eu penso <mark class="v">nela</mark> todos os dias.</p>
+    <p class="es">Pienso en ella todos los días.</p>
+    <p class="say">Suena: <b>né-la</b></p>
+    <button class="btn" data-say="Eu penso nela todos os dias.">▶ Normal</button><button class="btn" data-say="Eu penso nela todos os dias." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">A casa <mark class="v">deles</mark> é grande.</p>
+    <p class="es">La casa de ellos es grande.</p>
+    <p class="say">Suena: <b>dê-lis</b></p>
+    <button class="btn" data-say="A casa deles é grande.">▶ Normal</button><button class="btn" data-say="A casa deles é grande." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Eu confio <mark class="v">neles</mark>.</p>
+    <p class="es">Confío en ellos.</p>
+    <p class="say">Suena: <b>nê-lis</b></p>
+    <button class="btn" data-say="Eu confio neles.">▶ Normal</button><button class="btn" data-say="Eu confio neles." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="callout">
+    <b>📝 Ojo</b>
+    <p>Cada verbo pide su preposición: <b>gostar de</b>, <b>pensar em</b>, <b>confiar em</b>. Después, esa preposición se une al pronombre.</p>
+  </div>
+  <div class="quiz">
+  <h4>✍️ Práctica</h4>
+  <div class="q" data-ans="nele" data-why="&lt;i&gt;pensar em&lt;/i&gt; + ele → &lt;b&gt;nele&lt;/b&gt;.">
+    <p class="qs">Eu penso <span class="blank">____</span>. (en él)</p>
+    <div class="opts"><button class="opt" data-v="dele">dele</button><button class="opt" data-v="nele">nele</button></div>
+    <p class="fb"></p>
+    <button class="btn qsay" data-say="Eu penso nele.">🔊 Escuchar la frase</button>
+  </div>
+  <div class="q" data-ans="dela" data-why="&lt;i&gt;gostar de&lt;/i&gt; + ela → &lt;b&gt;dela&lt;/b&gt;.">
+    <p class="qs">Eu gosto <span class="blank">____</span>. (de ella)</p>
+    <div class="opts"><button class="opt" data-v="nela">nela</button><button class="opt" data-v="dela">dela</button></div>
+    <p class="fb"></p>
+    <button class="btn qsay" data-say="Eu gosto dela.">🔊 Escuchar la frase</button>
+  </div>
+  <div class="q" data-ans="neles" data-why="&lt;i&gt;confiar em&lt;/i&gt; + eles → &lt;b&gt;neles&lt;/b&gt;.">
+    <p class="qs">Eu confio <span class="blank">____</span>. (en ellos)</p>
+    <div class="opts"><button class="opt" data-v="deles">deles</button><button class="opt" data-v="neles">neles</button></div>
+    <p class="fb"></p>
+    <button class="btn qsay" data-say="Eu confio neles.">🔊 Escuchar la frase</button>
+  </div>
+  <div class="q" data-ans="delas" data-why="posesión: de + elas → &lt;b&gt;delas&lt;/b&gt;.">
+    <p class="qs">A casa <span class="blank">____</span> é linda. (de ellas)</p>
+    <div class="opts"><button class="opt" data-v="delas">delas</button><button class="opt" data-v="nelas">nelas</button></div>
+    <p class="fb"></p>
+    <button class="btn qsay" data-say="A casa delas é linda.">🔊 Escuchar la frase</button>
+  </div>
+  <div class="quizbar"><button class="btn reset">↺ Reiniciar</button></div>
+</div>
+</div>
+
+<div class="card rule">
+  <span class="tag">Grupo 7 · <b>de / em</b> + esse, essa</span>
+  <h3>desse · dessa · nesse · nessa</h3>
+  <p><b>esse / essa</b> (“ese / esa”) señalan algo cercano a <b>quien escucha</b>. Con <b>de</b> y <b>em</b> se unen: <i>desse, dessa, nesse, nessa</i>. Las formas neutras son <i>disso</i> (de eso) y <i>nisso</i> (en eso).</p>
+  <div class="tablewrap">
+  <table class="formtable">
+    <tr><th>Forma</th><th>Suena</th><th>Se forma con…</th><th>Ejemplo</th></tr>
+    <tr><td><button class="btn tbtn" data-say="desse casaco"><b>desse</b></button></td><td><i>dê-si</i></td><td>de + esse</td><td><button class="btn tbtn" data-say="desse casaco">desse casaco</button></td></tr>
+    <tr><td><button class="btn tbtn" data-say="dessa gravata"><b>dessa</b></button></td><td><i>dé-sa</i></td><td>de + essa</td><td><button class="btn tbtn" data-say="dessa gravata">dessa gravata</button></td></tr>
+    <tr><td><button class="btn tbtn" data-say="nesse prédio"><b>nesse</b></button></td><td><i>nê-si</i></td><td>em + esse</td><td><button class="btn tbtn" data-say="nesse prédio">nesse prédio</button></td></tr>
+    <tr><td><button class="btn tbtn" data-say="nessa loja"><b>nessa</b></button></td><td><i>né-sa</i></td><td>em + essa</td><td><button class="btn tbtn" data-say="nessa loja">nessa loja</button></td></tr>
+  </table>
+  </div>
+  <div class="chips">
+    <button class="chip" data-say="desse casaco"><b>desse casaco</b><small>dê-si ka-zá-ku · de ese abrigo</small></button>
+    <button class="chip" data-say="dessa gravata"><b>dessa gravata</b><small>dé-sa gra-vá-ta · de esa corbata</small></button>
+    <button class="chip" data-say="nesse prédio"><b>nesse prédio</b><small>nê-si pré-dyi-u · en ese edificio</small></button>
+    <button class="chip" data-say="nessa loja"><b>nessa loja</b><small>né-sa ló-zha · en esa tienda</small></button>
+    <button class="chip" data-say="disso"><b>disso</b><small>dí-su · de eso</small></button>
+    <button class="chip" data-say="nisso"><b>nisso</b><small>ní-su · en eso</small></button>
+  </div>
+
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Eu gosto <mark class="v">desse</mark> casaco.</p>
+    <p class="es">Me gusta ese abrigo.</p>
+    <p class="say">Suena: <b>dê-si</b></p>
+    <button class="btn" data-say="Eu gosto desse casaco.">▶ Normal</button><button class="btn" data-say="Eu gosto desse casaco." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Eu gosto <mark class="v">dessa</mark> gravata.</p>
+    <p class="es">Me gusta esa corbata.</p>
+    <p class="say">Suena: <b>dé-sa</b></p>
+    <button class="btn" data-say="Eu gosto dessa gravata.">▶ Normal</button><button class="btn" data-say="Eu gosto dessa gravata." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Ela trabalha <mark class="v">nessa</mark> loja.</p>
+    <p class="es">Ella trabaja en esa tienda.</p>
+    <p class="say">Suena: <b>né-sa</b></p>
+    <button class="btn" data-say="Ela trabalha nessa loja.">▶ Normal</button><button class="btn" data-say="Ela trabalha nessa loja." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Eu gosto <mark class="v">disso</mark>.</p>
+    <p class="es">Me gusta eso.</p>
+    <p class="say">Suena: <b>dí-su</b></p>
+    <button class="btn" data-say="Eu gosto disso.">▶ Normal</button><button class="btn" data-say="Eu gosto disso." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="callout">
+    <b>📝 Ojo</b>
+    <p><b>esses / essas</b> (plural) hacen <b>desses / dessas / nesses / nessas</b>: <i>o preço desses sapatos</i>.</p>
+  </div>
+  <div class="quiz">
+  <h4>✍️ Práctica</h4>
+  <div class="q" data-ans="desse" data-why="casaco es masculino → &lt;b&gt;desse&lt;/b&gt;.">
+    <p class="qs">Eu gosto <span class="blank">____</span> casaco.</p>
+    <div class="opts"><button class="opt" data-v="dessa">dessa</button><button class="opt" data-v="desse">desse</button></div>
+    <p class="fb"></p>
+    <button class="btn qsay" data-say="Eu gosto desse casaco.">🔊 Escuchar la frase</button>
+  </div>
+  <div class="q" data-ans="dessa" data-why="gravata es femenino → &lt;b&gt;dessa&lt;/b&gt;.">
+    <p class="qs">Eu gosto <span class="blank">____</span> gravata.</p>
+    <div class="opts"><button class="opt" data-v="dessa">dessa</button><button class="opt" data-v="desse">desse</button></div>
+    <p class="fb"></p>
+    <button class="btn qsay" data-say="Eu gosto dessa gravata.">🔊 Escuchar la frase</button>
+  </div>
+  <div class="q" data-ans="nessa" data-why="loja es femenino → &lt;b&gt;nessa&lt;/b&gt;.">
+    <p class="qs">Ela trabalha <span class="blank">____</span> loja.</p>
+    <div class="opts"><button class="opt" data-v="nesse">nesse</button><button class="opt" data-v="nessa">nessa</button></div>
+    <p class="fb"></p>
+    <button class="btn qsay" data-say="Ela trabalha nessa loja.">🔊 Escuchar la frase</button>
+  </div>
+  <div class="q" data-ans="nesse" data-why="prédio es masculino → &lt;b&gt;nesse&lt;/b&gt;.">
+    <p class="qs">Eu moro <span class="blank">____</span> prédio.</p>
+    <div class="opts"><button class="opt" data-v="nesse">nesse</button><button class="opt" data-v="nessa">nessa</button></div>
+    <p class="fb"></p>
+    <button class="btn qsay" data-say="Eu moro nesse prédio.">🔊 Escuchar la frase</button>
+  </div>
+  <div class="quizbar"><button class="btn reset">↺ Reiniciar</button></div>
+</div>
+</div>
+
+<div class="card rule">
+  <span class="tag">Grupo 8 · <b>de / em</b> + este, esta</span>
+  <h3>deste · desta · neste · nesta</h3>
+  <p><b>este / esta</b> (“este / esta”) señalan algo cercano a <b>quien habla</b>. Con <b>de</b> y <b>em</b> se unen: <i>deste, desta, neste, nesta</i>. Las neutras son <i>disto</i> y <i>nisto</i>.</p>
+  <div class="tablewrap">
+  <table class="formtable">
+    <tr><th>Forma</th><th>Suena</th><th>Se forma con…</th><th>Ejemplo</th></tr>
+    <tr><td><button class="btn tbtn" data-say="deste livro"><b>deste</b></button></td><td><i>dês-chi</i></td><td>de + este</td><td><button class="btn tbtn" data-say="deste livro">deste livro</button></td></tr>
+    <tr><td><button class="btn tbtn" data-say="desta cidade"><b>desta</b></button></td><td><i>dés-ta</i></td><td>de + esta</td><td><button class="btn tbtn" data-say="desta cidade">desta cidade</button></td></tr>
+    <tr><td><button class="btn tbtn" data-say="neste momento"><b>neste</b></button></td><td><i>nês-chi</i></td><td>em + este</td><td><button class="btn tbtn" data-say="neste momento">neste momento</button></td></tr>
+    <tr><td><button class="btn tbtn" data-say="nesta semana"><b>nesta</b></button></td><td><i>nés-ta</i></td><td>em + esta</td><td><button class="btn tbtn" data-say="nesta semana">nesta semana</button></td></tr>
+  </table>
+  </div>
+  <div class="chips">
+    <button class="chip" data-say="deste livro"><b>deste livro</b><small>dês-chi lí-vru · de este libro</small></button>
+    <button class="chip" data-say="desta cidade"><b>desta cidade</b><small>dés-ta si-dá-dyi · de esta ciudad</small></button>
+    <button class="chip" data-say="neste momento"><b>neste momento</b><small>nês-chi mo-mên-tu · en este momento</small></button>
+    <button class="chip" data-say="nesta semana"><b>nesta semana</b><small>nés-ta se-mã-na · en esta semana</small></button>
+  </div>
+
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Eu gosto <mark class="v">deste</mark> livro.</p>
+    <p class="es">Me gusta este libro.</p>
+    <p class="say">Suena: <b>dês-chi</b></p>
+    <button class="btn" data-say="Eu gosto deste livro.">▶ Normal</button><button class="btn" data-say="Eu gosto deste livro." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Eu gosto <mark class="v">desta</mark> cidade.</p>
+    <p class="es">Me gusta esta ciudad.</p>
+    <p class="say">Suena: <b>dés-ta</b></p>
+    <button class="btn" data-say="Eu gosto desta cidade.">▶ Normal</button><button class="btn" data-say="Eu gosto desta cidade." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR"><mark class="v">Neste</mark> momento estou ocupado.</p>
+    <p class="es">En este momento estoy ocupado.</p>
+    <p class="say">Suena: <b>nês-chi</b></p>
+    <button class="btn" data-say="Neste momento estou ocupado.">▶ Normal</button><button class="btn" data-say="Neste momento estou ocupado." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR"><mark class="v">Nesta</mark> semana tenho aula.</p>
+    <p class="es">Esta semana tengo clase.</p>
+    <p class="say">Suena: <b>nés-ta</b></p>
+    <button class="btn" data-say="Nesta semana tenho aula.">▶ Normal</button><button class="btn" data-say="Nesta semana tenho aula." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="callout">
+    <b>📝 Ojo</b>
+    <p>En el habla diaria de Brasil se usa más <b>esse / essa</b> que <b>este / esta</b>. Con <b>este</b> la <b>te</b> final de <i>deste / neste</i> suena “chi”.</p>
+  </div>
+  <div class="quiz">
+  <h4>✍️ Práctica</h4>
+  <div class="q" data-ans="deste" data-why="livro es masculino → &lt;b&gt;deste&lt;/b&gt;.">
+    <p class="qs">Eu gosto <span class="blank">____</span> livro.</p>
+    <div class="opts"><button class="opt" data-v="desta">desta</button><button class="opt" data-v="deste">deste</button></div>
+    <p class="fb"></p>
+    <button class="btn qsay" data-say="Eu gosto deste livro.">🔊 Escuchar la frase</button>
+  </div>
+  <div class="q" data-ans="desta" data-why="cidade es femenino → &lt;b&gt;desta&lt;/b&gt;.">
+    <p class="qs">Eu gosto <span class="blank">____</span> cidade.</p>
+    <div class="opts"><button class="opt" data-v="desta">desta</button><button class="opt" data-v="deste">deste</button></div>
+    <p class="fb"></p>
+    <button class="btn qsay" data-say="Eu gosto desta cidade.">🔊 Escuchar la frase</button>
+  </div>
+  <div class="q" data-ans="Nesta" data-why="semana es femenino → &lt;b&gt;nesta&lt;/b&gt;.">
+    <p class="qs"><span class="blank">____</span> semana tenho aula.</p>
+    <div class="opts"><button class="opt" data-v="Neste">Neste</button><button class="opt" data-v="Nesta">Nesta</button></div>
+    <p class="fb"></p>
+    <button class="btn qsay" data-say="Nesta semana tenho aula.">🔊 Escuchar la frase</button>
+  </div>
+  <div class="q" data-ans="Neste" data-why="momento es masculino → &lt;b&gt;neste&lt;/b&gt;.">
+    <p class="qs"><span class="blank">____</span> momento estou ocupado.</p>
+    <div class="opts"><button class="opt" data-v="Neste">Neste</button><button class="opt" data-v="Nesta">Nesta</button></div>
+    <p class="fb"></p>
+    <button class="btn qsay" data-say="Neste momento estou ocupado.">🔊 Escuchar la frase</button>
+  </div>
+  <div class="quizbar"><button class="btn reset">↺ Reiniciar</button></div>
+</div>
+</div>
+
+<div class="card rule">
+  <span class="tag">Grupo 9 · <b>de / em / a</b> + aquele, aquela</span>
+  <h3>daquele · daquela · naquele · naquela</h3>
+  <p><b>aquele / aquela</b> (“aquel / aquella”) señalan algo <b>lejos</b> de los dos. Con <b>de</b> y <b>em</b> se unen: <i>daquele, daquela, naquele, naquela</i>. Con <b>a</b> forman <i>àquele, àquela</i>. Las neutras son <i>daquilo</i>, <i>naquilo</i> y <i>àquilo</i>.</p>
+  <div class="tablewrap">
+  <table class="formtable">
+    <tr><th>Forma</th><th>Suena</th><th>Se forma con…</th><th>Ejemplo</th></tr>
+    <tr><td><button class="btn tbtn" data-say="daquele bolo"><b>daquele</b></button></td><td><i>da-kê-li</i></td><td>de + aquele</td><td><button class="btn tbtn" data-say="daquele bolo">daquele bolo</button></td></tr>
+    <tr><td><button class="btn tbtn" data-say="daquela jaqueta"><b>daquela</b></button></td><td><i>da-ké-la</i></td><td>de + aquela</td><td><button class="btn tbtn" data-say="daquela jaqueta">daquela jaqueta</button></td></tr>
+    <tr><td><button class="btn tbtn" data-say="naquele dia"><b>naquele</b></button></td><td><i>na-kê-li</i></td><td>em + aquele</td><td><button class="btn tbtn" data-say="naquele dia">naquele dia</button></td></tr>
+    <tr><td><button class="btn tbtn" data-say="naquela loja"><b>naquela</b></button></td><td><i>na-ké-la</i></td><td>em + aquela</td><td><button class="btn tbtn" data-say="naquela loja">naquela loja</button></td></tr>
+    <tr><td><button class="btn tbtn" data-say="àquela loja"><b>àquele / àquela</b></button></td><td><i>a-kê-li / a-ké-la</i></td><td>a + aquele / aquela</td><td><button class="btn tbtn" data-say="àquela loja">àquela loja</button></td></tr>
+  </table>
+  </div>
+  <div class="chips">
+    <button class="chip" data-say="daquele bolo"><b>daquele bolo</b><small>da-kê-li bô-lu · de aquel pastel</small></button>
+    <button class="chip" data-say="daquela jaqueta"><b>daquela jaqueta</b><small>da-ké-la zha-kê-ta · de aquella chaqueta</small></button>
+    <button class="chip" data-say="naquele dia"><b>naquele dia</b><small>na-kê-li dí-a · en aquel día</small></button>
+    <button class="chip" data-say="àquela loja"><b>àquela loja</b><small>a-ké-la ló-zha · a aquella tienda</small></button>
+    <button class="chip" data-say="daquilo"><b>daquilo</b><small>da-kí-lu · de aquello</small></button>
+  </div>
+
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Eu gosto <mark class="v">daquele</mark> bolo.</p>
+    <p class="es">Me gusta aquel pastel.</p>
+    <p class="say">Suena: <b>da-kê-li</b></p>
+    <button class="btn" data-say="Eu gosto daquele bolo.">▶ Normal</button><button class="btn" data-say="Eu gosto daquele bolo." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Eu gosto <mark class="v">daquela</mark> jaqueta.</p>
+    <p class="es">Me gusta aquella chaqueta.</p>
+    <p class="say">Suena: <b>da-ké-la</b></p>
+    <button class="btn" data-say="Eu gosto daquela jaqueta.">▶ Normal</button><button class="btn" data-say="Eu gosto daquela jaqueta." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Eu moro <mark class="v">naquele</mark> prédio ali.</p>
+    <p class="es">Vivo en aquel edificio de allí.</p>
+    <p class="say">Suena: <b>na-kê-li</b></p>
+    <button class="btn" data-say="Eu moro naquele prédio ali.">▶ Normal</button><button class="btn" data-say="Eu moro naquele prédio ali." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Eu vou <mark class="v">àquela</mark> loja.</p>
+    <p class="es">Voy a aquella tienda.</p>
+    <p class="say">Suena: <b>a-ké-la</b></p>
+    <button class="btn" data-say="Eu vou àquela loja.">▶ Normal</button><button class="btn" data-say="Eu vou àquela loja." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="callout">
+    <b>📝 Ojo</b>
+    <p>Es la contracción que más aparece junto a <i>ali</i>: <i>aquele bolo ali</i>. Recuerda que <b>à</b> + <b>aquela</b> se escribe <i>àquela</i>, con acento grave.</p>
+  </div>
+  <div class="quiz">
+  <h4>✍️ Práctica</h4>
+  <div class="q" data-ans="daquele" data-why="bolo es masculino → &lt;b&gt;daquele&lt;/b&gt;.">
+    <p class="qs">Eu gosto <span class="blank">____</span> bolo.</p>
+    <div class="opts"><button class="opt" data-v="daquela">daquela</button><button class="opt" data-v="daquele">daquele</button></div>
+    <p class="fb"></p>
+    <button class="btn qsay" data-say="Eu gosto daquele bolo.">🔊 Escuchar la frase</button>
+  </div>
+  <div class="q" data-ans="daquela" data-why="jaqueta es femenino → &lt;b&gt;daquela&lt;/b&gt;.">
+    <p class="qs">Eu gosto <span class="blank">____</span> jaqueta.</p>
+    <div class="opts"><button class="opt" data-v="daquela">daquela</button><button class="opt" data-v="daquele">daquele</button></div>
+    <p class="fb"></p>
+    <button class="btn qsay" data-say="Eu gosto daquela jaqueta.">🔊 Escuchar la frase</button>
+  </div>
+  <div class="q" data-ans="naquele" data-why="prédio es masculino → &lt;b&gt;naquele&lt;/b&gt;.">
+    <p class="qs">Eu moro <span class="blank">____</span> prédio.</p>
+    <div class="opts"><button class="opt" data-v="naquele">naquele</button><button class="opt" data-v="naquela">naquela</button></div>
+    <p class="fb"></p>
+    <button class="btn qsay" data-say="Eu moro naquele prédio.">🔊 Escuchar la frase</button>
+  </div>
+  <div class="q" data-ans="àquela" data-why="ir &lt;b&gt;a&lt;/b&gt; + aquela → &lt;b&gt;àquela&lt;/b&gt;.">
+    <p class="qs">Eu vou <span class="blank">____</span> loja.</p>
+    <div class="opts"><button class="opt" data-v="àquela">àquela</button><button class="opt" data-v="daquela">daquela</button></div>
+    <p class="fb"></p>
+    <button class="btn qsay" data-say="Eu vou àquela loja.">🔊 Escuchar la frase</button>
+  </div>
+  <div class="quizbar"><button class="btn reset">↺ Reiniciar</button></div>
+</div>
+</div>
+
+<div class="card rule">
+  <span class="tag">Grupo 10 · <b>de</b> + adverbios de lugar (aqui, ali, aí)</span>
+  <h3>daqui · dali · daí</h3>
+  <p><b>de</b> se une a los adverbios de lugar <i>aqui, ali, aí</i>. Se usan para decir <b>desde dónde</b> o <b>a qué distancia</b>: <i>perto <b>daqui</b></i> (cerca de aquí).</p>
+  <div class="tablewrap">
+  <table class="formtable">
+    <tr><th>Forma</th><th>Suena</th><th>Se forma con…</th><th>Ejemplo</th></tr>
+    <tr><td><button class="btn tbtn" data-say="perto daqui"><b>daqui</b></button></td><td><i>da-kí</i></td><td>de + aqui</td><td><button class="btn tbtn" data-say="perto daqui">perto daqui</button></td></tr>
+    <tr><td><button class="btn tbtn" data-say="longe dali"><b>dali</b></button></td><td><i>da-lí</i></td><td>de + ali</td><td><button class="btn tbtn" data-say="longe dali">longe dali</button></td></tr>
+    <tr><td><button class="btn tbtn" data-say="sai daí"><b>daí</b></button></td><td><i>da-í</i></td><td>de + aí</td><td><button class="btn tbtn" data-say="sai daí">sai daí</button></td></tr>
+  </table>
+  </div>
+  <div class="chips">
+    <button class="chip" data-say="daqui"><b>daqui</b><small>da-kí · de aquí</small></button>
+    <button class="chip" data-say="dali"><b>dali</b><small>da-lí · de allí</small></button>
+    <button class="chip" data-say="daí"><b>daí</b><small>da-í · de ahí</small></button>
+    <button class="chip" data-say="perto daqui"><b>perto daqui</b><small>pér-tu da-kí · cerca de aquí</small></button>
+    <button class="chip" data-say="longe dali"><b>longe dali</b><small>lôn-zhi da-lí · lejos de allí</small></button>
+  </div>
+
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Tem um restaurante perto <mark class="v">daqui</mark>?</p>
+    <p class="es">¿Hay un restaurante cerca de aquí?</p>
+    <p class="say">Suena: <b>da-kí</b></p>
+    <button class="btn" data-say="Tem um restaurante perto daqui?">▶ Normal</button><button class="btn" data-say="Tem um restaurante perto daqui?" data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">O parque fica longe <mark class="v">dali</mark>.</p>
+    <p class="es">El parque queda lejos de allí.</p>
+    <p class="say">Suena: <b>da-lí</b></p>
+    <button class="btn" data-say="O parque fica longe dali.">▶ Normal</button><button class="btn" data-say="O parque fica longe dali." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">A padaria é perto <mark class="v">daqui</mark>.</p>
+    <p class="es">La panadería está cerca de aquí.</p>
+    <p class="say">Suena: <b>da-kí</b></p>
+    <button class="btn" data-say="A padaria é perto daqui.">▶ Normal</button><button class="btn" data-say="A padaria é perto daqui." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Eu saí <mark class="v">dali</mark> cedo.</p>
+    <p class="es">Salí de allí temprano.</p>
+    <p class="say">Suena: <b>da-lí</b></p>
+    <button class="btn" data-say="Eu saí dali cedo.">▶ Normal</button><button class="btn" data-say="Eu saí dali cedo." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="callout">
+    <b>📝 Ojo</b>
+    <p>Verás muchísimo <b>perto daqui</b> y <b>longe daqui</b> al preguntar direcciones.</p>
+  </div>
+  <div class="quiz">
+  <h4>✍️ Práctica</h4>
+  <div class="q" data-ans="daqui" data-why="de + aqui → &lt;b&gt;daqui&lt;/b&gt;.">
+    <p class="qs">Tem um banco perto <span class="blank">____</span>? (de aquí)</p>
+    <div class="opts"><button class="opt" data-v="dali">dali</button><button class="opt" data-v="daqui">daqui</button></div>
+    <p class="fb"></p>
+    <button class="btn qsay" data-say="Tem um banco perto daqui?">🔊 Escuchar la frase</button>
+  </div>
+  <div class="q" data-ans="dali" data-why="de + ali → &lt;b&gt;dali&lt;/b&gt;.">
+    <p class="qs">O parque fica longe <span class="blank">____</span>. (de allí)</p>
+    <div class="opts"><button class="opt" data-v="dali">dali</button><button class="opt" data-v="daqui">daqui</button></div>
+    <p class="fb"></p>
+    <button class="btn qsay" data-say="O parque fica longe dali.">🔊 Escuchar la frase</button>
+  </div>
+  <div class="q" data-ans="daqui" data-why="siempre se escribe junto: &lt;b&gt;daqui&lt;/b&gt;.">
+    <p class="qs">Tem uma farmácia perto <span class="blank">____</span>?</p>
+    <div class="opts"><button class="opt" data-v="daqui">daqui</button><button class="opt" data-v="de aqui">de aqui</button></div>
+    <p class="fb"></p>
+    <button class="btn qsay" data-say="Tem uma farmácia perto daqui?">🔊 Escuchar la frase</button>
+  </div>
+  <div class="quizbar"><button class="btn reset">↺ Reiniciar</button></div>
+</div>
+</div>
+
+<div class="card rule">
+  <span class="tag">Grupo 11 · <b>com</b> + pronombre (mim, ti, nós)</span>
+  <h3>comigo · contigo · conosco</h3>
+  <p><b>com</b> se une a ciertos pronombres y forma palabras nuevas: <b>comigo</b> (conmigo), <b>contigo</b> (contigo) y <b>conosco</b> (con nosotros). Con <i>você, ele, ela</i> no se une: <i>com você</i>.</p>
+  <div class="tablewrap">
+  <table class="formtable">
+    <tr><th>Forma</th><th>Suena</th><th>Se forma con…</th><th>Ejemplo</th></tr>
+    <tr><td><button class="btn tbtn" data-say="Vem comigo!"><b>comigo</b></button></td><td><i>ko-mí-gu</i></td><td>com + mim</td><td><button class="btn tbtn" data-say="Vem comigo!">Vem comigo!</button></td></tr>
+    <tr><td><button class="btn tbtn" data-say="Eu vou contigo."><b>contigo</b></button></td><td><i>kon-chí-gu</i></td><td>com + ti</td><td><button class="btn tbtn" data-say="Eu vou contigo.">Eu vou contigo.</button></td></tr>
+    <tr><td><button class="btn tbtn" data-say="Ela vem conosco."><b>conosco</b></button></td><td><i>ko-nôs-ku</i></td><td>com + nós</td><td><button class="btn tbtn" data-say="Ela vem conosco.">Ela vem conosco.</button></td></tr>
+    <tr><td><button class="btn tbtn" data-say="Eu falo com você."><b>com você</b></button></td><td><i>kõ vo-sê</i></td><td>no se une</td><td><button class="btn tbtn" data-say="Eu falo com você.">Eu falo com você.</button></td></tr>
+  </table>
+  </div>
+  <div class="chips">
+    <button class="chip" data-say="comigo"><b>comigo</b><small>ko-mí-gu · conmigo</small></button>
+    <button class="chip" data-say="contigo"><b>contigo</b><small>kon-chí-gu · contigo</small></button>
+    <button class="chip" data-say="conosco"><b>conosco</b><small>ko-nôs-ku · con nosotros</small></button>
+    <button class="chip" data-say="com a gente"><b>com a gente</b><small>kõ a zhên-chi · con nosotros (informal)</small></button>
+  </div>
+
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Você quer ir <mark class="v">comigo</mark>?</p>
+    <p class="es">¿Quieres ir conmigo?</p>
+    <p class="say">Suena: <b>ko-mí-gu</b></p>
+    <button class="btn" data-say="Você quer ir comigo?">▶ Normal</button><button class="btn" data-say="Você quer ir comigo?" data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Eu vou <mark class="v">contigo</mark>.</p>
+    <p class="es">Voy contigo.</p>
+    <p class="say">Suena: <b>kon-chí-gu</b></p>
+    <button class="btn" data-say="Eu vou contigo.">▶ Normal</button><button class="btn" data-say="Eu vou contigo." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Ela vem <mark class="v">conosco</mark>.</p>
+    <p class="es">Ella viene con nosotros.</p>
+    <p class="say">Suena: <b>ko-nôs-ku</b></p>
+    <button class="btn" data-say="Ela vem conosco.">▶ Normal</button><button class="btn" data-say="Ela vem conosco." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Venha <mark class="v">com a gente</mark>!</p>
+    <p class="es">¡Ven con nosotros! (informal)</p>
+    <p class="say">Suena: <b>kõ a zhên-chi</b></p>
+    <button class="btn" data-say="Venha com a gente!">▶ Normal</button><button class="btn" data-say="Venha com a gente!" data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="callout">
+    <b>📝 Ojo</b>
+    <p><b>com mim</b> es un error: se dice <b>comigo</b>. En el habla informal, “con nosotros” se dice mucho <b>com a gente</b>.</p>
+  </div>
+  <div class="quiz">
+  <h4>✍️ Práctica</h4>
+  <div class="q" data-ans="comigo" data-why="com + mim → &lt;b&gt;comigo&lt;/b&gt;.">
+    <p class="qs">Você quer ir <span class="blank">____</span>? (conmigo)</p>
+    <div class="opts"><button class="opt" data-v="com mim">com mim</button><button class="opt" data-v="comigo">comigo</button></div>
+    <p class="fb"></p>
+    <button class="btn qsay" data-say="Você quer ir comigo?">🔊 Escuchar la frase</button>
+  </div>
+  <div class="q" data-ans="contigo" data-why="com + ti → &lt;b&gt;contigo&lt;/b&gt;.">
+    <p class="qs">Eu vou <span class="blank">____</span>. (contigo)</p>
+    <div class="opts"><button class="opt" data-v="contigo">contigo</button><button class="opt" data-v="com ti">com ti</button></div>
+    <p class="fb"></p>
+    <button class="btn qsay" data-say="Eu vou contigo.">🔊 Escuchar la frase</button>
+  </div>
+  <div class="q" data-ans="conosco" data-why="com + nós → &lt;b&gt;conosco&lt;/b&gt;.">
+    <p class="qs">Ela vem <span class="blank">____</span>. (con nosotros)</p>
+    <div class="opts"><button class="opt" data-v="com nós">com nós</button><button class="opt" data-v="conosco">conosco</button></div>
+    <p class="fb"></p>
+    <button class="btn qsay" data-say="Ela vem conosco.">🔊 Escuchar la frase</button>
+  </div>
+  <div class="q" data-ans="com" data-why="con &lt;i&gt;você&lt;/i&gt; no se une: &lt;b&gt;com você&lt;/b&gt;.">
+    <p class="qs">Eu falo <span class="blank">____</span> você.</p>
+    <div class="opts"><button class="opt" data-v="com">com</button><button class="opt" data-v="comigo">comigo</button></div>
+    <p class="fb"></p>
+    <button class="btn qsay" data-say="Eu falo com você.">🔊 Escuchar la frase</button>
+  </div>
+  <div class="quizbar"><button class="btn reset">↺ Reiniciar</button></div>
+</div>
+</div>
+
+<div class="card rule">
+  <span class="tag">Grupo 12 · <b>para</b> + artículo (informal, hablado)</span>
+  <h3>pro · pra · pros · pras</h3>
+  <p>En el habla, <b>para + o/a/os/as</b> se acorta a <b>pro, pra, pros, pras</b>. También <b>para</b> solo se acorta a <b>pra</b>. Son muy comunes oralmente, pero en exámenes y textos formales escribe <b>para o</b>, <b>para a</b>.</p>
+  <div class="tablewrap">
+  <table class="formtable">
+    <tr><th>Forma</th><th>Suena</th><th>Se forma con…</th><th>Ejemplo</th></tr>
+    <tr><td><button class="btn tbtn" data-say="Vou pro mercado."><b>pro</b></button></td><td><i>pru</i></td><td>para + o</td><td><button class="btn tbtn" data-say="Vou pro mercado.">Vou pro mercado.</button></td></tr>
+    <tr><td><button class="btn tbtn" data-say="Vou pra escola."><b>pra</b></button></td><td><i>pra</i></td><td>para + a (o para)</td><td><button class="btn tbtn" data-say="Vou pra escola.">Vou pra escola.</button></td></tr>
+    <tr><td><button class="btn tbtn" data-say="Dou os livros pros alunos."><b>pros</b></button></td><td><i>prus</i></td><td>para + os</td><td><button class="btn tbtn" data-say="Dou os livros pros alunos.">Dou os livros pros alunos.</button></td></tr>
+    <tr><td><button class="btn tbtn" data-say="Isso é pras crianças."><b>pras</b></button></td><td><i>pras</i></td><td>para + as</td><td><button class="btn tbtn" data-say="Isso é pras crianças.">Isso é pras crianças.</button></td></tr>
+  </table>
+  </div>
+  <div class="chips">
+    <button class="chip" data-say="pro mercado"><b>pro mercado</b><small>pru mer-ká-du · al mercado</small></button>
+    <button class="chip" data-say="pra escola"><b>pra escola</b><small>pra es-kó-la · a la escuela</small></button>
+    <button class="chip" data-say="pra você"><b>pra você</b><small>pra vo-sê · para ti</small></button>
+    <button class="chip" data-say="pros alunos"><b>pros alunos</b><small>prus a-lú-nus · a los alumnos</small></button>
+  </div>
+
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Eu vou <mark class="v">pro</mark> mercado.</p>
+    <p class="es">Voy al mercado. (informal)</p>
+    <p class="say">Suena: <b>pru</b></p>
+    <button class="btn" data-say="Eu vou pro mercado.">▶ Normal</button><button class="btn" data-say="Eu vou pro mercado." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Eu vou <mark class="v">pra</mark> escola.</p>
+    <p class="es">Voy a la escuela. (informal)</p>
+    <p class="say">Suena: <b>pra</b></p>
+    <button class="btn" data-say="Eu vou pra escola.">▶ Normal</button><button class="btn" data-say="Eu vou pra escola." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Isso é <mark class="v">pra</mark> você.</p>
+    <p class="es">Esto es para ti. (informal)</p>
+    <p class="say">Suena: <b>pra</b></p>
+    <button class="btn" data-say="Isso é pra você.">▶ Normal</button><button class="btn" data-say="Isso é pra você." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Eu dou os livros <mark class="v">pros</mark> alunos.</p>
+    <p class="es">Les doy los libros a los alumnos. (informal)</p>
+    <p class="say">Suena: <b>prus</b></p>
+    <button class="btn" data-say="Eu dou os livros pros alunos.">▶ Normal</button><button class="btn" data-say="Eu dou os livros pros alunos." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="callout">
+    <b>📝 Ojo</b>
+    <p>Escrito formal: <i>Eu vou <b>para o</b> mercado</i>. Hablado informal: <i>Eu vou <b>pro</b> mercado</i>. Las dos son correctas, pero en el examen usa la forma completa.</p>
+  </div>
+  <div class="quiz">
+  <h4>✍️ Práctica</h4>
+  <div class="q" data-ans="pro" data-why="para + o → &lt;b&gt;pro&lt;/b&gt;.">
+    <p class="qs">Eu vou <span class="blank">____</span> mercado. (informal)</p>
+    <div class="opts"><button class="opt" data-v="pra">pra</button><button class="opt" data-v="pro">pro</button></div>
+    <p class="fb"></p>
+    <button class="btn qsay" data-say="Eu vou pro mercado.">🔊 Escuchar la frase</button>
+  </div>
+  <div class="q" data-ans="pra" data-why="para + a → &lt;b&gt;pra&lt;/b&gt;.">
+    <p class="qs">Eu vou <span class="blank">____</span> escola. (informal)</p>
+    <div class="opts"><button class="opt" data-v="pra">pra</button><button class="opt" data-v="pro">pro</button></div>
+    <p class="fb"></p>
+    <button class="btn qsay" data-say="Eu vou pra escola.">🔊 Escuchar la frase</button>
+  </div>
+  <div class="q" data-ans="pra" data-why="&lt;i&gt;para&lt;/i&gt; sin artículo se acorta a &lt;b&gt;pra&lt;/b&gt;.">
+    <p class="qs">Isso é <span class="blank">____</span> você. (informal)</p>
+    <div class="opts"><button class="opt" data-v="pra">pra</button><button class="opt" data-v="pro">pro</button></div>
+    <p class="fb"></p>
+    <button class="btn qsay" data-say="Isso é pra você.">🔊 Escuchar la frase</button>
+  </div>
+  <div class="quizbar"><button class="btn reset">↺ Reiniciar</button></div>
+</div>
+</div>
+
+<h3 class="bigsec" id="r-con-ayuda">Para entenderlo mejor</h3>
+<div class="card">
+  <h3>¿Cuándo se contrae y cuándo no?</h3>
+  <ul><li><b>Sí se contrae</b> cuando la preposición va junto a un artículo: <i>de + o = do</i>, <i>em + a = na</i>.</li><li><b>No hay contracción</b> si no hay artículo: <i>sou <b>de</b> Lima</i>, <i>moro <b>em</b> Lima</i>, <i>vou <b>a</b> Lima</i>.</li><li>Algunos países <b>no llevan artículo</b> en Brasil: <i>moro <b>em</b> Portugal</i>, <i>sou <b>de</b> Cuba</i>.</li><li><b>com</b> + artículo <b>no</b> se une: <i>com o</i>, <i>com a</i>, <i>com os</i>, <i>com as</i>.</li><li><b>para</b> + artículo <b>no</b> se une al escribir (<i>para o</i>), pero se acorta al hablar (<i>pro</i>).</li></ul>
+</div>
+
+<div class="card">
+  <h3>Verbos y su preposición</h3>
+  <p>Cada verbo pide una preposición, y esa preposición se une al artículo o pronombre que sigue. Toca cada ejemplo:</p><div class="tablewrap"><table><tr><th>Verbo + preposición</th><th>Significa</th><th>Ejemplo con contracción</th></tr><tr><td><b>gostar de</b></td><td>gustar</td><td><button class="btn" data-say="Eu gosto do meu trabalho.">Eu gosto <mark class="v">do</mark> meu trabalho.</button></td></tr><tr><td><b>ir a</b></td><td>ir a</td><td><button class="btn" data-say="Eu vou à escola.">Eu vou <mark class="v">à</mark> escola.</button></td></tr><tr><td><b>chegar a / em</b></td><td>llegar a</td><td><button class="btn" data-say="Eu chego ao trabalho às oito.">Eu chego <mark class="v">ao</mark> trabalho <mark class="v">às</mark> oito.</button></td></tr><tr><td><b>morar em</b></td><td>vivir en</td><td><button class="btn" data-say="Eu moro na cidade.">Eu moro <mark class="v">na</mark> cidade.</button></td></tr><tr><td><b>pensar em</b></td><td>pensar en</td><td><button class="btn" data-say="Eu penso nela.">Eu penso <mark class="v">nela</mark>.</button></td></tr><tr><td><b>confiar em</b></td><td>confiar en</td><td><button class="btn" data-say="Eu confio neles.">Eu confio <mark class="v">neles</mark>.</button></td></tr><tr><td><b>sonhar com</b></td><td>soñar con</td><td><button class="btn" data-say="Eu sonho com você.">Eu sonho <mark class="v">com</mark> você.</button></td></tr><tr><td><b>falar de</b></td><td>hablar de</td><td><button class="btn" data-say="Eu falo da minha família.">Eu falo <mark class="v">da</mark> minha família.</button></td></tr></table></div>
+</div>
+
+<div class="card">
+  <h3>Contracciones en las horas y los días</h3>
+  <p>Las expresiones de tiempo usan mucho <b>a + artículo</b> y <b>em + artículo</b>:</p><div class="ex"><p class="pt" lang="pt-BR">A aula começa <mark class="v">às</mark> oito horas.</p><p class="es">La clase empieza a las ocho.</p><button class="btn" data-say="A aula começa às oito horas.">▶ Normal</button></div><div class="ex"><p class="pt" lang="pt-BR">Eu estudo <mark class="v">aos</mark> sábados e descanso <mark class="v">aos</mark> domingos.</p><p class="es">Estudio los sábados y descanso los domingos.</p><button class="btn" data-say="Eu estudo aos sábados e descanso aos domingos.">▶ Normal</button></div><div class="ex"><p class="pt" lang="pt-BR"><mark class="v">No</mark> verão faz muito calor.</p><p class="es">En verano hace mucho calor.</p><button class="btn" data-say="No verão faz muito calor.">▶ Normal</button></div>
+</div>
+
+<h3 class="bigsec" id="r-con-compara">🎧 Compara</h3>
+<div class="card">
+  <p>Escucha cada par seguido y fíjate qué parte cambia.</p>
+  <div class="pairs">
+    <div class="pair">
+      <div class="row"><span>Vou <mark class="v">ao</mark> mercado.</span><button class="btn" data-say="Vou ao mercado.">🔊</button></div>
+      <div class="tr">Voy al mercado. (masculino)</div>
+      <div class="arrow">vs</div>
+      <div class="row"><span>Vou <mark class="v">à</mark> escola.</span><button class="btn" data-say="Vou à escola.">🔊</button></div>
+      <div class="tr">Voy a la escuela. (femenino)</div>
+    </div>
+    <div class="pair">
+      <div class="row"><span>Gosto <mark class="v">desse</mark> casaco.</span><button class="btn" data-say="Gosto desse casaco.">🔊</button></div>
+      <div class="tr">Me gusta ese abrigo.</div>
+      <div class="arrow">vs</div>
+      <div class="row"><span>Gosto <mark class="v">daquele</mark> casaco.</span><button class="btn" data-say="Gosto daquele casaco.">🔊</button></div>
+      <div class="tr">Me gusta aquel abrigo.</div>
+    </div>
+    <div class="pair">
+      <div class="row"><span>Vou <mark class="v">pro</mark> mercado.</span><button class="btn" data-say="Vou pro mercado.">🔊</button></div>
+      <div class="tr">Informal, hablado.</div>
+      <div class="arrow">vs</div>
+      <div class="row"><span>Vou <mark class="v">ao</mark> mercado.</span><button class="btn" data-say="Vou ao mercado.">🔊</button></div>
+      <div class="tr">Formal, escrito.</div>
+    </div>
+    <div class="pair">
+      <div class="row"><span>Perto <mark class="v">daqui</mark>.</span><button class="btn" data-say="Perto daqui.">🔊</button></div>
+      <div class="tr">Cerca de aquí.</div>
+      <div class="arrow">vs</div>
+      <div class="row"><span>Longe <mark class="v">dali</mark>.</span><button class="btn" data-say="Longe dali.">🔊</button></div>
+      <div class="tr">Lejos de allí.</div>
+    </div>
+  </div>
+</div>
+
+<h3 class="bigsec" id="r-con-practica">✍️ Práctica final</h3>
+<div class="card">
+  <p>Elige la contracción correcta en cada frase. Al acertar, oirás la frase completa.</p>
+  <div class="quiz scored">
+  <h4>Doce frases mezcladas</h4>
+  <div class="q" data-ans="ao" data-why="mercado es masculino → &lt;b&gt;ao&lt;/b&gt;.">
+    <p class="qs">Eu vou <span class="blank">____</span> mercado.</p>
+    <div class="opts"><button class="opt" data-v="à">à</button><button class="opt" data-v="ao">ao</button></div>
+    <p class="fb"></p>
+    <button class="btn qsay" data-say="Eu vou ao mercado.">🔊 Escuchar la frase</button>
+  </div>
+  <div class="q" data-ans="do" data-why="Peru lleva artículo masculino → &lt;b&gt;do&lt;/b&gt;.">
+    <p class="qs">Eu sou <span class="blank">____</span> Peru.</p>
+    <div class="opts"><button class="opt" data-v="do">do</button><button class="opt" data-v="da">da</button></div>
+    <p class="fb"></p>
+    <button class="btn qsay" data-say="Eu sou do Peru.">🔊 Escuchar la frase</button>
+  </div>
+  <div class="q" data-ans="na" data-why="cidade es femenino → &lt;b&gt;na&lt;/b&gt;.">
+    <p class="qs">Eu moro <span class="blank">____</span> cidade.</p>
+    <div class="opts"><button class="opt" data-v="no">no</button><button class="opt" data-v="na">na</button></div>
+    <p class="fb"></p>
+    <button class="btn qsay" data-say="Eu moro na cidade.">🔊 Escuchar la frase</button>
+  </div>
+  <div class="q" data-ans="pelo" data-why="presente es masculino → &lt;b&gt;pelo&lt;/b&gt;.">
+    <p class="qs">Obrigado <span class="blank">____</span> presente!</p>
+    <div class="opts"><button class="opt" data-v="pelo">pelo</button><button class="opt" data-v="pela">pela</button></div>
+    <p class="fb"></p>
+    <button class="btn qsay" data-say="Obrigado pelo presente!">🔊 Escuchar la frase</button>
+  </div>
+  <div class="q" data-ans="num" data-why="banco es masculino → &lt;b&gt;num&lt;/b&gt;.">
+    <p class="qs">Ele trabalha <span class="blank">____</span> banco.</p>
+    <div class="opts"><button class="opt" data-v="numa">numa</button><button class="opt" data-v="num">num</button></div>
+    <p class="fb"></p>
+    <button class="btn qsay" data-say="Ele trabalha num banco.">🔊 Escuchar la frase</button>
+  </div>
+  <div class="q" data-ans="dela" data-why="&lt;i&gt;gostar de&lt;/i&gt; + ela → &lt;b&gt;dela&lt;/b&gt;.">
+    <p class="qs">Eu gosto <span class="blank">____</span>. (de ella)</p>
+    <div class="opts"><button class="opt" data-v="nela">nela</button><button class="opt" data-v="dela">dela</button></div>
+    <p class="fb"></p>
+    <button class="btn qsay" data-say="Eu gosto dela.">🔊 Escuchar la frase</button>
+  </div>
+  <div class="q" data-ans="dessa" data-why="gravata es femenino → &lt;b&gt;dessa&lt;/b&gt;.">
+    <p class="qs">Eu gosto <span class="blank">____</span> gravata.</p>
+    <div class="opts"><button class="opt" data-v="dessa">dessa</button><button class="opt" data-v="desse">desse</button></div>
+    <p class="fb"></p>
+    <button class="btn qsay" data-say="Eu gosto dessa gravata.">🔊 Escuchar la frase</button>
+  </div>
+  <div class="q" data-ans="naquele" data-why="prédio es masculino → &lt;b&gt;naquele&lt;/b&gt;.">
+    <p class="qs">Eu moro <span class="blank">____</span> prédio ali.</p>
+    <div class="opts"><button class="opt" data-v="naquele">naquele</button><button class="opt" data-v="naquela">naquela</button></div>
+    <p class="fb"></p>
+    <button class="btn qsay" data-say="Eu moro naquele prédio ali.">🔊 Escuchar la frase</button>
+  </div>
+  <div class="q" data-ans="daqui" data-why="de + aqui → &lt;b&gt;daqui&lt;/b&gt;.">
+    <p class="qs">Tem um banco perto <span class="blank">____</span>? (de aquí)</p>
+    <div class="opts"><button class="opt" data-v="dali">dali</button><button class="opt" data-v="daqui">daqui</button></div>
+    <p class="fb"></p>
+    <button class="btn qsay" data-say="Tem um banco perto daqui?">🔊 Escuchar la frase</button>
+  </div>
+  <div class="q" data-ans="comigo" data-why="com + mim → &lt;b&gt;comigo&lt;/b&gt;.">
+    <p class="qs">Você quer ir <span class="blank">____</span>? (conmigo)</p>
+    <div class="opts"><button class="opt" data-v="comigo">comigo</button><button class="opt" data-v="com mim">com mim</button></div>
+    <p class="fb"></p>
+    <button class="btn qsay" data-say="Você quer ir comigo?">🔊 Escuchar la frase</button>
+  </div>
+  <div class="q" data-ans="às" data-why="a + as → &lt;b&gt;às&lt;/b&gt;.">
+    <p class="qs">Eu acordo <span class="blank">____</span> sete horas.</p>
+    <div class="opts"><button class="opt" data-v="às">às</button><button class="opt" data-v="as">as</button></div>
+    <p class="fb"></p>
+    <button class="btn qsay" data-say="Eu acordo às sete horas.">🔊 Escuchar la frase</button>
+  </div>
+  <div class="q" data-ans="pro" data-why="para + o → &lt;b&gt;pro&lt;/b&gt;.">
+    <p class="qs">Eu vou <span class="blank">____</span> mercado. (informal)</p>
+    <div class="opts"><button class="opt" data-v="pro">pro</button><button class="opt" data-v="pra">pra</button></div>
+    <p class="fb"></p>
+    <button class="btn qsay" data-say="Eu vou pro mercado.">🔊 Escuchar la frase</button>
+  </div>
+  <div class="quizbar"><button class="btn reset">↺ Reiniciar</button><span class="score"></span></div>
+</div>
+</div>
+
+<h3 class="bigsec" id="r-con-errores">Errores y detalles</h3>
+<div class="card">
+  <h3>⚠️ Errores comunes</h3>
+  <ul class="errlist">
+    <li><span class="bad">Eu vou a o mercado.</span> → <span class="good">Eu vou ao mercado.</span> <button class="btn" data-say="Eu vou ao mercado.">🔊</button><br><span class="note"><i>a + o</i> siempre se une: <b>ao</b>.</span></li>
+    <li><span class="bad">Eu vou ao escola.</span> → <span class="good">Eu vou à escola.</span> <button class="btn" data-say="Eu vou à escola.">🔊</button><br><span class="note"><i>escola</i> es femenino → <b>à</b>.</span></li>
+    <li><span class="bad">Eu gosto de o bolo.</span> → <span class="good">Eu gosto do bolo.</span> <button class="btn" data-say="Eu gosto do bolo.">🔊</button><br><span class="note"><i>de + o</i> se une: <b>do</b>.</span></li>
+    <li><span class="bad">Eu moro em a cidade.</span> → <span class="good">Eu moro na cidade.</span> <button class="btn" data-say="Eu moro na cidade.">🔊</button><br><span class="note"><i>em + a</i> se une: <b>na</b>.</span></li>
+    <li><span class="bad">Eu gosto de esse casaco.</span> → <span class="good">Eu gosto desse casaco.</span> <button class="btn" data-say="Eu gosto desse casaco.">🔊</button><br><span class="note"><i>de + esse</i> se une: <b>desse</b>.</span></li>
+    <li><span class="bad">Você quer ir com mim?</span> → <span class="good">Você quer ir comigo?</span> <button class="btn" data-say="Você quer ir comigo?">🔊</button><br><span class="note"><i>com + mim</i> forma <b>comigo</b>.</span></li>
+  </ul>
+  <h3 style="margin-top:14px">📍 Para tener en cuenta</h3>
+  <ul>
+    <li>Con <b>ciudades</b> (sin artículo) no hay contracción: <i>de Lima</i>, <i>em Lima</i>.</li>
+    <li><b>à / às</b> llevan acento grave solo cuando se fusionan dos “a”.</li>
+    <li><b>pro / pra</b> son informales: en el examen escribe <i>para o / para a</i>.</li>
+    <li><b>dum / duma</b> (de + um / uma) casi no se usan en Brasil.</li>
+  </ul>
+</div>
+
+</section>
+
+<!-- Para añadir otro tema (p. ej. demostrativos): copia el bloque <section id="gram-posesivos">,
+     cámbiale el id (gram-demostrativos), agrega su enlace en <nav class="letters"> y reemplaza el contenido. -->
+
+<footer>
+  El audio usa una voz sintética en portugués de Brasil (pt-BR) de tu navegador o sistema. Úsalo como guía. Las transcripciones tipo “mí-ña” son aproximaciones para hispanohablantes.
+</footer>
+
+</div>
+
+<script>
+(function(){
+  var synth = window.speechSynthesis;
+  var voices = [];
+  var statusEl = document.getElementById('voiceStatus');
+  var sel = document.getElementById('voiceSel');
+
+  function lang(v){ return v.lang.replace('_','-').toLowerCase(); }
+  function ptList(){
+    var l = voices.filter(function(v){ return lang(v).indexOf('pt') === 0; });
+    l.sort(function(a,b){
+      var sa = (lang(a)==='pt-br'?0:2) + (/natural|online/i.test(a.name)?0:1);
+      var sb = (lang(b)==='pt-br'?0:2) + (/natural|online/i.test(b.name)?0:1);
+      return sa - sb;
+    });
+    return l;
+  }
+  function saved(){ try{ return localStorage.getItem('vozPT'); }catch(e){ return null; } }
+  function save(n){ try{ localStorage.setItem('vozPT', n); }catch(e){} }
+
+  function loadVoices(){
+    voices = synth ? synth.getVoices() : [];
+    var list = ptList();
+    sel.innerHTML = '';
+    list.forEach(function(v){
+      var o = document.createElement('option');
+      o.value = v.name; o.textContent = v.name + ' (' + v.lang + ')';
+      sel.appendChild(o);
+    });
+    var s = saved();
+    if(s && list.some(function(v){ return v.name === s; })) sel.value = s;
+    if(!synth){
+      showStatus('Tu navegador no admite audio de voz. Prueba con Edge o Chrome.');
+    } else if(voices.length && !list.length){
+      showStatus('No encontré ninguna voz en portugués en este navegador. Prueba abrir la página en Microsoft Edge.');
+    } else if(voices.length && !list.some(function(v){ return lang(v)==='pt-br'; })){
+      showStatus('Solo hay voces de portugués de Portugal (pt-PT). No sirven para estas reglas, que son de Brasil. Prueba en Microsoft Edge.');
+    } else {
+      statusEl.style.display = 'none';
+    }
+  }
+  function showStatus(msg){ statusEl.textContent = msg; statusEl.style.display = 'block'; }
+  sel.addEventListener('change', function(){ save(sel.value); });
+
+  function currentVoice(){
+    var list = ptList();
+    return list.find(function(v){ return v.name === sel.value; }) || list[0] || null;
+  }
+
+  function speak(text, slow){
+    if(!synth) return;
+    synth.cancel();
+    var u = new SpeechSynthesisUtterance(text);
+    var v = currentVoice();
+    u.lang = v ? v.lang : 'pt-BR';
+    if(v) u.voice = v;
+    u.rate = slow ? 0.55 : 0.9;
+    synth.speak(u);
+  }
+
+  loadVoices();
+  if(synth && typeof synth.onvoiceschanged !== 'undefined') synth.onvoiceschanged = loadVoices;
+
+  document.addEventListener('click', function(e){
+    var b = e.target.closest('[data-say]');
+    if(b) speak(b.getAttribute('data-say'), b.getAttribute('data-slow') === '1');
+  });
+})();
+</script>
+<script>
+(function(){
+  var all = [];
+  function init(section){
+    var slides = Array.prototype.slice.call(section.querySelectorAll('.card.rule'));
+    if(!slides.length) return;
+    var holder = document.createElement('div'); holder.className = 'reglas';
+    slides[0].parentNode.insertBefore(holder, slides[0]);
+    var head = document.createElement('p'); head.className = 'slidehead';
+    var top = document.createElement('div'); top.className = 'rulenav';
+    var bottom = document.createElement('div'); bottom.className = 'rulenav';
+    holder.appendChild(top); holder.appendChild(head);
+    slides.forEach(function(sl){ sl.classList.add('slide'); holder.appendChild(sl); });
+    holder.appendChild(bottom);
+    var i = 0;
+    function build(bar){
+      bar.innerHTML = '';
+      var prev = document.createElement('button'); prev.className='navbtn'; prev.textContent='← Anterior';
+      var next = document.createElement('button'); next.className='navbtn'; next.textContent='Siguiente →';
+      var pills = document.createElement('div'); pills.className='pills';
+      slides.forEach(function(_, k){
+        var b = document.createElement('button'); b.className='pill'+(k===i?' on':''); b.textContent=(k+1);
+        b.setAttribute('aria-label',(section.getAttribute('data-unit')||'Regla')+' '+(k+1));
+        b.addEventListener('click', function(){ go(k, bar===bottom); });
+        pills.appendChild(b);
+      });
+      prev.disabled = (i===0); next.disabled = (i===slides.length-1);
+      prev.addEventListener('click', function(){ go(i-1, bar===bottom); });
+      next.addEventListener('click', function(){ go(i+1, bar===bottom); });
+      bar.appendChild(prev); bar.appendChild(pills); bar.appendChild(next);
+    }
+    function render(){
+      slides.forEach(function(sl,k){ sl.classList.toggle('on', k===i); });
+      var t = slides[i].querySelector('h3');
+      head.textContent = (section.getAttribute('data-unit')||'Regla')+' ' + (i+1) + ' de ' + slides.length + (t ? ' · ' + t.textContent : '');
+      build(top); build(bottom);
+    }
+    function go(n, scroll){
+      if(n<0 || n>=slides.length) return;
+      i = n;
+      if(window.speechSynthesis) window.speechSynthesis.cancel();
+      render();
+      if(scroll) top.scrollIntoView({behavior:'smooth', block:'start'});
+    }
+    render();
+    all.push({holder: holder, go: go, cur: function(){ return i; }});
+  }
+  document.querySelectorAll('section[id^="gram-"]').forEach(init);
+
+  document.addEventListener('keydown', function(e){
+    var tag = (e.target && e.target.tagName) || '';
+    if(tag==='SELECT' || tag==='INPUT' || tag==='TEXTAREA') return;
+    if(e.key!=='ArrowRight' && e.key!=='ArrowLeft') return;
+    var mid = window.innerHeight/2, best = null, bd = 1e9;
+    all.forEach(function(c){
+      if(!c.holder.offsetParent) return;
+      var r = c.holder.getBoundingClientRect();
+      var d = (r.top<=mid && r.bottom>=mid) ? 0 : Math.min(Math.abs(r.top-mid), Math.abs(r.bottom-mid));
+      if(d<bd){ bd=d; best=c; }
+    });
+    if(best) best.go(best.cur() + (e.key==='ArrowRight'?1:-1), false);
+  });
+})();
+</script>
+<script>
+(function(){
+  var secs = Array.prototype.slice.call(document.querySelectorAll('section[id^="gram-"]'));
+  var links = Array.prototype.slice.call(document.querySelectorAll('nav.letters a'));
+  function activate(id){
+    secs.forEach(function(sc){ sc.classList.toggle('on', sc.id===id); });
+    links.forEach(function(a){ a.classList.toggle('active', a.getAttribute('href')==='#'+id); });
+  }
+  function route(first){
+    var h = decodeURIComponent((location.hash||'').slice(1));
+    var el = h ? document.getElementById(h) : null;
+    var sec = el ? (el.matches('section[id^="gram-"]') ? el : el.closest('section[id^="gram-"]')) : null;
+    activate(sec ? sec.id : (links[0] ? links[0].getAttribute('href').slice(1) : secs[0].id));
+    if(el && el !== sec){ el.scrollIntoView({behavior:'smooth', block:'start'}); }
+    else if(!first){ window.scrollTo({top:0, behavior:'smooth'}); }
+    if(window.speechSynthesis) window.speechSynthesis.cancel();
+  }
+  window.addEventListener('hashchange', function(){ route(false); });
+  route(true);
+})();
+</script>
+<script>
+(function(){
+  var V='aeiouáàâãäéêíóôõöúü';
+  function isV(c){ return !!c && V.indexOf(c)>-1; }
+  function esc(t){ return t.replace(/&/g,'&amp;').replace(/</g,'&lt;'); }
+
+  // Detecta los sonidos que cambian en un texto (todas las reglas a la vez)
+  function analyze(text){
+    var out=[], re=/[A-Za-zÀ-ÖØ-öø-ÿ]+/g, m;
+    while((m=re.exec(text))){
+      var w=m[0].toLowerCase(), b=m.index, n=w.length;
+      if(w.indexOf('setecentos')===0){ out.push([b+2,b+4,'k-ch']); }
+      for(var i=0;i<n;i++){
+        var c=w.charAt(i), nx=w.charAt(i+1);
+        if(c==='n' && nx==='h'){ out.push([b+i,b+i+2,'k-nh']); i++; continue; }
+        if(c==='l' && nx==='h'){ out.push([b+i,b+i+2,'k-lh']); i++; continue; }
+        if(c==='l'){ if(!isV(nx)) out.push([b+i,b+i+1,'k-u']); continue; }
+        if(c==='r'){
+          var pv=i>0?w.charAt(i-1):'';
+          if(nx==='r'){ out.push([b+i,b+i+2,'k-r']); i++; continue; }
+          if(i===0 || 'nls'.indexOf(pv)>-1){ if(i===0 || isV(nx)) out.push([b+i,b+i+1,'k-r']); }
+          continue;
+        }
+        if(c==='ç'){ out.push([b+i,b+i+1,'k-s']); continue; }
+        if(c==='x'){ out.push([b+i,b+i+1,'k-x']); continue; }
+        if(c==='j'){ out.push([b+i,b+i+1,'k-g']); continue; }
+        if(c==='g'){
+          if(nx==='e'||nx==='i'||nx==='é'||nx==='ê'||nx==='í') out.push([b+i,b+i+1,'k-g']);
+          continue;
+        }
+        if(c==='t' || c==='d'){
+          var cls = (c==='t') ? 'k-ch' : 'k-dy';
+          if(nx==='i' || nx==='í'){ out.push([b+i,b+i+2,cls]); i++; continue; }
+          if(nx==='e'){
+            var rest=w.slice(i+2);
+            if(rest==='' || rest==='s'){ out.push([b+i,b+i+2+rest.length,cls]); break; }
+          }
+        }
+      }
+    }
+    return out;
+  }
+
+  // Reconstruye una palabra/frase conservando las marcas azules (sonido normal)
+  function rebuild(el){
+    var text=el.textContent, n=text.length, cls=new Array(n);
+    var hasU=false;
+    analyze(text).forEach(function(r){
+      for(var k=r[0];k<r[1];k++) cls[k]=r[2];
+      if(r[2]==='k-u') hasU=true;
+    });
+    var html='', cur=null, buf='';
+    function flush(){ if(buf) html += cur ? '<mark class="'+cur+'">'+esc(buf)+'</mark>' : esc(buf); buf=''; }
+    for(var i=0;i<n;i++){
+      var c=cls[i]||'';
+      if(c!==cur){ flush(); cur=c; }
+      buf+=text.charAt(i);
+    }
+    flush();
+    el.innerHTML=html;
+    return hasU;
+  }
+
+  // Resalta en la pronunciación escrita los sonidos que cambian
+  function respell(str,useU){
+    return esc(str).replace(/\{[^}]*\}|ch|dy|ly|zh|ñ|h|§|([aeiouáéíóúâêôãõ])u(?![a-zñáéíóúâêôãõ])/gi,function(m,v){
+      if(v){ return useU ? v+'<mark class="k-u">u</mark>' : m; }
+      if(m==='§') return '<mark class="k-s">s</mark>';
+      if(m.charAt(0)==='{') return '<mark class="k-x">'+m.slice(1,-1)+'</mark>';
+      var c={ch:'k-ch',dy:'k-dy',ly:'k-lh','ñ':'k-nh',h:'k-r',zh:'k-g'}[m.toLowerCase()];
+      return '<mark class="'+c+'">'+m+'</mark>';
+    });
+  }
+
+  
+  function colorNodes(el){
+    var hasU=false, nodes=[], w=document.createTreeWalker(el,NodeFilter.SHOW_TEXT,null);
+    while(w.nextNode()) nodes.push(w.currentNode);
+    nodes.forEach(function(tn){
+      var text=tn.nodeValue; if(!text.trim()) return;
+      var n=text.length, cls=new Array(n);
+      analyze(text).forEach(function(r){ for(var k=r[0];k<r[1];k++) cls[k]=r[2]; if(r[2]==='k-u') hasU=true; });
+      var frag=document.createDocumentFragment(), cur=null, buf='';
+      function flush(){
+        if(!buf) return;
+        if(cur){ var m=document.createElement('mark'); m.className=cur; m.textContent=buf; frag.appendChild(m); }
+        else frag.appendChild(document.createTextNode(buf));
+        buf='';
+      }
+      for(var i=0;i<n;i++){ var c=cls[i]||''; if(c!==cur){ flush(); cur=c; } buf+=text.charAt(i); }
+      flush();
+      tn.parentNode.replaceChild(frag,tn);
+    });
+    return hasU;
+  }
+  document.querySelectorAll('.chip b, .ex .pt, .pair .row span, .qs, td .btn').forEach(function(el){
+    var hasU=colorNodes(el);
+    if(el.matches('.chip b')){
+      var sm=el.closest('.chip').querySelector('small');
+      if(sm){ var t=sm.textContent, i=t.indexOf(' · '); var a=(i<0)?t:t.slice(0,i), r=(i<0)?'':t.slice(i); sm.innerHTML=respell(a,hasU)+esc(r); }
+    } else if(el.matches('.ex .pt')){
+      el.closest('.ex').querySelectorAll('.say b').forEach(function(b){ b.innerHTML=respell(b.textContent,hasU); });
+    }
+  });
+  document.querySelectorAll('table td i').forEach(function(i){ i.innerHTML=respell(i.textContent,false); });
+})();
+</script>
+<script>
+(function(){
+  var bar=document.querySelector('.topbar'); if(!bar) return;
+  function setH(){ document.documentElement.style.setProperty('--topbar-h', bar.offsetHeight+'px'); }
+  function onScroll(){
+    var y=window.scrollY||document.documentElement.scrollTop||0;
+    if(y>40) bar.classList.add('stuck'); else if(y<10) bar.classList.remove('stuck');
+    setH();
+  }
+  window.addEventListener('scroll',onScroll,{passive:true});
+  window.addEventListener('resize',setH);
+  setH(); onScroll();
+})();
+</script>
+<script>
+(function(){
+  function esc(t){ return String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;'); }
+  document.querySelectorAll('.quiz').forEach(function(qz){
+    var qs=Array.prototype.slice.call(qz.querySelectorAll('.q'));
+    var scoreEl=qz.querySelector('.score');
+    function update(){
+      if(!scoreEl) return;
+      var ok=qs.filter(function(q){ return q.classList.contains('solved') && q.getAttribute('data-first')==='1'; }).length;
+      var done=qs.filter(function(q){ return q.classList.contains('solved'); }).length;
+      scoreEl.textContent='Aciertos a la primera: '+ok+' / '+qs.length+(done===qs.length?' · ¡Terminaste!':'');
+    }
+    qs.forEach(function(q){
+      q.setAttribute('data-first','1');
+      var ans=q.getAttribute('data-ans'), fb=q.querySelector('.fb'), blank=q.querySelector('.blank');
+      q.querySelectorAll('.opt').forEach(function(b){
+        b.addEventListener('click',function(){
+          if(q.classList.contains('solved')) return;
+          if(b.getAttribute('data-v')===ans){
+            q.classList.add('solved'); b.classList.add('right');
+            blank.innerHTML='<mark class="v">'+esc(ans)+'</mark>';
+            fb.className='fb good'; fb.innerHTML='✅ '+q.getAttribute('data-why');
+            update();
+            var s=q.querySelector('[data-say]'); if(s) s.click();
+          } else {
+            b.classList.add('wrong'); q.setAttribute('data-first','0');
+            fb.className='fb bad'; fb.textContent='❌ Casi. Piensa qué se posee (género y número) o, con dele/dela, quién es el dueño.';
+            update();
+          }
+        });
+      });
+    });
+    qz.querySelector('.reset').addEventListener('click',function(){
+      if(window.speechSynthesis) window.speechSynthesis.cancel();
+      qs.forEach(function(q){
+        q.classList.remove('solved'); q.setAttribute('data-first','1');
+        q.querySelectorAll('.opt').forEach(function(b){ b.classList.remove('right','wrong'); });
+        q.querySelector('.blank').textContent='____';
+        var f=q.querySelector('.fb'); f.className='fb'; f.textContent='';
+      });
+      update();
+    });
+    update();
+  });
+})();
+</script>
+</body>
+</html>

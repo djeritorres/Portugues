@@ -1,0 +1,1197 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Verbos en portugués</title>
+<style>
+:root{
+  --bg:#f6f4ef; --card:#ffffff; --ink:#1d2433; --muted:#5d6678; --line:#e3dfd6;
+  --accent:#0b7a4b; --accent-soft:#d9f0e4; --warm:#b4471d; --warm-soft:#fbe4d8;
+  --blue:#1f5fbf; --blue-soft:#dde9fb;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#14181f; --card:#1d232d; --ink:#e8ebf1; --muted:#9aa4b5; --line:#2e3644;
+    --accent:#5fd49b; --accent-soft:#1c3a2d; --warm:#ff9a6b; --warm-soft:#3e2418;
+    --blue:#8ab4ff; --blue-soft:#1d2d4a;
+  }
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.wrap{max-width:860px;margin:0 auto;padding:24px 16px 80px}
+header h1{font-size:1.9rem;margin:.2em 0 .1em}
+header p{color:var(--muted);margin:0}
+nav.letters{display:flex;gap:8px;flex-wrap:wrap;margin:20px 0}
+nav.letters a,nav.letters span{padding:6px 16px;border-radius:999px;border:1px solid var(--line);background:var(--card);text-decoration:none;color:var(--ink);font-weight:600}
+nav.letters a.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+nav.letters span{color:var(--muted);font-weight:400;border-style:dashed}
+#voiceStatus{display:none;background:var(--warm-soft);color:var(--warm);border:1px solid var(--warm);padding:10px 14px;border-radius:10px;margin-bottom:16px;font-size:.95rem}
+h2{font-size:1.45rem;margin:2.2em 0 .3em;padding-top:.4em}
+h3{font-size:1.15rem;margin:0 0 .3em}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px;margin:14px 0}
+.legend{display:flex;gap:16px;flex-wrap:wrap;font-size:.92rem;color:var(--muted);margin:10px 0}
+mark{background:none;color:inherit;font-weight:700;border-radius:4px;padding:0 2px}
+mark.ch{background:var(--accent-soft);color:var(--accent)}
+table{width:100%;border-collapse:collapse;font-size:.97rem}
+th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{color:var(--muted);font-weight:600;font-size:.85rem;text-transform:uppercase;letter-spacing:.04em}
+.tablewrap{overflow-x:auto}
+.rule{border-left:5px solid var(--accent)}
+.rule .tag{display:inline-block;font-size:.8rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--accent);margin-bottom:2px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 4px}
+button{font:inherit;cursor:pointer}
+.chip{display:flex;flex-direction:column;align-items:flex-start;padding:7px 12px;border-radius:10px;border:1px solid var(--line);background:var(--bg);color:var(--ink);text-align:left;line-height:1.25}
+.chip b{font-size:1.02rem}
+.chip small{color:var(--muted);font-size:.85rem}
+.chip:hover,.btn:hover{border-color:var(--accent)}
+.chip::after{content:"🔊";font-size:.75rem;margin-top:2px;opacity:.7}
+.ex{border-top:1px dashed var(--line);padding:14px 0 6px}
+.ex:first-of-type{border-top:0}
+.ex .pt{font-size:1.25rem;margin:0}
+.ex .es{color:var(--muted);margin:2px 0 4px}
+.ex .say{font-size:.93rem;margin:0 0 8px}
+.btn{padding:6px 14px;border-radius:999px;border:1px solid var(--line);background:var(--bg);color:var(--ink);margin-right:6px;font-size:.92rem}
+.pairs{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.pair{border:1px solid var(--line);border-radius:12px;padding:12px;background:var(--bg)}
+.pair .row{display:flex;justify-content:space-between;align-items:center;gap:8px;margin:4px 0}
+.pair .arrow{text-align:center;color:var(--muted);font-size:.8rem}
+ul{padding-left:1.2em}
+li{margin:.3em 0}
+.note{font-size:.93rem;color:var(--muted)}
+footer{margin-top:50px;color:var(--muted);font-size:.88rem;border-top:1px solid var(--line);padding-top:14px}
+
+.rulenav{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:14px 0 0;flex-wrap:wrap}
+.rulenav .navbtn{padding:9px 18px;border-radius:999px;border:1px solid var(--accent);background:var(--accent);color:#fff;font-weight:600}
+.rulenav .navbtn[disabled]{opacity:.35;cursor:default}
+.rulenav .pills{display:flex;gap:6px;align-items:center;flex-wrap:wrap;justify-content:center}
+.rulenav .pill{min-width:38px;padding:6px 10px;border-radius:999px;border:1px solid var(--line);background:var(--card);color:var(--ink);font-weight:600}
+.rulenav .pill.on{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.slide{display:none}
+.slide.on{display:block}
+.slidehead{color:var(--muted);font-size:.9rem;margin:10px 0 -6px}
+@media (max-width:520px){.rulenav .navbtn{flex:1}.rulenav .pills{order:-1;width:100%}}
+
+nav.letters a:hover{border-color:var(--accent);color:var(--accent)}
+
+.js section[id^="verbo-"]{display:none}
+.js section[id^="verbo-"].on{display:block}
+nav.letters{margin:22px 0 6px;border-bottom:2px solid var(--line);padding-bottom:0;gap:6px}
+nav.letters a{padding:12px 28px;font-size:1.1rem;border-radius:12px 12px 0 0;border-bottom:0;margin-bottom:-2px}
+nav.letters a.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+.bigsec{font-size:2.1rem;line-height:1.2;margin:2.4em 0 .5em;padding-bottom:.25em;border-bottom:4px solid var(--accent);scroll-margin-top:12px}
+.subnav{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0 0}
+.subnav a{padding:6px 14px;border-radius:999px;border:1px solid var(--line);background:var(--card);color:var(--ink);text-decoration:none;font-size:.95rem}
+.subnav a:hover{border-color:var(--accent);color:var(--accent)}
+@media (max-width:520px){nav.letters a{padding:10px 18px}.bigsec{font-size:1.7rem}}
+
+/* ===== Colores por sonido ===== */
+:root{
+  --c-ch:#a8420a; --c-ch-bg:#ffe0c7;
+  --c-dy:#6a2cb8; --c-dy-bg:#ead9fc;
+  --c-nh:#066b3f; --c-nh-bg:#cfeedd;
+  --c-lh:#00637d; --c-lh-bg:#c9edf6;
+  --c-u:#b0185f;  --c-u-bg:#fad5e8;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --c-ch:#ffb27a; --c-ch-bg:#4d2b10;
+    --c-dy:#d2aaff; --c-dy-bg:#3b2562;
+    --c-nh:#63dca2; --c-nh-bg:#183d2c;
+    --c-lh:#72d9f0; --c-lh-bg:#0f3d4a;
+    --c-u:#ff93c6;  --c-u-bg:#4d1733;
+  }
+}
+mark.k-ch,mark.k-dy,mark.k-nh,mark.k-lh,mark.k-u{font-weight:700;background:none;padding:0}
+mark.k-ch{color:var(--c-ch)}
+mark.k-dy{color:var(--c-dy)}
+mark.k-nh{color:var(--c-nh)}
+mark.k-lh{color:var(--c-lh)}
+mark.k-u{color:var(--c-u)}
+/* sonido propio de la pestaña: con fondo */
+#letra-t mark.k-ch,.colorkey mark.k-ch{background:var(--c-ch-bg);padding:0 3px;border-radius:4px;box-shadow:inset 0 -2px 0 currentColor}
+#letra-d mark.k-dy,.colorkey mark.k-dy{background:var(--c-dy-bg);padding:0 3px;border-radius:4px;box-shadow:inset 0 -2px 0 currentColor}
+#letra-nh mark.k-nh,.colorkey mark.k-nh{background:var(--c-nh-bg);padding:0 3px;border-radius:4px;box-shadow:inset 0 -2px 0 currentColor}
+#letra-lh mark.k-lh,.colorkey mark.k-lh{background:var(--c-lh-bg);padding:0 3px;border-radius:4px;box-shadow:inset 0 -2px 0 currentColor}
+#letra-l mark.k-u,.colorkey mark.k-u{background:var(--c-u-bg);padding:0 3px;border-radius:4px;box-shadow:inset 0 -2px 0 currentColor}
+.colorkey{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center;font-size:.93rem;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 14px;margin:14px 0 4px}
+.colorkey b{margin-right:2px}
+.chip small mark,.say mark{font-weight:700}
+
+:root{--c-r:#7a5400;--c-r-bg:#ffeea0}
+@media (prefers-color-scheme: dark){:root{--c-r:#ffd666;--c-r-bg:#4a3a05}}
+mark.k-r{color:var(--c-r);font-weight:700;background:none;padding:0}
+#letra-r mark.k-r,.colorkey mark.k-r{background:var(--c-r-bg);padding:0 3px;border-radius:4px;box-shadow:inset 0 -2px 0 currentColor}
+
+:root{--c-g:#1f4fc4;--c-g-bg:#d9e4ff}
+@media (prefers-color-scheme: dark){:root{--c-g:#9db8ff;--c-g-bg:#1b2f5c}}
+mark.k-g{color:var(--c-g);font-weight:700;background:none;padding:0}
+#letra-g mark.k-g,#letra-j mark.k-g,.colorkey mark.k-g{background:var(--c-g-bg);padding:0 3px;border-radius:4px;box-shadow:inset 0 -2px 0 currentColor}
+.callout{background:var(--bg);border:1px dashed var(--accent);border-radius:10px;padding:10px 14px;margin-top:14px;font-size:.95rem}
+.callout p{margin:.4em 0 0}
+
+/* ===== Encabezado fijo ===== */
+.topbar{position:sticky;top:0;z-index:50;background:var(--bg);margin:0 -16px;padding:0 16px;transition:box-shadow .2s}
+.topbar.stuck{box-shadow:0 8px 14px -10px rgba(0,0,0,.55)}
+.topbar header h1{transition:font-size .15s}
+.topbar.stuck header h1{font-size:1.25rem;margin:.25em 0 0}
+.topbar.stuck header p{display:none}
+.topbar.stuck nav.letters{margin:10px 0 0}
+.topbar nav.letters{margin-bottom:0}
+.bigsec,.rulenav{scroll-margin-top:calc(var(--topbar-h,120px) + 12px)}
+
+:root{--c-s:#b3261e;--c-s-bg:#fddad6}
+@media (prefers-color-scheme: dark){:root{--c-s:#ff8f85;--c-s-bg:#4d1c19}}
+mark.k-s{color:var(--c-s);font-weight:700;background:none;padding:0}
+#letra-c mark.k-s,.colorkey mark.k-s{background:var(--c-s-bg);padding:0 3px;border-radius:4px;box-shadow:inset 0 -2px 0 currentColor}
+
+:root{--c-x:#3f6212;--c-x-bg:#e4f5b8}
+@media (prefers-color-scheme: dark){:root{--c-x:#c4ee6b;--c-x-bg:#3a4a0e}}
+mark.k-x{color:var(--c-x);font-weight:700;background:none;padding:0}
+#letra-x mark.k-x,.colorkey mark.k-x{background:var(--c-x-bg);padding:0 3px;border-radius:4px;box-shadow:inset 0 -2px 0 currentColor}
+.homelink{display:inline-block;font-size:.9rem;color:var(--muted);text-decoration:none;margin-top:10px}
+.homelink:hover{color:var(--accent)}
+.topbar.stuck .homelink{display:none}
+
+/* ===== Páginas de verbos ===== */
+mark.v{color:var(--accent);font-weight:700;background:none;padding:0}
+.conj td:nth-child(1){font-weight:600;white-space:nowrap}
+.conj .btn{margin:0;font-size:1.05rem;padding:6px 16px}
+.conj .btn::after{content:" 🔊";font-size:.75rem;opacity:.7}
+.conj td i{color:var(--muted)}
+.pair .tr{color:var(--muted);font-size:.85rem;margin:-2px 0 6px}
+.bad{color:var(--warm);text-decoration:line-through;text-decoration-thickness:1px}
+.good{color:var(--accent);font-weight:600}
+.errlist li{margin:.7em 0}
+.verbtabs a{min-width:84px;text-align:center}
+.homelink{display:inline-block;font-size:.9rem;color:var(--muted);text-decoration:none;margin-top:10px}
+.homelink:hover{color:var(--accent)}
+.topbar.stuck .homelink{display:none}
+</style>
+<script>document.documentElement.className="js";</script>
+</head>
+<body>
+<div class="wrap">
+
+<div class="topbar">
+<header>
+  <a class="homelink" href="index.html">← Inicio</a>
+  <h1>🇧🇷 Verbos en portugués</h1>
+  <p>Conjugaciones, usos y ejemplos con audio · Portugués de Brasil</p>
+</header>
+
+<nav class="letters verbtabs" aria-label="Verbos">
+  <a href="#verbo-ser">SER</a>
+  <a href="#verbo-ter">TER</a>
+  <a href="#verbo-estar">ESTAR</a>
+</nav>
+</div>
+
+<div id="voiceStatus"></div>
+
+<div class="card" style="padding:12px 16px">
+  <label for="voiceSel"><b>🔊 Voz del audio:</b></label>
+  <select id="voiceSel" style="font:inherit;max-width:100%;padding:4px 6px"></select>
+  <button class="btn" data-say="Eu sou, eu tenho, eu estou.">Probar voz</button>
+  <p class="note" style="margin:8px 0 0">Para mejor pronunciación abre esta página en <b>Microsoft Edge</b> y elige una voz que diga <b>Online (Natural)</b>, como “Francisca” o “Antonio” (necesita internet).</p>
+</div>
+
+<section id="verbo-ser">
+
+<h2>SER <small style="font-weight:400;color:var(--muted)">· en español: ser</small></h2>
+<p><b>Ser</b> sirve para decir <b>quién eres o qué es algo</b>: identidad, profesión, origen, características, hora y fecha. Es el verbo más importante, y es irregular.</p>
+
+<div class="subnav"><a href="#r-ser-resumen">Conjugación</a><a href="#r-ser-reglas">Usos</a><a href="#r-ser-compara">Compara</a><a href="#r-ser-errores">Errores</a></div>
+
+<h3 class="bigsec" id="r-ser-resumen">Conjugación</h3>
+<div class="card">
+  <p class="note" style="margin-top:0">Presente del indicativo · toca cada forma para oírla</p>
+  <div class="tablewrap">
+  <table class="conj">
+    <tr><th>Pronombre</th><th>Forma</th><th>Suena</th><th>En español</th></tr>
+    <tr><td>eu</td><td><button class="btn" data-say="eu sou"><b>sou</b></button></td><td><i>sôu</i></td><td>yo soy</td></tr>
+    <tr><td>você / ele / ela</td><td><button class="btn" data-say="ele é"><b>é</b></button></td><td><i>é</i></td><td>usted / él / ella es</td></tr>
+    <tr><td>a gente</td><td><button class="btn" data-say="a gente é"><b>é</b></button></td><td><i>é</i></td><td>nosotros somos (informal)</td></tr>
+    <tr><td>nós</td><td><button class="btn" data-say="nós somos"><b>somos</b></button></td><td><i>sô-mus</i></td><td>nosotros somos</td></tr>
+    <tr><td>vocês / eles / elas</td><td><button class="btn" data-say="eles são"><b>são</b></button></td><td><i>sãu (nasal)</i></td><td>ustedes / ellos / ellas son</td></tr>
+  </table>
+  </div>
+  <p class="note">💡 <b>é</b> con tilde es el verbo “es”; <b>e</b> sin tilde significa “y”. Con <i>a gente</i> el verbo va igual que con <i>ele/ela</i>: <i>a gente é</i>. En algunas regiones de Brasil también se oye <i>tu és / tu é</i>; en el curso usa <i>você</i>.</p>
+</div>
+
+<h3 class="bigsec" id="r-ser-reglas">Usos de SER</h3>
+<div class="card rule">
+  <span class="tag">Uso 1</span>
+  <h3>Identidad y profesión</h3>
+  <p>Con <b>ser</b> dices quién eres, cómo te llamas y a qué te dedicas. Con las profesiones <b>no</b> se usa artículo: <i>Eu sou estudante</i> (no “um estudante”).</p>
+  <div class="chips">
+    <button class="chip" data-say="estudante"><b>estudante</b><small>es-tu-dán-chi · estudiante</small></button>
+    <button class="chip" data-say="professor"><b>professor</b><small>pro-fe-sôr · profesor</small></button>
+    <button class="chip" data-say="médico"><b>médico</b><small>mé-dyi-ku · médico</small></button>
+    <button class="chip" data-say="engenheiro"><b>engenheiro</b><small>en-zhe-ñêi-ru · ingeniero</small></button>
+    <button class="chip" data-say="advogado"><b>advogado</b><small>a-dyi-vo-gá-du · abogado</small></button>
+  </div>
+
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Eu <mark class="v">sou</mark> estudante.</p>
+    <p class="es">Soy estudiante.</p>
+    <p class="say">Suena: <b>sôu</b></p>
+    <button class="btn" data-say="Eu sou estudante.">▶ Normal</button><button class="btn" data-say="Eu sou estudante." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Ela <mark class="v">é</mark> professora de português.</p>
+    <p class="es">Ella es profesora de portugués.</p>
+    <p class="say">Suena: <b>é</b></p>
+    <button class="btn" data-say="Ela é professora de português.">▶ Normal</button><button class="btn" data-say="Ela é professora de português." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Meu pai <mark class="v">é</mark> médico e minha mãe <mark class="v">é</mark> engenheira.</p>
+    <p class="es">Mi papá es médico y mi mamá es ingeniera.</p>
+    <p class="say">Suena: <b>é</b> · <b>en-zhe-ñêi-ra</b></p>
+    <button class="btn" data-say="Meu pai é médico e minha mãe é engenheira.">▶ Normal</button><button class="btn" data-say="Meu pai é médico e minha mãe é engenheira." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Você <mark class="v">é</mark> o Beto? Sim, eu <mark class="v">sou</mark> o Beto.</p>
+    <p class="es">¿Eres Beto? Sí, soy Beto.</p>
+    <p class="say">Suena: <b>é</b> · <b>sôu</b></p>
+    <button class="btn" data-say="Você é o Beto? Sim, eu sou o Beto.">▶ Normal</button><button class="btn" data-say="Você é o Beto? Sim, eu sou o Beto." data-slow="1">🐢 Lento</button>
+  </div>
+</div>
+
+<div class="card rule">
+  <span class="tag">Uso 2</span>
+  <h3>Características: cómo es alguien o algo</h3>
+  <p>Para describir <b>cómo es</b> una persona o cosa (físico y personalidad) se usa <b>ser</b>. La pregunta es <i>Como ele é?</i> (¿cómo es?). Cuidado: el cabello y los ojos <b>no</b> van con ser, van con <b>ter</b> (mira la pestaña TER).</p>
+  <div class="chips">
+    <button class="chip" data-say="alto"><b>alto</b><small>ál-tu · alto</small></button>
+    <button class="chip" data-say="baixo"><b>baixo</b><small>bái-chu · bajo</small></button>
+    <button class="chip" data-say="simpático"><b>simpático</b><small>sin-pá-chi-ku · simpático</small></button>
+    <button class="chip" data-say="inteligente"><b>inteligente</b><small>in-te-li-zhên-chi · inteligente</small></button>
+    <button class="chip" data-say="bonito"><b>bonito</b><small>bo-ní-tu · bonito</small></button>
+    <button class="chip" data-say="divertido"><b>divertido</b><small>dyi-ver-chí-du · divertido</small></button>
+  </div>
+
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Meu irmão <mark class="v">é</mark> alto.</p>
+    <p class="es">Mi hermano es alto.</p>
+    <p class="say">Suena: <b>é</b> · <b>ál-tu</b></p>
+    <button class="btn" data-say="Meu irmão é alto.">▶ Normal</button><button class="btn" data-say="Meu irmão é alto." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">A Sara <mark class="v">é</mark> muito simpática.</p>
+    <p class="es">Sara es muy simpática.</p>
+    <p class="say">Suena: <b>é</b> · <b>sin-pá-chi-ka</b></p>
+    <button class="btn" data-say="A Sara é muito simpática.">▶ Normal</button><button class="btn" data-say="A Sara é muito simpática." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Como ele <mark class="v">é</mark>? Ele <mark class="v">é</mark> alto e simpático.</p>
+    <p class="es">¿Cómo es él? Es alto y simpático.</p>
+    <p class="say">Suena: <b>é</b></p>
+    <button class="btn" data-say="Como ele é? Ele é alto e simpático.">▶ Normal</button><button class="btn" data-say="Como ele é? Ele é alto e simpático." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Ele <mark class="v">é</mark> inteligente e ela também <mark class="v">é</mark> inteligente.</p>
+    <p class="es">Él es inteligente y ella también lo es.</p>
+    <p class="say">Suena: <b>in-te-li-zhên-chi</b></p>
+    <button class="btn" data-say="Ele é inteligente e ela também é inteligente.">▶ Normal</button><button class="btn" data-say="Ele é inteligente e ela também é inteligente." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="callout">
+    <b>📝 Ojo</b>
+    <p>Los adjetivos terminados en <b>-e</b> no cambian entre masculino y femenino: <i>ele é inteligente, ela é inteligente</i>. Los terminados en <b>-o</b> sí: <i>ele é simpático, ela é simpática</i>.</p>
+  </div>
+</div>
+
+<div class="card rule">
+  <span class="tag">Uso 3</span>
+  <h3>Origen y nacionalidad</h3>
+  <p>Para decir de dónde eres: <b>ser + de</b>. La preposición se une al artículo del país: <i>de + o = do</i>, <i>de + a = da</i>. Las ciudades no llevan artículo: <i>de Lima</i>.</p>
+  <div class="chips">
+    <button class="chip" data-say="brasileiro"><b>brasileiro</b><small>bra-zi-léi-ru · brasileño</small></button>
+    <button class="chip" data-say="peruano"><b>peruano</b><small>pe-ru-á-nu · peruano</small></button>
+    <button class="chip" data-say="argentino"><b>argentino</b><small>ar-zhen-chí-nu · argentino</small></button>
+    <button class="chip" data-say="colombiano"><b>colombiano</b><small>ko-lom-bi-á-nu · colombiano</small></button>
+    <button class="chip" data-say="chileno"><b>chileno</b><small>chi-lê-nu · chileno</small></button>
+  </div>
+
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Eu <mark class="v">sou</mark> peruano. <mark class="v">Sou</mark> de Lima.</p>
+    <p class="es">Soy peruano. Soy de Lima.</p>
+    <p class="say">Suena: <b>sôu</b></p>
+    <button class="btn" data-say="Eu sou peruano. Sou de Lima.">▶ Normal</button><button class="btn" data-say="Eu sou peruano. Sou de Lima." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Ela <mark class="v">é</mark> do Brasil.</p>
+    <p class="es">Ella es de Brasil.</p>
+    <p class="say">Suena: <b>é</b> · <b>du</b></p>
+    <button class="btn" data-say="Ela é do Brasil.">▶ Normal</button><button class="btn" data-say="Ela é do Brasil." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">De onde você <mark class="v">é</mark>?</p>
+    <p class="es">¿De dónde eres?</p>
+    <p class="say">Suena: <b>dyi ôn-dyi</b> · <b>é</b></p>
+    <button class="btn" data-say="De onde você é?">▶ Normal</button><button class="btn" data-say="De onde você é?" data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Nós <mark class="v">somos</mark> do Peru.</p>
+    <p class="es">Somos de Perú.</p>
+    <p class="say">Suena: <b>sô-mus</b> · <b>du</b></p>
+    <button class="btn" data-say="Nós somos do Peru.">▶ Normal</button><button class="btn" data-say="Nós somos do Peru." data-slow="1">🐢 Lento</button>
+  </div>
+  <p class="note">Peru, Brasil, Chile (países con artículo): <i>do Peru, do Brasil, do Chile</i>. Colômbia, Argentina: <i>da Colômbia, da Argentina</i>.</p>
+</div>
+
+<div class="card rule">
+  <span class="tag">Uso 4</span>
+  <h3>Hora, día y fecha</h3>
+  <p>Para la hora, el día y la fecha también se usa <b>ser</b>. Con la hora, el verbo concuerda con el número: <b>É</b> <i>uma hora</i> (singular), <b>São</b> <i>duas horas</i> (plural). Para mediodía y medianoche va <b>é</b>.</p>
+  <div class="chips">
+    <button class="chip" data-say="uma hora"><b>uma hora</b><small>ú-ma ó-ra · la una</small></button>
+    <button class="chip" data-say="duas horas"><b>duas horas</b><small>dú-as ó-ras · las dos</small></button>
+    <button class="chip" data-say="meio-dia"><b>meio-dia</b><small>mêi-u-dí-a · mediodía</small></button>
+    <button class="chip" data-say="meia-noite"><b>meia-noite</b><small>mêi-a-nói-chi · medianoche</small></button>
+    <button class="chip" data-say="sexta-feira"><b>sexta-feira</b><small>sês-ta-fêi-ra · viernes</small></button>
+  </div>
+
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Que horas <mark class="v">são</mark>? <mark class="v">São</mark> sete horas.</p>
+    <p class="es">¿Qué hora es? Son las siete.</p>
+    <p class="say">Suena: <b>sãu</b></p>
+    <button class="btn" data-say="Que horas são? São sete horas.">▶ Normal</button><button class="btn" data-say="Que horas são? São sete horas." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR"><mark class="v">É</mark> uma hora da tarde.</p>
+    <p class="es">Es la una de la tarde.</p>
+    <p class="say">Suena: <b>é</b></p>
+    <button class="btn" data-say="É uma hora da tarde.">▶ Normal</button><button class="btn" data-say="É uma hora da tarde." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Hoje <mark class="v">é</mark> sexta-feira.</p>
+    <p class="es">Hoy es viernes.</p>
+    <p class="say">Suena: <b>é</b> · <b>sês-ta-fêi-ra</b></p>
+    <button class="btn" data-say="Hoje é sexta-feira.">▶ Normal</button><button class="btn" data-say="Hoje é sexta-feira." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Hoje <mark class="v">é</mark> dia treze de novembro.</p>
+    <p class="es">Hoy es 13 de noviembre.</p>
+    <p class="say">Suena: <b>é</b> · <b>trê-zi</b></p>
+    <button class="btn" data-say="Hoje é dia treze de novembro.">▶ Normal</button><button class="btn" data-say="Hoje é dia treze de novembro." data-slow="1">🐢 Lento</button>
+  </div>
+</div>
+
+<div class="card rule">
+  <span class="tag">Uso 5</span>
+  <h3>Posesión y pertenencia (ser de)</h3>
+  <p>Para decir de quién es algo: <b>ser + de</b> (o <b>meu / seu</b>). La pregunta es <i>De quem é…?</i> (¿de quién es…?).</p>
+  <div class="chips">
+    <button class="chip" data-say="meu"><b>meu</b><small>mêu · mío / mi</small></button>
+    <button class="chip" data-say="minha"><b>minha</b><small>mí-ña · mía / mi</small></button>
+    <button class="chip" data-say="dele"><b>dele</b><small>dê-li · de él</small></button>
+    <button class="chip" data-say="dela"><b>dela</b><small>dé-la · de ella</small></button>
+  </div>
+
+  <div class="ex">
+    <p class="pt" lang="pt-BR">De quem <mark class="v">é</mark> este livro? <mark class="v">É</mark> da Ana.</p>
+    <p class="es">¿De quién es este libro? Es de Ana.</p>
+    <p class="say">Suena: <b>kãin</b> · <b>é</b></p>
+    <button class="btn" data-say="De quem é este livro? É da Ana.">▶ Normal</button><button class="btn" data-say="De quem é este livro? É da Ana." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">A casa <mark class="v">é</mark> do meu tio.</p>
+    <p class="es">La casa es de mi tío.</p>
+    <p class="say">Suena: <b>é</b> · <b>du</b></p>
+    <button class="btn" data-say="A casa é do meu tio.">▶ Normal</button><button class="btn" data-say="A casa é do meu tio." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">O guaraná <mark class="v">é</mark> meu.</p>
+    <p class="es">El guaraná es mío.</p>
+    <p class="say">Suena: <b>é</b> · <b>mêu</b></p>
+    <button class="btn" data-say="O guaraná é meu.">▶ Normal</button><button class="btn" data-say="O guaraná é meu." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Estes livros <mark class="v">são</mark> dela.</p>
+    <p class="es">Estos libros son de ella.</p>
+    <p class="say">Suena: <b>sãu</b> · <b>dé-la</b></p>
+    <button class="btn" data-say="Estes livros são dela.">▶ Normal</button><button class="btn" data-say="Estes livros são dela." data-slow="1">🐢 Lento</button>
+  </div>
+</div>
+
+<h3 class="bigsec" id="r-ser-compara">🎧 Compara</h3>
+<div class="card">
+  <p>Escucha cada par seguido. La misma frase cambia de significado según uses <b>ser</b> o <b>estar</b>.</p>
+  <div class="pairs">
+    <div class="pair">
+      <div class="row"><span>Como ele <mark class="v">é</mark>?</span><button class="btn" data-say="Como ele é?">🔊</button></div>
+      <div class="tr">¿Cómo es? (descripción)</div>
+      <div class="arrow">vs</div>
+      <div class="row"><span>Como ele <mark class="v">está</mark>?</span><button class="btn" data-say="Como ele está?">🔊</button></div>
+      <div class="tr">¿Cómo está? (ahora)</div>
+    </div>
+    <div class="pair">
+      <div class="row"><span>Ela <mark class="v">é</mark> bonita.</span><button class="btn" data-say="Ela é bonita.">🔊</button></div>
+      <div class="tr">Es bonita (siempre).</div>
+      <div class="arrow">vs</div>
+      <div class="row"><span>Ela <mark class="v">está</mark> bonita.</span><button class="btn" data-say="Ela está bonita.">🔊</button></div>
+      <div class="tr">Se ve bonita hoy.</div>
+    </div>
+    <div class="pair">
+      <div class="row"><span>Ele <mark class="v">é</mark> chato.</span><button class="btn" data-say="Ele é chato.">🔊</button></div>
+      <div class="tr">Es aburrido / pesado.</div>
+      <div class="arrow">vs</div>
+      <div class="row"><span>Ele <mark class="v">está</mark> chato.</span><button class="btn" data-say="Ele está chato.">🔊</button></div>
+      <div class="tr">Hoy está pesado.</div>
+    </div>
+    <div class="pair">
+      <div class="row"><span>Eu <mark class="v">sou</mark> feliz.</span><button class="btn" data-say="Eu sou feliz.">🔊</button></div>
+      <div class="tr">Soy una persona feliz.</div>
+      <div class="arrow">vs</div>
+      <div class="row"><span>Eu <mark class="v">estou</mark> feliz.</span><button class="btn" data-say="Eu estou feliz.">🔊</button></div>
+      <div class="tr">Estoy feliz ahora.</div>
+    </div>
+  </div>
+</div>
+
+<h3 class="bigsec" id="r-ser-errores">Errores y detalles</h3>
+<div class="card">
+  <h3>⚠️ Errores comunes</h3>
+  <ul class="errlist">
+    <li><span class="bad">Ele é cabelos loiros.</span> → <span class="good">Ele tem cabelos loiros.</span> <button class="btn" data-say="Ele tem cabelos loiros.">🔊</button><br><span class="note">El cabello y los ojos se “tienen”: van con <b>ter</b>.</span></li>
+    <li><span class="bad">Eu sou vinte anos.</span> → <span class="good">Eu tenho vinte anos.</span> <button class="btn" data-say="Eu tenho vinte anos.">🔊</button><br><span class="note">La edad también va con <b>ter</b>.</span></li>
+    <li><span class="bad">Eu sou cansado hoje.</span> → <span class="good">Eu estou cansado hoje.</span> <button class="btn" data-say="Eu estou cansado hoje.">🔊</button><br><span class="note">Un estado pasajero va con <b>estar</b>.</span></li>
+    <li><span class="bad">Eu sou de o Peru.</span> → <span class="good">Eu sou do Peru.</span> <button class="btn" data-say="Eu sou do Peru.">🔊</button><br><span class="note"><i>de + o</i> siempre se une: <b>do</b>.</span></li>
+  </ul>
+  <h3 style="margin-top:14px">📍 Para tener en cuenta</h3>
+  <ul>
+    <li>No confundas <b>é</b> (verbo) con <b>e</b> (“y”): <i>Ele é alto e simpático.</i></li>
+    <li><b>são</b> (“son”) se pronuncia con vocal nasal, “sãu”, y es la misma palabra de <i>São Paulo</i>.</li>
+    <li>En el habla rápida, <i>é</i> y <i>está</i> a veces suenan parecido; fíjate en el contexto.</li>
+  </ul>
+</div>
+
+</section>
+
+<section id="verbo-ter">
+
+<h2>TER <small style="font-weight:400;color:var(--muted)">· en español: tener</small></h2>
+<p><b>Ter</b> significa <b>tener</b>, pero en portugués hace más trabajo: también se usa para la <b>edad</b>, los <b>rasgos físicos</b> (cabello, ojos), las <b>sensaciones</b> (hambre, sed) y, en el habla diaria, para decir <b>“hay”</b>.</p>
+
+<div class="subnav"><a href="#r-ter-resumen">Conjugación</a><a href="#r-ter-reglas">Usos</a><a href="#r-ter-compara">Compara</a><a href="#r-ter-errores">Errores</a></div>
+
+<h3 class="bigsec" id="r-ter-resumen">Conjugación</h3>
+<div class="card">
+  <p class="note" style="margin-top:0">Presente del indicativo · toca cada forma para oírla</p>
+  <div class="tablewrap">
+  <table class="conj">
+    <tr><th>Pronombre</th><th>Forma</th><th>Suena</th><th>En español</th></tr>
+    <tr><td>eu</td><td><button class="btn" data-say="eu tenho"><b>tenho</b></button></td><td><i>té-ñu</i></td><td>yo tengo</td></tr>
+    <tr><td>você / ele / ela</td><td><button class="btn" data-say="ele tem"><b>tem</b></button></td><td><i>têin (nasal)</i></td><td>usted / él / ella tiene</td></tr>
+    <tr><td>a gente</td><td><button class="btn" data-say="a gente tem"><b>tem</b></button></td><td><i>têin (nasal)</i></td><td>nosotros tenemos (informal)</td></tr>
+    <tr><td>nós</td><td><button class="btn" data-say="nós temos"><b>temos</b></button></td><td><i>tê-mus</i></td><td>nosotros tenemos</td></tr>
+    <tr><td>vocês / eles / elas</td><td><button class="btn" data-say="eles têm"><b>têm</b></button></td><td><i>têin (nasal)</i></td><td>ustedes / ellos / ellas tienen</td></tr>
+  </table>
+  </div>
+  <p class="note">💡 <b>tem</b> (singular) y <b>têm</b> (plural) se escriben distinto pero <b>suenan igual</b> en Brasil. El acento circunflejo solo marca el plural: <i>ela tem / elas têm</i>.</p>
+</div>
+
+<h3 class="bigsec" id="r-ter-reglas">Usos de TER</h3>
+<div class="card rule">
+  <span class="tag">Uso 1</span>
+  <h3>Posesión: tener algo</h3>
+  <p>El uso más directo: <b>tener</b> una cosa o una persona (familia, amigos). Igual que en español.</p>
+  <div class="chips">
+    <button class="chip" data-say="carro"><b>carro</b><small>ká-hu · carro</small></button>
+    <button class="chip" data-say="casa"><b>casa</b><small>ká-za · casa</small></button>
+    <button class="chip" data-say="celular"><b>celular</b><small>se-lu-lár · celular</small></button>
+    <button class="chip" data-say="dinheiro"><b>dinheiro</b><small>dyi-ñêi-ru · dinero</small></button>
+    <button class="chip" data-say="tempo"><b>tempo</b><small>têm-pu · tiempo</small></button>
+  </div>
+
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Eu <mark class="v">tenho</mark> um carro novo.</p>
+    <p class="es">Tengo un carro nuevo.</p>
+    <p class="say">Suena: <b>té-ñu</b></p>
+    <button class="btn" data-say="Eu tenho um carro novo.">▶ Normal</button><button class="btn" data-say="Eu tenho um carro novo." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Ela <mark class="v">tem</mark> dois irmãos.</p>
+    <p class="es">Ella tiene dos hermanos.</p>
+    <p class="say">Suena: <b>têin</b> · <b>ir-mãus</b></p>
+    <button class="btn" data-say="Ela tem dois irmãos.">▶ Normal</button><button class="btn" data-say="Ela tem dois irmãos." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Nós <mark class="v">temos</mark> uma casa em Lima.</p>
+    <p class="es">Tenemos una casa en Lima.</p>
+    <p class="say">Suena: <b>tê-mus</b></p>
+    <button class="btn" data-say="Nós temos uma casa em Lima.">▶ Normal</button><button class="btn" data-say="Nós temos uma casa em Lima." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Você <mark class="v">tem</mark> tempo hoje?</p>
+    <p class="es">¿Tienes tiempo hoy?</p>
+    <p class="say">Suena: <b>têin</b> · <b>têm-pu</b></p>
+    <button class="btn" data-say="Você tem tempo hoje?">▶ Normal</button><button class="btn" data-say="Você tem tempo hoje?" data-slow="1">🐢 Lento</button>
+  </div>
+</div>
+
+<div class="card rule">
+  <span class="tag">Uso 2</span>
+  <h3>Rasgos físicos: cabello, ojos, barba</h3>
+  <p>Para el <b>cabello, los ojos y la barba</b> se usa <b>ter</b> (“tiene”), no ser. La estructura: <b>ser</b> + característica general (alto, baixo) y <b>ter</b> + parte del cuerpo.</p>
+  <div class="chips">
+    <button class="chip" data-say="cabelos"><b>cabelos</b><small>ka-bê-lus · cabello</small></button>
+    <button class="chip" data-say="olhos"><b>olhos</b><small>ó-lyus · ojos</small></button>
+    <button class="chip" data-say="barba"><b>barba</b><small>bár-ba · barba</small></button>
+    <button class="chip" data-say="loiros"><b>loiros</b><small>lói-rus · rubios</small></button>
+    <button class="chip" data-say="castanhos"><b>castanhos</b><small>kas-tá-ñus · castaños</small></button>
+    <button class="chip" data-say="azuis"><b>azuis</b><small>a-zúis · azules</small></button>
+  </div>
+
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Ele é alto e <mark class="v">tem</mark> cabelos loiros.</p>
+    <p class="es">Él es alto y tiene cabello rubio.</p>
+    <p class="say">Suena: <b>têin</b> · <b>ka-bê-lus</b></p>
+    <button class="btn" data-say="Ele é alto e tem cabelos loiros.">▶ Normal</button><button class="btn" data-say="Ele é alto e tem cabelos loiros." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Ela <mark class="v">tem</mark> olhos castanhos.</p>
+    <p class="es">Ella tiene ojos castaños.</p>
+    <p class="say">Suena: <b>têin</b> · <b>ó-lyus</b></p>
+    <button class="btn" data-say="Ela tem olhos castanhos.">▶ Normal</button><button class="btn" data-say="Ela tem olhos castanhos." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Meu irmão <mark class="v">tem</mark> barba.</p>
+    <p class="es">Mi hermano tiene barba.</p>
+    <p class="say">Suena: <b>têin</b></p>
+    <button class="btn" data-say="Meu irmão tem barba.">▶ Normal</button><button class="btn" data-say="Meu irmão tem barba." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Minha prima <mark class="v">tem</mark> cabelos compridos.</p>
+    <p class="es">Mi prima tiene cabello largo.</p>
+    <p class="say">Suena: <b>kom-prí-dus</b></p>
+    <button class="btn" data-say="Minha prima tem cabelos compridos.">▶ Normal</button><button class="btn" data-say="Minha prima tem cabelos compridos." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="callout">
+    <b>📝 Ojo</b>
+    <p>Es justo el error del ejercicio <i>“Ele é alto e <s>é</s> cabelos loiros”</i>: lo correcto es <b>Ele é alto e tem cabelos loiros</b>.</p>
+  </div>
+</div>
+
+<div class="card rule">
+  <span class="tag">Uso 3</span>
+  <h3>Edad: tener … años</h3>
+  <p>La edad se dice con <b>ter</b>, como en español: <i>tenho vinte anos</i> (nunca “sou vinte anos”). La pregunta es <i>Quantos anos você tem?</i></p>
+  <div class="chips">
+    <button class="chip" data-say="vinte"><b>vinte</b><small>vín-chi · veinte</small></button>
+    <button class="chip" data-say="trinta"><b>trinta</b><small>trín-ta · treinta</small></button>
+    <button class="chip" data-say="quarenta"><b>quarenta</b><small>kua-rên-ta · cuarenta</small></button>
+    <button class="chip" data-say="cinquenta"><b>cinquenta</b><small>sin-kuên-ta · cincuenta</small></button>
+  </div>
+
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Quantos anos você <mark class="v">tem</mark>?</p>
+    <p class="es">¿Cuántos años tienes?</p>
+    <p class="say">Suena: <b>kuán-tus á-nus</b> · <b>têin</b></p>
+    <button class="btn" data-say="Quantos anos você tem?">▶ Normal</button><button class="btn" data-say="Quantos anos você tem?" data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Eu <mark class="v">tenho</mark> vinte anos.</p>
+    <p class="es">Tengo veinte años.</p>
+    <p class="say">Suena: <b>té-ñu</b> · <b>vín-chi</b></p>
+    <button class="btn" data-say="Eu tenho vinte anos.">▶ Normal</button><button class="btn" data-say="Eu tenho vinte anos." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Meu pai <mark class="v">tem</mark> cinquenta anos.</p>
+    <p class="es">Mi papá tiene cincuenta años.</p>
+    <p class="say">Suena: <b>têin</b></p>
+    <button class="btn" data-say="Meu pai tem cinquenta anos.">▶ Normal</button><button class="btn" data-say="Meu pai tem cinquenta anos." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Minha irmã <mark class="v">tem</mark> trinta e dois anos.</p>
+    <p class="es">Mi hermana tiene treinta y dos años.</p>
+    <p class="say">Suena: <b>têin</b> · <b>trín-ta</b></p>
+    <button class="btn" data-say="Minha irmã tem trinta e dois anos.">▶ Normal</button><button class="btn" data-say="Minha irmã tem trinta e dois anos." data-slow="1">🐢 Lento</button>
+  </div>
+</div>
+
+<div class="card rule">
+  <span class="tag">Uso 4</span>
+  <h3>Sensaciones: hambre, sed, sueño, frío…</h3>
+  <p>Muchas sensaciones del cuerpo se dicen con <b>ter</b> + sustantivo, igual que en español: <i>tengo hambre</i> → <i>tenho fome</i>.</p>
+  <div class="chips">
+    <button class="chip" data-say="fome"><b>fome</b><small>fô-mi · hambre</small></button>
+    <button class="chip" data-say="sede"><b>sede</b><small>sé-dyi · sed</small></button>
+    <button class="chip" data-say="sono"><b>sono</b><small>sô-nu · sueño</small></button>
+    <button class="chip" data-say="frio"><b>frio</b><small>frí-u · frío</small></button>
+    <button class="chip" data-say="calor"><b>calor</b><small>ka-lôr · calor</small></button>
+    <button class="chip" data-say="medo"><b>medo</b><small>mê-dyu · miedo</small></button>
+    <button class="chip" data-say="pressa"><b>pressa</b><small>pré-sa · prisa</small></button>
+  </div>
+
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Eu <mark class="v">tenho</mark> fome. Vamos jantar?</p>
+    <p class="es">Tengo hambre. ¿Cenamos?</p>
+    <p class="say">Suena: <b>té-ñu</b> · <b>fô-mi</b></p>
+    <button class="btn" data-say="Eu tenho fome. Vamos jantar?">▶ Normal</button><button class="btn" data-say="Eu tenho fome. Vamos jantar?" data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Ela <mark class="v">tem</mark> sede.</p>
+    <p class="es">Ella tiene sed.</p>
+    <p class="say">Suena: <b>têin</b> · <b>sé-dyi</b></p>
+    <button class="btn" data-say="Ela tem sede.">▶ Normal</button><button class="btn" data-say="Ela tem sede." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Nós <mark class="v">temos</mark> sono.</p>
+    <p class="es">Tenemos sueño.</p>
+    <p class="say">Suena: <b>tê-mus</b> · <b>sô-nu</b></p>
+    <button class="btn" data-say="Nós temos sono.">▶ Normal</button><button class="btn" data-say="Nós temos sono." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Você <mark class="v">tem</mark> frio?</p>
+    <p class="es">¿Tienes frío?</p>
+    <p class="say">Suena: <b>têin</b> · <b>frí-u</b></p>
+    <button class="btn" data-say="Você tem frio?">▶ Normal</button><button class="btn" data-say="Você tem frio?" data-slow="1">🐢 Lento</button>
+  </div>
+  <p class="note">En Brasil también es muy común decir <i>estar com fome</i> (<i>Eu estou com fome</i>). Las dos formas se entienden.</p>
+</div>
+
+<div class="card rule">
+  <span class="tag">Uso 5</span>
+  <h3>“Tem” = hay (existencia)</h3>
+  <p>En el habla diaria de Brasil, <b>tem</b> significa <b>“hay”</b> (en textos formales se escribe <i>há</i>). Siempre va en singular, aunque lo que sigue sea plural.</p>
+  <div class="chips">
+    <button class="chip" data-say="alguém"><b>alguém</b><small>al-gãin · alguien</small></button>
+    <button class="chip" data-say="ninguém"><b>ninguém</b><small>nin-gãin · nadie</small></button>
+    <button class="chip" data-say="geladeira"><b>geladeira</b><small>zhe-la-dêi-ra · refrigeradora</small></button>
+    <button class="chip" data-say="farmácia"><b>farmácia</b><small>far-má-si-a · farmacia</small></button>
+  </div>
+
+  <div class="ex">
+    <p class="pt" lang="pt-BR"><mark class="v">Tem</mark> alguém sentado aqui? Não, não <mark class="v">tem</mark> ninguém.</p>
+    <p class="es">¿Hay alguien sentado aquí? No, no hay nadie.</p>
+    <p class="say">Suena: <b>têin</b> · <b>al-gãin</b> · <b>nin-gãin</b></p>
+    <button class="btn" data-say="Tem alguém sentado aqui? Não, não tem ninguém.">▶ Normal</button><button class="btn" data-say="Tem alguém sentado aqui? Não, não tem ninguém." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR"><mark class="v">Tem</mark> leite na geladeira.</p>
+    <p class="es">Hay leche en la refrigeradora.</p>
+    <p class="say">Suena: <b>têin</b> · <b>lêi-chi</b></p>
+    <button class="btn" data-say="Tem leite na geladeira.">▶ Normal</button><button class="btn" data-say="Tem leite na geladeira." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR"><mark class="v">Tem</mark> uma farmácia aqui perto?</p>
+    <p class="es">¿Hay una farmacia aquí cerca?</p>
+    <p class="say">Suena: <b>têin</b> · <b>far-má-si-a</b></p>
+    <button class="btn" data-say="Tem uma farmácia aqui perto?">▶ Normal</button><button class="btn" data-say="Tem uma farmácia aqui perto?" data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Não <mark class="v">tem</mark> problema.</p>
+    <p class="es">No hay problema.</p>
+    <p class="say">Suena: <b>têin</b> · <b>pro-blê-ma</b></p>
+    <button class="btn" data-say="Não tem problema.">▶ Normal</button><button class="btn" data-say="Não tem problema." data-slow="1">🐢 Lento</button>
+  </div>
+</div>
+
+<div class="card rule">
+  <span class="tag">Uso 6</span>
+  <h3>Ter que + infinitivo: tener que</h3>
+  <p><b>Ter que</b> + verbo en infinitivo expresa <b>obligación</b>: “tener que hacer algo”. El verbo <i>ter</i> se conjuga y el segundo verbo queda en infinitivo.</p>
+  <div class="chips">
+    <button class="chip" data-say="estudar"><b>estudar</b><small>es-tu-dár · estudiar</small></button>
+    <button class="chip" data-say="acordar"><b>acordar</b><small>a-kor-dár · despertar</small></button>
+    <button class="chip" data-say="trabalhar"><b>trabalhar</b><small>tra-ba-lyár · trabajar</small></button>
+    <button class="chip" data-say="chegar"><b>chegar</b><small>she-gár · llegar</small></button>
+  </div>
+
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Eu <mark class="v">tenho que</mark> estudar português.</p>
+    <p class="es">Tengo que estudiar portugués.</p>
+    <p class="say">Suena: <b>té-ñu ki</b></p>
+    <button class="btn" data-say="Eu tenho que estudar português.">▶ Normal</button><button class="btn" data-say="Eu tenho que estudar português." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Nós <mark class="v">temos que</mark> acordar cedo.</p>
+    <p class="es">Tenemos que despertarnos temprano.</p>
+    <p class="say">Suena: <b>tê-mus ki</b></p>
+    <button class="btn" data-say="Nós temos que acordar cedo.">▶ Normal</button><button class="btn" data-say="Nós temos que acordar cedo." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Você <mark class="v">tem que</mark> comer.</p>
+    <p class="es">Tienes que comer.</p>
+    <p class="say">Suena: <b>têin ki</b></p>
+    <button class="btn" data-say="Você tem que comer.">▶ Normal</button><button class="btn" data-say="Você tem que comer." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Ela <mark class="v">tem que</mark> trabalhar hoje.</p>
+    <p class="es">Ella tiene que trabajar hoy.</p>
+    <p class="say">Suena: <b>têin ki</b></p>
+    <button class="btn" data-say="Ela tem que trabalhar hoje.">▶ Normal</button><button class="btn" data-say="Ela tem que trabalhar hoje." data-slow="1">🐢 Lento</button>
+  </div>
+</div>
+
+<h3 class="bigsec" id="r-ter-compara">🎧 Compara</h3>
+<div class="card">
+  <p>Escucha cada par seguido y fíjate en cómo cambia el significado.</p>
+  <div class="pairs">
+    <div class="pair">
+      <div class="row"><span>Ela <mark class="v">tem</mark> fome.</span><button class="btn" data-say="Ela tem fome.">🔊</button></div>
+      <div class="tr">Ella tiene hambre.</div>
+      <div class="arrow">vs</div>
+      <div class="row"><span>Elas <mark class="v">têm</mark> fome.</span><button class="btn" data-say="Elas têm fome.">🔊</button></div>
+      <div class="tr">Ellas tienen hambre. (suena igual)</div>
+    </div>
+    <div class="pair">
+      <div class="row"><span>Ele <mark class="v">é</mark> alto.</span><button class="btn" data-say="Ele é alto.">🔊</button></div>
+      <div class="tr">Es alto. (característica)</div>
+      <div class="arrow">vs</div>
+      <div class="row"><span>Ele <mark class="v">tem</mark> cabelos loiros.</span><button class="btn" data-say="Ele tem cabelos loiros.">🔊</button></div>
+      <div class="tr">Tiene cabello rubio. (rasgo)</div>
+    </div>
+    <div class="pair">
+      <div class="row"><span><mark class="v">Tem</mark> uma farmácia aqui.</span><button class="btn" data-say="Tem uma farmácia aqui.">🔊</button></div>
+      <div class="tr">Hay una farmacia aquí.</div>
+      <div class="arrow">vs</div>
+      <div class="row"><span>Ele <mark class="v">tem</mark> uma farmácia.</span><button class="btn" data-say="Ele tem uma farmácia.">🔊</button></div>
+      <div class="tr">Él tiene una farmacia.</div>
+    </div>
+    <div class="pair">
+      <div class="row"><span>Eu <mark class="v">tenho</mark> fome.</span><button class="btn" data-say="Eu tenho fome.">🔊</button></div>
+      <div class="tr">Tengo hambre.</div>
+      <div class="arrow">vs</div>
+      <div class="row"><span>Eu <mark class="v">estou</mark> com fome.</span><button class="btn" data-say="Eu estou com fome.">🔊</button></div>
+      <div class="tr">Estoy con hambre. (muy común)</div>
+    </div>
+  </div>
+</div>
+
+<h3 class="bigsec" id="r-ter-errores">Errores y detalles</h3>
+<div class="card">
+  <h3>⚠️ Errores comunes</h3>
+  <ul class="errlist">
+    <li><span class="bad">Eu sou vinte anos.</span> → <span class="good">Eu tenho vinte anos.</span> <button class="btn" data-say="Eu tenho vinte anos.">🔊</button><br><span class="note">La edad va con <b>ter</b>.</span></li>
+    <li><span class="bad">Ele é cabelos loiros.</span> → <span class="good">Ele tem cabelos loiros.</span> <button class="btn" data-say="Ele tem cabelos loiros.">🔊</button><br><span class="note">El cabello se “tiene”.</span></li>
+    <li><span class="bad">Eu sou frio.</span> → <span class="good">Eu tenho frio.</span> <button class="btn" data-say="Eu tenho frio.">🔊</button><br><span class="note"><i>Eu sou frio</i> significa “soy una persona fría”; la sensación es <i>tenho frio</i>.</span></li>
+    <li><span class="bad">Têm duas farmácias aqui.</span> → <span class="good">Tem duas farmácias aqui.</span> <button class="btn" data-say="Tem duas farmácias aqui.">🔊</button><br><span class="note">Con el sentido “hay”, <b>tem</b> no cambia a plural.</span></li>
+  </ul>
+  <h3 style="margin-top:14px">📍 Para tener en cuenta</h3>
+  <ul>
+    <li>Con <b>eu</b>: <i>tenho</i> (la <b>nh</b> suena “ñ”: “té-ñu”).</li>
+    <li>En escritos formales, “hay” se escribe <i>há</i>: <i>Há duas farmácias</i>. En la conversación se dice <i>Tem duas farmácias</i>.</li>
+    <li>Con <b>você</b> y <b>a gente</b> el verbo va en singular: <i>você tem</i>, <i>a gente tem</i>.</li>
+  </ul>
+</div>
+
+</section>
+
+<section id="verbo-estar">
+
+<h2>ESTAR <small style="font-weight:400;color:var(--muted)">· en español: estar</small></h2>
+<p><b>Estar</b> sirve para decir <b>cómo está</b> alguien (estados pasajeros), <b>dónde está</b> algo y <b>qué está haciendo</b> (estar + gerundio). Se usa mucho junto con <b>ser</b>, así que conviene verlos juntos.</p>
+
+<div class="subnav"><a href="#r-estar-resumen">Conjugación</a><a href="#r-estar-reglas">Usos</a><a href="#r-estar-compara">Compara</a><a href="#r-estar-errores">Errores</a></div>
+
+<h3 class="bigsec" id="r-estar-resumen">Conjugación</h3>
+<div class="card">
+  <p class="note" style="margin-top:0">Presente del indicativo · toca cada forma para oírla</p>
+  <div class="tablewrap">
+  <table class="conj">
+    <tr><th>Pronombre</th><th>Forma</th><th>Suena</th><th>En español</th></tr>
+    <tr><td>eu</td><td><button class="btn" data-say="eu estou"><b>estou</b></button></td><td><i>es-tôu</i></td><td>yo estoy</td></tr>
+    <tr><td>você / ele / ela</td><td><button class="btn" data-say="ele está"><b>está</b></button></td><td><i>es-tá</i></td><td>usted / él / ella está</td></tr>
+    <tr><td>a gente</td><td><button class="btn" data-say="a gente está"><b>está</b></button></td><td><i>es-tá</i></td><td>nosotros estamos (informal)</td></tr>
+    <tr><td>nós</td><td><button class="btn" data-say="nós estamos"><b>estamos</b></button></td><td><i>es-tá-mus</i></td><td>nosotros estamos</td></tr>
+    <tr><td>vocês / eles / elas</td><td><button class="btn" data-say="eles estão"><b>estão</b></button></td><td><i>es-tãu (nasal)</i></td><td>ustedes / ellos / ellas están</td></tr>
+  </table>
+  </div>
+  <p class="note">💡 En el habla rápida se acorta: <i>estou → tô</i>, <i>está → tá</i>, <i>estamos → tamo(s)</i>, <i>estão → tão</i>. <i>Tô bem</i> y <i>Tá bom</i> los oirás todo el tiempo.</p>
+</div>
+
+<h3 class="bigsec" id="r-estar-reglas">Usos de ESTAR</h3>
+<div class="card rule">
+  <span class="tag">Uso 1</span>
+  <h3>Estados de ánimo y físicos (pasajeros)</h3>
+  <p>Con <b>estar</b> describes cómo te sientes o en qué estado estás <b>ahora</b>. No es algo permanente.</p>
+  <div class="chips">
+    <button class="chip" data-say="cansado"><b>cansado</b><small>kan-sá-du · cansado</small></button>
+    <button class="chip" data-say="feliz"><b>feliz</b><small>fe-líz · feliz</small></button>
+    <button class="chip" data-say="triste"><b>triste</b><small>trís-chi · triste</small></button>
+    <button class="chip" data-say="doente"><b>doente</b><small>do-ên-chi · enfermo</small></button>
+    <button class="chip" data-say="ocupado"><b>ocupado</b><small>o-ku-pá-du · ocupado</small></button>
+  </div>
+
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Eu <mark class="v">estou</mark> cansado hoje.</p>
+    <p class="es">Estoy cansado hoy.</p>
+    <p class="say">Suena: <b>es-tôu</b></p>
+    <button class="btn" data-say="Eu estou cansado hoje.">▶ Normal</button><button class="btn" data-say="Eu estou cansado hoje." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Ela <mark class="v">está</mark> feliz.</p>
+    <p class="es">Ella está feliz.</p>
+    <p class="say">Suena: <b>es-tá</b></p>
+    <button class="btn" data-say="Ela está feliz.">▶ Normal</button><button class="btn" data-say="Ela está feliz." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Meu pai <mark class="v">está</mark> ocupado.</p>
+    <p class="es">Mi papá está ocupado.</p>
+    <p class="say">Suena: <b>es-tá</b></p>
+    <button class="btn" data-say="Meu pai está ocupado.">▶ Normal</button><button class="btn" data-say="Meu pai está ocupado." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Nós <mark class="v">estamos</mark> com fome.</p>
+    <p class="es">Estamos con hambre.</p>
+    <p class="say">Suena: <b>es-tá-mus</b></p>
+    <button class="btn" data-say="Nós estamos com fome.">▶ Normal</button><button class="btn" data-say="Nós estamos com fome." data-slow="1">🐢 Lento</button>
+  </div>
+  <p class="note">El adjetivo concuerda con quien habla: hombre → <i>cansado</i>; mujer → <i>cansada</i>.</p>
+</div>
+
+<div class="card rule">
+  <span class="tag">Uso 2</span>
+  <h3>Ubicación: dónde está algo</h3>
+  <p>Para decir <b>dónde está</b> una persona o cosa se usa <b>estar</b>, incluso si el lugar no cambia: <i>Lima está no Peru</i>. La pregunta es <i>Onde está…?</i></p>
+  <div class="chips">
+    <button class="chip" data-say="em casa"><b>em casa</b><small>ãin ká-za · en casa</small></button>
+    <button class="chip" data-say="perto"><b>perto</b><small>pér-tu · cerca</small></button>
+    <button class="chip" data-say="longe"><b>longe</b><small>lôn-zhi · lejos</small></button>
+    <button class="chip" data-say="aqui"><b>aqui</b><small>a-kí · aquí</small></button>
+    <button class="chip" data-say="ali"><b>ali</b><small>a-lí · allí</small></button>
+  </div>
+
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Eu <mark class="v">estou</mark> em casa.</p>
+    <p class="es">Estoy en casa.</p>
+    <p class="say">Suena: <b>es-tôu</b></p>
+    <button class="btn" data-say="Eu estou em casa.">▶ Normal</button><button class="btn" data-say="Eu estou em casa." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">O banco <mark class="v">está</mark> perto daqui.</p>
+    <p class="es">El banco está cerca de aquí.</p>
+    <p class="say">Suena: <b>es-tá</b> · <b>pér-tu</b></p>
+    <button class="btn" data-say="O banco está perto daqui.">▶ Normal</button><button class="btn" data-say="O banco está perto daqui." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Onde <mark class="v">está</mark> o banheiro?</p>
+    <p class="es">¿Dónde está el baño?</p>
+    <p class="say">Suena: <b>ôn-dyi</b> · <b>es-tá</b></p>
+    <button class="btn" data-say="Onde está o banheiro?">▶ Normal</button><button class="btn" data-say="Onde está o banheiro?" data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Meus pais <mark class="v">estão</mark> em Lima.</p>
+    <p class="es">Mis padres están en Lima.</p>
+    <p class="say">Suena: <b>es-tãu</b></p>
+    <button class="btn" data-say="Meus pais estão em Lima.">▶ Normal</button><button class="btn" data-say="Meus pais estão em Lima." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="callout">
+    <b>📝 Ojo</b>
+    <p>Para <b>eventos</b> se usa ser: <i>A festa <b>é</b> na minha casa</i>. Para <b>objetos y personas</b> se usa estar: <i>O livro <b>está</b> na minha casa</i>.</p>
+  </div>
+</div>
+
+<div class="card rule">
+  <span class="tag">Uso 3</span>
+  <h3>Acción en curso: estar + gerundio</h3>
+  <p><b>Estar + gerundio</b> dice lo que alguien está haciendo ahora. El gerundio se forma así: <b>-ar → -ando</b>, <b>-er → -endo</b>, <b>-ir → -indo</b>. Después de <i>estar</i> nunca va el infinitivo.</p>
+  <div class="chips">
+    <button class="chip" data-say="estudando"><b>estudando</b><small>es-tu-dán-du · estudiando</small></button>
+    <button class="chip" data-say="jogando"><b>jogando</b><small>zho-gán-du · jugando</small></button>
+    <button class="chip" data-say="bebendo"><b>bebendo</b><small>be-bên-du · bebiendo</small></button>
+    <button class="chip" data-say="comendo"><b>comendo</b><small>ko-mên-du · comiendo</small></button>
+    <button class="chip" data-say="dormindo"><b>dormindo</b><small>dor-mín-du · durmiendo</small></button>
+  </div>
+
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Minha irmã <mark class="v">está</mark> estudando inglês.</p>
+    <p class="es">Mi hermana está estudiando inglés.</p>
+    <p class="say">Suena: <b>es-tá</b> · <b>es-tu-dán-du</b></p>
+    <button class="btn" data-say="Minha irmã está estudando inglês.">▶ Normal</button><button class="btn" data-say="Minha irmã está estudando inglês." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Meus pais <mark class="v">estão</mark> tomando café.</p>
+    <p class="es">Mis padres están tomando café.</p>
+    <p class="say">Suena: <b>es-tãu</b> · <b>to-mán-du</b></p>
+    <button class="btn" data-say="Meus pais estão tomando café.">▶ Normal</button><button class="btn" data-say="Meus pais estão tomando café." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">O que você <mark class="v">está</mark> fazendo?</p>
+    <p class="es">¿Qué estás haciendo?</p>
+    <p class="say">Suena: <b>es-tá</b> · <b>fa-zên-du</b></p>
+    <button class="btn" data-say="O que você está fazendo?">▶ Normal</button><button class="btn" data-say="O que você está fazendo?" data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Eu <mark class="v">estou</mark> aprendendo português.</p>
+    <p class="es">Estoy aprendiendo portugués.</p>
+    <p class="say">Suena: <b>es-tôu</b> · <b>a-pren-dên-du</b></p>
+    <button class="btn" data-say="Eu estou aprendendo português.">▶ Normal</button><button class="btn" data-say="Eu estou aprendendo português." data-slow="1">🐢 Lento</button>
+  </div>
+</div>
+
+<div class="card rule">
+  <span class="tag">Uso 4</span>
+  <h3>Saludar: Como você está?</h3>
+  <p>Para preguntar <b>cómo está</b> alguien en este momento se usa <b>estar</b>. No lo confundas con <i>Como ele é?</i> (¿cómo es?), que pide una descripción.</p>
+  <div class="chips">
+    <button class="chip" data-say="bem"><b>bem</b><small>bãin · bien</small></button>
+    <button class="chip" data-say="mal"><b>mal</b><small>máu · mal</small></button>
+    <button class="chip" data-say="mais ou menos"><b>mais ou menos</b><small>máis ou mê-nus · más o menos</small></button>
+    <button class="chip" data-say="obrigado"><b>obrigado</b><small>o-bri-gá-du · gracias (hombre)</small></button>
+    <button class="chip" data-say="obrigada"><b>obrigada</b><small>o-bri-gá-da · gracias (mujer)</small></button>
+  </div>
+
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Oi, tudo bem? Como você <mark class="v">está</mark>?</p>
+    <p class="es">Hola, ¿todo bien? ¿Cómo estás?</p>
+    <p class="say">Suena: <b>es-tá</b></p>
+    <button class="btn" data-say="Oi, tudo bem? Como você está?">▶ Normal</button><button class="btn" data-say="Oi, tudo bem? Como você está?" data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR"><mark class="v">Estou</mark> bem, obrigado. E você?</p>
+    <p class="es">Estoy bien, gracias. ¿Y tú?</p>
+    <p class="say">Suena: <b>es-tôu</b></p>
+    <button class="btn" data-say="Estou bem, obrigado. E você?">▶ Normal</button><button class="btn" data-say="Estou bem, obrigado. E você?" data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Hoje eu <mark class="v">estou</mark> mais ou menos.</p>
+    <p class="es">Hoy estoy así así.</p>
+    <p class="say">Suena: <b>es-tôu</b></p>
+    <button class="btn" data-say="Hoje eu estou mais ou menos.">▶ Normal</button><button class="btn" data-say="Hoje eu estou mais ou menos." data-slow="1">🐢 Lento</button>
+  </div>
+  <div class="ex">
+    <p class="pt" lang="pt-BR">Eu <mark class="v">tô</mark> bem e você <mark class="v">tá</mark> bem?</p>
+    <p class="es">Yo estoy bien, ¿y tú estás bien? (informal)</p>
+    <p class="say">Suena: <b>tô</b> · <b>tá</b></p>
+    <button class="btn" data-say="Eu tô bem e você tá bem?">▶ Normal</button><button class="btn" data-say="Eu tô bem e você tá bem?" data-slow="1">🐢 Lento</button>
+  </div>
+  <p class="note"><i>Tô</i> y <i>tá</i> son la forma hablada y relajada de <i>estou</i> y <i>está</i>.</p>
+</div>
+
+<h3 class="bigsec" id="r-estar-compara">🎧 Compara</h3>
+<div class="card">
+  <p>Escucha cada par seguido. La diferencia entre <b>ser</b> y <b>estar</b> cambia por completo el mensaje.</p>
+  <div class="pairs">
+    <div class="pair">
+      <div class="row"><span>Como ele <mark class="v">é</mark>?</span><button class="btn" data-say="Como ele é?">🔊</button></div>
+      <div class="tr">¿Cómo es? (descripción)</div>
+      <div class="arrow">vs</div>
+      <div class="row"><span>Como ele <mark class="v">está</mark>?</span><button class="btn" data-say="Como ele está?">🔊</button></div>
+      <div class="tr">¿Cómo está? (ahora)</div>
+    </div>
+    <div class="pair">
+      <div class="row"><span>Lima <mark class="v">é</mark> grande.</span><button class="btn" data-say="Lima é grande.">🔊</button></div>
+      <div class="tr">Lima es grande. (característica)</div>
+      <div class="arrow">vs</div>
+      <div class="row"><span>Lima <mark class="v">está</mark> no Peru.</span><button class="btn" data-say="Lima está no Peru.">🔊</button></div>
+      <div class="tr">Lima está en Perú. (ubicación)</div>
+    </div>
+    <div class="pair">
+      <div class="row"><span>A festa <mark class="v">é</mark> em casa.</span><button class="btn" data-say="A festa é em casa.">🔊</button></div>
+      <div class="tr">La fiesta es en casa. (evento)</div>
+      <div class="arrow">vs</div>
+      <div class="row"><span>O livro <mark class="v">está</mark> em casa.</span><button class="btn" data-say="O livro está em casa.">🔊</button></div>
+      <div class="tr">El libro está en casa. (objeto)</div>
+    </div>
+    <div class="pair">
+      <div class="row"><span>Eu <mark class="v">estudo</mark> português.</span><button class="btn" data-say="Eu estudo português.">🔊</button></div>
+      <div class="tr">Estudio portugués. (hábito)</div>
+      <div class="arrow">vs</div>
+      <div class="row"><span>Eu <mark class="v">estou</mark> estudando português.</span><button class="btn" data-say="Eu estou estudando português.">🔊</button></div>
+      <div class="tr">Estoy estudiando portugués. (ahora)</div>
+    </div>
+  </div>
+</div>
+
+<h3 class="bigsec" id="r-estar-errores">Errores y detalles</h3>
+<div class="card">
+  <h3>⚠️ Errores comunes</h3>
+  <ul class="errlist">
+    <li><span class="bad">Eu sou cansado.</span> → <span class="good">Eu estou cansado.</span> <button class="btn" data-say="Eu estou cansado.">🔊</button><br><span class="note">Un estado pasajero va con <b>estar</b>.</span></li>
+    <li><span class="bad">Eu estou estudar.</span> → <span class="good">Eu estou estudando.</span> <button class="btn" data-say="Eu estou estudando.">🔊</button><br><span class="note">Después de <b>estar</b> va el gerundio (<b>-ando</b>), no el infinitivo.</span></li>
+    <li><span class="bad">Meu irmão estou jogando futebol.</span> → <span class="good">Meu irmão está jogando futebol.</span> <button class="btn" data-say="Meu irmão está jogando futebol.">🔊</button><br><span class="note"><b>estou</b> solo va con <i>eu</i>; con <i>meu irmão</i> va <b>está</b>.</span></li>
+    <li><span class="bad">Minha irmã está beber um guaraná.</span> → <span class="good">Minha irmã está bebendo um guaraná.</span> <button class="btn" data-say="Minha irmã está bebendo um guaraná.">🔊</button><br><span class="note"><i>beber</i> → <b>bebendo</b>.</span></li>
+  </ul>
+  <h3 style="margin-top:14px">📍 Para tener en cuenta</h3>
+  <ul>
+    <li>No confundas <b>está</b> (verbo, con tilde) con <b>esta</b> (“esta”, sin tilde): <i>Esta casa está limpa.</i></li>
+    <li>En el habla relajada oirás <i>tô</i>, <i>tá</i>, <i>tamo</i> y <i>tão</i>; en un examen escribe las formas completas.</li>
+    <li>Con <b>estar</b> también va la expresión <i>estar com</i> + sustantivo: <i>estou com fome</i>, <i>estou com sono</i>.</li>
+  </ul>
+</div>
+
+</section>
+
+<!-- Para añadir otro verbo: copia un bloque <section id="verbo-ser"> completo,
+     cámbiale el id (p. ej. verbo-ir), agrega su enlace en <nav class="letters"> y reemplaza el contenido. -->
+
+<footer>
+  El audio usa una voz sintética en portugués de Brasil (pt-BR) de tu navegador o sistema. Úsalo como guía. Las transcripciones tipo “té-ñu” son aproximaciones para hispanohablantes.
+</footer>
+
+</div>
+
+<script>
+(function(){
+  var synth = window.speechSynthesis;
+  var voices = [];
+  var statusEl = document.getElementById('voiceStatus');
+  var sel = document.getElementById('voiceSel');
+
+  function lang(v){ return v.lang.replace('_','-').toLowerCase(); }
+  function ptList(){
+    var l = voices.filter(function(v){ return lang(v).indexOf('pt') === 0; });
+    l.sort(function(a,b){
+      var sa = (lang(a)==='pt-br'?0:2) + (/natural|online/i.test(a.name)?0:1);
+      var sb = (lang(b)==='pt-br'?0:2) + (/natural|online/i.test(b.name)?0:1);
+      return sa - sb;
+    });
+    return l;
+  }
+  function saved(){ try{ return localStorage.getItem('vozPT'); }catch(e){ return null; } }
+  function save(n){ try{ localStorage.setItem('vozPT', n); }catch(e){} }
+
+  function loadVoices(){
+    voices = synth ? synth.getVoices() : [];
+    var list = ptList();
+    sel.innerHTML = '';
+    list.forEach(function(v){
+      var o = document.createElement('option');
+      o.value = v.name; o.textContent = v.name + ' (' + v.lang + ')';
+      sel.appendChild(o);
+    });
+    var s = saved();
+    if(s && list.some(function(v){ return v.name === s; })) sel.value = s;
+    if(!synth){
+      showStatus('Tu navegador no admite audio de voz. Prueba con Edge o Chrome.');
+    } else if(voices.length && !list.length){
+      showStatus('No encontré ninguna voz en portugués en este navegador. Prueba abrir la página en Microsoft Edge.');
+    } else if(voices.length && !list.some(function(v){ return lang(v)==='pt-br'; })){
+      showStatus('Solo hay voces de portugués de Portugal (pt-PT). No sirven para estas reglas, que son de Brasil. Prueba en Microsoft Edge.');
+    } else {
+      statusEl.style.display = 'none';
+    }
+  }
+  function showStatus(msg){ statusEl.textContent = msg; statusEl.style.display = 'block'; }
+  sel.addEventListener('change', function(){ save(sel.value); });
+
+  function currentVoice(){
+    var list = ptList();
+    return list.find(function(v){ return v.name === sel.value; }) || list[0] || null;
+  }
+
+  function speak(text, slow){
+    if(!synth) return;
+    synth.cancel();
+    var u = new SpeechSynthesisUtterance(text);
+    var v = currentVoice();
+    u.lang = v ? v.lang : 'pt-BR';
+    if(v) u.voice = v;
+    u.rate = slow ? 0.55 : 0.9;
+    synth.speak(u);
+  }
+
+  loadVoices();
+  if(synth && typeof synth.onvoiceschanged !== 'undefined') synth.onvoiceschanged = loadVoices;
+
+  document.addEventListener('click', function(e){
+    var b = e.target.closest('[data-say]');
+    if(b) speak(b.getAttribute('data-say'), b.getAttribute('data-slow') === '1');
+  });
+})();
+</script>
+<script>
+(function(){
+  var all = [];
+  function init(section){
+    var slides = Array.prototype.slice.call(section.querySelectorAll('.card.rule'));
+    if(!slides.length) return;
+    var holder = document.createElement('div'); holder.className = 'reglas';
+    slides[0].parentNode.insertBefore(holder, slides[0]);
+    var head = document.createElement('p'); head.className = 'slidehead';
+    var top = document.createElement('div'); top.className = 'rulenav';
+    var bottom = document.createElement('div'); bottom.className = 'rulenav';
+    holder.appendChild(top); holder.appendChild(head);
+    slides.forEach(function(sl){ sl.classList.add('slide'); holder.appendChild(sl); });
+    holder.appendChild(bottom);
+    var i = 0;
+    function build(bar){
+      bar.innerHTML = '';
+      var prev = document.createElement('button'); prev.className='navbtn'; prev.textContent='← Anterior';
+      var next = document.createElement('button'); next.className='navbtn'; next.textContent='Siguiente →';
+      var pills = document.createElement('div'); pills.className='pills';
+      slides.forEach(function(_, k){
+        var b = document.createElement('button'); b.className='pill'+(k===i?' on':''); b.textContent=(k+1);
+        b.setAttribute('aria-label','Uso '+(k+1));
+        b.addEventListener('click', function(){ go(k, bar===bottom); });
+        pills.appendChild(b);
+      });
+      prev.disabled = (i===0); next.disabled = (i===slides.length-1);
+      prev.addEventListener('click', function(){ go(i-1, bar===bottom); });
+      next.addEventListener('click', function(){ go(i+1, bar===bottom); });
+      bar.appendChild(prev); bar.appendChild(pills); bar.appendChild(next);
+    }
+    function render(){
+      slides.forEach(function(sl,k){ sl.classList.toggle('on', k===i); });
+      var t = slides[i].querySelector('h3');
+      head.textContent = 'Uso ' + (i+1) + ' de ' + slides.length + (t ? ' · ' + t.textContent : '');
+      build(top); build(bottom);
+    }
+    function go(n, scroll){
+      if(n<0 || n>=slides.length) return;
+      i = n;
+      if(window.speechSynthesis) window.speechSynthesis.cancel();
+      render();
+      if(scroll) top.scrollIntoView({behavior:'smooth', block:'start'});
+    }
+    render();
+    all.push({holder: holder, go: go, cur: function(){ return i; }});
+  }
+  document.querySelectorAll('section[id^="verbo-"]').forEach(init);
+
+  document.addEventListener('keydown', function(e){
+    var tag = (e.target && e.target.tagName) || '';
+    if(tag==='SELECT' || tag==='INPUT' || tag==='TEXTAREA') return;
+    if(e.key!=='ArrowRight' && e.key!=='ArrowLeft') return;
+    var mid = window.innerHeight/2, best = null, bd = 1e9;
+    all.forEach(function(c){
+      if(!c.holder.offsetParent) return;
+      var r = c.holder.getBoundingClientRect();
+      var d = (r.top<=mid && r.bottom>=mid) ? 0 : Math.min(Math.abs(r.top-mid), Math.abs(r.bottom-mid));
+      if(d<bd){ bd=d; best=c; }
+    });
+    if(best) best.go(best.cur() + (e.key==='ArrowRight'?1:-1), false);
+  });
+})();
+</script>
+<script>
+(function(){
+  var secs = Array.prototype.slice.call(document.querySelectorAll('section[id^="verbo-"]'));
+  var links = Array.prototype.slice.call(document.querySelectorAll('nav.letters a'));
+  function activate(id){
+    secs.forEach(function(sc){ sc.classList.toggle('on', sc.id===id); });
+    links.forEach(function(a){ a.classList.toggle('active', a.getAttribute('href')==='#'+id); });
+  }
+  function route(first){
+    var h = decodeURIComponent((location.hash||'').slice(1));
+    var el = h ? document.getElementById(h) : null;
+    var sec = el ? (el.matches('section[id^="verbo-"]') ? el : el.closest('section[id^="verbo-"]')) : null;
+    activate(sec ? sec.id : (links[0] ? links[0].getAttribute('href').slice(1) : secs[0].id));
+    if(el && el !== sec){ el.scrollIntoView({behavior:'smooth', block:'start'}); }
+    else if(!first){ window.scrollTo({top:0, behavior:'smooth'}); }
+    if(window.speechSynthesis) window.speechSynthesis.cancel();
+  }
+  window.addEventListener('hashchange', function(){ route(false); });
+  route(true);
+})();
+</script>
+<script>
+(function(){
+  var bar=document.querySelector('.topbar'); if(!bar) return;
+  function setH(){ document.documentElement.style.setProperty('--topbar-h', bar.offsetHeight+'px'); }
+  function onScroll(){
+    var y=window.scrollY||document.documentElement.scrollTop||0;
+    if(y>40) bar.classList.add('stuck'); else if(y<10) bar.classList.remove('stuck');
+    setH();
+  }
+  window.addEventListener('scroll',onScroll,{passive:true});
+  window.addEventListener('resize',setH);
+  setH(); onScroll();
+})();
+</script>
+</body>
+</html>
